@@ -4,9 +4,9 @@ export function Avatar() {
       {/* Main body */}
       <div className="absolute bg-accent h-[49.614px] left-[7.09px] top-0 w-[86.825px]" />
 
-      {/* Eyes - with blink animation */}
-      <div className="absolute bg-dark-text h-[10.632px] left-[69.11px] top-[14.18px] w-[7.088px] pixel-eye pixel-eye-right" />
-      <div className="absolute bg-dark-text h-[10.632px] left-[24.81px] top-[14.18px] w-[7.088px] pixel-eye pixel-eye-left" />
+      {/* Eyes - left eye blinks */}
+      <div className="absolute bg-dark-text h-[10.632px] left-[69.11px] top-[14.18px] w-[7.088px]" />
+      <div className="absolute bg-dark-text h-[10.632px] left-[24.81px] top-[14.18px] w-[7.088px] pixel-eye-left" />
 
       {/* Side and bottom pixels */}
       <div className="absolute bg-accent h-[10.632px] left-[74.42px] top-[53.16px] w-[7.088px]" />

@@ -62,17 +62,14 @@
   }
 
   @keyframes wave {
-    0%, 100% {
+    0%, 85%, 100% {
       transform: translateY(0) translateX(0);
     }
-    25% {
-      transform: translateY(-6px) translateX(2px);
+    90% {
+      transform: translateY(-4px) translateX(1px);
     }
-    50% {
-      transform: translateY(-10px) translateX(0);
-    }
-    75% {
-      transform: translateY(-6px) translateX(-2px);
+    95% {
+      transform: translateY(-3px) translateX(-1px);
     }
   }
 
@@ -87,25 +84,21 @@
   }
 
   .waving-arm {
-    animation: wave 1.5s ease-in-out infinite;
+    animation: wave 3.5s ease-in-out infinite;
     transform-origin: bottom center;
     will-change: transform;
   }
 
-  .pixel-eye {
+  .pixel-eye-left {
     animation: eyeBlink 4s ease-in-out infinite;
     will-change: opacity;
-  }
-
-  .pixel-eye-right {
-    animation-delay: 0.1s;
   }
 
   /* Accessibility - respect reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
     .bouncing-avatar,
     .waving-arm,
-    .pixel-eye {
+    .pixel-eye-left {
       animation: none;
     }
   }
