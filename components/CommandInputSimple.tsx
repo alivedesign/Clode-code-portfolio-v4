@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef, KeyboardEvent, useEffect } from 'react';
+import { useState, useRef, KeyboardEvent, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { NavigationItem } from '@/lib/types/navigation';
+import { throttle } from '@/lib/utils/performance';
 
 interface CommandInputSimpleProps {
   navigationItems: NavigationItem[];
@@ -79,9 +80,26 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
       }
     };
 
-    document.addEventListener('selectionchange', handleSelectionChange);
-    return () => document.removeEventListener('selectionchange', handleSelectionChange);
+    // Throttle selectionchange to max 60fps (16.67ms) for better performance
+    const throttledHandleSelectionChange = throttle(handleSelectionChange, 16);
+
+    document.addEventListener('selectionchange', throttledHandleSelectionChange);
+    return () => document.removeEventListener('selectionchange', throttledHandleSelectionChange);
   }, [input]);
+
+  // Execute command - defined early to be used in useEffect below
+  const executeCommand = useCallback((command: string) => {
+    const navItem = navigationItems.find(item =>
+      item.command.toLowerCase() === command.toLowerCase()
+    );
+
+    if (navItem) {
+      router.push(navItem.route);
+      setInput('/');
+      setIsFocused(false);
+      inputRef.current?.blur();
+    }
+  }, [navigationItems, router]);
 
   // Global keyboard shortcuts
   useEffect(() => {
@@ -105,7 +123,7 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
 
     window.addEventListener('keydown', handleGlobalKeyDown);
     return () => window.removeEventListener('keydown', handleGlobalKeyDown);
-  }, [isFocused]);
+  }, [isFocused, navigationItems, executeCommand]);
 
   // Filter suggestions based on input
   const suggestions = input.length > 1
@@ -116,19 +134,6 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
         return commandText.includes(searchTerm);
       })
     : navigationItems;
-
-  const executeCommand = (command: string) => {
-    const navItem = navigationItems.find(item =>
-      item.command.toLowerCase() === command.toLowerCase()
-    );
-
-    if (navItem) {
-      router.push(navItem.route);
-      setInput('/');
-      setIsFocused(false);
-      inputRef.current?.blur();
-    }
-  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
