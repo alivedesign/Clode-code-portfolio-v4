@@ -5,53 +5,97 @@
 
 ## Overview
 
-Add a cute, playful looping animation to the pixel art character avatar on the homepage. The animation combines a friendly waving arm with occasional eye blinks.
+Interactive pixel art character with eye tracking, bounce animation, occasional wave, and wiggle-on-hover. Character feels alive and playful with cursor-following eyes and excited reactions to hover.
 
 ## Animation Components
 
-### 1. Wave Animation (Continuous)
-- **Movement:** Right arm waves in a friendly greeting
-- **Animation:** Up and down motion with side-to-side movement
-- **Max height:** 10px up
-- **Side movement:** ±2px
-- **Duration:** 1.5s loop
-- **Easing:** ease-in-out
-- **Target:** Right arm pixel (far right side)
+### 1. Eye Tracking (Always Active)
+- **Behavior:** Eyes follow cursor position across entire page
+- **Positions:** 9 fixed positions (center + 8 directions)
+- **Movement:** ±2px in x/y direction per eye
+- **Transition:** Smooth 0.2s ease between positions
+- **Threshold:** 100px zones for position detection
+- **Target:** Both eye pixels
 
-### 2. Eye Blink (Occasional)
+### 2. Bounce Animation (Continuous)
+- **Movement:** Gentle up and down
+- **Height:** 8px up
+- **Duration:** 2s loop
+- **Easing:** ease-in-out
+- **Target:** Entire avatar container
+
+### 3. Wave Animation (Occasional)
+- **Movement:** Right arm waves in a friendly greeting
+- **Timing:** Idle 85% of time, quick wave at end
+- **Max height:** 4px up
+- **Side movement:** ±1px
+- **Duration:** 3.5s loop
+- **Target:** Right arm pixel
+
+### 4. Eye Blink (Occasional)
 - **Effect:** Quick opacity change (1 → 0 → 1)
 - **Frequency:** Every 4 seconds
 - **Duration:** ~150ms per blink
-- **Target:** Both eye pixels (dark-text divs)
-- **Offset:** Right eye delayed by 0.1s for natural feel
+- **Target:** Left eye only (right eye stays open)
+
+### 5. Wiggle on Hover (Interactive)
+- **Movement:** Rapid side-to-side shake
+- **Distance:** ±3px horizontal
+- **Duration:** 0.6s with multiple shake cycles
+- **Trigger:** Mouse hover over avatar
+- **Effect:** Pauses wave animation during wiggle
 
 ## Technical Implementation
 
 ### Component Structure
 ```
-Avatar Component (components/Avatar.tsx)
-├── Container (relative positioned)
-├── Body pixels (accent color)
-├── Eye pixels (dark-text) - receive blink animation
-├── Right arm pixel (accent color) - receives wave animation
-└── Other pixels (accent color)
+Avatar Component (components/Avatar.tsx) - Client Component
+├── React State: eyeOffset { x, y }
+├── React Ref: avatarRef for position tracking
+├── useEffect: Global mousemove listener
+├── Container (bouncing-avatar class)
+├── Body pixel (accent color)
+├── Eye pixels (dark-text) - dynamic position via inline styles
+│   ├── Left eye: blinking animation
+│   └── Right eye: tracking only
+├── Right arm pixel (accent color) - waving-arm class
+└── Other pixels (accent color, feet/sides)
 ```
 
 ### CSS Animations
 
+**bounce keyframes:**
+```css
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+```
+
 **wave keyframes:**
 ```css
 @keyframes wave {
-  0%, 100% { transform: translateY(0) translateX(0); }
-  25% { transform: translateY(-6px) translateX(2px); }
-  50% { transform: translateY(-10px) translateX(0); }
-  75% { transform: translateY(-6px) translateX(-2px); }
+  0%, 85%, 100% { transform: translateY(0) translateX(0); }
+  90% { transform: translateY(-4px) translateX(1px); }
+  95% { transform: translateY(-3px) translateX(-1px); }
+}
+```
+
+**wiggle keyframes:**
+```css
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-3px); }
+  30% { transform: translateX(3px); }
+  50% { transform: translateX(-3px); }
+  70% { transform: translateX(3px); }
+  90% { transform: translateX(-2px); }
 }
 ```
 
 **eyeBlink keyframes:**
 ```css
-@keyframes blink {
+@keyframes eyeBlink {
   0%, 90%, 100% { opacity: 1; }
   95% { opacity: 0; }
 }
@@ -60,10 +104,9 @@ Avatar Component (components/Avatar.tsx)
 ### Performance Optimizations
 - Use `transform` and `opacity` (GPU-accelerated)
 - Add `will-change: transform, opacity`
-- Set `transform-origin: center` for proper rotation pivot
-
-### Accessibility
-- Include `@media (prefers-reduced-motion: reduce)` to disable animations for users who prefer reduced motion
+- Eye transitions use CSS only (0.2s ease)
+- Single mousemove listener with threshold-based updates
+- Inline styles for dynamic eye positioning
 
 ## Files to Modify
 
@@ -73,8 +116,13 @@ Avatar Component (components/Avatar.tsx)
 
 ## Success Criteria
 
-- Right arm waves smoothly at 60fps
-- Eyes blink occasionally and independently
-- Animations respect user motion preferences
-- Component works across all screen sizes
-- No layout shift or jank during animation
+✅ Eyes track cursor smoothly across entire page
+✅ Bounce animation runs continuously at 60fps
+✅ Right arm waves occasionally (subtle movement)
+✅ Left eye blinks every 4 seconds
+✅ Hover triggers excited wiggle animation
+✅ Wave pauses during hover
+✅ Smooth transitions between eye positions
+✅ No layout shift or jank during animations
+✅ Component works across all screen sizes
+✅ Respects `prefers-reduced-motion` accessibility setting
