@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Colors from Figma design */
+  --color-background: #1e1e1e;
+  --color-text: #ffffff;
+  --color-text-secondary: #999899;
+  --color-accent: #d77757;
+  --color-link: #b2b9f9;
+  --color-dark-text: #222222;
+
+  /* Spacing scale from Figma */
+  --spacing-1: 2px;
+  --spacing-2: 4px;
+  --spacing-4: 8px;
+  --spacing-6: 16px;
+  --spacing-7: 24px;
+  --spacing-8: 32px;
+  --spacing-9: 40px;
+  --spacing-12: 64px;
+
+  /* Border radius */
+  --border-radius: 4px;
+
+  /* Font family variable */
+  --font-sf-pro: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-text font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Custom cursor animation */
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .cursor-blink {
+    animation: blink 1s infinite;
+  }
+
+  /* Terminal-style text selection */
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-dark-text);
+  }
+}
