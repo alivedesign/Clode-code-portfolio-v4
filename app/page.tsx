@@ -1,25 +1,82 @@
+import { homepageData } from "@/lib/data/homepage";
+import { navigationItems } from "@/lib/data/navigation";
+import { CommandInputSimple } from "@/components/CommandInputSimple";
+import { RichText } from "@/components/RichText";
+import { Avatar } from "@/components/Avatar";
+
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8">
-      <div className="w-full max-w-[1200px]">
-        <h1 className="text-4xl font-semibold text-accent mb-4">
-          Evgeny Shkuratov
-        </h1>
-        <p className="text-body text-text-secondary mb-8">
-          Portfolio v5.0.1 - Next.js setup complete
-        </p>
-        <div className="border border-accent rounded p-8">
-          <p className="text-body-lg">
-            ✅ Next.js 15 initialized
-            <br />
-            ✅ TypeScript configured
-            <br />
-            ✅ Tailwind CSS with design tokens ready
-            <br />
-            ✅ Project structure created
-            <br />
-            <br />
-            Ready for development!
+    <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 mobile:px-spacing-9 tablet:px-[32px] desktop:px-[40px] py-spacing-8">
+      {/* Main Container - responsive width */}
+      <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
+        {/* Content wrapper with gap */}
+        <div className="flex flex-col gap-spacing-9">
+        {/* Bordered Box with all main content */}
+        <div className="relative border border-accent rounded-[var(--spacing-2,4px)] px-spacing-7 pt-spacing-8 pb-spacing-7 mobile:p-spacing-8 flex flex-col tablet:flex-row gap-spacing-7">
+          {/* Header - positioned absolutely at top-left inside border */}
+          <div className="absolute left-[32px] mobile:left-spacing-8 top-[-16px] bg-background px-spacing-4 py-spacing-2 flex gap-spacing-4 items-center text-text-18">
+            <span className="text-accent font-semibold">{homepageData.header.name}</span>
+            <span className="text-text-secondary">{homepageData.header.version}</span>
+          </div>
+
+          {/* Hero Section - Center aligned on mobile, left column on tablet/desktop */}
+          <div className="w-full tablet:w-[300px] desktop:w-[340px] tablet:shrink-0 flex flex-col gap-spacing-9 items-center">
+            <h1 className="text-title-18 text-text text-center w-full">
+              {homepageData.hero.greeting}
+            </h1>
+
+            {/* Avatar with animation */}
+            <Avatar />
+
+            <div className="text-text-16 text-text-secondary w-full text-center">
+              <p className="mb-0">{homepageData.hero.tagline.split(" /")[0]}</p>
+              <p>/{homepageData.hero.tagline.split(" /")[1]}</p>
+            </div>
+          </div>
+
+          {/* Divider - Horizontal on mobile, Vertical on tablet/desktop */}
+          <div className="w-full tablet:w-[1px] h-[1px] tablet:h-auto tablet:self-stretch bg-accent tablet:shrink-0" style={{ opacity: 0.6 }} />
+
+          {/* Activity Section - Bottom on mobile, Right column on tablet/desktop */}
+          <div className="w-full tablet:flex-1 tablet:min-w-0 flex flex-col gap-spacing-7 tablet:gap-spacing-6">
+            {/* Recent Activity */}
+            <div className="flex flex-col gap-[2px]">
+              <h2 className="text-title-18 text-accent">
+                {homepageData.activity.recentTitle}
+              </h2>
+              <p className="text-text-18 text-text-secondary">
+                {homepageData.activity.recentActivity}
+              </p>
+            </div>
+
+            {/* Horizontal Divider */}
+            <div className="w-full h-[1px] bg-accent" style={{ opacity: 0.6 }} />
+
+            {/* What's New */}
+            <div className="flex flex-col gap-3">
+              <h2 className="text-title-18 text-accent">
+                {homepageData.activity.whatsNewTitle}
+              </h2>
+              {homepageData.activity.updates.map((update, index) => (
+                <p key={index} className="text-text-18 text-text">
+                  <RichText content={update} />
+                </p>
+              ))}
+              <p className="text-text-18 text-text-secondary whitespace-pre-wrap">
+                {homepageData.activity.moreLink}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation Section with Command Input */}
+        <CommandInputSimple navigationItems={navigationItems} />
+        </div>
+
+        {/* Footer - pushed to bottom */}
+        <div className="w-full mt-auto">
+          <p className="text-text-16 text-text-secondary">
+            Reach me on <a href="https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/" target="_blank" rel="noopener noreferrer" className="text-link hover:underline transition-all">LinkedIn</a> or at shkuratovdesigner@gmail.com
           </p>
         </div>
       </div>

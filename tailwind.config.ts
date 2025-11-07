@@ -8,6 +8,11 @@ export default {
   ],
   theme: {
     extend: {
+      screens: {
+        'mobile': '500px',
+        'tablet': '768px',
+        'desktop': '1200px',
+      },
       colors: {
         background: "var(--color-background)",
         text: "var(--color-text)",
@@ -17,14 +22,14 @@ export default {
         "dark-text": "var(--color-dark-text)",
       },
       spacing: {
-        '1': 'var(--spacing-1)',
-        '2': 'var(--spacing-2)',
-        '4': 'var(--spacing-4)',
-        '6': 'var(--spacing-6)',
-        '7': 'var(--spacing-7)',
-        '8': 'var(--spacing-8)',
-        '9': 'var(--spacing-9)',
-        '12': 'var(--spacing-12)',
+        'spacing-1': 'var(--spacing-1)',
+        'spacing-2': 'var(--spacing-2)',
+        'spacing-4': 'var(--spacing-4)',
+        'spacing-6': 'var(--spacing-6)',
+        'spacing-7': 'var(--spacing-7)',
+        'spacing-8': 'var(--spacing-8)',
+        'spacing-9': 'var(--spacing-9)',
+        'spacing-12': 'var(--spacing-12)',
       },
       borderRadius: {
         DEFAULT: 'var(--border-radius)',
@@ -33,8 +38,9 @@ export default {
         sans: ['var(--font-sf-pro)', 'SF Pro Text', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
       },
       fontSize: {
-        'body': ['16px', { lineHeight: '1.4' }],
-        'body-lg': ['18px', { lineHeight: '1.2' }],
+        'text-16': ['16px', { lineHeight: '1.4' }],
+        'text-18': ['18px', { lineHeight: '1.2' }],
+        'title-18': ['18px', { lineHeight: '1.2', fontWeight: '600' }],
       },
     },
   },

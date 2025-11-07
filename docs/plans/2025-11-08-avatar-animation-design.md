@@ -1,21 +1,22 @@
 # Avatar Animation Design
 
 **Date:** 2025-11-08
-**Status:** Approved
+**Status:** Implemented
 
 ## Overview
 
-Add a cute, playful looping animation to the pixel art character avatar on the homepage. The animation combines a continuous bounce/rotate with occasional eye blinks.
+Add a cute, playful looping animation to the pixel art character avatar on the homepage. The animation combines a friendly waving arm with occasional eye blinks.
 
 ## Animation Components
 
-### 1. Bounce + Rotate (Continuous)
-- **Movement:** Gentle bounce up and down with side-to-side rotation
-- **Bounce height:** 8px
-- **Rotation range:** -5° to +6° (asymmetric for character)
-- **Duration:** 2.5s loop
+### 1. Wave Animation (Continuous)
+- **Movement:** Right arm waves in a friendly greeting
+- **Animation:** Up and down motion with side-to-side movement
+- **Max height:** 10px up
+- **Side movement:** ±2px
+- **Duration:** 1.5s loop
 - **Easing:** ease-in-out
-- **Target:** Main avatar container
+- **Target:** Right arm pixel (far right side)
 
 ### 2. Eye Blink (Occasional)
 - **Effect:** Quick opacity change (1 → 0 → 1)
@@ -29,25 +30,26 @@ Add a cute, playful looping animation to the pixel art character avatar on the h
 ### Component Structure
 ```
 Avatar Component (components/Avatar.tsx)
-├── Container (animated-avatar) - receives bounce/rotate
+├── Container (relative positioned)
 ├── Body pixels (accent color)
 ├── Eye pixels (dark-text) - receive blink animation
-└── Foot pixels (accent color)
+├── Right arm pixel (accent color) - receives wave animation
+└── Other pixels (accent color)
 ```
 
 ### CSS Animations
 
-**bounceRotate keyframes:**
+**wave keyframes:**
 ```css
-@keyframes bounceRotate {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  25% { transform: translateY(-8px) rotate(-5deg); }
-  50% { transform: translateY(0) rotate(0deg); }
-  75% { transform: translateY(-8px) rotate(6deg); }
+@keyframes wave {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-6px) translateX(2px); }
+  50% { transform: translateY(-10px) translateX(0); }
+  75% { transform: translateY(-6px) translateX(-2px); }
 }
 ```
 
-**blink keyframes:**
+**eyeBlink keyframes:**
 ```css
 @keyframes blink {
   0%, 90%, 100% { opacity: 1; }
@@ -71,7 +73,7 @@ Avatar Component (components/Avatar.tsx)
 
 ## Success Criteria
 
-- Avatar bounces smoothly at 60fps
+- Right arm waves smoothly at 60fps
 - Eyes blink occasionally and independently
 - Animations respect user motion preferences
 - Component works across all screen sizes

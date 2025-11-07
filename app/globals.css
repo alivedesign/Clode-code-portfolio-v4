@@ -51,6 +51,50 @@
     animation: blink 1s infinite;
   }
 
+  /* Avatar animations */
+  @keyframes wave {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    25% {
+      transform: translateY(-6px) translateX(2px);
+    }
+    50% {
+      transform: translateY(-10px) translateX(0);
+    }
+    75% {
+      transform: translateY(-6px) translateX(-2px);
+    }
+  }
+
+  @keyframes eyeBlink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0; }
+  }
+
+  .waving-arm {
+    animation: wave 1.5s ease-in-out infinite;
+    transform-origin: bottom center;
+    will-change: transform;
+  }
+
+  .pixel-eye {
+    animation: eyeBlink 4s ease-in-out infinite;
+    will-change: opacity;
+  }
+
+  .pixel-eye-right {
+    animation-delay: 0.1s;
+  }
+
+  /* Accessibility - respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .waving-arm,
+    .pixel-eye {
+      animation: none;
+    }
+  }
+
   /* Terminal-style text selection */
   ::selection {
     background-color: var(--color-accent);
