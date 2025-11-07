@@ -1,6 +1,6 @@
 export function Avatar() {
   return (
-    <div className="w-[101px] h-[63.789px] relative">
+    <div className="w-[101px] h-[63.789px] relative bouncing-avatar">
       {/* Main body */}
       <div className="absolute bg-accent h-[49.614px] left-[7.09px] top-0 w-[86.825px]" />
 

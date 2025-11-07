@@ -52,6 +52,15 @@
   }
 
   /* Avatar animations */
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
   @keyframes wave {
     0%, 100% {
       transform: translateY(0) translateX(0);
@@ -72,6 +81,11 @@
     95% { opacity: 0; }
   }
 
+  .bouncing-avatar {
+    animation: bounce 2s ease-in-out infinite;
+    will-change: transform;
+  }
+
   .waving-arm {
     animation: wave 1.5s ease-in-out infinite;
     transform-origin: bottom center;
@@ -89,6 +103,7 @@
 
   /* Accessibility - respect reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
+    .bouncing-avatar,
     .waving-arm,
     .pixel-eye {
       animation: none;
