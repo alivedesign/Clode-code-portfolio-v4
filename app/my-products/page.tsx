@@ -107,10 +107,8 @@ export default function MyProducts() {
           <CommandInputSimple navigationItems={myProductsPageNavigationItems} dropdownBehavior="relative" />
         </div>
 
-        {/* Footer - pushed to bottom with spacing */}
-        <div className="mt-spacing-8">
-          <Footer />
-        </div>
+        {/* Footer - pushed to bottom */}
+        <Footer />
       </div>
     </div>
   );
