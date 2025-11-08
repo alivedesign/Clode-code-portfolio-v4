@@ -8,9 +8,10 @@ import { throttle } from '@/lib/utils/performance';
 interface CommandInputSimpleProps {
   navigationItems: NavigationItem[];
   dropdownBehavior?: 'absolute' | 'relative'; // Controls dropdown positioning: 'absolute' overlays (default), 'relative' pushes content
+  autoFocus?: boolean; // Controls whether input auto-focuses on mount (default: true)
 }
 
-export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolute' }: CommandInputSimpleProps) {
+export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolute', autoFocus = true }: CommandInputSimpleProps) {
   const [input, setInput] = useState('/');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
@@ -21,13 +22,13 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
 
   // Auto-focus input on mount and position cursor after "/"
   useEffect(() => {
-    if (inputRef.current) {
+    if (autoFocus && inputRef.current) {
       inputRef.current.focus();
       setIsFocused(true);
       // Set cursor position after the "/"
       inputRef.current.setSelectionRange(1, 1);
     }
-  }, []);
+  }, [autoFocus]);
 
   // Auto-resize textarea based on content
   useEffect(() => {
