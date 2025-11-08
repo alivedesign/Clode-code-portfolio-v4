@@ -71,3 +71,27 @@ export const worksPageNavigationItems: NavigationItem[] = [
     description: '/ Start terminal page',
   },
 ];
+
+// Navigation items for /my-products page
+export const myProductsPageNavigationItems: NavigationItem[] = [
+  {
+    command: '/ Main',
+    route: '/main',
+    description: '/ Hero Section: "The Story of How We\'ll Work Together"',
+  },
+  {
+    command: '/ Works',
+    route: '/works',
+    description: '/ Case Studies: "Real Projects, Real Results"',
+  },
+  {
+    command: '/ Info_Contact',
+    route: '/info-contact',
+    description: '/ Info-Contact: "The Person Behind the Products"',
+  },
+  {
+    command: '/ Clear',
+    route: '/',
+    description: '/ Start terminal page',
+  },
+];
