@@ -158,7 +158,7 @@ export default function InfoContact() {
                   "As you've probably noticed, ",
                   { text: 'I love creating content too.', color: 'white' },
                   ' I share my experience and stories on ',
-                  { text: 'YouTube', link: 'https://www.youtube.com/@evgenyshkuratov' },
+                  { text: 'YouTube', link: 'https://www.youtube.com/@EvgenyShkuratovDesigner' },
                   ' and ',
                   { text: 'LinkedIn', link: 'https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/' },
                 ]}
