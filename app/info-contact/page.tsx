@@ -43,7 +43,7 @@ export default function InfoContact() {
               <h1 className="text-[24px] leading-[1.2] text-accent font-semibold">
                 {heroContent.title}
               </h1>
-              <p className="text-text-18 leading-[1.2] w-full desktop:w-[975px]">
+              <p className="text-text-18 leading-[1.4] w-full desktop:w-[975px]">
                 <RichText
                   content={heroContent.subtitle}
                   className="text-text-secondary [&_.font-semibold]:text-text"
@@ -63,7 +63,7 @@ export default function InfoContact() {
             </p>
 
             {/* YouTube Video */}
-            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] rounded-spacing-3 overflow-hidden bg-black">
+            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] rounded-[6px] overflow-hidden bg-black">
               <iframe
                 width="100%"
                 height="100%"
@@ -78,7 +78,7 @@ export default function InfoContact() {
 
             {/* Image Grid 1 - Two images */}
             <div className="flex flex-col tablet:flex-row gap-spacing-6 w-full max-w-[795px]">
-              <div className="relative w-full tablet:flex-1 aspect-[389/358] rounded-spacing-3 overflow-hidden">
+              <div className="relative w-full tablet:flex-1 aspect-[389/358] rounded-[6px] overflow-hidden">
                 <Image
                   src="/images/info-contact/thumbnail-2.png"
                   alt="Behind the scenes"
@@ -88,7 +88,7 @@ export default function InfoContact() {
                   quality={95}
                 />
               </div>
-              <div className="relative w-full tablet:flex-1 aspect-[389/358] rounded-spacing-3 overflow-hidden">
+              <div className="relative w-full tablet:flex-1 aspect-[389/358] rounded-[6px] overflow-hidden">
                 <Image
                   src="/images/info-contact/thumbnail-3.png"
                   alt="Behind the scenes"
@@ -102,7 +102,7 @@ export default function InfoContact() {
 
             {/* Image Grid 2 - Two images */}
             <div className="flex flex-col tablet:flex-row gap-spacing-6 w-full max-w-[795px]">
-              <div className="relative w-full tablet:flex-1 aspect-[389/302] rounded-spacing-3 overflow-hidden">
+              <div className="relative w-full tablet:flex-1 aspect-[389/302] rounded-[6px] overflow-hidden">
                 <Image
                   src="/images/info-contact/thumbnail-4.png"
                   alt="Behind the scenes"
@@ -112,7 +112,7 @@ export default function InfoContact() {
                   quality={95}
                 />
               </div>
-              <div className="relative w-full tablet:flex-1 aspect-[389/302] rounded-spacing-3 overflow-hidden">
+              <div className="relative w-full tablet:flex-1 aspect-[389/302] rounded-[6px] overflow-hidden">
                 <Image
                   src="/images/info-contact/thumbnail-5.png"
                   alt="Behind the scenes"
@@ -125,7 +125,7 @@ export default function InfoContact() {
             </div>
 
             {/* Paragraph 2 */}
-            <p className="text-text-18 leading-[1.2] w-full desktop:w-[640px]">
+            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   'As a ',
@@ -138,7 +138,7 @@ export default function InfoContact() {
             </p>
 
             {/* Paragraph 3 */}
-            <p className="text-text-18 leading-[1.2] w-full desktop:w-[640px]">
+            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   'Outside of work, ',
@@ -152,7 +152,7 @@ export default function InfoContact() {
             </p>
 
             {/* Single Image */}
-            <div className="relative w-full max-w-[795px] aspect-[795/421] rounded-spacing-3 overflow-hidden">
+            <div className="relative w-full max-w-[795px] aspect-[795/421] rounded-[6px] overflow-hidden">
               <Image
                 src="/images/info-contact/thumbnail-6.png"
                 alt="Snowboarding adventure"
@@ -164,7 +164,7 @@ export default function InfoContact() {
             </div>
 
             {/* Paragraph 4 */}
-            <p className="text-text-18 leading-[1.2] w-full desktop:w-[640px]">
+            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   "As you've probably noticed, ",
@@ -179,7 +179,7 @@ export default function InfoContact() {
             </p>
 
             {/* Paragraph 5 - with emoticon */}
-            <div className="text-text-18 leading-[1.2] w-full desktop:w-[640px] text-text-secondary">
+            <div className="text-text-18 leading-[1.4] w-full desktop:w-[640px] text-text-secondary">
               <p className="mb-spacing-4">
                 <RichText
                   content={[
