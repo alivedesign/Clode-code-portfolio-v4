@@ -45,7 +45,7 @@ export default function MyProducts() {
               // Featured project (Lullami)
               if (project.isFeatured) {
                 return (
-                  <div key={project.id} className="flex flex-col gap-spacing-4 w-full desktop:max-w-[795px]">
+                  <div key={project.id} className="flex flex-col gap-[12px] w-full desktop:max-w-[795px]">
                     {/* Project Image */}
                     <div className="relative w-full aspect-[793/329] rounded-spacing-4 overflow-hidden">
                       <Image
@@ -60,7 +60,7 @@ export default function MyProducts() {
                     </div>
 
                     {/* Project Title and Button */}
-                    <div className="flex flex-col tablet:flex-row gap-spacing-4 tablet:gap-0 tablet:items-center tablet:justify-between w-full">
+                    <div className="flex flex-col tablet:flex-row gap-[14px] tablet:gap-0 tablet:items-center tablet:justify-between w-full">
                       <p className="text-text-18 leading-[1.2] text-text">
                         {project.name}
                       </p>
