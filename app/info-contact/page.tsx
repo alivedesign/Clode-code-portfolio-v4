@@ -177,7 +177,7 @@ export default function InfoContact() {
                   className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
                 />
               </p>
-              <p>That's what drives most of what I do (＾▽＾)</p>
+              <p>That&apos;s what drives most of what I do (＾▽＾)</p>
             </div>
           </div>
 
