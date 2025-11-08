@@ -37,7 +37,7 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
   }, [input]);
 
   // Calculate cursor position for custom cursor
-  const updateCursorPosition = () => {
+  const updateCursorPosition = useCallback(() => {
     if (!inputRef.current || !mirrorRef.current) return;
 
     const textarea = inputRef.current;
@@ -66,12 +66,12 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
       // Cursor at start
       setCursorCoords({ top: 0, left: 0, height: 24 });
     }
-  };
+  }, [input]);
 
   // Update cursor position on input change, selection change, and clicks
   useEffect(() => {
     updateCursorPosition();
-  }, [input]);
+  }, [input, updateCursorPosition]);
 
   useEffect(() => {
     const handleSelectionChange = () => {
@@ -85,7 +85,7 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
 
     document.addEventListener('selectionchange', throttledHandleSelectionChange);
     return () => document.removeEventListener('selectionchange', throttledHandleSelectionChange);
-  }, [input]);
+  }, [updateCursorPosition]);
 
   // Execute command - defined early to be used in useEffect below
   const executeCommand = useCallback((command: string) => {

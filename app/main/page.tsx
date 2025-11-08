@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { CommandInputSimple } from '@/components/CommandInputSimple';
+import { Footer } from '@/components/Footer';
 import { mainPageData } from '@/lib/data/main';
 import { navigationItems } from '@/lib/data/navigation';
 import { TextSegment } from '@/lib/types/content';
@@ -33,7 +34,7 @@ export default function Main() {
             {/* Hero Box with Border */}
             <div className="border border-accent rounded-spacing-2 px-spacing-7 tablet:px-spacing-8 py-spacing-6 tablet:py-spacing-7 flex flex-col gap-spacing-6">
               {/* Headline and Description */}
-              <div className="flex flex-col gap-spacing-2">
+              <div className="flex flex-col gap-spacing-4">
                 <h1 className="text-[24px] leading-[1.2] text-accent font-semibold">
                   {hero.headline}
                 </h1>
@@ -75,8 +76,9 @@ export default function Main() {
                 width="100%"
                 height="100%"
                 src="https://www.youtube.com/embed/dO9pUqYHX_I"
-                title="YouTube video player"
+                title="Evgeny Shkuratov - Product Designer Portfolio Demo"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
                 className="w-full h-full border-none"
               />
@@ -90,11 +92,7 @@ export default function Main() {
         </div>
 
         {/* Footer - pushed to bottom */}
-        <div className="w-full mt-auto">
-          <p className="text-text-16 text-text-secondary">
-            Reach me on <a href="https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/" target="_blank" rel="noopener noreferrer" className="text-link hover:underline transition-all">LinkedIn</a> or at shkuratovdesigner@gmail.com
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   );

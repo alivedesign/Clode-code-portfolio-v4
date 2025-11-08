@@ -27,9 +27,9 @@ export const mainPageData: MainPageData = {
     headline: "Product Designer leveraging AI to build apps focused on what users actually need",
     description: [
       "For founders who ",
-      { text: "refuse to look generic.", link: undefined } as TextSegment,
+      { text: "refuse to look generic.", link: undefined },
       " I design mobile & web apps that ",
-      { text: "solve real problems,", link: undefined } as TextSegment,
+      { text: "solve real problems,", link: undefined },
       " not collect features",
     ],
     stats: [
@@ -40,7 +40,7 @@ export const mainPageData: MainPageData = {
   },
   footer: [
     "Reach me on ",
-    { text: "LinkedIn", link: "https://www.linkedin.com/in/shkuratovdesigner/" } as TextSegment,
+    { text: "LinkedIn", link: "https://www.linkedin.com/in/shkuratovdesigner/" },
     " or at shkuratovdesigner@gmail.com",
   ],
 };
