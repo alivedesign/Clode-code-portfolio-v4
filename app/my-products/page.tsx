@@ -32,7 +32,7 @@ export default function MyProducts() {
               <h1 className="text-[24px] leading-[1.2] text-accent font-semibold">
                 {hero.title}
               </h1>
-              <p className="text-text-18 leading-[1.2] w-full desktop:w-[763px]">
+              <p className="text-text-18 leading-[1.4] w-full desktop:w-[763px]">
                 <RichText
                   content={hero.subtitle}
                   className="text-text-secondary [&_.font-semibold]:text-text"
