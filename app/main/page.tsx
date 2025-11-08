@@ -1,15 +1,13 @@
 'use client';
 
 import Link from 'next/link';
-import { MainLayout } from '@/components/MainLayout';
 import { CommandInputSimple } from '@/components/CommandInputSimple';
-import { RichText } from '@/components/RichText';
 import { mainPageData } from '@/lib/data/main';
 import { navigationItems } from '@/lib/data/navigation';
 import { TextSegment } from '@/lib/types/content';
 
 export default function Main() {
-  const { backLink, hero, footer } = mainPageData;
+  const { backLink, hero } = mainPageData;
 
   // Helper to check if segment is a TextSegment
   const isTextSegment = (segment: string | TextSegment): segment is TextSegment => {
@@ -17,73 +15,87 @@ export default function Main() {
   };
 
   return (
-    <MainLayout>
-      <div className="flex flex-col gap-spacing-7 w-full max-w-[1200px] mx-auto px-spacing-8 py-spacing-8">
-        {/* Back Link */}
-        <Link
-          href={backLink.href}
-          className="text-text-18 text-text-secondary hover:text-link transition-colors"
-        >
-          {backLink.text}
-        </Link>
+    <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 mobile:px-spacing-8 tablet:px-spacing-7 desktop:px-[40px] py-spacing-8">
+      {/* Main Container - responsive width */}
+      <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
+        {/* Content wrapper with gap */}
+        <div className="flex flex-col gap-spacing-7">
+          {/* Back Link */}
+          <Link
+            href={backLink.href}
+            className="text-text-18 text-text-secondary hover:text-link transition-colors"
+          >
+            {backLink.text}
+          </Link>
 
-        {/* Hero Section */}
-        <div className="flex flex-col gap-spacing-8">
-          {/* Hero Box with Border */}
-          <div className="border border-accent rounded-spacing-2 px-spacing-8 py-spacing-7 flex flex-col gap-spacing-6">
-            {/* Headline and Description */}
-            <div className="flex flex-col gap-spacing-2">
-              <h1 className="text-title-18 desktop:text-[24px] desktop:leading-[1.2] text-accent font-semibold">
-                {hero.headline}
-              </h1>
-              <p className="text-text-18 text-text-secondary">
-                {hero.description.map((segment, index) => {
-                  if (typeof segment === 'string') {
-                    return <span key={`desc-${index}`}>{segment}</span>;
-                  }
-                  if (isTextSegment(segment)) {
-                    // Render highlighted segments in white
-                    return (
-                      <span key={`desc-${index}`} className="text-text">
-                        {segment.text}
-                      </span>
-                    );
-                  }
-                  return null;
-                })}
-              </p>
+          {/* Hero Section */}
+          <div className="flex flex-col gap-spacing-8">
+            {/* Hero Box with Border */}
+            <div className="border border-accent rounded-spacing-2 px-spacing-7 tablet:px-spacing-8 py-spacing-6 tablet:py-spacing-7 flex flex-col gap-spacing-6">
+              {/* Headline and Description */}
+              <div className="flex flex-col gap-spacing-2">
+                <h1 className="text-[24px] leading-[1.2] text-accent font-semibold">
+                  {hero.headline}
+                </h1>
+                <p className="text-text-18 leading-[1.4] text-text-secondary max-w-[968px]">
+                  {hero.description.map((segment, index) => {
+                    if (typeof segment === 'string') {
+                      return <span key={`desc-${index}`}>{segment}</span>;
+                    }
+                    if (isTextSegment(segment)) {
+                      // Render highlighted segments in white
+                      return (
+                        <span key={`desc-${index}`} className="text-text">
+                          {segment.text}
+                        </span>
+                      );
+                    }
+                    return null;
+                  })}
+                </p>
+              </div>
+
+              {/* Divider Line */}
+              <div className="h-[1px] w-full bg-accent opacity-60" />
+
+              {/* Stats */}
+              <div className="flex flex-col gap-spacing-4">
+                {hero.stats.map((stat, index) => (
+                  <p key={index} className="text-text-18 text-text-secondary leading-[1.4]">
+                    <span className="text-accent font-semibold leading-[1.2]">{stat.value}</span>
+                    {' '}{stat.label}
+                  </p>
+                ))}
+              </div>
             </div>
 
-            {/* Divider Line */}
-            <div className="h-[1px] w-full bg-accent opacity-60" />
-
-            {/* Stats */}
-            <div className="flex flex-col gap-spacing-3">
-              {hero.stats.map((stat, index) => (
-                <div key={index} className="flex gap-spacing-2 items-center text-text-18">
-                  <span className="text-accent font-semibold">{stat.value}</span>
-                  <span className="text-text-secondary">{stat.label}</span>
-                </div>
-              ))}
+            {/* YouTube Video Embed */}
+            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] rounded-[6.273px] overflow-hidden bg-black">
+              <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/dO9pUqYHX_I"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="w-full h-full border-none"
+              />
             </div>
           </div>
 
-          {/* Image Placeholder */}
-          <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] rounded-[6px] bg-text-secondary/20 flex items-center justify-center">
-            <span className="text-text-secondary text-text-18">Image placeholder</span>
+          {/* Command Input Section */}
+          <div className="flex flex-col gap-spacing-6 mt-spacing-6">
+            <CommandInputSimple navigationItems={navigationItems} />
           </div>
         </div>
 
-        {/* Command Input Section */}
-        <div className="flex flex-col gap-spacing-6 mt-spacing-6">
-          <CommandInputSimple navigationItems={navigationItems} />
+        {/* Footer - pushed to bottom */}
+        <div className="w-full mt-auto">
+          <p className="text-text-16 text-text-secondary">
+            Reach me on <a href="https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/" target="_blank" rel="noopener noreferrer" className="text-link hover:underline transition-all">LinkedIn</a> or at shkuratovdesigner@gmail.com
+          </p>
         </div>
-
-        {/* Footer */}
-        <p className="text-[16px] leading-[1.2] text-text-secondary mt-spacing-4">
-          <RichText content={footer} />
-        </p>
       </div>
-    </MainLayout>
+    </div>
   );
 }

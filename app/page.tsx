@@ -1,5 +1,5 @@
 import { homepageData } from "@/lib/data/homepage";
-import { navigationItems } from "@/lib/data/navigation";
+import { homepageNavigationItems } from "@/lib/data/navigation";
 import { CommandInputSimple } from "@/components/CommandInputSimple";
 import { RichText } from "@/components/RichText";
 import { Avatar } from "@/components/Avatar";
@@ -70,7 +70,7 @@ export default function Home() {
         </div>
 
         {/* Navigation Section with Command Input */}
-        <CommandInputSimple navigationItems={navigationItems} />
+        <CommandInputSimple navigationItems={homepageNavigationItems} />
         </div>
 
         {/* Footer - pushed to bottom */}
