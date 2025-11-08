@@ -197,8 +197,10 @@ export default function InfoContact() {
           <CommandInputSimple navigationItems={infoContactPageNavigationItems} dropdownBehavior="relative" />
         </div>
 
-        {/* Footer - pushed to bottom */}
-        <Footer />
+        {/* Footer - pushed to bottom with spacing */}
+        <div className="mt-spacing-8">
+          <Footer />
+        </div>
       </div>
     </div>
   );
