@@ -28,7 +28,7 @@ export default function Home() {
             {/* Avatar with animation */}
             <Avatar />
 
-            <div className="text-text-16 text-text-secondary w-full text-center">
+            <div className="text-text-16 leading-[1.4] text-text-secondary w-full text-center">
               <p className="mb-0">{homepageData.hero.tagline.split(" /")[0]}</p>
               <p>/{homepageData.hero.tagline.split(" /")[1]}</p>
             </div>
