@@ -23,7 +23,7 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
   // Auto-focus input on mount and position cursor after "/"
   useEffect(() => {
     if (autoFocus && inputRef.current) {
-      inputRef.current.focus();
+      inputRef.current.focus({ preventScroll: true });
       setIsFocused(true);
       // Set cursor position after the "/"
       inputRef.current.setSelectionRange(1, 1);

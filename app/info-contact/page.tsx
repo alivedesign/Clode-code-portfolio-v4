@@ -182,7 +182,7 @@ export default function InfoContact() {
           </div>
 
           {/* Navigation Section with Command Input */}
-          <CommandInputSimple navigationItems={infoContactPageNavigationItems} dropdownBehavior="relative" autoFocus={false} />
+          <CommandInputSimple navigationItems={infoContactPageNavigationItems} dropdownBehavior="relative" />
         </div>
 
         {/* Footer - pushed to bottom with spacing */}
