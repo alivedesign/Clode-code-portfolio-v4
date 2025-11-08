@@ -82,8 +82,7 @@ export const myProductsPageData: MyProductsPageData = {
       id: 6,
       name: "Smart AI Proposal Generator",
       status: "Currently building...",
-      emoji: "(☞ﾟヮﾟ)☞🔩",
-      emotionType: "point"
+      emoji: "(☞ﾟヮﾟ)☞🔩"
     }
   ]
 };
