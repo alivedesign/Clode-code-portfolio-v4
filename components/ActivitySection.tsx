@@ -1,5 +1,4 @@
 import { Divider } from './Divider';
-import { RichText } from './RichText';
 import { ActivityData } from '@/lib/types/content';
 
 interface ActivitySectionProps {
@@ -23,7 +22,7 @@ export function ActivitySection({ data }: ActivitySectionProps) {
         <ul className="flex flex-col gap-spacing-6">
           {data.updates.map((update, index) => (
             <li key={index} className="text-body text-text-secondary">
-              <RichText content={update} />
+              {update}
             </li>
           ))}
           <li className="text-body text-text-secondary">{data.moreLink}</li>

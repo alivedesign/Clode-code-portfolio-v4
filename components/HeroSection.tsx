@@ -11,7 +11,7 @@ export function HeroSection({ data }: HeroSectionProps) {
       <h1 className="text-body text-text">{data.greeting}</h1>
 
       <div className="flex justify-center">
-        <Avatar />
+        <Avatar emoji={data.avatarEmoji} />
       </div>
 
       <p className="text-body text-text-secondary whitespace-pre-line">
