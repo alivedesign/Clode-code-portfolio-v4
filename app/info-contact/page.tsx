@@ -17,7 +17,7 @@ export default function InfoContact() {
     title: 'The Person Behind the Products',
     subtitle: [
       'I value honesty, courage, and ambition to build truly inspiring products for good. ',
-      { text: 'Environmental projects, healthcare, edtech, and anything that helps make the world a better place', bold: true },
+      { text: 'Environmental projects, healthcare, edtech, and anything that helps make the world a better place' },
       ' will always have higher priority for me!',
     ],
   };
@@ -43,7 +43,7 @@ export default function InfoContact() {
               <h1 className="text-[24px] leading-[1.2] text-accent font-semibold">
                 {heroContent.title}
               </h1>
-              <p className="text-text-18 leading-[1.4] w-full desktop:w-[975px]">
+              <p className="text-text-18 leading-[1.4] w-full desktop:w-[1000px]">
                 <RichText
                   content={heroContent.subtitle}
                   className="text-text-secondary [&_.font-semibold]:text-text"
@@ -56,9 +56,9 @@ export default function InfoContact() {
               <RichText
                 content={[
                   "I'm the ideal partners for ",
-                  { text: 'startups building tech for good, AI innovations, and impactful real-world solutions', bold: true },
+                  { text: 'startups building tech for good, AI innovations, and impactful real-world solutions' },
                 ]}
-                className="text-text-secondary [&_.font-semibold]:text-text"
+                className="text-text-secondary [&_span:has(.text-text)]:text-text"
               />
             </p>
 
@@ -129,11 +129,11 @@ export default function InfoContact() {
               <RichText
                 content={[
                   'As a ',
-                  { text: "designer who's built and shipped my own products,", bold: true },
+                  { text: "designer who's built and shipped my own products," },
                   ' I understand the pressure to move fast without wasting time on the wrong thing. From discovery to high-fidelity UI product in production, ',
-                  { text: 'I focus on what users need, not what sounds cool', bold: true },
+                  { text: 'I focus on what users need, not what sounds cool' },
                 ]}
-                className="text-text-secondary [&_.font-semibold]:text-text"
+                className="text-text-secondary [&_span:has(.text-text)]:text-text"
               />
             </p>
 
@@ -142,12 +142,12 @@ export default function InfoContact() {
               <RichText
                 content={[
                   'Outside of work, ',
-                  { text: 'I like to stay active. I train 5–6 times a week.', bold: true },
+                  { text: 'I like to stay active. I train 5–6 times a week.' },
                   ' It helps me stay productive and optimistic. Recently, I also ',
-                  { text: 'discovered snowboarding and completely fell in love with it.', bold: true },
+                  { text: 'discovered snowboarding and completely fell in love with it.' },
                   ' I even bought my own board and gear and took a trip to the mountains in a neighbouring country during my first season',
                 ]}
-                className="text-text-secondary [&_.font-semibold]:text-text"
+                className="text-text-secondary [&_span:has(.text-text)]:text-text"
               />
             </p>
 
@@ -168,13 +168,13 @@ export default function InfoContact() {
               <RichText
                 content={[
                   "As you've probably noticed, ",
-                  { text: 'I love creating content too.', bold: true },
+                  { text: 'I love creating content too.' },
                   ' I share my experience and stories on ',
                   { text: 'YouTube', link: 'https://www.youtube.com/@evgenyshkuratov' },
                   ' and ',
                   { text: 'LinkedIn', link: 'https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/' },
                 ]}
-                className="text-text-secondary [&_.font-semibold]:text-text"
+                className="text-text-secondary [&_span:has(.text-text)]:text-text"
               />
             </p>
 
@@ -184,9 +184,9 @@ export default function InfoContact() {
                 <RichText
                   content={[
                     'I help founders and builders like me ',
-                    { text: 'grow their products and have some fun along the way.', bold: true },
+                    { text: 'grow their products and have some fun along the way.' },
                   ]}
-                  className="text-text-secondary [&_.font-semibold]:text-text"
+                  className="text-text-secondary [&_span:has(.text-text)]:text-text"
                 />
               </p>
               <p>That's what drives most of what I do (＾▽＾)</p>
