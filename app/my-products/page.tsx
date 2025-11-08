@@ -93,7 +93,15 @@ export default function MyProducts() {
                       <span className="text-text-secondary"> | {project.status}</span>
                     </>
                   )}
-                  {project.emoji && (
+                  {project.emoji && project.emotionType && (
+                    <>
+                      <span className="text-text-secondary"> </span>
+                      <span className={`text-text-secondary emoticon-${project.emotionType}`}>
+                        {project.emoji}
+                      </span>
+                    </>
+                  )}
+                  {project.emoji && !project.emotionType && (
                     <>
                       <span className="text-text-secondary"> {project.emoji}</span>
                     </>

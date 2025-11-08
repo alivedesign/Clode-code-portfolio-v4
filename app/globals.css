@@ -87,6 +87,34 @@
     90% { transform: translateX(-2px); }
   }
 
+  /* Emoticon animations */
+  @keyframes emoticon-sad-sway {
+    0%, 100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  @keyframes emoticon-work-bounce {
+    0%, 100% {
+      transform: translateY(0) rotate(0deg);
+    }
+    50% {
+      transform: translateY(-3px) rotate(-2deg);
+    }
+  }
+
+  @keyframes emoticon-point-slide {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(4px);
+    }
+  }
+
   .bouncing-avatar {
     animation: bounce 2s ease-in-out infinite;
     will-change: transform;
@@ -116,11 +144,45 @@
     transition: left 0.2s ease, top 0.2s ease;
   }
 
+  /* Emoticon utility classes */
+  .emoticon-sad {
+    display: inline-block;
+    animation: emoticon-sad-sway 2.5s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .emoticon-sad:hover {
+    animation: emoticon-sad-sway 0.6s ease-in-out infinite;
+  }
+
+  .emoticon-work {
+    display: inline-block;
+    animation: emoticon-work-bounce 1.8s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .emoticon-work:hover {
+    animation: emoticon-work-bounce 0.6s ease-in-out infinite;
+  }
+
+  .emoticon-point {
+    display: inline-block;
+    animation: emoticon-point-slide 2s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  .emoticon-point:hover {
+    animation: emoticon-point-slide 0.6s ease-in-out infinite;
+  }
+
   /* Accessibility - respect reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
     .bouncing-avatar,
     .waving-arm,
-    .pixel-eye-left {
+    .pixel-eye-left,
+    .emoticon-sad,
+    .emoticon-work,
+    .emoticon-point {
       animation: none;
     }
   }

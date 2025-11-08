@@ -6,6 +6,7 @@ export interface MyProductsProject {
   name: string;
   status: string;
   emoji: string;
+  emotionType?: 'sad' | 'work' | 'point';
   isFeatured?: boolean;
   image?: string;
   appStoreLink?: string;
@@ -42,21 +43,24 @@ export const myProductsPageData: MyProductsPageData = {
       year: "2019",
       name: "Cashback service",
       status: "Closed",
-      emoji: "(︶︹︺)"
+      emoji: "(︶︹︺)",
+      emotionType: "sad"
     },
     {
       id: 2,
       year: "2021",
       name: "A PWA for booking dishes",
       status: "from local restaurants | Closed",
-      emoji: "(；﹏；)"
+      emoji: "(；﹏；)",
+      emotionType: "sad"
     },
     {
       id: 3,
       year: "2022",
       name: "Online School with AI IDE",
       status: "Closed",
-      emoji: "(ノ﹏ヽ)"
+      emoji: "(ノ﹏ヽ)",
+      emotionType: "sad"
     },
     {
       id: 4,
@@ -71,13 +75,15 @@ export const myProductsPageData: MyProductsPageData = {
       id: 5,
       name: "Vibe-code Agency",
       status: "Currently building...",
-      emoji: "(•_•)🔧"
+      emoji: "(•_•)🔧",
+      emotionType: "work"
     },
     {
       id: 6,
       name: "Smart AI Proposal Generator",
       status: "Currently building...",
-      emoji: "(☞ﾟヮﾟ)☞🔩"
+      emoji: "(☞ﾟヮﾟ)☞🔩",
+      emotionType: "point"
     }
   ]
 };
