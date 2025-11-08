@@ -7,9 +7,10 @@ import { throttle } from '@/lib/utils/performance';
 
 interface CommandInputSimpleProps {
   navigationItems: NavigationItem[];
+  dropdownBehavior?: 'absolute' | 'relative'; // Controls dropdown positioning: 'absolute' overlays (default), 'relative' pushes content
 }
 
-export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps) {
+export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolute' }: CommandInputSimpleProps) {
   const [input, setInput] = useState('/');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
@@ -228,7 +229,7 @@ export function CommandInputSimple({ navigationItems }: CommandInputSimpleProps)
 
       {/* Dropdown Menu */}
       {isFocused && (
-        <div className="relative tablet:absolute tablet:top-full tablet:left-0 w-full mt-spacing-6 mb-spacing-8 tablet:mb-0 flex flex-col gap-spacing-6 desktop:gap-spacing-4 z-10">
+        <div className={`${dropdownBehavior === 'relative' ? 'relative' : 'relative tablet:absolute tablet:top-full tablet:left-0'} w-full mt-spacing-6 ${dropdownBehavior === 'relative' ? 'mb-spacing-8' : 'mb-spacing-8 tablet:mb-0'} flex flex-col gap-spacing-6 desktop:gap-spacing-4 z-10`}>
           {suggestions.map((item, index) => (
             <button
               key={item.route}

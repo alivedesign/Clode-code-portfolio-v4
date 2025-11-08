@@ -12,6 +12,7 @@ export interface HeroData {
 export interface TextSegment {
   text: string;
   link?: string;
+  bold?: boolean;
 }
 
 export type RichText = (string | TextSegment)[];
