@@ -17,7 +17,7 @@ export default function InfoContact() {
     title: 'The Person Behind the Products',
     subtitle: [
       'I value honesty, courage, and ambition to build truly inspiring products for good. ',
-      { text: 'Environmental projects, healthcare, edtech, and anything that helps make the world a better place' },
+      { text: 'Environmental projects, healthcare, edtech, and anything that helps make the world a better place', color: 'white' },
       ' will always have higher priority for me!',
     ],
   };
@@ -46,7 +46,7 @@ export default function InfoContact() {
               <p className="text-text-18 leading-[1.4] w-full desktop:w-[1000px]">
                 <RichText
                   content={heroContent.subtitle}
-                  className="text-text-secondary [&_.font-semibold]:text-text"
+                  className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
                 />
               </p>
             </div>
@@ -56,9 +56,9 @@ export default function InfoContact() {
               <RichText
                 content={[
                   "I'm the ideal partners for ",
-                  { text: 'startups building tech for good, AI innovations, and impactful real-world solutions' },
+                  { text: 'startups building tech for good, AI innovations, and impactful real-world solutions', color: 'white' },
                 ]}
-                className="text-text-secondary [&_span:has(.text-text)]:text-text"
+                className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
               />
             </p>
 
@@ -100,6 +100,33 @@ export default function InfoContact() {
               </div>
             </div>
 
+            {/* Paragraph 2 */}
+            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
+              <RichText
+                content={[
+                  'As a ',
+                  { text: "designer who's built and shipped my own products,", color: 'white' },
+                  ' I understand the pressure to move fast without wasting time on the wrong thing. From discovery to high-fidelity UI product in production, ',
+                  { text: 'I focus on what users need, not what sounds cool', color: 'white' },
+                ]}
+                className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
+              />
+            </p>
+
+            {/* Paragraph 3 */}
+            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
+              <RichText
+                content={[
+                  'Outside of work, ',
+                  { text: 'I like to stay active. I train 5–6 times a week.', color: 'white' },
+                  ' It helps me stay productive and optimistic. Recently, I also ',
+                  { text: 'discovered snowboarding and completely fell in love with it.', color: 'white' },
+                  ' I even bought my own board and gear and took a trip to the mountains in a neighbouring country during my first season',
+                ]}
+                className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
+              />
+            </p>
+
             {/* Image Grid 2 - Two images */}
             <div className="flex flex-col tablet:flex-row gap-spacing-6 w-full max-w-[795px]">
               <div className="relative w-full tablet:flex-1 aspect-[389/302] rounded-[6px] overflow-hidden">
@@ -124,57 +151,18 @@ export default function InfoContact() {
               </div>
             </div>
 
-            {/* Paragraph 2 */}
-            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
-              <RichText
-                content={[
-                  'As a ',
-                  { text: "designer who's built and shipped my own products," },
-                  ' I understand the pressure to move fast without wasting time on the wrong thing. From discovery to high-fidelity UI product in production, ',
-                  { text: 'I focus on what users need, not what sounds cool' },
-                ]}
-                className="text-text-secondary [&_span:has(.text-text)]:text-text"
-              />
-            </p>
-
-            {/* Paragraph 3 */}
-            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
-              <RichText
-                content={[
-                  'Outside of work, ',
-                  { text: 'I like to stay active. I train 5–6 times a week.' },
-                  ' It helps me stay productive and optimistic. Recently, I also ',
-                  { text: 'discovered snowboarding and completely fell in love with it.' },
-                  ' I even bought my own board and gear and took a trip to the mountains in a neighbouring country during my first season',
-                ]}
-                className="text-text-secondary [&_span:has(.text-text)]:text-text"
-              />
-            </p>
-
-            {/* Single Image */}
-            <div className="relative w-full max-w-[795px] aspect-[795/421] rounded-[6px] overflow-hidden">
-              <Image
-                src="/images/info-contact/thumbnail-6.png"
-                alt="Snowboarding adventure"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 795px"
-                quality={95}
-              />
-            </div>
-
             {/* Paragraph 4 */}
             <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   "As you've probably noticed, ",
-                  { text: 'I love creating content too.' },
+                  { text: 'I love creating content too.', color: 'white' },
                   ' I share my experience and stories on ',
                   { text: 'YouTube', link: 'https://www.youtube.com/@evgenyshkuratov' },
                   ' and ',
                   { text: 'LinkedIn', link: 'https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/' },
                 ]}
-                className="text-text-secondary [&_span:has(.text-text)]:text-text"
+                className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
               />
             </p>
 
@@ -184,9 +172,9 @@ export default function InfoContact() {
                 <RichText
                   content={[
                     'I help founders and builders like me ',
-                    { text: 'grow their products and have some fun along the way.' },
+                    { text: 'grow their products and have some fun along the way.', color: 'white' },
                   ]}
-                  className="text-text-secondary [&_span:has(.text-text)]:text-text"
+                  className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
                 />
               </p>
               <p>That's what drives most of what I do (＾▽＾)</p>

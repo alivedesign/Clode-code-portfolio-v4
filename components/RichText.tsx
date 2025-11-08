@@ -51,16 +51,18 @@ export function RichText({ content, className = "" }: RichTextProps) {
           if (!isSafeUrl(segment.link)) {
             // If URL is unsafe, render as plain text
             console.warn(`Unsafe URL detected and blocked: ${segment.link}`);
-            return <span key={generateKey()} className={segment.bold ? "font-semibold" : ""}>{segment.text}</span>;
+            const colorClass = segment.color === 'white' ? 'text-white' : '';
+            return <span key={generateKey()} className={`${segment.bold ? "font-semibold" : ""} ${colorClass}`.trim()}>{segment.text}</span>;
           }
 
+          const colorClass = segment.color === 'white' ? 'text-white' : '';
           return (
             <a
               key={generateKey()}
               href={segment.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-link hover:underline transition-all ${segment.bold ? "font-semibold" : ""}`}
+              className={`text-link hover:underline transition-all ${segment.bold ? "font-semibold" : ""} ${colorClass}`.trim()}
             >
               {segment.text}
             </a>
@@ -68,7 +70,8 @@ export function RichText({ content, className = "" }: RichTextProps) {
         }
 
         if (isTextSegment(segment)) {
-          return <span key={generateKey()} className={segment.bold ? "font-semibold" : ""}>{segment.text}</span>;
+          const colorClass = segment.color === 'white' ? 'text-white' : '';
+          return <span key={generateKey()} className={`${segment.bold ? "font-semibold" : ""} ${colorClass}`.trim()}>{segment.text}</span>;
         }
 
         return null;

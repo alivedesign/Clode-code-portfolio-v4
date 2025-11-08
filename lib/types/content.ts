@@ -13,6 +13,7 @@ export interface TextSegment {
   text: string;
   link?: string;
   bold?: boolean;
+  color?: 'white' | string;
 }
 
 export type RichText = (string | TextSegment)[];
