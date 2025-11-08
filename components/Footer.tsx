@@ -1,11 +1,18 @@
-interface FooterProps {
-  text: string;
-}
-
-export function Footer({ text }: FooterProps) {
+export function Footer() {
   return (
-    <footer className="px-spacing-8 lg:px-[200px] py-spacing-7 mt-auto">
-      <p className="text-body text-text-secondary">{text}</p>
-    </footer>
+    <div className="w-full mt-auto">
+      <p className="text-text-16 text-text-secondary">
+        Reach me on{' '}
+        <a
+          href="https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-link hover:underline transition-all"
+        >
+          LinkedIn
+        </a>{' '}
+        or at shkuratovdesigner@gmail.com
+      </p>
+    </div>
   );
 }

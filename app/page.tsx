@@ -1,10 +1,20 @@
 import { homepageData } from "@/lib/data/homepage";
-import { navigationItems } from "@/lib/data/navigation";
+import { homepageNavigationItems } from "@/lib/data/navigation";
 import { CommandInputSimple } from "@/components/CommandInputSimple";
 import { RichText } from "@/components/RichText";
 import { Avatar } from "@/components/Avatar";
+import { Footer } from "@/components/Footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Evgeny Shkuratov - Product Designer",
+  description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+};
 
 export default function Home() {
+  // Pre-process tagline split for cleaner JSX
+  const [taglinePart1, taglinePart2] = homepageData.hero.tagline.split(" /");
+
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 mobile:px-spacing-9 tablet:px-[32px] desktop:px-[40px] py-spacing-8">
       {/* Main Container - responsive width */}
@@ -20,7 +30,7 @@ export default function Home() {
           </div>
 
           {/* Hero Section - Center aligned on mobile, left column on tablet/desktop */}
-          <div className="w-full tablet:w-[300px] desktop:w-[340px] tablet:shrink-0 flex flex-col gap-spacing-9 items-center">
+          <div className="w-full tablet:w-[300px] desktop:w-[340px] tablet:shrink-0 flex flex-col gap-spacing-9 items-center justify-center">
             <h1 className="text-title-18 text-text text-center w-full">
               {homepageData.hero.greeting}
             </h1>
@@ -28,9 +38,9 @@ export default function Home() {
             {/* Avatar with animation */}
             <Avatar />
 
-            <div className="text-text-16 text-text-secondary w-full text-center">
-              <p className="mb-0">{homepageData.hero.tagline.split(" /")[0]}</p>
-              <p>/{homepageData.hero.tagline.split(" /")[1]}</p>
+            <div className="text-text-16 text-text-secondary w-full text-center leading-relaxed">
+              <p className="m-0">{taglinePart1}</p>
+              <p className="m-0">/{taglinePart2}</p>
             </div>
           </div>
 
@@ -70,15 +80,11 @@ export default function Home() {
         </div>
 
         {/* Navigation Section with Command Input */}
-        <CommandInputSimple navigationItems={navigationItems} />
+        <CommandInputSimple navigationItems={homepageNavigationItems} />
         </div>
 
         {/* Footer - pushed to bottom */}
-        <div className="w-full mt-auto">
-          <p className="text-text-16 text-text-secondary">
-            Reach me on <a href="https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/" target="_blank" rel="noopener noreferrer" className="text-link hover:underline transition-all">LinkedIn</a> or at shkuratovdesigner@gmail.com
-          </p>
-        </div>
+        <Footer />
       </div>
     </div>
   );

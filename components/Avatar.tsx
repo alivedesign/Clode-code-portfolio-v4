@@ -67,7 +67,14 @@ export function Avatar() {
   }, [])
 
   return (
-    <div ref={avatarRef} className={`w-[${AVATAR_WIDTH}px] h-[${AVATAR_HEIGHT}px] relative bouncing-avatar`}>
+    <div
+      ref={avatarRef}
+      className="relative bouncing-avatar"
+      style={{
+        width: `${AVATAR_WIDTH}px`,
+        height: `${AVATAR_HEIGHT}px`
+      }}
+    >
       {/* Main body */}
       <div
         className="absolute bg-accent top-0"

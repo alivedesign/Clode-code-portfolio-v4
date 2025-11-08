@@ -6,7 +6,7 @@ export default function Works() {
       <div className="flex flex-col items-center justify-center flex-1 px-spacing-8">
         <h1 className="text-body-lg text-text mb-spacing-6">/ Works</h1>
         <p className="text-body text-text-secondary text-center">
-          Case Studies: "Real Projects, Real Results"
+          Case Studies: &quot;Real Projects, Real Results&quot;
         </p>
         <p className="text-body text-text-secondary text-center mt-spacing-8">
           Coming soon...
