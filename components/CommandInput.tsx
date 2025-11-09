@@ -6,6 +6,7 @@ import Fuse from 'fuse.js';
 import { NavigationItem } from '@/lib/types/navigation';
 import { CommandPrompt } from './CommandPrompt';
 import { Divider } from './Divider';
+import { useAnimation } from '@/contexts/AnimationContext';
 
 interface CommandInputProps {
   navigationItems: NavigationItem[];
@@ -19,6 +20,7 @@ export function CommandInput({ navigationItems }: CommandInputProps) {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const { triggerFallingAvatars } = useAnimation();
 
   // Initialize Fuse.js for fuzzy search
   const fuse = useRef(
@@ -43,6 +45,16 @@ export function CommandInput({ navigationItems }: CommandInputProps) {
 
   const executeCommand = (command: string) => {
     const trimmedCommand = command.trim().toLowerCase();
+
+    // Check for special /clode command
+    if (trimmedCommand === '/clode') {
+      // Trigger falling avatars animation
+      triggerFallingAvatars();
+      setInput('');
+      setSuggestions([]);
+      setHistoryIndex(-1);
+      return;
+    }
 
     // Find matching navigation item
     const navItem = navigationItems.find(
