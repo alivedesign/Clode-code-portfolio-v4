@@ -16,7 +16,7 @@ export default function MyProducts() {
       {/* Main Container - responsive width */}
       <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
-        <div className="flex flex-col gap-spacing-8">
+        <div className="flex flex-col gap-spacing-8 flex-1">
           {/* Back Link */}
           <Link
             href={backLink.href}
@@ -47,7 +47,7 @@ export default function MyProducts() {
                 return (
                   <div key={project.id} className="flex flex-col gap-[12px] w-full desktop:max-w-[795px]">
                     {/* Project Image */}
-                    <div className="relative w-full aspect-[793/329] rounded-spacing-4 overflow-hidden">
+                    <div className="relative w-full aspect-[793/329] rounded-[6px] overflow-hidden">
                       <Image
                         src={project.image!}
                         alt={project.name}
@@ -115,8 +115,10 @@ export default function MyProducts() {
           <CommandInputSimple navigationItems={myProductsPageNavigationItems} dropdownBehavior="relative" />
         </div>
 
-        {/* Footer - pushed to bottom */}
-        <Footer />
+        {/* Footer - pushed to bottom with spacing */}
+        <div className="mt-spacing-8">
+          <Footer />
+        </div>
       </div>
     </div>
   );

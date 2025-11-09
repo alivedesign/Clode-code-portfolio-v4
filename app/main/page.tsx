@@ -20,7 +20,7 @@ export default function Main() {
       {/* Main Container - responsive width */}
       <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
-        <div className="flex flex-col gap-spacing-7">
+        <div className="flex flex-col gap-spacing-7 flex-1">
           {/* Back Link */}
           <Link
             href={backLink.href}
@@ -70,29 +70,27 @@ export default function Main() {
               </div>
             </div>
 
-            {/* YouTube Video Embed */}
-            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] rounded-[6.273px] overflow-hidden bg-black">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/dO9pUqYHX_I"
-                title="Evgeny Shkuratov - Product Designer Portfolio Demo"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                className="w-full h-full border-none"
-              />
+            {/* Video Coming Soon Placeholder */}
+            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+              <p className="text-text-16 text-accent leading-[1.4]">
+                Video coming soon..
+              </p>
+              <p className="text-title-18 text-text-secondary leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">
+                Product Design for Founders. 4 Fantasy locations Where Products Die (And How to Win)
+              </p>
             </div>
           </div>
 
           {/* Command Input Section */}
           <div className="flex flex-col gap-spacing-6 mt-spacing-6">
-            <CommandInputSimple navigationItems={navigationItems} />
+            <CommandInputSimple navigationItems={navigationItems} dropdownBehavior="relative" />
           </div>
         </div>
 
-        {/* Footer - pushed to bottom */}
-        <Footer />
+        {/* Footer - pushed to bottom with spacing */}
+        <div className="mt-spacing-8">
+          <Footer />
+        </div>
       </div>
     </div>
   );

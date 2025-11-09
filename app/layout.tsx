@@ -6,22 +6,25 @@ import "./globals.css";
 // and uncomment the localFont configuration in this file (see public/fonts/README.md)
 
 export const metadata: Metadata = {
-  title: "Evgeny Shkuratov - Product Designer & Developer",
-  description: "Portfolio of Evgeny Shkuratov - Design Thinking, Product Design, and Development",
-  keywords: ["product design", "UX design", "portfolio", "Evgeny Shkuratov"],
+  metadataBase: new URL('https://shkuratov.design'),
+  title: "Evgeny Shkuratov - Product Designer",
+  description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+  keywords: ["product design", "UX design", "portfolio", "Evgeny Shkuratov", "AI-powered builder"],
   authors: [{ name: "Evgeny Shkuratov" }],
   creator: "Evgeny Shkuratov",
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Evgeny Shkuratov - Product Designer & Developer",
-    description: "Portfolio of Evgeny Shkuratov - Design Thinking, Product Design, and Development",
-    siteName: "Evgeny Shkuratov Portfolio",
+    title: "Evgeny Shkuratov - Product Designer & AI-Powered Builder",
+    description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+    siteName: "Shkuratov Designer",
+    images: ['/opengraph-image'],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Evgeny Shkuratov - Product Designer & Developer",
-    description: "Portfolio of Evgeny Shkuratov - Design Thinking, Product Design, and Development",
+    title: "Evgeny Shkuratov - Product Designer & AI-Powered Builder",
+    description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+    images: ['/opengraph-image'],
   },
   robots: {
     index: true,

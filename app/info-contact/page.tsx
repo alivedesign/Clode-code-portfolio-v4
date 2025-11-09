@@ -27,7 +27,7 @@ export default function InfoContact() {
       {/* Main Container - responsive width */}
       <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
-        <div className="flex flex-col gap-spacing-8">
+        <div className="flex flex-col gap-spacing-8 flex-1">
           {/* Back Link */}
           <Link
             href={backLink.href}
@@ -61,20 +61,6 @@ export default function InfoContact() {
                 className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
               />
             </p>
-
-            {/* YouTube Video */}
-            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] rounded-[6px] overflow-hidden bg-black">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/_j-mglGJGk0"
-                title="Info Contact Video"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                className="w-full h-full border-none"
-              />
-            </div>
 
             {/* Image Grid 1 - Two images */}
             <div className="flex flex-col tablet:flex-row gap-spacing-6 w-full max-w-[795px]">

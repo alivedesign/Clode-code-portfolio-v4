@@ -5,6 +5,7 @@ export interface WorkProject {
   image: string;
   alt: string;
   description: RichText;
+  isNDA?: boolean;
 }
 
 export interface WorksPageData {
@@ -53,7 +54,8 @@ export const worksPageData: WorksPageData = {
       description: [
         { text: "Mobile advertising platform ", bold: true },
         { text: "with 90M Unique Users", bold: false }
-      ]
+      ],
+      isNDA: true
     },
     {
       id: 4,
@@ -61,7 +63,8 @@ export const worksPageData: WorksPageData = {
       alt: "Online course constructor and educational marketplace",
       description: [
         { text: "Online Course Constructor and Largest educational Marketplace in CIS for 8M teachers", bold: true }
-      ]
+      ],
+      isNDA: true
     }
   ]
 };

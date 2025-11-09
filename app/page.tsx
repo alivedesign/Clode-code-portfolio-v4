@@ -20,7 +20,7 @@ export default function Home() {
       {/* Main Container - responsive width */}
       <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
-        <div className="flex flex-col gap-spacing-9">
+        <div className="flex flex-col gap-spacing-9 flex-1">
         {/* Bordered Box with all main content */}
         <div className="relative border border-accent rounded-[var(--spacing-2,4px)] px-spacing-7 pt-spacing-8 pb-spacing-7 mobile:p-spacing-8 flex flex-col tablet:flex-row gap-spacing-7">
           {/* Header - positioned absolutely at top-left inside border */}
@@ -80,11 +80,13 @@ export default function Home() {
         </div>
 
         {/* Navigation Section with Command Input */}
-        <CommandInputSimple navigationItems={homepageNavigationItems} />
+        <CommandInputSimple navigationItems={homepageNavigationItems} dropdownBehavior="relative" />
         </div>
 
-        {/* Footer - pushed to bottom */}
-        <Footer />
+        {/* Footer - pushed to bottom with spacing */}
+        <div className="mt-spacing-8">
+          <Footer />
+        </div>
       </div>
     </div>
   );
