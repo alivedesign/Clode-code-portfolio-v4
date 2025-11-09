@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { AnimationProvider } from "@/contexts/AnimationContext";
+import { FallingAvatars } from "@/components/FallingAvatars";
 
 // Note: Using system fonts (SF Pro on macOS, Segoe UI on Windows, etc.)
 // To use custom SF Pro fonts across all platforms, add font files to public/fonts/
@@ -40,7 +42,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased" suppressHydrationWarning>
-        {children}
+        <AnimationProvider>
+          {children}
+          <FallingAvatars />
+        </AnimationProvider>
       </body>
     </html>
   );
