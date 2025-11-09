@@ -46,8 +46,8 @@ export function CommandInput({ navigationItems }: CommandInputProps) {
   const executeCommand = (command: string) => {
     const trimmedCommand = command.trim().toLowerCase();
 
-    // Check for special /clode command
-    if (trimmedCommand === '/clode') {
+    // Check for special /claude command
+    if (trimmedCommand === '/claude') {
       // Trigger falling avatars animation
       triggerFallingAvatars();
       setInput('');
