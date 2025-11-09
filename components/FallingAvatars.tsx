@@ -16,8 +16,10 @@ export function FallingAvatars() {
   const [avatars, setAvatars] = useState<FallingAvatar[]>([])
 
   useEffect(() => {
+    console.log('[FallingAvatars] Trigger changed:', fallingAvatarsTrigger);
     if (fallingAvatarsTrigger === 0) return
 
+    console.log('[FallingAvatars] Generating avatars...');
     // Generate 20-30 avatars with random positions and speeds
     const count = Math.floor(Math.random() * 11) + 20 // 20-30
     const newAvatars: FallingAvatar[] = []
@@ -26,7 +28,7 @@ export function FallingAvatars() {
       newAvatars.push({
         id: `avatar-${fallingAvatarsTrigger}-${Date.now()}-${i}`,
         x: Math.random() * 100, // 0-100vw
-        duration: Math.random() * 0.7 + 0.8 // 0.8-1.5s
+        duration: Math.random() * 1.4 + 1.6 // 1.6-3.0s (2x slower)
       })
     }
 
@@ -35,7 +37,7 @@ export function FallingAvatars() {
     // Auto-cleanup after longest animation completes
     const timeoutId = setTimeout(() => {
       setAvatars([])
-    }, 1600) // 1.5s max duration + 100ms buffer
+    }, 3100) // 3.0s max duration + 100ms buffer
 
     return () => clearTimeout(timeoutId)
   }, [fallingAvatarsTrigger])

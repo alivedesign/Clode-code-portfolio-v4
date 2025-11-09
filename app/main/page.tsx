@@ -8,7 +8,7 @@ import { navigationItems } from '@/lib/data/navigation';
 import { TextSegment } from '@/lib/types/content';
 
 export default function Main() {
-  const { backLink, hero } = mainPageData;
+  const { backLink, hero, workExperience } = mainPageData;
 
   // Helper to check if segment is a TextSegment
   const isTextSegment = (segment: string | TextSegment): segment is TextSegment => {
@@ -69,6 +69,14 @@ export default function Main() {
                 ))}
               </div>
             </div>
+
+            {/* Work Experience */}
+            {workExperience.map((job, index) => (
+              <p key={index} className="text-text-18 text-text-secondary leading-[1.4]">
+                {job.period} | {job.role}{' '}
+                <span className="text-text">{job.company}</span>
+              </p>
+            ))}
 
             {/* Video Coming Soon Placeholder */}
             <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>

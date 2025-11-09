@@ -13,7 +13,11 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
   const [fallingAvatarsTrigger, setFallingAvatarsTrigger] = useState(0)
 
   const triggerFallingAvatars = () => {
-    setFallingAvatarsTrigger(prev => prev + 1)
+    console.log('[AnimationContext] Triggering falling avatars, current:', fallingAvatarsTrigger);
+    setFallingAvatarsTrigger(prev => {
+      console.log('[AnimationContext] New trigger value:', prev + 1);
+      return prev + 1;
+    })
   }
 
   return (

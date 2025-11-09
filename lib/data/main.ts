@@ -5,6 +5,12 @@ export interface StatItem {
   label: string;
 }
 
+export interface WorkExperienceItem {
+  period: string;
+  role: string;
+  company: string;
+}
+
 export interface MainPageData {
   backLink: {
     text: string;
@@ -15,6 +21,7 @@ export interface MainPageData {
     description: RichText;
     stats: StatItem[];
   };
+  workExperience: WorkExperienceItem[];
   footer: RichText;
 }
 
@@ -38,6 +45,33 @@ export const mainPageData: MainPageData = {
       { value: "7", label: "launches of my own products" },
     ],
   },
+  workExperience: [
+    {
+      period: "2024 — ✦",
+      role: "Product Designer @",
+      company: "B2B messenger app with 100 000+ daily users",
+    },
+    {
+      period: "2024 — 2025",
+      role: "Product Designer @",
+      company: "HyperADX. Smart Programmatic Platform. 4.5 B Advertising requests",
+    },
+    {
+      period: "2023 — 2024",
+      role: "Lead Product Designer @",
+      company: "Edtech platform with 15M+ user",
+    },
+    {
+      period: "2020 — 2023",
+      role: "Senior Product Designer @",
+      company: "Edtech platform with 15M+ user",
+    },
+    {
+      period: "2018 — 2019",
+      role: "UX/UI Designer @",
+      company: "ITMINT",
+    },
+  ],
   footer: [
     "Reach me on ",
     { text: "LinkedIn", link: "https://www.linkedin.com/in/shkuratovdesigner/" },

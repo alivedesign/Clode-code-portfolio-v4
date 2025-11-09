@@ -97,11 +97,14 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
 
     // Check for special /claude command
     if (trimmedCommand === '/claude') {
+      console.log('[CommandInputSimple] /claude command detected, triggering animation');
       // Trigger falling avatars animation
       triggerFallingAvatars();
       setInput('/');
       return;
     }
+
+    console.log('[CommandInputSimple] Command:', trimmedCommand);
 
     const navItem = navigationItems.find(item =>
       item.command.toLowerCase() === trimmedCommand
@@ -154,6 +157,8 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
       e.preventDefault();
       if (suggestions.length > 0) {
         executeCommand(suggestions[selectedIndex].command);
+      } else {
+        executeCommand(input);
       }
     } else if (e.key === 'ArrowDown') {
       e.preventDefault();

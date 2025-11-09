@@ -10,8 +10,16 @@ export function Footer() {
           className="text-link hover:underline transition-all"
         >
           LinkedIn
-        </a>{' '}
-        or at shkuratovdesigner@gmail.com
+        </a>
+        , at shkuratovdesigner@gmail.com, or{' '}
+        <a
+          href="https://calendly.com/shkuratovdesigner-xtkx/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-link hover:underline transition-all"
+        >
+          book a discovery call
+        </a>
       </p>
     </div>
   );

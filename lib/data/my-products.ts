@@ -73,6 +73,7 @@ export const myProductsPageData: MyProductsPageData = {
     },
     {
       id: 5,
+      year: "2025",
       name: "Vibe-code Agency",
       status: "Currently building...",
       emoji: "(•_•)🔧",
@@ -80,6 +81,7 @@ export const myProductsPageData: MyProductsPageData = {
     },
     {
       id: 6,
+      year: "2026",
       name: "Smart AI Proposal Generator",
       status: "Currently building...",
       emoji: "(☞ﾟヮﾟ)☞🔩"
