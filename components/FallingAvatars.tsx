@@ -24,7 +24,7 @@ export function FallingAvatars() {
 
     for (let i = 0; i < count; i++) {
       newAvatars.push({
-        id: `avatar-${Date.now()}-${i}`,
+        id: `avatar-${fallingAvatarsTrigger}-${Date.now()}-${i}`,
         x: Math.random() * 100, // 0-100vw
         duration: Math.random() * 0.7 + 0.8 // 0.8-1.5s
       })
@@ -33,9 +33,11 @@ export function FallingAvatars() {
     setAvatars(newAvatars)
 
     // Auto-cleanup after longest animation completes
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setAvatars([])
     }, 1600) // 1.5s max duration + 100ms buffer
+
+    return () => clearTimeout(timeoutId)
   }, [fallingAvatarsTrigger])
 
   return (
