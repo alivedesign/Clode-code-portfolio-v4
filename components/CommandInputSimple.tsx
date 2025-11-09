@@ -4,6 +4,7 @@ import { useState, useRef, KeyboardEvent, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { NavigationItem } from '@/lib/types/navigation';
 import { throttle } from '@/lib/utils/performance';
+import { useAnimation } from '@/contexts/AnimationContext';
 
 interface CommandInputSimpleProps {
   navigationItems: NavigationItem[];
@@ -19,6 +20,7 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
   const mirrorRef = useRef<HTMLDivElement>(null);
   const [cursorCoords, setCursorCoords] = useState({ top: 0, left: 0, height: 24 });
   const router = useRouter();
+  const { triggerFallingAvatars } = useAnimation();
 
   // Auto-focus input on mount and position cursor after "/"
   useEffect(() => {
@@ -91,8 +93,18 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
 
   // Execute command - defined early to be used in useEffect below
   const executeCommand = useCallback((command: string) => {
+    const trimmedCommand = command.trim().toLowerCase();
+
+    // Check for special /clode command
+    if (trimmedCommand === '/clode') {
+      // Trigger falling avatars animation
+      triggerFallingAvatars();
+      setInput('/');
+      return;
+    }
+
     const navItem = navigationItems.find(item =>
-      item.command.toLowerCase() === command.toLowerCase()
+      item.command.toLowerCase() === trimmedCommand
     );
 
     if (navItem) {
@@ -101,7 +113,7 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
       setIsFocused(false);
       inputRef.current?.blur();
     }
-  }, [navigationItems, router]);
+  }, [navigationItems, router, triggerFallingAvatars]);
 
   // Global keyboard shortcuts
   useEffect(() => {
