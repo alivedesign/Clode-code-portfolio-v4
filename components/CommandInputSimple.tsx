@@ -20,7 +20,7 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
   const mirrorRef = useRef<HTMLDivElement>(null);
   const [cursorCoords, setCursorCoords] = useState({ top: 0, left: 0, height: 24 });
   const router = useRouter();
-  const { triggerFallingAvatars } = useAnimation();
+  const { triggerFallingAvatars, triggerDesignAnimation } = useAnimation();
 
   // Auto-focus input on mount and position cursor after "/"
   useEffect(() => {
@@ -104,6 +104,15 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
       return;
     }
 
+    // Check for special /design command
+    if (trimmedCommand === '/design') {
+      console.log('[CommandInputSimple] /design command detected, triggering design animation');
+      // Trigger design animation
+      triggerDesignAnimation();
+      setInput('/');
+      return;
+    }
+
     console.log('[CommandInputSimple] Command:', trimmedCommand);
 
     const navItem = navigationItems.find(item =>
@@ -116,7 +125,7 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
       setIsFocused(false);
       inputRef.current?.blur();
     }
-  }, [navigationItems, router, triggerFallingAvatars]);
+  }, [navigationItems, router, triggerFallingAvatars, triggerDesignAnimation]);
 
   // Global keyboard shortcuts
   useEffect(() => {
