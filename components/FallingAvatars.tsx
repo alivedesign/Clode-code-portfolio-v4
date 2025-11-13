@@ -4,64 +4,125 @@ import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useAnimation } from '@/contexts/AnimationContext'
 import { AvatarStatic } from './AvatarStatic'
+import { AvatarRainbow } from './AvatarRainbow'
+import { ToolLogo, ToolName } from './ToolLogo'
 
-interface FallingAvatar {
+type FallingObjectType = 'avatar' | 'rainbow-avatar' | 'tool-logo'
+
+interface FallingObject {
   id: string
+  type: FallingObjectType
   x: number // horizontal position in vw
   duration: number // fall duration in seconds
+  toolName?: ToolName // only for tool-logo type
 }
 
 export function FallingAvatars() {
-  const { fallingAvatarsTrigger } = useAnimation()
-  const [avatars, setAvatars] = useState<FallingAvatar[]>([])
+  const { fallingAvatarsTrigger, designAnimationTrigger, currentAnimationType } = useAnimation()
+  const [objects, setObjects] = useState<FallingObject[]>([])
 
+  // Handle /claude animation
   useEffect(() => {
-    console.log('[FallingAvatars] Trigger changed:', fallingAvatarsTrigger);
     if (fallingAvatarsTrigger === 0) return
 
-    console.log('[FallingAvatars] Generating avatars...');
-    // Generate 20-30 avatars with random positions and speeds
+    console.log('[FallingAvatars] Generating claude avatars...')
     const count = Math.floor(Math.random() * 11) + 20 // 20-30
-    const newAvatars: FallingAvatar[] = []
+    const newObjects: FallingObject[] = []
 
     for (let i = 0; i < count; i++) {
-      newAvatars.push({
-        id: `avatar-${fallingAvatarsTrigger}-${Date.now()}-${i}`,
+      newObjects.push({
+        id: `claude-${fallingAvatarsTrigger}-${Date.now()}-${i}`,
+        type: 'avatar',
         x: Math.random() * 100, // 0-100vw
-        duration: Math.random() * 1.4 + 1.6 // 1.6-3.0s (2x slower)
+        duration: Math.random() * 1.4 + 1.6 // 1.6-3.0s
       })
     }
 
-    setAvatars(newAvatars)
+    setObjects(newObjects)
 
-    // Auto-cleanup after longest animation completes
     const timeoutId = setTimeout(() => {
-      setAvatars([])
-    }, 3100) // 3.0s max duration + 100ms buffer
+      setObjects([])
+    }, 3100)
 
     return () => clearTimeout(timeoutId)
   }, [fallingAvatarsTrigger])
 
+  // Handle /design animation
+  useEffect(() => {
+    if (designAnimationTrigger === 0) return
+
+    console.log('[FallingAvatars] Generating design animation objects...')
+    const count = Math.floor(Math.random() * 11) + 20 // 20-30
+    const newObjects: FallingObject[] = []
+    const tools: ToolName[] = ['figma', 'after-effects', 'claude', 'chatgpt', 'midjourney']
+
+    for (let i = 0; i < count; i++) {
+      // 50% chance for rainbow avatar, 50% for tool logo
+      const isRainbowAvatar = Math.random() < 0.5
+
+      if (isRainbowAvatar) {
+        newObjects.push({
+          id: `design-rainbow-${designAnimationTrigger}-${Date.now()}-${i}`,
+          type: 'rainbow-avatar',
+          x: Math.random() * 100,
+          duration: Math.random() * 0.7 + 0.8 // 0.8-1.5s
+        })
+      } else {
+        // Pick random tool
+        const randomTool = tools[Math.floor(Math.random() * tools.length)]
+        newObjects.push({
+          id: `design-logo-${designAnimationTrigger}-${Date.now()}-${i}`,
+          type: 'tool-logo',
+          x: Math.random() * 100,
+          duration: Math.random() * 0.7 + 0.8, // 0.8-1.5s
+          toolName: randomTool
+        })
+      }
+    }
+
+    setObjects(newObjects)
+
+    const timeoutId = setTimeout(() => {
+      setObjects([])
+    }, 1600) // 1.5s max duration + 100ms buffer
+
+    return () => clearTimeout(timeoutId)
+  }, [designAnimationTrigger])
+
+  // Render appropriate component based on type
+  const renderObject = (obj: FallingObject) => {
+    switch (obj.type) {
+      case 'avatar':
+        return <AvatarStatic />
+      case 'rainbow-avatar':
+        return <AvatarRainbow />
+      case 'tool-logo':
+        return obj.toolName ? <ToolLogo tool={obj.toolName} /> : null
+      default:
+        return null
+    }
+  }
+
   return (
     <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
       <AnimatePresence>
-        {avatars.map((avatar) => (
+        {objects.map((obj) => (
           <motion.div
-            key={avatar.id}
+            key={obj.id}
             initial={{ y: -100 }}
             animate={{ y: 'calc(100vh + 100px)' }}
             exit={{ opacity: 0 }}
             transition={{
-              duration: avatar.duration,
+              duration: obj.duration,
               ease: 'linear'
             }}
             style={{
               position: 'absolute',
-              left: `${avatar.x}vw`,
-              transform: 'translateX(-50px)' // Center avatar on x position
+              left: `${obj.x}vw`,
+              transform: 'translateX(-50px)' // Center object on x position
             }}
           >
-            <AvatarStatic />
+            {renderObject(obj)}
           </motion.div>
         ))}
       </AnimatePresence>
