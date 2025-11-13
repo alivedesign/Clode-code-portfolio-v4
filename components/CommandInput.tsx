@@ -20,7 +20,7 @@ export function CommandInput({ navigationItems }: CommandInputProps) {
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const { triggerFallingAvatars } = useAnimation();
+  const { triggerFallingAvatars, triggerDesignAnimation } = useAnimation();
 
   // Initialize Fuse.js for fuzzy search
   const fuse = useRef(
@@ -50,6 +50,15 @@ export function CommandInput({ navigationItems }: CommandInputProps) {
     if (trimmedCommand === '/claude') {
       // Trigger falling avatars animation
       triggerFallingAvatars();
+      setInput('');
+      setSuggestions([]);
+      setHistoryIndex(-1);
+      return;
+    }
+
+    // Check for special /design command
+    if (trimmedCommand === '/design') {
+      triggerDesignAnimation();
       setInput('');
       setSuggestions([]);
       setHistoryIndex(-1);
