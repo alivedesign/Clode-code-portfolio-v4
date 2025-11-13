@@ -8,21 +8,21 @@ interface ToolLogoProps {
 
 export function ToolLogo({ tool }: ToolLogoProps) {
   const logoPath = `/logos/${tool}.svg`
-  const size = 100 // Match avatar width
+  const LOGO_SIZE = 101 // Match avatar width (AVATAR_WIDTH constant)
 
   return (
     <div
       className="relative"
       style={{
-        width: `${size}px`,
-        height: `${size}px`
+        width: `${LOGO_SIZE}px`,
+        height: `${LOGO_SIZE}px`
       }}
     >
       <Image
         src={logoPath}
         alt={`${tool} logo`}
-        width={size}
-        height={size}
+        width={LOGO_SIZE}
+        height={LOGO_SIZE}
         style={{
           objectFit: 'contain'
         }}
