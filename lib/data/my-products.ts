@@ -30,7 +30,7 @@ export const myProductsPageData: MyProductsPageData = {
     href: "/"
   },
   hero: {
-    title: "Work with not \"just\" a designer but a founder too",
+    title: "Work with not «just» a designer but a founder too",
     subtitle: [
       "I love creating and solving problems. ",
       { text: "I've built more than seven startups", bold: true },

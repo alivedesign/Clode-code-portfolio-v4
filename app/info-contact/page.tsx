@@ -43,7 +43,7 @@ export default function InfoContact() {
               <h1 className="text-[24px] leading-[1.2] text-accent font-semibold">
                 {heroContent.title}
               </h1>
-              <p className="text-text-18 leading-[1.4] w-full desktop:w-[1000px]">
+              <p className="text-text-16 leading-[1.6] w-full desktop:w-[1000px]">
                 <RichText
                   content={heroContent.subtitle}
                   className="text-text-secondary [&_span]:text-inherit [&_span.text-white]:text-white"
@@ -52,7 +52,7 @@ export default function InfoContact() {
             </div>
 
             {/* Paragraph 1 */}
-            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
+            <p className="text-text-18 leading-[1.6] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   "I'm the ideal partners for ",
@@ -86,8 +86,18 @@ export default function InfoContact() {
               </div>
             </div>
 
+            {/* Video Placeholder 1 */}
+            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+              <p className="text-text-16 text-accent leading-[1.4]">
+                Video coming soon..
+              </p>
+              <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">
+                Why Discipline Beats Talent in Digital Product Building (What I Learned)
+              </p>
+            </div>
+
             {/* Paragraph 2 */}
-            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
+            <p className="text-text-18 leading-[1.6] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   'As a ',
@@ -100,7 +110,7 @@ export default function InfoContact() {
             </p>
 
             {/* Paragraph 3 */}
-            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
+            <p className="text-text-18 leading-[1.6] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   'Outside of work, ',
@@ -137,8 +147,18 @@ export default function InfoContact() {
               </div>
             </div>
 
+            {/* Video Placeholder 2 */}
+            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+              <p className="text-text-16 text-accent leading-[1.4]">
+                Video coming soon..
+              </p>
+              <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[417px] px-spacing-4">
+                Day in the life of a Product Designer Managing 3 Jobs with AI
+              </p>
+            </div>
+
             {/* Paragraph 4 */}
-            <p className="text-text-18 leading-[1.4] w-full desktop:w-[640px]">
+            <p className="text-text-16 leading-[1.6] w-full desktop:w-[640px]">
               <RichText
                 content={[
                   "As you've probably noticed, ",
@@ -153,7 +173,7 @@ export default function InfoContact() {
             </p>
 
             {/* Paragraph 5 - with emoticon */}
-            <div className="text-text-18 leading-[1.4] w-full desktop:w-[640px] text-text-secondary">
+            <div className="text-text-16 leading-[1.6] w-full desktop:w-[640px] text-text-secondary">
               <p className="mb-spacing-4">
                 <RichText
                   content={[

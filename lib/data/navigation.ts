@@ -5,22 +5,22 @@ export const homepageNavigationItems: NavigationItem[] = [
   {
     command: '/ Main',
     route: '/main',
-    description: '/ Hero Section: "The Story of How We\'ll Work Together"',
+    description: '/ Hero Section: «The Story of How We\'ll Work Together»',
   },
   {
     command: '/ Works',
     route: '/works',
-    description: '/ Case Studies: "Real Projects, Real Results"',
+    description: '/ Case Studies: «Real Projects, Real Results»',
   },
   {
     command: '/ My_Products',
     route: '/my-products',
-    description: '/ My-Products: "What I Build When No One\'s Watching"',
+    description: '/ My-Products: «What I Build When No One\'s Watching»',
   },
   {
     command: '/ Info_Contact',
     route: '/info-contact',
-    description: '/ Info-Contact: "The Person Behind the Products"',
+    description: '/ Info-Contact: «The Person Behind the Products»',
   },
 ];
 
@@ -29,17 +29,17 @@ export const navigationItems: NavigationItem[] = [
   {
     command: '/ Works',
     route: '/works',
-    description: '/ Case Studies: "Real Projects, Real Results"',
+    description: '/ Case Studies: «Real Projects, Real Results»',
   },
   {
     command: '/ My_Products',
     route: '/my-products',
-    description: '/ My-Products: "What I Build When No One\'s Watching"',
+    description: '/ My-Products: «What I Build When No One\'s Watching»',
   },
   {
     command: '/ Info_Contact',
     route: '/info-contact',
-    description: '/ Info-Contact: "The Person Behind the Products"',
+    description: '/ Info-Contact: «The Person Behind the Products»',
   },
   {
     command: '/ Clear',
@@ -53,17 +53,17 @@ export const worksPageNavigationItems: NavigationItem[] = [
   {
     command: '/ Main',
     route: '/main',
-    description: '/ Hero Section: "The Story of How We\'ll Work Together"',
+    description: '/ Hero Section: «The Story of How We\'ll Work Together»',
   },
   {
     command: '/ My_Products',
     route: '/my-products',
-    description: '/ My-Products: "What I Build When No One\'s Watching"',
+    description: '/ My-Products: «What I Build When No One\'s Watching»',
   },
   {
     command: '/ Info_Contact',
     route: '/info-contact',
-    description: '/ Info-Contact: "The Person Behind the Products"',
+    description: '/ Info-Contact: «The Person Behind the Products»',
   },
   {
     command: '/ Clear',
@@ -77,17 +77,17 @@ export const myProductsPageNavigationItems: NavigationItem[] = [
   {
     command: '/ Main',
     route: '/main',
-    description: '/ Hero Section: "The Story of How We\'ll Work Together"',
+    description: '/ Hero Section: «The Story of How We\'ll Work Together»',
   },
   {
     command: '/ Works',
     route: '/works',
-    description: '/ Case Studies: "Real Projects, Real Results"',
+    description: '/ Case Studies: «Real Projects, Real Results»',
   },
   {
     command: '/ Info_Contact',
     route: '/info-contact',
-    description: '/ Info-Contact: "The Person Behind the Products"',
+    description: '/ Info-Contact: «The Person Behind the Products»',
   },
   {
     command: '/ Clear',
@@ -101,17 +101,17 @@ export const infoContactPageNavigationItems: NavigationItem[] = [
   {
     command: '/ Main',
     route: '/main',
-    description: '/ Hero Section: "The Story of How We\'ll Work Together"',
+    description: '/ Hero Section: «The Story of How We\'ll Work Together»',
   },
   {
     command: '/ Works',
     route: '/works',
-    description: '/ Case Studies: "Real Projects, Real Results"',
+    description: '/ Case Studies: «Real Projects, Real Results»',
   },
   {
     command: '/ My_Products',
     route: '/my-products',
-    description: '/ My-Products: "What I Build When No One\'s Watching"',
+    description: '/ My-Products: «What I Build When No One\'s Watching»',
   },
   {
     command: '/ Clear',

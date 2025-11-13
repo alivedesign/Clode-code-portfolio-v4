@@ -89,14 +89,14 @@ export default function Works() {
                 </div>
 
                 {/* Project Description */}
-                <p className="text-text-18 leading-[1.4]">
+                <p className="text-text-18 desktop:text-[20px] leading-[1.4]">
                   {project.description.map((segment, index) => {
                     if (typeof segment === 'string') {
                       return <span key={index} className="text-text-secondary">{segment}</span>;
                     }
                     if (typeof segment === 'object' && 'text' in segment) {
-                      // Bold text should be white (text), non-bold should be text-secondary
-                      const colorClass = segment.bold ? 'text-text' : 'text-text-secondary';
+                      // Bold text should be white with medium font weight, non-bold should be text-secondary with regular weight
+                      const colorClass = segment.bold ? 'text-text font-medium' : 'text-text-secondary';
                       return <span key={index} className={colorClass}>{segment.text}</span>;
                     }
                     return null;

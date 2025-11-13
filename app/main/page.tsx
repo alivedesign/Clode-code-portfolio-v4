@@ -83,7 +83,7 @@ export default function Main() {
               <p className="text-text-16 text-accent leading-[1.4]">
                 Video coming soon..
               </p>
-              <p className="text-title-18 text-text-secondary leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">
+              <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">
                 Product Design for Founders. 4 Fantasy locations Where Products Die (And How to Win)
               </p>
             </div>

@@ -33,9 +33,9 @@ export const worksPageData: WorksPageData = {
       image: "/images/works/b2b-messenger.png",
       alt: "B2B messenger app interface showing conversational UI",
       description: [
-        { text: "B2B messenger app", bold: true },
-        { text: " focused on conversational UI with ", bold: false },
-        { text: "over 100,000 daily active users", bold: true }
+        { text: "Making corporate communication ", bold: true },
+        { text: "fast, secure, and delightful for ", bold: false },
+        { text: "100K+ people daily", bold: true }
       ]
     },
     {
@@ -43,8 +43,10 @@ export const worksPageData: WorksPageData = {
       image: "/images/works/content-engine.png",
       alt: "Content engine platform interface",
       description: [
-        { text: "Full-stack content engine ", bold: true },
-        { text: "powered by specialized, purpose-trained models", bold: false }
+        { text: "From 0% to 5% conversion. ", bold: true },
+        { text: "Redesigning an ", bold: false },
+        { text: "AI content platform ", bold: true },
+        { text: "that proved PMF on LinkedIn", bold: false }
       ]
     },
     {
@@ -52,8 +54,10 @@ export const worksPageData: WorksPageData = {
       image: "/images/works/ad-platform.png",
       alt: "Mobile advertising platform dashboard",
       description: [
-        { text: "Mobile advertising platform ", bold: true },
-        { text: "with 90M Unique Users", bold: false }
+        { text: "20% conversion lift. ", bold: true },
+        { text: "Transforming a ", bold: false },
+        { text: "programmatic advertising platform's ", bold: true },
+        { text: "design and trust", bold: false }
       ],
       isNDA: true
     },
@@ -62,7 +66,9 @@ export const worksPageData: WorksPageData = {
       image: "/images/works/course-constructor.png",
       alt: "Online course constructor and educational marketplace",
       description: [
-        { text: "Online Course Constructor and Largest educational Marketplace in CIS for 8M teachers", bold: true }
+        { text: "Helping 8M teachers ", bold: true },
+        { text: "build, monetize, and grow their ", bold: false },
+        { text: "educational content effortlessly", bold: true }
       ],
       isNDA: true
     }
