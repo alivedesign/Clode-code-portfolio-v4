@@ -54,7 +54,7 @@ export function FallingAvatars() {
     console.log('[FallingAvatars] Generating design animation objects...')
     const count = Math.floor(Math.random() * 11) + 20 // 20-30
     const newObjects: FallingObject[] = []
-    const tools: ToolName[] = ['figma', 'after-effects', 'claude', 'chatgpt', 'midjourney']
+    const tools: ToolName[] = ['figma', 'figma', 'figma', 'claude', 'chatgpt', 'midjourney']
 
     for (let i = 0; i < count; i++) {
       // 50% chance for rainbow avatar, 50% for tool logo
