@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Shkuratov Designer",
     description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
-    images: ['https://shkuratov.design/images/opengraph.png'],
+    images: ['https://shkuratovdesigner.com/images/opengraph.png'],
   },
 };
 

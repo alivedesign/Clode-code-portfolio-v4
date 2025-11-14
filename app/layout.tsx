@@ -8,7 +8,7 @@ import { FallingAvatars } from "@/components/FallingAvatars";
 // and uncomment the localFont configuration in this file (see public/fonts/README.md)
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://shkuratov.design'),
+  metadataBase: new URL('https://shkuratovdesigner.com'),
   title: "Shkuratov Designer",
   description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
   keywords: ["product design", "UX design", "portfolio", "Evgeny Shkuratov", "AI-powered builder"],
@@ -17,13 +17,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://shkuratov.design",
+    url: "https://shkuratovdesigner.com",
     title: "Shkuratov Designer",
     description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
     siteName: "Shkuratov Designer",
     images: [
       {
-        url: 'https://shkuratov.design/images/opengraph.png',
+        url: 'https://shkuratovdesigner.com/images/opengraph.png',
         width: 1800,
         height: 945,
         alt: 'Evgeny Shkuratov - Product Designer Portfolio',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Shkuratov Designer",
     description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
-    images: ['https://shkuratov.design/images/opengraph.png'],
+    images: ['https://shkuratovdesigner.com/images/opengraph.png'],
   },
   robots: {
     index: true,
