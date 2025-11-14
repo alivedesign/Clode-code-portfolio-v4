@@ -124,6 +124,12 @@ export function CommandInputSimple({ navigationItems, dropdownBehavior = 'absolu
       setInput('/');
       setIsFocused(false);
       inputRef.current?.blur();
+    } else {
+      // Unknown command - redirect to unknown page
+      router.push('/unknown');
+      setInput('/');
+      setIsFocused(false);
+      inputRef.current?.blur();
     }
   }, [navigationItems, router, triggerFallingAvatars, triggerDesignAnimation]);
 
