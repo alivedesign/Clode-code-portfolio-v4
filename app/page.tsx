@@ -7,8 +7,13 @@ import { Footer } from "@/components/Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Evgeny Shkuratov - Product Designer",
-  description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+  title: "Shkuratov Designer",
+  description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
+  openGraph: {
+    title: "Shkuratov Designer",
+    description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
+    images: ['/images/opengraph.png'],
+  },
 };
 
 export default function Home() {
