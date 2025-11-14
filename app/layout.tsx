@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { AnimationProvider } from "@/contexts/AnimationContext";
 import { FallingAvatars } from "@/components/FallingAvatars";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 // Note: Using system fonts (SF Pro on macOS, Segoe UI on Windows, etc.)
 // To use custom SF Pro fonts across all platforms, add font files to public/fonts/
@@ -54,6 +55,9 @@ export default function RootLayout({
           {children}
           <FallingAvatars />
         </AnimationProvider>
+        {process.env.NODE_ENV === 'production' && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!} />
+        )}
       </body>
     </html>
   );
