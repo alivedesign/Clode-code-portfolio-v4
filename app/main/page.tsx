@@ -18,7 +18,7 @@ export default function Main() {
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 mobile:px-spacing-8 tablet:px-spacing-7 desktop:px-[40px] py-spacing-8">
       {/* Main Container - responsive width */}
-      <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
+      <div className="w-full desktop:max-w-[1000px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
         <div className="flex flex-col gap-spacing-7 flex-1">
           {/* Back Link */}
@@ -80,7 +80,7 @@ export default function Main() {
 
             {/* Video Coming Soon Placeholder */}
             <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-              <p className="text-text-16 text-accent leading-[1.4]">
+              <p className="text-[16px] font-medium text-accent leading-[1.2]">
                 Video coming soon..
               </p>
               <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">

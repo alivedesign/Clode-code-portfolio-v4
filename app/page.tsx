@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 mobile:px-spacing-9 tablet:px-[32px] desktop:px-[40px] py-spacing-8">
       {/* Main Container - responsive width */}
-      <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
+      <div className="w-full desktop:max-w-[1000px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
         <div className="flex flex-col gap-spacing-9 flex-1">
         {/* Bordered Box with all main content */}

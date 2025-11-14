@@ -9,24 +9,32 @@ import { FallingAvatars } from "@/components/FallingAvatars";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://shkuratov.design'),
-  title: "Evgeny Shkuratov - Product Designer",
-  description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+  title: "Shkuratov Designer",
+  description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
   keywords: ["product design", "UX design", "portfolio", "Evgeny Shkuratov", "AI-powered builder"],
   authors: [{ name: "Evgeny Shkuratov" }],
   creator: "Evgeny Shkuratov",
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "Evgeny Shkuratov - Product Designer & AI-Powered Builder",
-    description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
+    url: "https://shkuratov.design",
+    title: "Shkuratov Designer",
+    description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
     siteName: "Shkuratov Designer",
-    images: ['/opengraph-image'],
+    images: [
+      {
+        url: '/images/opengraph.png',
+        width: 1800,
+        height: 945,
+        alt: 'Evgeny Shkuratov - Product Designer Portfolio',
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Evgeny Shkuratov - Product Designer & AI-Powered Builder",
-    description: "Product Designer leveraging AI to build apps focused on what users actually need. 9 years of experience, 30+ client products launched.",
-    images: ['/opengraph-image'],
+    title: "Shkuratov Designer",
+    description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
+    images: ['/images/opengraph.png'],
   },
   robots: {
     index: true,

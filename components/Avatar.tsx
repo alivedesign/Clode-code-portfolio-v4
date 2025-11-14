@@ -33,7 +33,7 @@ const BOTTOM_PIXELS = [
 
 // Eye tracking thresholds
 const EYE_TRACKING_THRESHOLD = 100
-const EYE_TRACKING_OFFSET = 2
+const EYE_TRACKING_OFFSET = 4
 
 export function Avatar() {
   const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 })

@@ -40,30 +40,22 @@ export const myProductsPageData: MyProductsPageData = {
   projects: [
     {
       id: 1,
-      year: "2019",
-      name: "Cashback service",
-      status: "Closed",
-      emoji: "(︶︹︺)",
-      emotionType: "sad"
+      year: "2026",
+      name: "Smart AI Proposal Generator",
+      status: "Currently building...",
+      emoji: "(☞ﾟヮﾟ)☞🔩"
     },
     {
       id: 2,
-      year: "2021",
-      name: "A PWA for booking dishes",
-      status: "from local restaurants | Closed",
-      emoji: "(；﹏；)",
-      emotionType: "sad"
+      year: "2025",
+      name: "Vibe-code Agency",
+      status: "Currently building...",
+      emoji: "(•_•)🔧",
+      emotionType: "work"
     },
     {
       id: 3,
-      year: "2022",
-      name: "Online School with AI IDE",
-      status: "Closed",
-      emoji: "(ノ﹏ヽ)",
-      emotionType: "sad"
-    },
-    {
-      id: 4,
+      year: "2025",
       isFeatured: true,
       name: "Lullami kids stories app",
       status: "",
@@ -72,19 +64,28 @@ export const myProductsPageData: MyProductsPageData = {
       appStoreLink: "https://apps.apple.com/us/app/lullami-bed-time-stories/id6745401906"
     },
     {
+      id: 4,
+      year: "2022",
+      name: "Online School with AI IDE",
+      status: "Closed",
+      emoji: "(ノ﹏ヽ)",
+      emotionType: "sad"
+    },
+    {
       id: 5,
-      year: "2025",
-      name: "Vibe-code Agency",
-      status: "Currently building...",
-      emoji: "(•_•)🔧",
-      emotionType: "work"
+      year: "2021",
+      name: "A PWA for booking dishes",
+      status: "from local restaurants | Closed",
+      emoji: "(；﹏；)",
+      emotionType: "sad"
     },
     {
       id: 6,
-      year: "2026",
-      name: "Smart AI Proposal Generator",
-      status: "Currently building...",
-      emoji: "(☞ﾟヮﾟ)☞🔩"
+      year: "2019",
+      name: "Cashback service",
+      status: "Closed",
+      emoji: "(︶︹︺)",
+      emotionType: "sad"
     }
   ]
 };

@@ -14,7 +14,7 @@ export default function MyProducts() {
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 mobile:px-spacing-9 tablet:px-[32px] desktop:px-[40px] py-spacing-8 relative">
       {/* Main Container - responsive width */}
-      <div className="w-full tablet:max-w-[1200px] flex flex-col flex-1">
+      <div className="w-full desktop:max-w-[1000px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
         <div className="flex flex-col gap-spacing-8 flex-1">
           {/* Back Link */}
@@ -62,13 +62,14 @@ export default function MyProducts() {
                     {/* Project Title and Button */}
                     <div className="flex flex-col tablet:flex-row gap-[14px] tablet:gap-0 tablet:items-center tablet:justify-between w-full">
                       <p className="text-text-18 leading-[1.2] text-text">
+                        {project.year && <span className="text-text-secondary">{project.year}. </span>}
                         {project.name}
                       </p>
                       <a
                         href={project.appStoreLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-[#9f5c46] hover:bg-[#8a503d] transition-colors rounded-[4px] px-spacing-7 py-spacing-4 text-center"
+                        className="bg-accent hover:bg-[#c26849] transition-colors rounded-[4px] px-spacing-7 py-[12px] text-center"
                       >
                         <span className="text-text-16 text-text font-medium whitespace-nowrap">
                           Download in AppStore
@@ -80,6 +81,9 @@ export default function MyProducts() {
               }
 
               // Regular projects
+              const isBuilding = project.status?.includes('Currently building');
+              const statusColor = isBuilding ? 'text-accent' : 'text-text-secondary';
+
               return (
                 <p key={project.id} className="text-text-18 leading-[1.2] w-full">
                   {project.year && (
@@ -90,20 +94,20 @@ export default function MyProducts() {
                   <span className="text-text">{project.name}</span>
                   {project.status && (
                     <>
-                      <span className="text-text-secondary"> | {project.status}</span>
+                      <span className={statusColor}> | {project.status}</span>
                     </>
                   )}
                   {project.emoji && project.emotionType && (
                     <>
                       <span className="text-text-secondary"> </span>
-                      <span className={`text-text-secondary emoticon-${project.emotionType}`}>
+                      <span className={`${statusColor} emoticon-${project.emotionType}`}>
                         {project.emoji}
                       </span>
                     </>
                   )}
                   {project.emoji && !project.emotionType && (
                     <>
-                      <span className="text-text-secondary"> {project.emoji}</span>
+                      <span className={statusColor}> {project.emoji}</span>
                     </>
                   )}
                 </p>
