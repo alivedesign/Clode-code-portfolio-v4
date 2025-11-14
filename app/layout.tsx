@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Shkuratov Designer",
     images: [
       {
-        url: '/images/opengraph.png',
+        url: 'https://shkuratov.design/images/opengraph.png',
         width: 1800,
         height: 945,
         alt: 'Evgeny Shkuratov - Product Designer Portfolio',
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Shkuratov Designer",
     description: "Helping Solo Founders & Startups Ship User-Centric Products Faster",
-    images: ['/images/opengraph.png'],
+    images: ['https://shkuratov.design/images/opengraph.png'],
   },
   robots: {
     index: true,
