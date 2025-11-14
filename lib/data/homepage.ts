@@ -15,7 +15,10 @@ export const homepageData: HomePageData = {
     recentActivity: "Redesigning bloggingmachine.io",
     whatsNewTitle: "What's new",
     updates: [
-      ["New Episode of redesigning AI products"],
+      [
+        { text: "New Episode", link: "https://www.linkedin.com/posts/evgeny-shkuratov-b34a99174_ep-3-of-redesigning-random-products-fully-activity-7391847231361875968-zxJ8?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAClzlBgBnOCW9mmIdKjCWSQps6uG6kE4spo" } as TextSegment,
+        " of redesigning AI products"
+      ],
       [
         "live stream with ",
         { text: "George Kachanouski", link: "https://www.linkedin.com/in/georgekachanouski/" } as TextSegment,
