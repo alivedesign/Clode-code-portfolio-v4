@@ -65,7 +65,7 @@ export function FallingAvatars() {
           id: `design-rainbow-${designAnimationTrigger}-${Date.now()}-${i}`,
           type: 'rainbow-avatar',
           x: Math.random() * 100,
-          duration: Math.random() * 0.7 + 0.8 // 0.8-1.5s
+          duration: Math.random() * 1.5 + 2.5 // 2.5-4.0s (slower)
         })
       } else {
         // Pick random tool
@@ -74,7 +74,7 @@ export function FallingAvatars() {
           id: `design-logo-${designAnimationTrigger}-${Date.now()}-${i}`,
           type: 'tool-logo',
           x: Math.random() * 100,
-          duration: Math.random() * 0.7 + 0.8, // 0.8-1.5s
+          duration: Math.random() * 1.5 + 2.5, // 2.5-4.0s (slower)
           toolName: randomTool
         })
       }
@@ -84,7 +84,7 @@ export function FallingAvatars() {
 
     const timeoutId = setTimeout(() => {
       setObjects([])
-    }, 1600) // 1.5s max duration + 100ms buffer
+    }, 4100) // 4.0s max duration + 100ms buffer
 
     return () => clearTimeout(timeoutId)
   }, [designAnimationTrigger])

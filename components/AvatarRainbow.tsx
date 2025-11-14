@@ -28,8 +28,8 @@ export function AvatarRainbow() {
     { left: 62.02 },
   ]
 
-  // Rainbow gradient style
-  const rainbowGradient = 'linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #8B00FF)'
+  // Rainbow gradient style - matches gradient reference
+  const rainbowGradient = 'linear-gradient(90deg, #E60000, #FFA500, #FFFF00, #008000, #0066FF, #9B00FF)'
 
   return (
     <div
