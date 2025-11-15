@@ -38,6 +38,9 @@ export default function BloggingMachineCaseStudy() {
                   alt="Andrew's LinkedIn profile"
                   fill
                   className="object-cover rounded-spacing-3"
+                  priority
+                  sizes="232px"
+                  quality={90}
                 />
               </div>
               <p className="text-[18px] leading-[1.5] font-semibold text-text desktop:w-[334px]">
@@ -82,6 +85,9 @@ export default function BloggingMachineCaseStudy() {
                 alt="Old Blogging Machine website"
                 fill
                 className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 1200px) 100vw, 795px"
+                quality={85}
               />
             </div>
 
@@ -97,6 +103,9 @@ export default function BloggingMachineCaseStudy() {
                     alt="Analytics graph showing user behavior"
                     fill
                     className="object-cover"
+                    loading="lazy"
+                    sizes="(max-width: 1200px) 100vw, 795px"
+                    quality={85}
                   />
                 </div>
                 <div className="relative w-full aspect-[795/187] rounded-spacing-3 overflow-hidden">
@@ -105,6 +114,9 @@ export default function BloggingMachineCaseStudy() {
                     alt="Analytics data details"
                     fill
                     className="object-cover"
+                    loading="lazy"
+                    sizes="(max-width: 1200px) 100vw, 795px"
+                    quality={85}
                   />
                 </div>
               </div>
@@ -122,6 +134,8 @@ export default function BloggingMachineCaseStudy() {
                   loop
                   muted
                   playsInline
+                  preload="metadata"
+                  aria-label="Research process demonstration video"
                   className="absolute left-0 desktop:left-[67px] top-[34px] desktop:top-[29.48px] w-full desktop:w-[629px] h-[243px] desktop:h-[353.664px] rounded-[4.747px] object-cover"
                 >
                   <source src="/videos/bloggingmachine-case/research.mp4" type="video/mp4" />
@@ -223,6 +237,8 @@ export default function BloggingMachineCaseStudy() {
                   loop
                   muted
                   playsInline
+                  preload="metadata"
+                  aria-label="New Blogging Machine website showcase video"
                   className="w-full h-full object-cover"
                 >
                   <source src="/videos/bloggingmachine-case/new-site-showcase.mp4" type="video/mp4" />
@@ -292,6 +308,9 @@ export default function BloggingMachineCaseStudy() {
                     alt="B2B Messenger case study preview"
                     fill
                     className="object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
+                    loading="lazy"
+                    sizes="(max-width: 1200px) 100vw, 795px"
+                    quality={85}
                   />
                 </div>
                 <p className="text-[20px] leading-[1.4] text-text">
