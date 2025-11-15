@@ -6,6 +6,7 @@ export interface WorkProject {
   alt: string;
   description: RichText;
   isNDA?: boolean;
+  slug?: string;
 }
 
 export interface WorksPageData {
@@ -36,7 +37,8 @@ export const worksPageData: WorksPageData = {
         { text: "Making corporate communication ", bold: true },
         { text: "fast, secure, and delightful for ", bold: false },
         { text: "100K+ people daily", bold: true }
-      ]
+      ],
+      slug: "b2b-messenger"
     },
     {
       id: 2,
