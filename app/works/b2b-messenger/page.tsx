@@ -23,17 +23,15 @@ export default function B2BMessengerCaseStudy() {
           </Link>
 
           {/* Hero Section */}
-          <div className="desktop:max-w-[795px]">
-            <div className="border border-accent px-spacing-8 py-spacing-7 flex flex-col justify-between min-h-[106px]">
-              <p className="text-[24px] leading-[1.2] desktop:text-[28px] desktop:leading-[1.2] text-accent font-semibold">
-                I helped 100,000+ teams communicate 50% more efficiently by designing conversational experiences that feel human, not robotic.
-              </p>
-            </div>
+          <div className="border border-accent px-spacing-8 py-spacing-7 flex flex-col justify-between min-h-[106px]">
+            <p className="text-[24px] leading-[1.2] desktop:text-[28px] desktop:leading-[1.2] text-accent font-semibold">
+              I helped 100,000+ teams communicate 50% more efficiently by designing conversational experiences that feel human, not robotic.
+            </p>
           </div>
 
           {/* NDA Section */}
           <div className="desktop:max-w-[795px] flex flex-col gap-spacing-6">
-            <p className="text-text-18 leading-[1.5] text-text font-semibold">
+            <p className="text-text-16 leading-[1.5] text-text font-semibold">
               Working under NDA, I&apos;ve adapted this case study to showcase my process and thinking while respecting confidentiality
             </p>
 
@@ -54,13 +52,13 @@ export default function B2BMessengerCaseStudy() {
           <div className="desktop:max-w-[795px] bg-[#1A1A1A] rounded-[6px]">
             <div className="p-spacing-7 desktop:px-spacing-8 desktop:py-spacing-8 flex flex-col gap-spacing-7">
               <div className="flex flex-col gap-spacing-6">
-                <p className="text-text-18 desktop:text-[20px] leading-[1.2] text-accent">
+                <p className="text-text-16 leading-[1.2] text-accent">
                   Animated stickers, emojis, and GIFs
                 </p>
                 <h2 className="text-[36px] leading-[1.1] desktop:text-[42px] desktop:leading-[1.1] font-semibold text-text">
                   Making Team Communication Feel Human Again
                 </h2>
-                <p className="text-text-18 desktop:text-[20px] leading-[1.4] text-text-secondary">
+                <p className="text-text-16 leading-[1.4] text-text-secondary">
                   <span>Through 15 interviews with team leads, I discovered </span>
                   <span className="text-text">89% of messages were text-only.</span>
                   <span> Users described conversations as &quot;dry&quot; and &quot;impersonal.&quot; </span>
@@ -70,19 +68,19 @@ export default function B2BMessengerCaseStudy() {
 
               <div className="flex flex-col gap-spacing-6">
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Challenge 1:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     How to add personality without looking unprofessional?
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Challenge 2:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     Cross-platform consistency (iOS, Android, Web)
                   </p>
                 </div>
@@ -142,7 +140,7 @@ export default function B2BMessengerCaseStudy() {
                 </div>
               </div>
 
-              <p className="text-text-18 leading-[1.4] text-text-secondary">
+              <p className="text-text-16 leading-[1.4] text-text-secondary">
                 <span>Created </span>
                 <span className="text-text">animation principles</span>
                 <span> and a motion design system with standardized timing values and platform requirements. </span>
@@ -150,10 +148,10 @@ export default function B2BMessengerCaseStudy() {
               </p>
 
               <div className="flex flex-col gap-spacing-4">
-                <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                   Learning:
                 </h3>
-                <p className="text-text-18 leading-[1.4] text-text-secondary">
+                <p className="text-text-16 leading-[1.4] text-text-secondary">
                   <span>Animation isn&apos;t decoration—it&apos;s communication when used properly.</span>
                   <span className="text-text"> In the AI era, people increasingly value</span>
                   <span> animated stickers, emojis, and GIFs that add </span>
@@ -167,13 +165,13 @@ export default function B2BMessengerCaseStudy() {
           <div className="desktop:max-w-[795px] bg-[#1A1A1A] rounded-[6px]">
             <div className="p-spacing-7 desktop:px-spacing-8 desktop:py-spacing-8 flex flex-col gap-spacing-7">
               <div className="flex flex-col gap-spacing-6">
-                <p className="text-text-18 desktop:text-[20px] leading-[1.2] text-accent">
+                <p className="text-text-16 leading-[1.2] text-accent">
                   Global and chat search
                 </p>
                 <h2 className="text-[36px] leading-[1.1] desktop:text-[42px] desktop:leading-[1.1] font-semibold text-text">
                   Designing Search That Actually Works for Enterprise Scale
                 </h2>
-                <p className="text-text-18 desktop:text-[20px] leading-[1.4] text-text-secondary">
+                <p className="text-text-16 leading-[1.4] text-text-secondary">
                   <span>Users spent more than 3 minutes per search. The real </span>
                   <span className="text-text">problem was context, not algorithms.</span>
                   <span> </span>
@@ -183,10 +181,10 @@ export default function B2BMessengerCaseStudy() {
 
               <div className="flex flex-col gap-spacing-6">
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Challenge 1:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     <span>Response time and </span>
                     <span className="text-text">server optimization:</span>
                     <span> How can we align complex filters with lightweight database requests?</span>
@@ -194,10 +192,10 @@ export default function B2BMessengerCaseStudy() {
                 </div>
 
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Challenge 2:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     <span>Work </span>
                     <span className="text-text">offline</span>
                     <span> with cached results</span>
@@ -217,16 +215,16 @@ export default function B2BMessengerCaseStudy() {
                 />
               </div>
 
-              <p className="text-text-18 leading-[1.4] text-text-secondary">
+              <p className="text-text-16 leading-[1.4] text-text-secondary">
                 <span className="text-text">Designed multi-dimensional search</span>
                 <span> with smart filters (person, topic, time). Chose a hybrid approach for MVP to save developer resources</span>
               </p>
 
               <div className="flex flex-col gap-spacing-4">
-                <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                   Learning:
                 </h3>
-                <p className="text-text-18 leading-[1.4] text-text-secondary">
+                <p className="text-text-16 leading-[1.4] text-text-secondary">
                   <span>Search is never &quot;done&quot;. It&apos;s a continuous learning system. My biggest insight was: </span>
                   <span className="text-text">don&apos;t make users learn how to search.</span>
                   <span> The best search is the one that works the way people already think</span>
@@ -239,13 +237,13 @@ export default function B2BMessengerCaseStudy() {
           <div className="desktop:max-w-[795px] bg-[#1A1A1A] rounded-[6px]">
             <div className="p-spacing-7 desktop:px-spacing-8 desktop:py-spacing-8 flex flex-col gap-spacing-7">
               <div className="flex flex-col gap-spacing-6">
-                <p className="text-text-18 desktop:text-[20px] leading-[1.2] text-accent">
+                <p className="text-text-16 leading-[1.2] text-accent">
                   Scheduled messages
                 </p>
                 <h2 className="text-[36px] leading-[1.1] desktop:text-[42px] desktop:leading-[1.1] font-semibold text-text">
                   Designing for Strategic Communication, Not Just Real-Time Chat
                 </h2>
-                <p className="text-text-18 desktop:text-[20px] leading-[1.4] text-text-secondary">
+                <p className="text-text-16 leading-[1.4] text-text-secondary">
                   <span>Our enterprise </span>
                   <span className="text-text">users weren&apos;t just chatting spontaneously.</span>
                   <span> They were trying to coordinate across time zones, plan announcements, and manage team communications strategically</span>
@@ -254,19 +252,19 @@ export default function B2BMessengerCaseStudy() {
 
               <div className="flex flex-col gap-spacing-6">
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     The Core Insight after interviews:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     Users needed message delivery to be intentional, not just immediate. Communication timing is as important as content, especially in async, distributed teams
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Challenge 1:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     <span>Mental Model — &quot;Send&quot; vs. &quot;Schedule&quot;. </span>
                     <span className="text-text">How do you introduce a new behavior</span>
                     <span> without confusing the existing one? Users are trained to hit &apos;send&apos; immediately</span>
@@ -274,20 +272,20 @@ export default function B2BMessengerCaseStudy() {
                 </div>
 
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Challenge 2:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     <span className="text-text">Time Zone Complexity.</span>
                     <span> When scheduling for a channel with members in 6 time zones, whose 9am do you use?</span>
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-spacing-4">
-                  <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                  <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                     Interesting Edge Case I Caught:
                   </h3>
-                  <p className="text-text-18 leading-[1.4] text-text-secondary">
+                  <p className="text-text-16 leading-[1.4] text-text-secondary">
                     What happens when someone travels and changes time zones after scheduling?
                   </p>
                 </div>
@@ -305,16 +303,16 @@ export default function B2BMessengerCaseStudy() {
                 />
               </div>
 
-              <p className="text-text-18 leading-[1.4] text-text-secondary">
+              <p className="text-text-16 leading-[1.4] text-text-secondary">
                 <span>I designed solutions for all challenges, and after shipping to production, we achieved a </span>
                 <span className="text-text">feature satisfaction score of 8.7/10</span>
               </p>
 
               <div className="flex flex-col gap-spacing-4">
-                <h3 className="text-text-18 desktop:text-[22px] leading-[1.2] font-medium text-text">
+                <h3 className="text-text-18 leading-[1.5] font-semibold text-text">
                   Learning:
                 </h3>
-                <p className="text-text-18 leading-[1.4] text-text-secondary">
+                <p className="text-text-16 leading-[1.4] text-text-secondary">
                   <span>Simplicity is iterative. It took </span>
                   <span className="text-text">4 rounds of testing to get from complex to &quot;simple but not simplistic.&quot;</span>
                   <span> Cross-functional collaboration makes better products. Engineering&apos;s pushback led to simpler, better solutions than my original ideas</span>
@@ -359,7 +357,7 @@ export default function B2BMessengerCaseStudy() {
               </div>
 
               {/* Next Case Description */}
-              <p className="text-text-18 desktop:text-[20px] leading-[1.4]">
+              <p className="text-text-16 leading-[1.4]">
                 <span className="text-text font-medium">From 0% to 5% conversion. </span>
                 <span className="text-text-secondary">Redesigning an</span>
                 <span className="text-text font-medium"> AI content platform </span>
