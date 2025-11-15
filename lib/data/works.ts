@@ -49,7 +49,8 @@ export const worksPageData: WorksPageData = {
         { text: "Redesigning an ", bold: false },
         { text: "AI content platform ", bold: true },
         { text: "that proved PMF on LinkedIn", bold: false }
-      ]
+      ],
+      slug: "bloggingmachine"
     },
     {
       id: 3,
