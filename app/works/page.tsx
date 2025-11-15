@@ -51,7 +51,13 @@ export default function Works() {
                       src={project.image}
                       alt={project.alt}
                       fill
-                      className={`object-cover ${project.isNDA ? 'opacity-50' : 'opacity-50 desktop:opacity-100'}`}
+                      className={
+                        project.isNDA
+                          ? 'object-cover opacity-50'
+                          : isClickable
+                            ? 'object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300'
+                            : 'object-cover opacity-50 desktop:opacity-100'
+                      }
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 795px, 795px"
                       quality={95}
                       priority={project.id === 1}
@@ -107,7 +113,7 @@ export default function Works() {
                   <Link
                     key={project.id}
                     href={`/works/${project.slug}`}
-                    className="flex flex-col gap-[12px] w-full desktop:max-w-[795px]"
+                    className="group flex flex-col gap-[12px] w-full desktop:max-w-[795px]"
                   >
                     {cardContent}
                   </Link>
