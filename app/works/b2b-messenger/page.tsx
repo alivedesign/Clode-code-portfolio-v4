@@ -89,7 +89,7 @@ export default function B2BMessengerCaseStudy() {
               {/* Feature Image with Stickers */}
               <div className="relative w-full aspect-[731/667]">
                 {/* Noodles cat - Left middle */}
-                <div className="absolute left-[3.5%] top-[12%] w-[30%] z-10">
+                <div className="absolute left-[3.5%] top-[12%] w-[35.64%] desktop:w-[27%] z-10 -translate-x-2 desktop:translate-x-0">
                   <DotLottieReact
                     src="/images/b2b-messenger-case/noodles-cat.lottie"
                     loop
@@ -99,7 +99,7 @@ export default function B2BMessengerCaseStudy() {
                 </div>
 
                 {/* Beaver sleepwear - Top right */}
-                <div className="absolute right-[1.2%] top-[3.5%] w-[26%] z-10" style={{ transform: 'scale(0.767) rotate(19deg)' }}>
+                <div className="absolute right-[1.2%] top-[3.5%] w-[34.32%] desktop:w-[26%] z-10 translate-x-2 desktop:translate-x-0" style={{ transform: 'scale(0.767) rotate(19deg)' }}>
                   <Image
                     src="/images/b2b-messenger-case/beaver-sleepwear.svg"
                     alt="Beaver sleepwear sticker"
@@ -122,7 +122,7 @@ export default function B2BMessengerCaseStudy() {
                 </div>
 
                 {/* Ant Weeping - Bottom left */}
-                <div className="absolute left-[4%] bottom-[6.6%] w-[33%] z-10">
+                <div className="absolute left-[4%] bottom-[6.6%] w-[43.56%] desktop:w-[33%] z-10 -translate-x-2 desktop:translate-x-0">
                   <DotLottieReact
                     src="/images/b2b-messenger-case/ant-weeping.lottie"
                     loop
@@ -131,7 +131,7 @@ export default function B2BMessengerCaseStudy() {
                 </div>
 
                 {/* Give Like - Bottom right */}
-                <div className="absolute right-[-1.1%] bottom-[9.8%] w-[37%] z-10">
+                <div className="absolute right-[-1.1%] bottom-[9.8%] w-[48.84%] desktop:w-[37%] z-10 translate-x-2 desktop:translate-x-0">
                   <DotLottieReact
                     src="/images/b2b-messenger-case/give-like.lottie"
                     loop

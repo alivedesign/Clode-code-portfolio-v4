@@ -31,6 +31,7 @@ export default {
         'spacing-7': 'var(--spacing-7)',
         'spacing-8': 'var(--spacing-8)',
         'spacing-9': 'var(--spacing-9)',
+        'spacing-11': 'var(--spacing-11)',
         'spacing-12': 'var(--spacing-12)',
       },
       borderRadius: {
