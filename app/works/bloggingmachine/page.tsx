@@ -143,10 +143,12 @@ export default function BloggingMachineCaseStudy() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster="/videos/bloggingmachine-case/research-poster.webp"
                   aria-label="Research process demonstration video"
                   className="w-full h-[244px] rounded-[4.747px] object-cover"
                 >
+                  <source src="/videos/bloggingmachine-case/research.webm" type="video/webm" />
                   <source src="/videos/bloggingmachine-case/research.mp4" type="video/mp4" />
                 </video>
 
@@ -173,10 +175,12 @@ export default function BloggingMachineCaseStudy() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster="/videos/bloggingmachine-case/research-poster.webp"
                   aria-label="Research process demonstration video"
                   className="absolute left-[67px] top-[29.48px] w-[629px] h-[353.664px] rounded-[4.747px] object-cover"
                 >
+                  <source src="/videos/bloggingmachine-case/research.webm" type="video/webm" />
                   <source src="/videos/bloggingmachine-case/research.mp4" type="video/mp4" />
                 </video>
 
@@ -280,10 +284,12 @@ export default function BloggingMachineCaseStudy() {
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster="/videos/bloggingmachine-case/bloggingmachine-video-poster.webp"
                   aria-label="New Blogging Machine website showcase video"
                   className="w-full h-auto"
                 >
+                  <source src="/videos/bloggingmachine-case/bloggingmachine-video.webm" type="video/webm" />
                   <source src="/videos/bloggingmachine-case/bloggingmachine-video.mp4" type="video/mp4" />
                 </video>
               </div>
