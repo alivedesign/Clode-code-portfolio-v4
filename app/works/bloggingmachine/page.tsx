@@ -5,8 +5,26 @@ import Image from 'next/image';
 import { CommandInputSimple } from '@/components/CommandInputSimple';
 import { Footer } from '@/components/Footer';
 import { worksPageNavigationItems } from '@/lib/data/navigation';
+import { useRef, useMemo } from 'react';
+import { useVideoPreload } from '../../hooks/useVideoPreload';
 
 export default function BloggingMachineCaseStudy() {
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const showcaseVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Collect video refs for preloading (memoized to prevent unnecessary effect triggers)
+  const videoRefs = useMemo(() => {
+    return [
+      mobileVideoRef.current,
+      desktopVideoRef.current,
+      showcaseVideoRef.current,
+    ].filter((ref): ref is HTMLVideoElement => ref !== null);
+  }, []);
+
+  // Progressive preload after page is interactive
+  useVideoPreload(videoRefs, { delay: 1500 });
+
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 desktop:px-[40px] py-spacing-8 relative">
       {/* Main Container */}
@@ -87,7 +105,7 @@ export default function BloggingMachineCaseStudy() {
                 className="object-cover"
                 loading="lazy"
                 sizes="(max-width: 1200px) 100vw, 795px"
-                quality={85}
+                quality={80}
               />
             </div>
 
@@ -105,7 +123,7 @@ export default function BloggingMachineCaseStudy() {
                     className="object-cover"
                     loading="lazy"
                     sizes="(max-width: 1200px) 100vw, 795px"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
                 <div className="relative w-full aspect-[795/187] rounded-[6px] overflow-hidden">
@@ -116,7 +134,7 @@ export default function BloggingMachineCaseStudy() {
                     className="object-cover"
                     loading="lazy"
                     sizes="(max-width: 1200px) 100vw, 795px"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
               </div>
@@ -139,14 +157,17 @@ export default function BloggingMachineCaseStudy() {
 
                 {/* Research Video */}
                 <video
+                  ref={mobileVideoRef}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster="/videos/bloggingmachine-case/research-poster.webp"
                   aria-label="Research process demonstration video"
                   className="w-full h-[244px] rounded-[4.747px] object-cover"
                 >
+                  <source src="/videos/bloggingmachine-case/research.webm" type="video/webm" />
                   <source src="/videos/bloggingmachine-case/research.mp4" type="video/mp4" />
                 </video>
 
@@ -169,14 +190,17 @@ export default function BloggingMachineCaseStudy() {
               <div className="hidden desktop:block relative h-[400px] w-[795px]">
                 {/* Research Video - center */}
                 <video
+                  ref={desktopVideoRef}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster="/videos/bloggingmachine-case/research-poster.webp"
                   aria-label="Research process demonstration video"
                   className="absolute left-[67px] top-[29.48px] w-[629px] h-[353.664px] rounded-[4.747px] object-cover"
                 >
+                  <source src="/videos/bloggingmachine-case/research.webm" type="video/webm" />
                   <source src="/videos/bloggingmachine-case/research.mp4" type="video/mp4" />
                 </video>
 
@@ -276,14 +300,17 @@ export default function BloggingMachineCaseStudy() {
               {/* New Website Video */}
               <div className="relative w-full rounded-[6px] overflow-hidden">
                 <video
+                  ref={showcaseVideoRef}
                   autoPlay
                   loop
                   muted
                   playsInline
-                  preload="metadata"
+                  preload="none"
+                  poster="/videos/bloggingmachine-case/bloggingmachine-video-poster.webp"
                   aria-label="New Blogging Machine website showcase video"
                   className="w-full h-auto"
                 >
+                  <source src="/videos/bloggingmachine-case/bloggingmachine-video.webm" type="video/webm" />
                   <source src="/videos/bloggingmachine-case/bloggingmachine-video.mp4" type="video/mp4" />
                 </video>
               </div>
@@ -353,7 +380,7 @@ export default function BloggingMachineCaseStudy() {
                     className="object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"
                     sizes="(max-width: 1200px) 100vw, 795px"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
                 <p className="text-[20px] leading-[1.4] text-text">
