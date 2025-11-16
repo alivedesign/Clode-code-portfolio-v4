@@ -97,16 +97,39 @@ export default function BloggingMachineCaseStudy() {
             </div>
 
             {/* Old Website Screenshot */}
-            <div className="relative w-full aspect-[795/984] rounded-[6px] overflow-hidden desktop:max-w-[795px]">
-              <Image
-                src="/images/bloggingmachine-case/old-site-screenshot.png"
-                alt="Old Blogging Machine website"
-                fill
-                className="object-cover"
-                loading="lazy"
-                sizes="(max-width: 1200px) 100vw, 795px"
-                quality={80}
-              />
+            <div className="relative desktop:max-w-[795px]">
+              <div className="relative w-full aspect-[795/984] rounded-[6px] overflow-hidden">
+                <Image
+                  src="/images/bloggingmachine-case/old-site-screenshot.png"
+                  alt="Old Blogging Machine website"
+                  fill
+                  className="object-cover"
+                  loading="lazy"
+                  sizes="(max-width: 1200px) 100vw, 795px"
+                  quality={80}
+                />
+              </div>
+
+              {/* Old version of the Site annotation - desktop only */}
+              <div className="hidden desktop:block absolute left-[calc(100%-32px)] top-[-80px] w-[221px] h-[81.701px]">
+                <div className="relative size-full">
+                  {/* Label */}
+                  <p className="absolute left-[26px] top-[-1px] text-[18px] leading-[1.5] font-semibold text-accent whitespace-nowrap">
+                    Old version of the Site
+                  </p>
+                  {/* Arrow */}
+                  <div className="absolute left-0 top-[34px] flex items-center justify-center">
+                    <div className="rotate-[110.957deg] scale-y-[-100%]">
+                      <Image
+                        src="/images/bloggingmachine-case/arrow.svg"
+                        alt=""
+                        width={48.464}
+                        height={31.991}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Data Rich Section */}
@@ -397,27 +420,6 @@ export default function BloggingMachineCaseStudy() {
         {/* Footer */}
         <div className="mt-spacing-8">
           <Footer />
-        </div>
-      </div>
-
-      {/* Old version of the Site annotation - desktop only */}
-      <div className="hidden desktop:block absolute left-[1007px] top-[932px] w-[221px] h-[81.701px]">
-        <div className="relative size-full">
-          {/* Label */}
-          <p className="absolute left-[26px] top-[-1px] text-[18px] leading-[1.5] font-semibold text-accent whitespace-nowrap">
-            Old version of the Site
-          </p>
-          {/* Arrow */}
-          <div className="absolute left-0 top-[34px] flex items-center justify-center">
-            <div className="rotate-[110.957deg] scale-y-[-100%]">
-              <Image
-                src="/images/bloggingmachine-case/arrow.svg"
-                alt=""
-                width={48.464}
-                height={31.991}
-              />
-            </div>
-          </div>
         </div>
       </div>
     </div>
