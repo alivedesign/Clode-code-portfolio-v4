@@ -5,8 +5,24 @@ import Image from 'next/image';
 import { CommandInputSimple } from '@/components/CommandInputSimple';
 import { Footer } from '@/components/Footer';
 import { worksPageNavigationItems } from '@/lib/data/navigation';
+import { useRef } from 'react';
+import { useVideoPreload } from '../../hooks/useVideoPreload';
 
 export default function BloggingMachineCaseStudy() {
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const desktopVideoRef = useRef<HTMLVideoElement>(null);
+  const showcaseVideoRef = useRef<HTMLVideoElement>(null);
+
+  // Collect video refs for preloading
+  const videoRefs = [
+    mobileVideoRef.current,
+    desktopVideoRef.current,
+    showcaseVideoRef.current,
+  ].filter((ref): ref is HTMLVideoElement => ref !== null);
+
+  // Progressive preload after page is interactive
+  useVideoPreload(videoRefs, { delay: 1500 });
+
   return (
     <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 desktop:px-[40px] py-spacing-8 relative">
       {/* Main Container */}
@@ -139,6 +155,7 @@ export default function BloggingMachineCaseStudy() {
 
                 {/* Research Video */}
                 <video
+                  ref={mobileVideoRef}
                   autoPlay
                   loop
                   muted
@@ -171,6 +188,7 @@ export default function BloggingMachineCaseStudy() {
               <div className="hidden desktop:block relative h-[400px] w-[795px]">
                 {/* Research Video - center */}
                 <video
+                  ref={desktopVideoRef}
                   autoPlay
                   loop
                   muted
@@ -280,6 +298,7 @@ export default function BloggingMachineCaseStudy() {
               {/* New Website Video */}
               <div className="relative w-full rounded-[6px] overflow-hidden">
                 <video
+                  ref={showcaseVideoRef}
                   autoPlay
                   loop
                   muted
