@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { CommandInputSimple } from '@/components/CommandInputSimple';
 import { Footer } from '@/components/Footer';
 import { worksPageNavigationItems } from '@/lib/data/navigation';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { useVideoPreload } from '../../hooks/useVideoPreload';
 
 export default function BloggingMachineCaseStudy() {
@@ -13,12 +13,14 @@ export default function BloggingMachineCaseStudy() {
   const desktopVideoRef = useRef<HTMLVideoElement>(null);
   const showcaseVideoRef = useRef<HTMLVideoElement>(null);
 
-  // Collect video refs for preloading
-  const videoRefs = [
-    mobileVideoRef.current,
-    desktopVideoRef.current,
-    showcaseVideoRef.current,
-  ].filter((ref): ref is HTMLVideoElement => ref !== null);
+  // Collect video refs for preloading (memoized to prevent unnecessary effect triggers)
+  const videoRefs = useMemo(() => {
+    return [
+      mobileVideoRef.current,
+      desktopVideoRef.current,
+      showcaseVideoRef.current,
+    ].filter((ref): ref is HTMLVideoElement => ref !== null);
+  }, []);
 
   // Progressive preload after page is interactive
   useVideoPreload(videoRefs, { delay: 1500 });
