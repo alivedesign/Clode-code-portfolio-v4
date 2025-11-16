@@ -26,7 +26,7 @@ export default function BloggingMachineCaseStudy() {
   useVideoPreload(videoRefs, { delay: 1500 });
 
   return (
-    <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 desktop:px-[40px] py-spacing-8 relative">
+    <div className="bg-background min-h-screen flex flex-col items-center px-spacing-7 desktop:px-[40px] py-spacing-8 relative overflow-x-hidden">
       {/* Main Container */}
       <div className="w-full desktop:max-w-[1000px] flex flex-col flex-1">
         {/* Content wrapper with gap */}
@@ -68,7 +68,7 @@ export default function BloggingMachineCaseStudy() {
 
             {/* His Message Section */}
             <div className="flex flex-col gap-spacing-6 desktop:max-w-[795px]">
-              <h2 className="text-[32px] leading-[1.2] font-semibold text-text w-[409px]">
+              <h2 className="text-[32px] leading-[1.2] font-semibold text-text desktop:w-[409px]">
                 His message:
               </h2>
               <div className="relative bg-[rgba(215,119,87,0.15)] backdrop-blur-[10px] px-spacing-7 py-spacing-6 rounded-[16px] desktop:w-fit border border-[rgba(215,119,87,0.3)] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
