@@ -103,7 +103,7 @@ export default function BloggingMachineCaseStudy() {
                 className="object-cover"
                 loading="lazy"
                 sizes="(max-width: 1200px) 100vw, 795px"
-                quality={85}
+                quality={80}
               />
             </div>
 
@@ -121,7 +121,7 @@ export default function BloggingMachineCaseStudy() {
                     className="object-cover"
                     loading="lazy"
                     sizes="(max-width: 1200px) 100vw, 795px"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
                 <div className="relative w-full aspect-[795/187] rounded-[6px] overflow-hidden">
@@ -132,7 +132,7 @@ export default function BloggingMachineCaseStudy() {
                     className="object-cover"
                     loading="lazy"
                     sizes="(max-width: 1200px) 100vw, 795px"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
               </div>
@@ -378,7 +378,7 @@ export default function BloggingMachineCaseStudy() {
                     className="object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300"
                     loading="lazy"
                     sizes="(max-width: 1200px) 100vw, 795px"
-                    quality={85}
+                    quality={80}
                   />
                 </div>
                 <p className="text-[20px] leading-[1.4] text-text">
