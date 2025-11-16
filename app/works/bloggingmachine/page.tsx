@@ -73,7 +73,7 @@ export default function BloggingMachineCaseStudy() {
                   → Traffic works <span className="text-text-secondary">(ads perform well)</span>
                 </p>
                 <p className="text-[16px] leading-[1.4] text-text">
-                  → Website doesn't work <span className="text-text-secondary">(obvious disconnect)</span>
+                  → Website doesn&apos;t work <span className="text-text-secondary">(obvious disconnect)</span>
                 </p>
               </div>
             </div>
@@ -94,7 +94,7 @@ export default function BloggingMachineCaseStudy() {
             {/* Data Rich Section */}
             <div className="flex flex-col gap-spacing-6 desktop:max-w-[795px]">
               <p className="text-[18px] leading-[1.5] font-semibold text-text">
-                He was frustrated but data-rich. He'd interviewed customers, tracked everything, knew his numbers. This made my job easier
+                He was frustrated but data-rich. He&apos;d interviewed customers, tracked everything, knew his numbers. This made my job easier
               </p>
               <div className="flex flex-col gap-[6px]">
                 <div className="relative w-full aspect-[795/381] rounded-[6px] overflow-hidden">
@@ -160,7 +160,7 @@ export default function BloggingMachineCaseStudy() {
                 {/* Andrew's interviews annotation */}
                 <div className="relative bg-[rgba(215,119,87,0.15)] backdrop-blur-[10px] px-spacing-6 py-spacing-5 rounded-[12px] border border-[rgba(215,119,87,0.3)] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
                   <p className="text-[16px] leading-[1.4] text-text">
-                    Andrew's interviews and reports about user behaviors and pain points
+                    Andrew&apos;s interviews and reports about user behaviors and pain points
                   </p>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function BloggingMachineCaseStudy() {
                 {/* Andrew's interviews annotation - right side */}
                 <div className="absolute left-[568px] top-[252px] bg-[rgba(215,119,87,0.15)] backdrop-blur-[10px] px-spacing-6 py-spacing-5 rounded-[12px] border border-[rgba(215,119,87,0.3)] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)]">
                   <p className="text-[16px] leading-[1.4] text-text w-[195px]">
-                    Andrew's interviews and reports about user behaviors and pain points
+                    Andrew&apos;s interviews and reports about user behaviors and pain points
                   </p>
                 </div>
               </div>
@@ -206,14 +206,14 @@ export default function BloggingMachineCaseStudy() {
             {/* Research Insights Box */}
             <div className="bg-[#181818] p-spacing-6 desktop:p-spacing-8 rounded-[6px] flex flex-col gap-spacing-6 desktop:gap-spacing-7 desktop:max-w-[795px]">
               <p className="text-[18px] leading-[1.5] font-semibold text-text">
-                I've got the ideal customer personas, value proposition, and biggest competitor strategies:
+                I&apos;ve got the ideal customer personas, value proposition, and biggest competitor strategies:
               </p>
               <div className="flex flex-col desktop:flex-row gap-spacing-5">
                 {/* Column 1 */}
                 <div className="flex flex-col gap-[12px] desktop:flex-1">
                   <div className="bg-background p-spacing-6 rounded-[6px]">
                     <p className="text-[16px] leading-[1.4] text-text-secondary">
-                      Startup founders who understand the value of SEO but don't have resources to do research and writing of blog articles
+                      Startup founders who understand the value of SEO but don&apos;t have resources to do research and writing of blog articles
                     </p>
                   </div>
                   <div className="bg-background p-spacing-6 rounded-[6px]">
@@ -232,7 +232,7 @@ export default function BloggingMachineCaseStudy() {
                 <div className="flex flex-col gap-[12px] desktop:flex-1">
                   <div className="bg-background p-spacing-6 rounded-[6px]">
                     <p className="text-[16px] leading-[1.4] text-text-secondary">
-                      Most early-stage founders know they need SEO but don't have the time to do it right. Blogging Machine handles everything from keyword research to writing and publishing, so you get high-intent traffic with zero effort.
+                      Most early-stage founders know they need SEO but don&apos;t have the time to do it right. Blogging Machine handles everything from keyword research to writing and publishing, so you get high-intent traffic with zero effort.
                     </p>
                   </div>
                   <div className="bg-background p-spacing-6 rounded-[6px]">
@@ -246,7 +246,7 @@ export default function BloggingMachineCaseStudy() {
                 <div className="flex flex-col gap-[12px] desktop:flex-1">
                   <div className="bg-background p-spacing-6 rounded-[6px]">
                     <p className="text-[16px] leading-[1.4] text-text-secondary">
-                      Seed-to-Series B founders and scrappy solo marketers who know SEO's worth but don't want to waste headcount, weekends, or runway on it
+                      Seed-to-Series B founders and scrappy solo marketers who know SEO&apos;s worth but don&apos;t want to waste headcount, weekends, or runway on it
                     </p>
                   </div>
                   <div className="bg-background p-spacing-6 rounded-[6px]">
@@ -262,7 +262,7 @@ export default function BloggingMachineCaseStudy() {
             <div className="flex flex-col gap-spacing-6 desktop:max-w-[1000px]">
               <div className="flex flex-col desktop:flex-row desktop:items-end desktop:justify-between gap-spacing-6">
                 <h2 className="text-[32px] leading-[1.2] font-semibold text-text">
-                  Here's what I proposed and why...
+                  Here&apos;s what I proposed and why...
                 </h2>
                 <a
                   href="https://bloggingmachine.io"
@@ -335,7 +335,7 @@ export default function BloggingMachineCaseStudy() {
                 <span className="text-text">Only 2 trial activations</span> (1.6% conversion) from these 119 conversions
               </p>
               <p className="text-[24px] leading-[1.3] font-semibold text-text-secondary desktop:w-[795px]">
-                And you'll see how I <span className="text-text">solve this problem in the next case study coming soon</span>
+                And you&apos;ll see how I <span className="text-text">solve this problem in the next case study coming soon</span>
               </p>
             </div>
 
