@@ -26,7 +26,7 @@ export function Footer() {
         </a>
         , at shkuratovdesigner@gmail.com, or{' '}
         <a
-          href="https://calendly.com/shkuratovdesigner-xtkx/30min"
+          href="https://cal.com/shkuratov-design/45min"
           target="_blank"
           rel="noopener noreferrer"
           className="text-link hover:underline transition-all"
@@ -34,7 +34,7 @@ export function Footer() {
             trackLinkClick(
               'calendly',
               'footer',
-              'https://calendly.com/shkuratovdesigner-xtkx/30min'
+              'https://cal.com/shkuratov-design/45min'
             )
           }
         >
