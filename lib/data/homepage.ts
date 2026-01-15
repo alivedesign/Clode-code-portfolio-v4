@@ -19,8 +19,8 @@ export const homepageData: HomePageData = {
     whatsNewTitle: "What's new",
     updates: [
       [
-        "New video on my ",
-        { text: "YouTube channel", link: "https://www.youtube.com/@EvgenyShkuratovDesigner" } as TextSegment,
+        "New video: ",
+        { text: "«4 Deadly Stages Every Founder Must Survive»", link: "https://youtu.be/ijcQL4Dd0QY" } as TextSegment,
       ],
       [
         { text: "New Episode", link: "https://www.linkedin.com/posts/evgeny-shkuratov-b34a99174_episode-4-of-redesigning-ai-apps-nobody-asked-activity-7416441375740653569-9fZI?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAClzlBgBnOCW9mmIdKjCWSQps6uG6kE4spo" } as TextSegment,
