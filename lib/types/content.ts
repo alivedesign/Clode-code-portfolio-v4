@@ -20,7 +20,7 @@ export type RichText = (string | TextSegment)[];
 
 export interface ActivityData {
   recentTitle: string;
-  recentActivity: string;
+  recentActivity: RichText;
   whatsNewTitle: string;
   updates: RichText[];
   moreLink: string;

@@ -12,7 +12,9 @@ export function ActivitySection({ data }: ActivitySectionProps) {
       {/* Recent Activity */}
       <div className="flex flex-col gap-spacing-6">
         <h2 className="text-body text-text">{data.recentTitle}</h2>
-        <p className="text-body text-text-secondary">{data.recentActivity}</p>
+        <p className="text-body text-text-secondary">
+          <RichText content={data.recentActivity} />
+        </p>
       </div>
 
       <Divider />

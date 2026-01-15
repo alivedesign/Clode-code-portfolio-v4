@@ -12,26 +12,23 @@ export const homepageData: HomePageData = {
   },
   activity: {
     recentTitle: "Recent activity",
-    recentActivity: "Redesigning bloggingmachine.io",
+    recentActivity: [
+      "Launching ",
+      { text: "SKR.Design", link: "https://skr.design" } as TextSegment,
+    ],
     whatsNewTitle: "What's new",
     updates: [
       [
-        { text: "New Episode", link: "https://www.linkedin.com/posts/evgeny-shkuratov-b34a99174_ep-3-of-redesigning-random-products-fully-activity-7391847231361875968-zxJ8?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAClzlBgBnOCW9mmIdKjCWSQps6uG6kE4spo" } as TextSegment,
-        " of redesigning AI products"
+        "New video on my ",
+        { text: "YouTube channel", link: "https://www.youtube.com/@EvgenyShkuratovDesigner" } as TextSegment,
       ],
       [
-        "live stream with ",
-        { text: "George Kachanouski", link: "https://www.linkedin.com/in/georgekachanouski/" } as TextSegment,
-        ": ",
-        { text: "«How to create quality AI Content fast»", link: "https://www.youtube.com/watch?v=SzArB0p8WtY" } as TextSegment,
+        { text: "New Episode", link: "https://www.linkedin.com/posts/evgeny-shkuratov-b34a99174_episode-4-of-redesigning-ai-apps-nobody-asked-activity-7416441375740653569-9fZI?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAClzlBgBnOCW9mmIdKjCWSQps6uG6kE4spo" } as TextSegment,
+        " of redesigning AI products"
       ],
       [
         "New Client: ",
         { text: "Andrew White", link: "https://www.linkedin.com/in/andrew-white-ai/" } as TextSegment,
-      ],
-      [
-        "New video on my ",
-        { text: "YouTube channel", link: "https://www.youtube.com/@EvgenyShkuratovDesigner" } as TextSegment,
       ],
     ],
     moreLink: "/ info-contact for more",

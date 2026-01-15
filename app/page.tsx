@@ -60,7 +60,7 @@ export default function Home() {
                 {homepageData.activity.recentTitle}
               </h2>
               <p className="text-text-18 text-text-secondary">
-                {homepageData.activity.recentActivity}
+                <RichText content={homepageData.activity.recentActivity} />
               </p>
             </div>
 
