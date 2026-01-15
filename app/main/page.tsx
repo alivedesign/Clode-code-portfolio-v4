@@ -78,14 +78,17 @@ export default function Main() {
               </p>
             ))}
 
-            {/* Video Coming Soon Placeholder */}
-            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-              <p className="text-[16px] font-medium text-accent leading-[1.2]">
-                Video coming soon..
-              </p>
-              <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">
-                Product Design for Founders. 4 Fantasy locations Where Products Die (And How to Win)
-              </p>
+            {/* YouTube Video Embed */}
+            <div className="w-full max-w-[795px] aspect-video">
+              <iframe
+                className="w-full h-full rounded-spacing-2"
+                src="https://www.youtube.com/embed/ijcQL4Dd0QY"
+                title="4 Deadly Stages EVERY FOUNDER must survive"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
             </div>
           </div>
 

@@ -49,11 +49,14 @@ A command-driven portfolio website with terminal-style navigation.
 - **Contains**: Recent activity, What's new updates, header info, footer
 
 ### Current Homepage Data
-- **Recent activity**: "Launching SKR.Design" (with link to https://skr.design)
+- **Recent activity**: "Launched skr.design" (with link to https://skr.design)
 - **What's new**:
   1. New video: «4 Deadly Stages Every Founder Must Survive»
   2. New Episode of redesigning AI products
   3. New Client: Andrew White
+
+### Main Page Video
+- **YouTube embed**: "4 Deadly Stages EVERY FOUNDER must survive" (https://www.youtube.com/embed/ijcQL4Dd0QY)
 
 ### Type Definitions
 - **File**: `lib/types/content.ts`

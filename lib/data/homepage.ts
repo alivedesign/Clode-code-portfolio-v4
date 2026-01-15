@@ -13,8 +13,8 @@ export const homepageData: HomePageData = {
   activity: {
     recentTitle: "Recent activity",
     recentActivity: [
-      "Launching ",
-      { text: "SKR.Design", link: "https://skr.design" } as TextSegment,
+      "Launched ",
+      { text: "skr.design", link: "https://skr.design" } as TextSegment,
     ],
     whatsNewTitle: "What's new",
     updates: [
