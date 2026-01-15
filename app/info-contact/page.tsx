@@ -92,7 +92,7 @@ export default function InfoContact() {
                 Video coming soon..
               </p>
               <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[509px] px-spacing-4">
-                Why Discipline Beats Talent in Digital Product Building (What I Learned)
+                Day in the Life of a Product Designer Managing Sweet Jobs with AI
               </p>
             </div>
 
@@ -145,16 +145,6 @@ export default function InfoContact() {
                   quality={95}
                 />
               </div>
-            </div>
-
-            {/* Video Placeholder 2 */}
-            <div className="w-full max-w-[795px] h-[300px] mobile:h-[400px] desktop:h-[447px] flex flex-col items-center justify-center gap-spacing-6" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-              <p className="text-[16px] font-medium text-accent leading-[1.2]">
-                Video coming soon..
-              </p>
-              <p className="text-title-18 text-text leading-[1.5] text-center w-full max-w-[417px] px-spacing-4">
-                Day in the life of a Product Designer Managing 3 Jobs with AI
-              </p>
             </div>
 
             {/* Paragraph 4 */}

@@ -41,6 +41,7 @@ export default function MyProducts() {
             </div>
 
             {/* Projects List */}
+            <div className="flex flex-col gap-[44px]">
             {projects.map((project) => {
               // Featured project with site link (Smart AI Proposal)
               if (project.isFeatured && project.siteLink) {
@@ -151,6 +152,7 @@ export default function MyProducts() {
                 </p>
               );
             })}
+            </div>
           </div>
 
           {/* Navigation Section with Command Input */}

@@ -61,17 +61,27 @@ A command-driven portfolio website with terminal-style navigation.
 
 ### My Products Page Content
 - **File**: `lib/data/my-products.ts`
+- **Page file**: `app/my-products/page.tsx`
 - **Contains**: Products list with featured products (with images and CTAs) and regular text entries
+- **Products spacing**: 44px gap between items
 
-**Featured Products:**
-1. **skr.design** (2026) - AI website builder with "Visit the Site" button (https://skr.design)
-2. **Lullami kids stories app** (2025) - with "Download in AppStore" button
+**Current Products:**
+1. **Healthy Information Bubble Aggregator Platform for AI Founders** (2026) - Currently building...
+2. **skr.design** (2026) - AI website builder with "Visit the Site" button (https://skr.design) - Featured
+3. **Lullami kids stories app** (2025) - with "Download in AppStore" button - Featured
 
 **Product Interface Fields:**
 - `year`, `name`, `description`, `status`, `emoji`
 - `isFeatured` - shows image card with CTA button
 - `siteLink` - external site link (shows "Visit the Site" button)
 - `appStoreLink` - App Store link (shows "Download in AppStore" button)
+
+### Info & Contact Page Content
+- **File**: `app/info-contact/page.tsx`
+- **Contains**: Personal bio, images, and video placeholder
+
+**Video Placeholder:**
+- "Day in the Life of a Product Designer Managing Sweet Jobs with AI" (coming soon)
 
 ### Type Definitions
 - **File**: `lib/types/content.ts`

@@ -43,7 +43,7 @@ export const myProductsPageData: MyProductsPageData = {
     {
       id: 1,
       year: "2026",
-      name: "Smart AI Proposal Generator",
+      name: "Healthy Information Bubble Aggregator Platform for AI Founders",
       status: "Currently building...",
       emoji: "(☞ﾟヮﾟ)☞🔩",
       emotionType: "point"
