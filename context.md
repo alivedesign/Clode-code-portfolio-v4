@@ -36,7 +36,8 @@ A command-driven portfolio website with terminal-style navigation.
 │   └── ...
 ├── lib/                        # Utilities and data
 │   ├── data/
-│   │   └── homepage.ts        # Homepage content data
+│   │   ├── homepage.ts        # Homepage content data
+│   │   └── my-products.ts     # My Products page data
 │   └── types/
 │       └── content.ts         # TypeScript type definitions
 └── public/                     # Static assets
@@ -57,6 +58,20 @@ A command-driven portfolio website with terminal-style navigation.
 
 ### Main Page Video
 - **YouTube embed**: "4 Deadly Stages EVERY FOUNDER must survive" (https://www.youtube.com/embed/ijcQL4Dd0QY)
+
+### My Products Page Content
+- **File**: `lib/data/my-products.ts`
+- **Contains**: Products list with featured products (with images and CTAs) and regular text entries
+
+**Featured Products:**
+1. **skr.design** (2026) - AI website builder with "Visit the Site" button (https://skr.design)
+2. **Lullami kids stories app** (2025) - with "Download in AppStore" button
+
+**Product Interface Fields:**
+- `year`, `name`, `description`, `status`, `emoji`
+- `isFeatured` - shows image card with CTA button
+- `siteLink` - external site link (shows "Visit the Site" button)
+- `appStoreLink` - App Store link (shows "Download in AppStore" button)
 
 ### Type Definitions
 - **File**: `lib/types/content.ts`

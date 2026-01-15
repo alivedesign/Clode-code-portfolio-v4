@@ -9,7 +9,9 @@ export interface MyProductsProject {
   emotionType?: 'sad' | 'work' | 'point';
   isFeatured?: boolean;
   image?: string;
+  description?: string;
   appStoreLink?: string;
+  siteLink?: string;
 }
 
 export interface MyProductsPageData {
@@ -43,15 +45,19 @@ export const myProductsPageData: MyProductsPageData = {
       year: "2026",
       name: "Smart AI Proposal Generator",
       status: "Currently building...",
-      emoji: "(☞ﾟヮﾟ)☞🔩"
+      emoji: "(☞ﾟヮﾟ)☞🔩",
+      emotionType: "point"
     },
     {
       id: 2,
-      year: "2025",
-      name: "Vibe-code Agency",
-      status: "Currently building...",
-      emoji: "(•_•)🔧",
-      emotionType: "work"
+      year: "2026",
+      isFeatured: true,
+      name: "",
+      status: "",
+      emoji: "",
+      description: "Turning low-performing pages into premium, authentic websites that increase conversions by 10-50% with AI",
+      image: "/smart-ai-proposal.png",
+      siteLink: "https://skr.design"
     },
     {
       id: 3,

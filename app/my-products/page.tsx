@@ -42,10 +42,48 @@ export default function MyProducts() {
 
             {/* Projects List */}
             {projects.map((project) => {
-              // Featured project (Lullami)
-              if (project.isFeatured) {
+              // Featured project with site link (Smart AI Proposal)
+              if (project.isFeatured && project.siteLink) {
                 return (
-                  <div key={project.id} className="flex flex-col gap-[12px] w-full desktop:max-w-[795px]">
+                  <div key={project.id} className="flex flex-col gap-[8px] w-full desktop:max-w-[795px]">
+                    {/* Project Image */}
+                    <div className="relative w-full aspect-[795/378] rounded-[6px] overflow-hidden">
+                      <Image
+                        src={project.image!}
+                        alt={project.description || 'Product image'}
+                        fill
+                        className="object-cover object-top"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 795px, 795px"
+                        quality={95}
+                        priority
+                      />
+                    </div>
+
+                    {/* Description and Button */}
+                    <div className="flex flex-col tablet:flex-row gap-[8px] tablet:gap-[16px] tablet:items-center w-full">
+                      <p className="text-text-18 leading-[1.4] text-text flex-1">
+                        {project.year && <span className="text-text-secondary">{project.year}. </span>}
+                        {project.description}
+                      </p>
+                      <a
+                        href={project.siteLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-accent hover:bg-[#c26849] transition-colors rounded-[4px] px-spacing-7 py-[12px] text-center w-full tablet:w-[202px] shrink-0"
+                      >
+                        <span className="text-text-16 text-text font-medium whitespace-nowrap">
+                          Visit the Site
+                        </span>
+                      </a>
+                    </div>
+                  </div>
+                );
+              }
+
+              // Featured project with AppStore link (Lullami)
+              if (project.isFeatured && project.appStoreLink) {
+                return (
+                  <div key={project.id} className="flex flex-col gap-[8px] w-full desktop:max-w-[795px]">
                     {/* Project Image */}
                     <div className="relative w-full aspect-[793/329] rounded-[6px] overflow-hidden">
                       <Image
@@ -60,8 +98,8 @@ export default function MyProducts() {
                     </div>
 
                     {/* Project Title and Button */}
-                    <div className="flex flex-col tablet:flex-row gap-[14px] tablet:gap-0 tablet:items-center tablet:justify-between w-full">
-                      <p className="text-text-18 leading-[1.2] text-text">
+                    <div className="flex flex-col gap-[12px] tablet:flex-row tablet:gap-[16px] tablet:items-center tablet:justify-between w-full">
+                      <p className="text-text-18 leading-[1.4] text-text">
                         {project.year && <span className="text-text-secondary">{project.year}. </span>}
                         {project.name}
                       </p>
@@ -69,7 +107,7 @@ export default function MyProducts() {
                         href={project.appStoreLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="bg-accent hover:bg-[#c26849] transition-colors rounded-[4px] px-spacing-7 py-[12px] text-center"
+                        className="bg-accent hover:bg-[#c26849] transition-colors rounded-[4px] px-spacing-7 py-[12px] text-center w-full tablet:w-auto shrink-0"
                       >
                         <span className="text-text-16 text-text font-medium whitespace-nowrap">
                           Download in AppStore
