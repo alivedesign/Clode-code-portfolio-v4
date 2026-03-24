@@ -23,3 +23,6 @@ yarn-error.log*
 
 # vite
 vite.config.ts.timestamp-*
+
+# Large video files
+public/videos/*.mp4
