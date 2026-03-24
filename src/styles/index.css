@@ -7,3 +7,19 @@
   --color-accent: #d77757;
   --color-glass: rgba(255, 255, 255, 0.1);
 }
+
+@keyframes scaleToggle {
+  0% { scale: 1 1; }
+  50% { scale: 1.1 1; }
+  100% { scale: 1 1; }
+}
+
+.nav-item {
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.nav-item:hover {
+  color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  animation: scaleToggle 0.4s ease;
+}
