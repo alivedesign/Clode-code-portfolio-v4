@@ -4,9 +4,20 @@ import { NavBar } from "@/components/NavBar";
 import { Logo, HeroText } from "@/components/Hero";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { MainLayout } from "@/components/Layout/MainLayout";
+import { useVideoPreloader } from "@/hooks/useVideoPreloader";
 import type { CharacterPose } from "@/components/Character";
 
 type EntryPhase = "black" | "logo" | "reveal" | "text" | "nav" | "complete";
+
+const POSE_VIDEOS = [
+  "/videos/pose-experience.mp4",
+  "/videos/pose-products.mp4",
+  "/videos/pose-cases.mp4",
+  "/videos/pose-content.mp4",
+  "/videos/pose-about.mp4",
+  "/videos/pose-resume.mp4",
+  "/videos/transition.mp4",
+];
 
 export function Home() {
   const [entryPhase, setEntryPhase] = useState<EntryPhase>("black");
@@ -38,6 +49,9 @@ export function Home() {
     const order: EntryPhase[] = ["black", "logo", "reveal", "text", "nav", "complete"];
     return order.indexOf(entryPhase) >= order.indexOf(target);
   };
+
+  // Preload pose videos after reveal completes
+  useVideoPreloader(POSE_VIDEOS, isAfter("text"));
 
   return (
     <MainLayout>
