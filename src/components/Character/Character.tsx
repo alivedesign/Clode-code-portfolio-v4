@@ -66,7 +66,7 @@ export function Character({ state, onRevealComplete, onTransitionComplete, class
   }, [onTransitionComplete]);
 
   return (
-    <div className={`relative w-[550px] h-[550px] ${className}`}>
+    <div className={`relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px] ${className}`}>
       {/* Main video layer */}
       <VideoPlayer
         ref={frontRef}

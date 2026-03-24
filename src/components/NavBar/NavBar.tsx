@@ -22,7 +22,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
     <>
       <LiquidGlassFilter />
       <nav
-        className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex items-center gap-14 rounded-[64px] bg-glass px-12 pt-4 pb-3.5 font-['Times_Now',serif] text-2xl leading-[1.2] transition-all duration-500 ${
+        className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-8 lg:gap-14 rounded-[64px] bg-glass px-4 sm:px-8 lg:px-12 pt-4 pb-3.5 font-['Times_Now',serif] text-base sm:text-lg lg:text-2xl leading-[1.2] transition-all duration-500 ${
           visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
         style={{ filter: "url(#liquid-glass-filter)" }}
