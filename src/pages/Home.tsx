@@ -42,14 +42,16 @@ export function Home() {
     <MainLayout>
       <Logo visible={revealed} />
 
-      <Character
-        state={state}
-        onRevealComplete={handleRevealComplete}
-        onTransitionComplete={onTransitionComplete}
-        className="absolute left-1/2 top-1/2 -translate-x-[calc(50%+24px)] -translate-y-[calc(50%+48px)]"
-      />
+      {/* Character + HeroText wrapper — shared positioning context */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-[calc(50%+24px)] -translate-y-[calc(50%+48px)] w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px]">
+        <Character
+          state={state}
+          onRevealComplete={handleRevealComplete}
+          onTransitionComplete={onTransitionComplete}
+        />
 
-      <HeroText visible={revealed} />
+        <HeroText visible={revealed} />
+      </div>
 
       <NavBar
         onHoverPose={hoverPose}
