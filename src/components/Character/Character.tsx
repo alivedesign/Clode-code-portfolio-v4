@@ -65,7 +65,7 @@ export function Character({ state, onRevealComplete, onTransitionComplete, class
   return (
     <div
       ref={containerRef}
-      className={`relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px] ${videoPlaying ? "animate-mask-c" : "invisible"} ${className}`}
+      className={`relative w-full h-full ${videoPlaying ? "animate-mask-c" : "invisible"} ${className}`}
     >
       {/* Reveal video — always in DOM, plays immediately via autoPlay */}
       <VideoPlayer
