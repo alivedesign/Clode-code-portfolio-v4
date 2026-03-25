@@ -1,3 +1,52 @@
+# NavBar Liquid Glass Effect — Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Add an Apple-style liquid glass distortion effect to the bottom navigation bar using SVG `feDisplacementMap` filters, replacing the current plain frosted-glass look.
+
+**Architecture:** The NavBar gets restructured into two layers: (1) a glass background layer that combines `backdrop-filter: blur` with an SVG displacement filter for the liquid refraction effect, and (2) a content layer with crisp, unfiltered text on top. The SVG filter definitions live in `LiquidGlass.tsx` and are rendered as hidden SVG within the NavBar.
+
+**Tech Stack:** React 19, Tailwind CSS 4, SVG Filters (`feImage`, `feGaussianBlur`, `feDisplacementMap`), base64-encoded WebP displacement map texture.
+
+---
+
+## Current State
+
+- `NavBar.tsx` — Single `<nav>` with `bg-white/10 backdrop-blur-xl`. No distortion effect.
+- `LiquidGlass.tsx` — Empty placeholder file (comment says "SVG filter removed").
+- `NavItem.tsx` — Simple `<a>` tags with hover animation. **No changes needed.**
+- `index.css` — Has `scaleToggle` keyframe and `.nav-item` hover styles. Needs additional keyframes.
+
+## Target State
+
+The nav bar should visually distort its blurred background through a displacement map, creating the "liquid glass" refraction effect seen in Apple's design language. Text remains sharp and unfiltered.
+
+### Visual Layer Stack (bottom to top)
+
+```
+┌────────────────────────────────────────────┐
+│ 3. Nav item text (z-10, crisp, unfiltered) │
+├────────────────────────────────────────────┤
+│ 2. SVG feDisplacementMap filter            │
+│    (applied to glass layer via CSS filter) │
+├────────────────────────────────────────────┤
+│ 1. Glass base layer                        │
+│    (bg-white/10 + backdrop-blur-xl)        │
+└────────────────────────────────────────────┘
+```
+
+---
+
+### Task 1: Implement SVG Filter Definitions in LiquidGlass.tsx
+
+**Files:**
+- Modify: `src/components/NavBar/LiquidGlass.tsx`
+
+**Step 1: Write the LiquidGlass component**
+
+Replace the placeholder comment with a component that renders hidden SVG filter definitions. The filter uses `feImage` to load a displacement map texture, `feGaussianBlur` for subtle softening, and `feDisplacementMap` to create the liquid glass refraction.
+
+```tsx
 export function LiquidGlassFilter() {
   return (
     <svg
@@ -30,3 +79,198 @@ export function LiquidGlassFilter() {
     </svg>
   );
 }
+```
+
+**Key details:**
+- `primitiveUnits="objectBoundingBox"` makes the filter scale to any element size
+- The base64 WebP is a displacement map texture (grayscale noise pattern)
+- `stdDeviation="0.04"` provides subtle blur before displacement
+- `scale="0.5"` controls distortion intensity
+- The filter ID `navbar-glass` must match what NavBar references
+
+**Step 2: Update the index export**
+
+In `src/components/NavBar/index.ts`, add the export:
+```ts
+export { NavBar } from "./NavBar";
+export { LiquidGlassFilter } from "./LiquidGlass";
+```
+
+(The export is only needed if consumed outside NavBar, but good practice for the barrel file.)
+
+**Step 3: Verify component renders without errors**
+
+Run: `npm run dev`
+Expected: No errors. The SVG is hidden (`h-0 w-0`), no visual change yet.
+
+---
+
+### Task 2: Restructure NavBar with Glass + Content Layers
+
+**Files:**
+- Modify: `src/components/NavBar/NavBar.tsx`
+
+**Step 1: Restructure NavBar into layered architecture**
+
+The nav element becomes a positioning container with two children:
+1. **Glass layer** — absolute-positioned div with `backdrop-blur`, `bg-white/10`, AND the SVG displacement filter applied via CSS `filter: url(#navbar-glass)`
+2. **Content layer** — relative-positioned div at `z-10` containing the nav items (crisp, unfiltered text)
+3. **LiquidGlassFilter** — renders the hidden SVG filter definitions
+
+```tsx
+import { NavItem } from "./NavItem";
+import { LiquidGlassFilter } from "./LiquidGlass";
+import type { CharacterPose } from "@/components/Character/useCharacterState";
+
+const NAV_ITEMS: { label: string; pose: CharacterPose; href: string }[] = [
+  { label: "Experience", pose: "experience", href: "#experience" },
+  { label: "Products", pose: "products", href: "#products" },
+  { label: "Cases", pose: "cases", href: "#cases" },
+  { label: "Content", pose: "content", href: "#content" },
+  { label: "About", pose: "about", href: "#about" },
+  { label: "Resume", pose: "resume", href: "#resume" },
+];
+
+interface NavBarProps {
+  onHoverPose: (pose: CharacterPose) => void;
+  onLeavePose: () => void;
+  visible?: boolean;
+}
+
+export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps) {
+  return (
+    <nav
+      className={`fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+        visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Glass background layer — blur + displacement filter */}
+      <div
+        className="absolute inset-0 rounded-[64px] bg-white/10 backdrop-blur-xl"
+        style={{ filter: "url(#navbar-glass)" }}
+        aria-hidden="true"
+      />
+
+      {/* Content layer — crisp, unfiltered text */}
+      <div className="relative z-10 flex items-center gap-6 sm:gap-10 lg:gap-[56px] px-6 sm:px-10 lg:px-[48px] pt-[16px] pb-[14px] font-['Times_Now',serif] text-lg sm:text-xl lg:text-[24px] leading-[1.2] text-white whitespace-nowrap">
+        {NAV_ITEMS.map((item) => (
+          <NavItem
+            key={item.pose}
+            label={item.label}
+            pose={item.pose}
+            href={item.href}
+            onHover={onHoverPose}
+            onLeave={onLeavePose}
+          />
+        ))}
+      </div>
+
+      {/* SVG filter definitions (hidden) */}
+      <LiquidGlassFilter />
+    </nav>
+  );
+}
+```
+
+**Critical differences from current code:**
+- `<nav>` no longer carries background/blur styles directly — it's just the positioning shell
+- New `<div>` with `absolute inset-0` handles the glass visual + SVG filter
+- New `<div>` with `relative z-10` holds the nav items — text stays crisp
+- `rounded-[64px]` moved to the glass layer (the content layer doesn't need it)
+
+**Step 2: Verify visually**
+
+Run: `npm run dev`
+Expected: The nav bar should show a liquid glass distortion effect on its background. Text remains sharp and readable. The displacement map creates subtle refraction warping through the blurred background.
+
+---
+
+### Task 3: Add Additional CSS Keyframes
+
+**Files:**
+- Modify: `src/styles/index.css`
+
+**Step 1: Add the scaleToggle2 and scaleToggle3 keyframes**
+
+The reference component uses three scale animations. Our `index.css` already has `scaleToggle`. Add the other two for potential use on hover micro-interactions:
+
+```css
+@keyframes scaleToggle2 {
+  0% { scale: 1 1; }
+  50% { scale: 1.2 1; }
+  100% { scale: 1 1; }
+}
+
+@keyframes scaleToggle3 {
+  0% { scale: 1 1; }
+  50% { scale: 1.1 1; }
+  100% { scale: 1 1; }
+}
+```
+
+Add these after the existing `scaleToggle` keyframe in `index.css`.
+
+---
+
+### Task 4: Accessibility — Reduced Motion
+
+**Files:**
+- Modify: `src/components/NavBar/LiquidGlass.tsx` (or `NavBar.tsx`)
+
+**Step 1: Respect `prefers-reduced-motion`**
+
+The SVG displacement filter creates visual motion/distortion. For users who prefer reduced motion, disable the filter by not applying it. Add a `useReducedMotion` check or use CSS:
+
+In `index.css`, add inside the existing `@media (prefers-reduced-motion: reduce)` block:
+
+```css
+.navbar-glass-layer {
+  filter: none !important;
+}
+```
+
+And add the class `navbar-glass-layer` to the glass div in NavBar.tsx.
+
+---
+
+### Task 5: Visual QA & Fine-Tuning
+
+**No file changes — verification only.**
+
+**Step 1: Check filter intensity**
+
+If the displacement is too strong or too subtle, adjust these values in `LiquidGlass.tsx`:
+- `stdDeviation="0.04"` — blur softness (increase for more blur, decrease for less)
+- `scale="0.5"` — displacement intensity (increase for more distortion)
+
+**Step 2: Check cross-browser rendering**
+
+SVG filters with `feDisplacementMap` are supported in:
+- Chrome 80+ ✅
+- Firefox 72+ ✅
+- Safari 13.1+ ✅
+- Edge 80+ ✅
+
+`feImage` with inline base64 data URIs works in all modern browsers. No polyfill needed.
+
+**Step 3: Check mobile performance**
+
+The SVG filter runs on the GPU. On low-end mobile devices, test that it doesn't cause frame drops. If it does, consider disabling the filter on mobile via a media query.
+
+---
+
+## File Change Summary
+
+| File | Action | What Changes |
+|------|--------|-------------|
+| `src/components/NavBar/LiquidGlass.tsx` | Rewrite | SVG filter definitions with displacement map |
+| `src/components/NavBar/NavBar.tsx` | Modify | Two-layer architecture (glass + content) |
+| `src/styles/index.css` | Modify | Add scaleToggle2/3 keyframes + reduced-motion rule |
+| `src/components/NavBar/NavItem.tsx` | None | No changes needed |
+| `src/components/NavBar/index.ts` | Minor | Add LiquidGlassFilter export |
+
+## Risk Mitigation
+
+1. **Filter not rendering**: If the SVG filter doesn't visually appear, the nav bar gracefully falls back to just `backdrop-blur-xl` + `bg-white/10` (current behavior minus the displacement).
+2. **Performance on mobile**: The displacement map is static (not animated), so GPU cost is a one-time composite per frame, not continuous recomputation.
+3. **Base64 texture size**: The WebP displacement map is ~12KB base64-encoded. This is inlined to avoid an extra network request and CORS issues with SVG `feImage`.
