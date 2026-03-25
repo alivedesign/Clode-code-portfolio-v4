@@ -1,17 +1,6 @@
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { VideoPlayer, type VideoPlayerHandle } from "./VideoPlayer";
 import type { CharacterState } from "./useCharacterState";
-
-const VIDEO_SOURCES: Record<string, string> = {
-  reveal: "/videos/reveal.mp4",
-  transition: "/videos/transition.mp4",
-  "pose-experience": "/videos/pose-experience.mp4",
-  "pose-products": "/videos/pose-products.mp4",
-  "pose-cases": "/videos/pose-cases.mp4",
-  "pose-content": "/videos/pose-content.mp4",
-  "pose-about": "/videos/pose-about.mp4",
-  "pose-resume": "/videos/pose-resume.mp4",
-};
 
 interface CharacterProps {
   state: CharacterState;
@@ -21,41 +10,39 @@ interface CharacterProps {
 }
 
 export function Character({ state, onRevealComplete, onTransitionComplete, className = "" }: CharacterProps) {
-  const frontRef = useRef<VideoPlayerHandle>(null);
+  const revealRef = useRef<VideoPlayerHandle>(null);
+  const poseRef = useRef<VideoPlayerHandle>(null);
   const transitionRef = useRef<VideoPlayerHandle>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [videoPlaying, setVideoPlaying] = useState(false);
 
-  // Handle state transitions by playing appropriate videos
+  // Wait for the video to actually start rendering pixels before showing
+  // timeupdate fires after real frames are decoded and painted — no flash
   useEffect(() => {
-    switch (state.phase) {
-      case "revealing":
-        frontRef.current?.play();
-        break;
-      case "transitioning-to-pose":
-        transitionRef.current?.play();
-        break;
-      case "posing":
-        frontRef.current?.play();
-        break;
-      case "transitioning-to-idle":
-        transitionRef.current?.play();
-        break;
+    const video = containerRef.current?.querySelector("video");
+    if (!video) return;
+
+    const onFirstFrame = () => {
+      // Use requestAnimationFrame to ensure the browser has composited the frame
+      requestAnimationFrame(() => {
+        setVideoPlaying(true);
+      });
+      video.removeEventListener("timeupdate", onFirstFrame);
+    };
+
+    video.addEventListener("timeupdate", onFirstFrame);
+    return () => video.removeEventListener("timeupdate", onFirstFrame);
+  }, []);
+
+  // Handle pose transitions
+  useEffect(() => {
+    if (state.phase === "transitioning-to-pose" || state.phase === "transitioning-to-idle") {
+      transitionRef.current?.play();
+    }
+    if (state.phase === "posing") {
+      poseRef.current?.play();
     }
   }, [state]);
-
-  const getCurrentSrc = () => {
-    switch (state.phase) {
-      case "loading":
-      case "revealing":
-      case "idle":
-      case "transitioning-to-idle":
-        return VIDEO_SOURCES.reveal;
-      case "transitioning-to-pose":
-      case "posing":
-        return VIDEO_SOURCES[`pose-${state.pose}`] || VIDEO_SOURCES.reveal;
-      default:
-        return VIDEO_SOURCES.reveal;
-    }
-  };
 
   const handleRevealEnded = useCallback(() => {
     onRevealComplete();
@@ -65,23 +52,45 @@ export function Character({ state, onRevealComplete, onTransitionComplete, class
     onTransitionComplete();
   }, [onTransitionComplete]);
 
+  const getPoseSrc = () => {
+    if (state.phase === "transitioning-to-pose" || state.phase === "posing") {
+      return `/videos/pose-${state.pose}.mp4`;
+    }
+    return "";
+  };
+
+  const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
+  const showPose = state.phase === "posing";
+
   return (
-    <div className={`relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px] ${className}`}>
-      {/* Main video layer */}
+    <div
+      ref={containerRef}
+      className={`relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px] ${videoPlaying ? "animate-mask-c" : "invisible"} ${className}`}
+    >
+      {/* Reveal video — always in DOM, plays immediately via autoPlay */}
       <VideoPlayer
-        ref={frontRef}
-        src={getCurrentSrc()}
-        loop={state.phase === "posing"}
-        poster="/images/character-poster.webp"
-        className="absolute inset-0 w-full h-full object-cover"
-        onEnded={state.phase === "revealing" ? handleRevealEnded : undefined}
+        ref={revealRef}
+        src="/videos/reveal.mp4"
+        autoPlay
+        className={`absolute inset-0 w-full h-full object-cover bg-black ${showReveal ? "opacity-100" : "opacity-0"}`}
+        onEnded={handleRevealEnded}
       />
+
+      {/* Pose video layer */}
+      {getPoseSrc() && (
+        <VideoPlayer
+          ref={poseRef}
+          src={getPoseSrc()}
+          loop
+          className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${showPose ? "opacity-100" : "opacity-0"}`}
+        />
+      )}
 
       {/* Transition video layer */}
       <VideoPlayer
         ref={transitionRef}
-        src={VIDEO_SOURCES.transition}
-        className="absolute inset-0 w-full h-full object-cover"
+        src="/videos/transition.mp4"
+        className="absolute inset-0 w-full h-full object-cover bg-black opacity-0"
         onEnded={handleTransitionEnded}
       />
     </div>

@@ -19,14 +19,20 @@ interface NavBarProps {
 
 export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps) {
   return (
-    <>
-      <LiquidGlassFilter />
-      <nav
-        className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex items-center gap-4 sm:gap-8 lg:gap-14 rounded-[64px] bg-glass px-4 sm:px-8 lg:px-12 pt-4 pb-3.5 font-['Times_Now',serif] text-base sm:text-lg lg:text-2xl leading-[1.2] transition-all duration-500 ${
-          visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-        }`}
-        style={{ filter: "url(#liquid-glass-filter)" }}
-      >
+    <nav
+      className={`fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
+        visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+      }`}
+    >
+      {/* Glass background layer — blur + displacement filter */}
+      <div
+        className="navbar-glass-layer absolute inset-0 rounded-[64px] bg-white/10 backdrop-blur-xl"
+        style={{ filter: "url(#navbar-glass)" }}
+        aria-hidden="true"
+      />
+
+      {/* Content layer — crisp, unfiltered text */}
+      <div className="relative z-10 flex items-center gap-6 sm:gap-10 lg:gap-[56px] px-6 sm:px-10 lg:px-[48px] pt-[16px] pb-[14px] font-['Times_Now',serif] text-lg sm:text-xl lg:text-[24px] leading-[1.2] text-white whitespace-nowrap">
         {NAV_ITEMS.map((item) => (
           <NavItem
             key={item.pose}
@@ -37,7 +43,10 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
             onLeave={onLeavePose}
           />
         ))}
-      </nav>
-    </>
+      </div>
+
+      {/* SVG filter definitions (hidden) */}
+      <LiquidGlassFilter />
+    </nav>
   );
 }

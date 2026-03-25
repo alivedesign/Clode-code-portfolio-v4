@@ -22,6 +22,18 @@
   100% { scale: 1 1; }
 }
 
+@keyframes scaleToggle2 {
+  0% { scale: 1 1; }
+  50% { scale: 1.2 1; }
+  100% { scale: 1 1; }
+}
+
+@keyframes scaleToggle3 {
+  0% { scale: 1 1; }
+  50% { scale: 1.1 1; }
+  100% { scale: 1 1; }
+}
+
 .nav-item {
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
@@ -32,11 +44,36 @@
   animation: scaleToggle 0.4s ease;
 }
 
+/* Bottom-to-top gradient mask reveal for character entrance */
+/* Fully opaque by 60%, then holds — no visible snap at the end */
+@keyframes maskRevealC {
+  0% {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
+  }
+  40% {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
+  }
+  60% {
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
+  }
+  100% {
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
+  }
+}
+.animate-mask-c {
+  animation: maskRevealC 1.8s ease-out forwards;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .navbar-glass-layer {
+    filter: none !important;
   }
 }

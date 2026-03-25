@@ -7,8 +7,6 @@ import { MainLayout } from "@/components/Layout/MainLayout";
 import { useVideoPreloader } from "@/hooks/useVideoPreloader";
 import type { CharacterPose } from "@/components/Character";
 
-type EntryPhase = "black" | "logo" | "reveal" | "text" | "nav" | "complete";
-
 const POSE_VIDEOS = [
   "/videos/pose-experience.mp4",
   "/videos/pose-products.mp4",
@@ -20,61 +18,46 @@ const POSE_VIDEOS = [
 ];
 
 export function Home() {
-  const [entryPhase, setEntryPhase] = useState<EntryPhase>("black");
+  const [revealed, setRevealed] = useState(false);
   const { state, startReveal, onRevealComplete, onTransitionComplete, hoverPose, leavePose } =
     useCharacterState();
 
-  // Entry sequence timers
+  // Start reveal immediately on mount
+  // Show UI 1 second before the video ends (~2.5s into a 3.5s video)
   useEffect(() => {
-    const timer1 = setTimeout(() => setEntryPhase("logo"), 200);
-    const timer2 = setTimeout(() => {
-      setEntryPhase("reveal");
-      startReveal();
-    }, 500);
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
+    startReveal();
+    const uiTimer = setTimeout(() => setRevealed(true), 2500);
+    return () => clearTimeout(uiTimer);
   }, [startReveal]);
 
-  // When reveal completes, advance entry sequence
+  // When reveal video actually ends, transition to idle state
   const handleRevealComplete = useCallback(() => {
     onRevealComplete();
-    setEntryPhase("text");
-    setTimeout(() => setEntryPhase("nav"), 400);
-    setTimeout(() => setEntryPhase("complete"), 600);
   }, [onRevealComplete]);
 
-  const isAfter = (target: EntryPhase) => {
-    const order: EntryPhase[] = ["black", "logo", "reveal", "text", "nav", "complete"];
-    return order.indexOf(entryPhase) >= order.indexOf(target);
-  };
-
-  // Preload pose videos after reveal completes
-  useVideoPreloader(POSE_VIDEOS, isAfter("text"));
+  // Preload pose videos after reveal
+  useVideoPreloader(POSE_VIDEOS, revealed);
 
   return (
     <MainLayout>
-      <Logo visible={isAfter("logo")} />
+      <Logo visible={revealed} />
 
-      {isAfter("reveal") && (
-        <Character
-          state={state}
-          onRevealComplete={handleRevealComplete}
-          onTransitionComplete={onTransitionComplete}
-          className="absolute left-1/2 top-1/2 -translate-x-[calc(50%+24px)] -translate-y-[calc(50%+48px)]"
-        />
-      )}
+      <Character
+        state={state}
+        onRevealComplete={handleRevealComplete}
+        onTransitionComplete={onTransitionComplete}
+        className="absolute left-1/2 top-1/2 -translate-x-[calc(50%+24px)] -translate-y-[calc(50%+48px)]"
+      />
 
-      <HeroText visible={isAfter("text")} />
+      <HeroText visible={revealed} />
 
       <NavBar
         onHoverPose={hoverPose}
         onLeavePose={leavePose}
-        visible={isAfter("nav")}
+        visible={revealed}
       />
 
-      <ContactLine visible={isAfter("complete")} />
+      <ContactLine visible={revealed} />
     </MainLayout>
   );
 }

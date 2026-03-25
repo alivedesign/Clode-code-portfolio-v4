@@ -8,34 +8,39 @@ interface VideoPlayerProps {
   className?: string;
   onEnded?: () => void;
   onCanPlay?: () => void;
+  autoPlay?: boolean;
 }
 
 export interface VideoPlayerHandle {
-  play: () => Promise<void>;
+  play: () => void;
   pause: () => void;
   reset: () => void;
+  element: HTMLVideoElement | null;
 }
 
 export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
-  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay }, ref) => {
+  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, autoPlay = false }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useImperativeHandle(ref, () => ({
-      play: async () => {
-        if (videoRef.current) {
-          videoRef.current.currentTime = 0;
-          await videoRef.current.play();
+      play: () => {
+        const v = videoRef.current;
+        if (v) {
+          v.currentTime = 0;
+          v.play().catch(() => {});
         }
       },
       pause: () => {
         videoRef.current?.pause();
       },
       reset: () => {
-        if (videoRef.current) {
-          videoRef.current.pause();
-          videoRef.current.currentTime = 0;
+        const v = videoRef.current;
+        if (v) {
+          v.pause();
+          v.currentTime = 0;
         }
       },
+      element: videoRef.current,
     }));
 
     useEffect(() => {
@@ -61,6 +66,7 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
         loop={loop}
         muted={muted}
         playsInline
+        autoPlay={autoPlay}
         poster={poster}
         className={className}
         aria-hidden="true"
