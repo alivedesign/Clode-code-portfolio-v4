@@ -1,4 +1,4 @@
-import { NavItem } from "./NavItem";
+import { useRef, useCallback } from "react";
 import type { CharacterPose } from "@/components/Character/useCharacterState";
 
 const NAV_ITEMS: { label: string; pose: CharacterPose; href: string }[] = [
@@ -17,6 +17,38 @@ interface NavBarProps {
 }
 
 export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps) {
+  const glassRef = useRef<HTMLDivElement>(null);
+  const lensRef = useRef<HTMLSpanElement>(null);
+
+  const handleMouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLLIElement>, pose: CharacterPose) => {
+      onHoverPose(pose);
+
+      const li = e.currentTarget;
+      const lens = lensRef.current;
+      const glass = glassRef.current;
+      if (!lens || !glass) return;
+
+      const liRect = li.getBoundingClientRect();
+      const glassRect = glass.getBoundingClientRect();
+      const border = parseFloat(getComputedStyle(glass).borderLeftWidth) || 0;
+      const left = liRect.left - glassRect.left - border + 8;
+      const width = liRect.width - 16;
+
+      lens.style.display = "flex";
+      lens.style.width = `${width}px`;
+      lens.style.transform = `translate(${left}px, 0)`;
+    },
+    [onHoverPose],
+  );
+
+  const handleMouseLeave = useCallback(() => {
+    onLeavePose();
+    if (lensRef.current) {
+      lensRef.current.style.display = "none";
+    }
+  }, [onLeavePose]);
+
   return (
     <nav
       className={`fixed bottom-[100px] left-1/2 -translate-x-1/2 z-50 transition-all duration-300 ${
@@ -24,50 +56,23 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
       }`}
     >
       {/* Outer wrap — shadow halo */}
-      <div
-        className="relative rounded-full"
-        style={{
-          filter: "drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)) drop-shadow(0 12px 40px rgba(0, 0, 0, 0.4))",
-        }}
-      >
-        {/* Glass pill — dark neumorphic surface */}
-        <div
-          className="navbar-glass-layer relative rounded-full"
-          style={{
-            background: "linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)",
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-            boxShadow: [
-              "inset 0 1px 0 0 rgba(255, 255, 255, 0.09)",
-              "inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4)",
-              "inset 0 0 12px 0 rgba(0, 0, 0, 0.15)",
-              "0 0 0 1px rgba(0, 0, 0, 0.6)",
-            ].join(", "),
-            backdropFilter: "blur(40px) saturate(150%)",
-            WebkitBackdropFilter: "blur(40px) saturate(150%)",
-          }}
-        >
-          <div className="flex items-center gap-6 sm:gap-10 lg:gap-[56px] px-6 sm:px-10 lg:px-[48px] pt-[16px] pb-[14px] font-['Times_Now',serif] text-lg sm:text-xl lg:text-[24px] leading-[1.2] text-white/80 whitespace-nowrap">
+      <div className="navbar-shadow-halo">
+        {/* Glass pill */}
+        <div ref={glassRef} className="navbar-glass">
+          <ul className="navbar-list" onMouseLeave={handleMouseLeave}>
             {NAV_ITEMS.map((item) => (
-              <NavItem
+              <li
                 key={item.pose}
-                label={item.label}
-                pose={item.pose}
-                href={item.href}
-                onHover={onHoverPose}
-                onLeave={onLeavePose}
-              />
+                onMouseEnter={(e) => handleMouseEnter(e, item.pose)}
+              >
+                <a href={item.href} className="navbar-tab">
+                  {item.label}
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
+          <span ref={lensRef} className="navbar-lens" />
         </div>
-
-        {/* Shadow layer underneath */}
-        <div
-          className="absolute inset-0 -z-10 rounded-full"
-          style={{
-            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3)",
-          }}
-          aria-hidden="true"
-        />
       </div>
     </nav>
   );
