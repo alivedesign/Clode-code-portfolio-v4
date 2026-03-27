@@ -3,6 +3,15 @@ import { useTypewriter } from "@/hooks/useTypewriter";
 import { POSE_TEXT } from "@/data/poseTextData";
 import type { TypewriterPhase } from "@/hooks/useTypewriter";
 
+const POSE_LABELS: Record<CharacterPose, { label: string; href: string }> = {
+  experience: { label: "Experience", href: "#experience" },
+  products: { label: "Products", href: "#products" },
+  cases: { label: "Cases", href: "#cases" },
+  content: { label: "Content", href: "#content" },
+  about: { label: "About", href: "#about" },
+  resume: { label: "Resume", href: "#resume" },
+};
+
 interface PoseTextProps {
   pose: CharacterPose | null;
 }
@@ -60,6 +69,14 @@ export function PoseText({ pose }: PoseTextProps) {
           </p>
         );
       })}
+      {activePose && (
+        <a
+          href={POSE_LABELS[activePose].href}
+          className="inline-block mt-4 text-accent"
+        >
+          {POSE_LABELS[activePose].label}
+        </a>
+      )}
     </div>
   );
 }
