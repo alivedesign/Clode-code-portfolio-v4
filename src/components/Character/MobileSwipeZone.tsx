@@ -11,7 +11,7 @@ export function MobileSwipeZone({ children, onNext, onPrev }: MobileSwipeZonePro
 
   return (
     <div
-      className="relative"
+      className="relative w-full h-full"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
