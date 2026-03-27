@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect } from "react";
 import { VideoPlayer, type VideoPlayerHandle } from "./VideoPlayer";
 import type { CharacterState } from "./useCharacterState";
 
@@ -11,7 +11,6 @@ interface CharacterProps {
 
 export function Character({ state, onRevealComplete, onPoseVideoEnded, className = "" }: CharacterProps) {
   const revealRef = useRef<VideoPlayerHandle>(null);
-  const poseRef = useRef<VideoPlayerHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [videoPlaying, setVideoPlaying] = useState(false);
 
@@ -30,25 +29,12 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
     return () => video.removeEventListener("timeupdate", onFirstFrame);
   }, []);
 
-  // Play pose video immediately when entering posing state
-  useEffect(() => {
-    if (state.phase === "posing" && !state.videoEnded) {
-      poseRef.current?.play();
-    }
-  }, [state]);
-
-  const handleRevealEnded = useCallback(() => {
-    onRevealComplete();
-  }, [onRevealComplete]);
-
-  const handlePoseEnded = useCallback(() => {
-    onPoseVideoEnded();
-  }, [onPoseVideoEnded]);
-
   const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
   const isPosing = state.phase === "posing";
   const showPoseVideo = isPosing && !state.videoEnded;
   const showPoster = isPosing && state.videoEnded;
+  const poseSrc = isPosing ? `/videos/pose-${state.pose}.mp4` : "";
+  const posterSrc = isPosing ? `/images/poster-${state.pose}.png` : "";
 
   return (
     <div
@@ -61,27 +47,27 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
         src="/videos/reveal.mp4"
         autoPlay
         className={`absolute inset-0 w-full h-full object-cover bg-black ${showReveal ? "opacity-100" : "opacity-0"}`}
-        onEnded={handleRevealEnded}
+        onEnded={onRevealComplete}
       />
 
-      {/* Pose video layer — key forces remount on pose change */}
+      {/* Pose video layer — key forces remount on pose change, autoPlay starts immediately */}
       {isPosing && (
         <VideoPlayer
           key={state.pose}
-          ref={poseRef}
-          src={`/videos/pose-${state.pose}.mp4`}
-          onEnded={handlePoseEnded}
+          src={poseSrc}
+          autoPlay
+          onEnded={onPoseVideoEnded}
           className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${showPoseVideo ? "opacity-100" : "opacity-0"}`}
         />
       )}
 
-      {/* Poster image — shown after pose video ends */}
-      {showPoster && (
+      {/* Poster image — always in DOM when posing, toggled via opacity to avoid flash */}
+      {isPosing && (
         <img
-          src={`/images/poster-${state.pose}.png`}
+          src={posterSrc}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover bg-black"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${showPoster ? "opacity-100" : "opacity-0"}`}
         />
       )}
     </div>
