@@ -30,7 +30,7 @@ export function PoseText({ pose }: PoseTextProps) {
 
   return (
     <div
-      className={`absolute w-[230px] md:w-[247px] left-1/2 -translate-x-1/2 top-[calc(100%+20px)] lg:left-[calc(100%-88px)] lg:translate-x-0 lg:top-[-16px] font-['SF_Pro_Text','-apple-system',BlinkMacSystemFont,sans-serif] text-[14px] md:text-lg leading-[1.3] text-center lg:text-left hidden lg:block transition-opacity duration-200 ${getOpacityClass(phase)}`}
+      className={`absolute w-[230px] md:w-[247px] left-1/2 -translate-x-1/2 top-[calc(100%+20px)] lg:left-[calc(100%-88px)] lg:translate-x-0 lg:top-[-16px] font-['SF_Pro_Text','-apple-system',BlinkMacSystemFont,sans-serif] text-[14px] md:text-lg leading-[1.3] text-center lg:text-left transition-opacity duration-200 ${getOpacityClass(phase)}`}
     >
       {textData.map((line, lineIdx) => {
         const lineContent = line.map((segment, segIdx) => {

@@ -197,7 +197,6 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
                 key={item.pose}
                 href={item.href}
                 className="mobile-nav-tab"
-                onClick={() => onHoverPose(item.pose)}
               >
                 {item.label}
               </a>
