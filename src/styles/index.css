@@ -1,11 +1,3 @@
-@font-face {
-  font-family: "Times Now";
-  src: url("/fonts/TimesNow-SemiLight.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
 @import "tailwindcss";
 
 @theme {
@@ -14,6 +6,49 @@
   --color-text-secondary: #999899;
   --color-accent: #d77757;
   --color-glass: rgba(255, 255, 255, 0.1);
+}
+
+@font-face {
+  font-family: "TN";
+  src: url("/fonts/TimesNow-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TN";
+  src: url("/fonts/TimesNow-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TN";
+  src: url("/fonts/TimesNow-SemiLight.ttf") format("truetype");
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TN";
+  src: url("/fonts/TimesNow-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TN";
+  src: url("/fonts/TimesNow-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "TN";
+  src: url("/fonts/TimesNow-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* ─── Navbar ───────────────────────────────────────────────── */
@@ -60,7 +95,8 @@
   white-space: nowrap;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.65);
-  font-family: "Times Now", serif;
+  font-family: "TN", serif;
+  font-weight: 200;
   font-size: 24px;
   line-height: 1.2;
   transition: color 0.2s ease-in-out;
@@ -69,6 +105,14 @@
   position: relative;
 }
 .navbar-tab:hover {
+  color: white;
+}
+
+.navbar-tab-active {
+  color: white;
+}
+
+.mobile-nav-tab-active {
   color: white;
 }
 
@@ -117,7 +161,8 @@
   white-space: nowrap;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.65);
-  font-family: "Times Now", serif;
+  font-family: "TN", serif;
+  font-weight: 200;
   font-size: 16px;
   line-height: 1.2;
   cursor: pointer;
@@ -178,7 +223,7 @@
 }
 
 .hamburger-close-text {
-  font-family: "Times Now", serif;
+  font-family: "TN", serif;
   font-size: 16px;
   line-height: 1.2;
   color: white;
@@ -229,7 +274,8 @@
 }
 
 .menu-overlay-link {
-  font-family: "Times Now", serif;
+  font-family: "TN", serif;
+  font-weight: 200;
   font-size: 24px;
   line-height: 1.2;
   color: white;
@@ -314,6 +360,47 @@
   mask-composite: intersect;
 }
 
+/* ─── Nav frost pill (sits behind glass pill, outside filter parent) ── */
+.nav-frost-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(0, 0, 0, 0.25);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ─── Experience page animations ─────────────────────────── */
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.experience-fade-up {
+  opacity: 0;
+  animation: fadeUpIn 500ms ease-out forwards;
+}
+
+/* ─── Scroll-triggered reveal ────────────────────────────── */
+.experience-scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+}
+
+.experience-scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -324,5 +411,14 @@
 
   .navbar-glass {
     filter: none !important;
+  }
+
+  .experience-fade-up {
+    opacity: 1;
+    animation: none;
+  }
+  .experience-scroll-reveal {
+    opacity: 1;
+    transform: none;
   }
 }

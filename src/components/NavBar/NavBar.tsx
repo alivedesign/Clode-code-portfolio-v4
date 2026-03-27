@@ -1,35 +1,37 @@
 import { useState, useRef, useCallback } from "react";
+import { Link, useLocation } from "react-router";
 import type { CharacterPose } from "@/components/Character/useCharacterState";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
-const NAV_ITEMS: { label: string; pose: CharacterPose; href: string }[] = [
-  { label: "Experience", pose: "experience", href: "#experience" },
-  { label: "Products", pose: "products", href: "#products" },
-  { label: "Cases", pose: "cases", href: "#cases" },
-  { label: "Content", pose: "content", href: "#content" },
-  { label: "About", pose: "about", href: "#about" },
-  { label: "Resume", pose: "resume", href: "#resume" },
+const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
+  { label: "Experience", pose: "experience", path: "/experience" },
+  { label: "Products", pose: "products", path: "/" },
+  { label: "Cases", pose: "cases", path: "/" },
+  { label: "Content", pose: "content", path: "/" },
+  { label: "About", pose: "about", path: "/" },
+  { label: "Resume", pose: "resume", path: "/" },
 ];
 
-const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; href: string }[] = [
-  { label: "Experience", pose: "experience", href: "#experience" },
-  { label: "Products", pose: "products", href: "#products" },
-  { label: "Cases", pose: "cases", href: "#cases" },
+const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
+  { label: "Experience", pose: "experience", path: "/experience" },
+  { label: "Products", pose: "products", path: "/" },
+  { label: "Cases", pose: "cases", path: "/" },
 ];
 
-const MENU_NAV_ITEMS: { label: string; href: string }[] = [
-  { label: "Content", href: "#content" },
-  { label: "About", href: "#about" },
-  { label: "Resume", href: "#resume" },
+const MENU_NAV_ITEMS: { label: string; path: string }[] = [
+  { label: "Content", path: "/" },
+  { label: "About", path: "/" },
+  { label: "Resume", path: "/" },
 ];
 
 interface NavBarProps {
-  onHoverPose: (pose: CharacterPose) => void;
-  onLeavePose: () => void;
+  onHoverPose?: (pose: CharacterPose) => void;
+  onLeavePose?: () => void;
   visible?: boolean;
 }
 
 export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps) {
+  const location = useLocation();
   const glassRef = useRef<HTMLDivElement>(null);
   const lensRef = useRef<HTMLSpanElement>(null);
 
@@ -41,7 +43,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
 
   const handleMouseEnter = useCallback(
     (e: React.MouseEvent<HTMLLIElement>, pose: CharacterPose) => {
-      onHoverPose(pose);
+      onHoverPose?.(pose);
 
       const li = e.currentTarget;
       const lens = lensRef.current;
@@ -62,7 +64,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
   );
 
   const handleMouseLeave = useCallback(() => {
-    onLeavePose();
+    onLeavePose?.();
     if (lensRef.current) {
       lensRef.current.style.display = "none";
     }
@@ -96,6 +98,8 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
           visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
         }`}
       >
+        {/* Frost backdrop — outside shadow-halo so backdrop-filter works */}
+        <div className="nav-frost-pill" />
         {/* Outer wrap — shadow halo */}
         <div className="navbar-shadow-halo">
           {/* Glass pill */}
@@ -106,9 +110,12 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
                   key={item.pose}
                   onMouseEnter={(e) => handleMouseEnter(e, item.pose)}
                 >
-                  <a href={item.href} className="navbar-tab">
+                  <Link
+                    to={item.path}
+                    className={`navbar-tab ${item.path !== "/" && location.pathname === item.path ? "navbar-tab-active" : ""}`}
+                  >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -135,14 +142,14 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
 
         <nav className="menu-overlay-items">
           {MENU_NAV_ITEMS.map((item) => (
-            <a
+            <Link
               key={item.label}
-              href={item.href}
+              to={item.path}
               className="menu-overlay-link"
               onClick={closeMenu}
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -157,14 +164,14 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
           <div className="navbar-shadow-halo flex-1">
             <div className="navbar-glass mobile-nav-pill menu-open">
               {MAIN_NAV_ITEMS.map((item) => (
-                <a
+                <Link
                   key={item.pose}
-                  href={item.href}
-                  className="mobile-nav-tab"
+                  to={item.path}
+                  className={`mobile-nav-tab ${item.path !== "/" && location.pathname === item.path ? "mobile-nav-tab-active" : ""}`}
                   onClick={closeMenu}
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -190,31 +197,37 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
           visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
         }`}
       >
-        <div className="navbar-shadow-halo flex-1">
-          <div className="navbar-glass mobile-nav-pill">
-            {MAIN_NAV_ITEMS.map((item) => (
-              <a
-                key={item.pose}
-                href={item.href}
-                className="mobile-nav-tab"
-              >
-                {item.label}
-              </a>
-            ))}
+        <div className="relative flex-1">
+          <div className="nav-frost-pill" />
+          <div className="navbar-shadow-halo">
+            <div className="navbar-glass mobile-nav-pill">
+              {MAIN_NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.pose}
+                  to={item.path}
+                  className={`mobile-nav-tab ${item.path !== "/" && location.pathname === item.path ? "mobile-nav-tab-active" : ""}`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
-        <div className="navbar-shadow-halo">
-          <button
-            ref={menuBtnRef}
-            className="navbar-glass mobile-menu-btn"
-            onClick={openMenu}
-          >
-            <div className="hamburger">
-              <span className="hamburger-line" />
-              <span className="hamburger-line" />
-              <span className="hamburger-line" />
-            </div>
-          </button>
+        <div className="relative">
+          <div className="nav-frost-pill" />
+          <div className="navbar-shadow-halo">
+            <button
+              ref={menuBtnRef}
+              className="navbar-glass mobile-menu-btn"
+              onClick={openMenu}
+            >
+              <div className="hamburger">
+                <span className="hamburger-line" />
+                <span className="hamburger-line" />
+                <span className="hamburger-line" />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </>
