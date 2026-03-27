@@ -25,6 +25,7 @@ export function useTypewriter(pose: CharacterPose | null): TypewriterState {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const fadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevPoseRef = useRef<CharacterPose | null>(null);
+  const typedPosesRef = useRef<Set<CharacterPose>>(new Set());
 
   const clearTimers = useCallback(() => {
     if (intervalRef.current) {
@@ -35,6 +36,17 @@ export function useTypewriter(pose: CharacterPose | null): TypewriterState {
       clearTimeout(fadeTimeoutRef.current);
       fadeTimeoutRef.current = null;
     }
+  }, []);
+
+  // Show all chars instantly (for already-typed poses) — CSS transition handles fade-in
+  const showInstant = useCallback((newPose: CharacterPose) => {
+    const total = getTotalChars(newPose);
+    setState({
+      visibleChars: total,
+      totalChars: total,
+      phase: "typing",
+      activePose: newPose,
+    });
   }, []);
 
   const startTyping = useCallback((newPose: CharacterPose) => {
@@ -54,12 +66,22 @@ export function useTypewriter(pose: CharacterPose | null): TypewriterState {
       if (chars >= total) {
         if (intervalRef.current) clearInterval(intervalRef.current);
         intervalRef.current = null;
+        typedPosesRef.current.add(newPose);
         setState((prev) => ({ ...prev, visibleChars: total }));
       } else {
         setState((prev) => ({ ...prev, visibleChars: chars }));
       }
     }, msPerChar);
   }, []);
+
+  // Show a pose — either type-in (first time) or instant (already typed)
+  const showPose = useCallback((newPose: CharacterPose) => {
+    if (typedPosesRef.current.has(newPose)) {
+      showInstant(newPose);
+    } else {
+      startTyping(newPose);
+    }
+  }, [showInstant, startTyping]);
 
   useEffect(() => {
     const prevPose = prevPoseRef.current;
@@ -82,18 +104,18 @@ export function useTypewriter(pose: CharacterPose | null): TypewriterState {
         });
       }, FADE_DURATION);
     } else if (prevPose === null) {
-      // First hover (from idle) — start typing immediately
-      startTyping(pose);
+      // First hover from idle
+      showPose(pose);
     } else {
-      // Pose changed (hover to different item) — fade out, then type new
+      // Pose changed — fade out, then show new
       setState((prev) => ({ ...prev, phase: "fading-out" }));
       fadeTimeoutRef.current = setTimeout(() => {
-        startTyping(pose);
+        showPose(pose);
       }, FADE_DURATION);
     }
 
     return () => clearTimers();
-  }, [pose, clearTimers, startTyping]);
+  }, [pose, clearTimers, showPose]);
 
   // Cleanup on unmount
   useEffect(() => {
