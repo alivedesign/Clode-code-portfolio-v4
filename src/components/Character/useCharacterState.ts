@@ -36,7 +36,7 @@ export function useCharacterState(): CharacterActions {
 
   const hoverPose = useCallback((pose: CharacterPose) => {
     setState((prev) => {
-      if (prev.phase === "idle" || prev.phase === "posing") {
+      if (prev.phase === "idle" || prev.phase === "posing" || prev.phase === "revealing") {
         return { phase: "posing", pose, videoEnded: false };
       }
       return prev;

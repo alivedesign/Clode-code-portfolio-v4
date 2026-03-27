@@ -36,7 +36,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
       revealRef.current?.play();
     }
     prevPhaseRef.current = state.phase;
-  }, [state]);
+  }, [state.phase]);
 
   const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
   const isPosing = state.phase === "posing";
