@@ -1,10 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
-import { Character, useCharacterState } from "@/components/Character";
+import { Character, useCharacterState, MobileSwipeZone } from "@/components/Character";
 import { NavBar } from "@/components/NavBar";
 import { Logo, HeroText, PoseText } from "@/components/Hero";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { MainLayout } from "@/components/Layout/MainLayout";
 import { useVideoPreloader } from "@/hooks/useVideoPreloader";
+import { usePoseCycle } from "@/hooks/usePoseCycle";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const POSE_VIDEOS = [
   "/videos/pose-experience.mp4",
@@ -20,6 +22,8 @@ export function Home() {
   const [heroReady, setHeroReady] = useState(false);
   const { state, startReveal, onRevealComplete, onPoseVideoEnded, hoverPose, leavePose } =
     useCharacterState();
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  const { nextPose, prevPose } = usePoseCycle(hoverPose);
 
   useEffect(() => {
     startReveal();
@@ -48,16 +52,33 @@ export function Home() {
       <Logo visible={revealed} />
 
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+48px)] w-[300px] h-[300px] md:-translate-x-[calc(50%+24px)] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px]">
-        <Character
-          state={state}
-          onRevealComplete={handleRevealComplete}
-          onPoseVideoEnded={onPoseVideoEnded}
-        />
-        <HeroText
-          visible={heroReady && state.phase !== "posing"}
-          startTyping={heroReady}
-        />
-        <PoseText pose={revealed ? currentPose : null} />
+        {isMobile ? (
+          <MobileSwipeZone onNext={nextPose} onPrev={prevPose}>
+            <Character
+              state={state}
+              onRevealComplete={handleRevealComplete}
+              onPoseVideoEnded={onPoseVideoEnded}
+            />
+            <HeroText
+              visible={heroReady && state.phase !== "posing"}
+              startTyping={heroReady}
+            />
+            <PoseText pose={revealed ? currentPose : null} />
+          </MobileSwipeZone>
+        ) : (
+          <>
+            <Character
+              state={state}
+              onRevealComplete={handleRevealComplete}
+              onPoseVideoEnded={onPoseVideoEnded}
+            />
+            <HeroText
+              visible={heroReady && state.phase !== "posing"}
+              startTyping={heroReady}
+            />
+            <PoseText pose={revealed ? currentPose : null} />
+          </>
+        )}
       </div>
 
       <NavBar
