@@ -1,45 +1,57 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useState } from "react";
 
-const SWIPE_THRESHOLD = 50; // px
+const SWIPE_THRESHOLD = 25; // px (lowered from 50)
+const DAMPING = 0.4;
+const MAX_OFFSET = 40; // px
 
-interface SwipeHandlers {
+interface SwipeState {
   onTouchStart: (e: React.TouchEvent) => void;
   onTouchMove: (e: React.TouchEvent) => void;
   onTouchEnd: () => void;
+  dragDeltaX: number;
+  isDragging: boolean;
 }
 
 export function useSwipe(
   onSwipeLeft: () => void,
   onSwipeRight: () => void,
-): SwipeHandlers {
+): SwipeState {
   const startXRef = useRef<number | null>(null);
-  const currentXRef = useRef<number | null>(null);
+  const [dragDeltaX, setDragDeltaX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const onTouchStart = useCallback((e: React.TouchEvent) => {
     startXRef.current = e.touches[0].clientX;
-    currentXRef.current = e.touches[0].clientX;
+    setIsDragging(true);
+    setDragDeltaX(0);
   }, []);
 
   const onTouchMove = useCallback((e: React.TouchEvent) => {
-    currentXRef.current = e.touches[0].clientX;
+    if (startXRef.current === null) return;
+    const raw = e.touches[0].clientX - startXRef.current;
+    const damped = raw * DAMPING;
+    const clamped = Math.max(-MAX_OFFSET, Math.min(MAX_OFFSET, damped));
+    setDragDeltaX(clamped);
   }, []);
 
   const onTouchEnd = useCallback(() => {
-    if (startXRef.current === null || currentXRef.current === null) return;
+    if (startXRef.current === null) return;
 
-    const deltaX = currentXRef.current - startXRef.current;
+    // Read final delta before resetting — derive from damped value
+    const rawDelta = dragDeltaX / DAMPING;
 
-    if (Math.abs(deltaX) >= SWIPE_THRESHOLD) {
-      if (deltaX < 0) {
-        onSwipeLeft(); // swiped left → next pose
+    if (Math.abs(rawDelta) >= SWIPE_THRESHOLD) {
+      if (rawDelta < 0) {
+        onSwipeLeft();
       } else {
-        onSwipeRight(); // swiped right → previous pose
+        onSwipeRight();
       }
     }
 
     startXRef.current = null;
-    currentXRef.current = null;
-  }, [onSwipeLeft, onSwipeRight]);
+    setIsDragging(false);
+    setDragDeltaX(0);
+  }, [dragDeltaX, onSwipeLeft, onSwipeRight]);
 
-  return { onTouchStart, onTouchMove, onTouchEnd };
+  return { onTouchStart, onTouchMove, onTouchEnd, dragDeltaX, isDragging };
 }
