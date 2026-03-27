@@ -12,7 +12,7 @@ interface TypewriterState {
 }
 
 const FADE_DURATION = 200; // ms
-const TARGET_TYPING_DURATION = 2500; // ms — constant speed, finishes ~0.3s after pose video
+const TARGET_TYPING_DURATION = 1250; // ms — 2x speed, constant rate
 
 export function useTypewriter(pose: CharacterPose | null): TypewriterState {
   const [state, setState] = useState<TypewriterState>({

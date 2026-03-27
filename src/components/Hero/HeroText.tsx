@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { HERO_TEXT, getLinesTotalChars } from "@/data/poseTextData";
 
 const TOTAL_CHARS = getLinesTotalChars(HERO_TEXT);
-const TARGET_TYPING_DURATION = 1700; // ms — constant speed, finishes ~0.3s after reveal video
+const TARGET_TYPING_DURATION = 850; // ms — 2x speed, constant rate
 const MS_PER_CHAR = Math.max(TARGET_TYPING_DURATION / TOTAL_CHARS, 10);
 
 interface HeroTextProps {

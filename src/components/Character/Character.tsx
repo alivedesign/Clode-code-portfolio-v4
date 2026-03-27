@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { VideoPlayer, type VideoPlayerHandle } from "./VideoPlayer";
 import type { CharacterState } from "./useCharacterState";
 
@@ -13,6 +13,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
   const revealRef = useRef<VideoPlayerHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [videoPlaying, setVideoPlaying] = useState(false);
+  const [poseVideoReady, setPoseVideoReady] = useState(false);
 
   useEffect(() => {
     const video = containerRef.current?.querySelector("video");
@@ -34,12 +35,34 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
   useEffect(() => {
     if (state.phase === "revealing" && prevPhaseRef.current === "posing") {
       revealRef.current?.play();
+      // Re-trigger mask animation: remove class, force reflow, re-add
+      const el = containerRef.current;
+      if (el) {
+        el.classList.remove("animate-mask-c");
+        void el.offsetWidth;
+        el.classList.add("animate-mask-c");
+      }
     }
     prevPhaseRef.current = state.phase;
   }, [state.phase]);
 
-  const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
+  // Reset poseVideoReady when pose changes or when leaving posing
   const isPosing = state.phase === "posing";
+  const currentPose = isPosing ? state.pose : null;
+  const prevPoseRef = useRef<string | null>(null);
+  useEffect(() => {
+    if (currentPose !== prevPoseRef.current) {
+      setPoseVideoReady(false);
+      prevPoseRef.current = currentPose;
+    }
+  }, [currentPose]);
+
+  const handlePoseCanPlay = useCallback(() => {
+    setPoseVideoReady(true);
+  }, []);
+
+  // Show reveal as fallback until pose video is ready to play
+  const showReveal = !isPosing || !poseVideoReady;
   const showPoster = isPosing && state.videoEnded;
   const poseSrc = isPosing ? `/videos/pose-${state.pose}.mp4` : "";
   const posterSrc = isPosing ? `/images/poster-${state.pose}.png` : "";
@@ -51,7 +74,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
       ref={containerRef}
       className={`relative w-full h-full ${videoPlaying ? "animate-mask-c" : "invisible"} ${className}`}
     >
-      {/* Reveal video — always in DOM, plays immediately via autoPlay */}
+      {/* Reveal video — always in DOM, stays visible as fallback until pose video is ready */}
       <VideoPlayer
         ref={revealRef}
         src="/videos/reveal.mp4"
@@ -70,6 +93,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
           startTime={0.8}
           onNearEnd={onPoseVideoEnded}
           nearEndOffset={0.3}
+          onCanPlay={handlePoseCanPlay}
           className={`absolute inset-0 w-full h-full object-cover bg-black ${edgeMaskClass} ${isPosing ? "opacity-100" : "opacity-0"}`}
         />
       )}
