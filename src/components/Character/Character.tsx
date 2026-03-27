@@ -40,7 +40,6 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
 
   const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
   const isPosing = state.phase === "posing";
-  const showPoseVideo = isPosing && !state.videoEnded;
   const showPoster = isPosing && state.videoEnded;
   const poseSrc = isPosing ? `/videos/pose-${state.pose}.mp4` : "";
   const posterSrc = isPosing ? `/images/poster-${state.pose}.png` : "";
@@ -68,8 +67,10 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
           src={poseSrc}
           autoPlay
           playbackRate={1.25}
-          onEnded={onPoseVideoEnded}
-          className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${edgeMaskClass} ${showPoseVideo ? "opacity-100" : "opacity-0"}`}
+          startTime={0.8}
+          onNearEnd={onPoseVideoEnded}
+          nearEndOffset={0.3}
+          className={`absolute inset-0 w-full h-full object-cover bg-black ${edgeMaskClass} ${isPosing ? "opacity-100" : "opacity-0"}`}
         />
       )}
 

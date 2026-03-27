@@ -8,8 +8,11 @@ interface VideoPlayerProps {
   className?: string;
   onEnded?: () => void;
   onCanPlay?: () => void;
+  onNearEnd?: () => void;
+  nearEndOffset?: number;
   autoPlay?: boolean;
   playbackRate?: number;
+  startTime?: number;
 }
 
 export interface VideoPlayerHandle {
@@ -20,7 +23,7 @@ export interface VideoPlayerHandle {
 }
 
 export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
-  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, autoPlay = false, playbackRate = 1 }, ref) => {
+  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, onNearEnd, nearEndOffset = 0, autoPlay = false, playbackRate = 1, startTime = 0 }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -45,10 +48,22 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
     }));
 
     useEffect(() => {
-      if (videoRef.current) {
-        videoRef.current.playbackRate = playbackRate;
+      const video = videoRef.current;
+      if (!video) return;
+      video.playbackRate = playbackRate;
+      if (startTime > 0) {
+        const seekToStart = () => {
+          video.currentTime = startTime;
+          video.removeEventListener("loadedmetadata", seekToStart);
+        };
+        if (video.readyState >= 1) {
+          video.currentTime = startTime;
+        } else {
+          video.addEventListener("loadedmetadata", seekToStart);
+          return () => video.removeEventListener("loadedmetadata", seekToStart);
+        }
       }
-    }, [playbackRate]);
+    }, [playbackRate, startTime]);
 
     useEffect(() => {
       const video = videoRef.current;
@@ -56,15 +71,24 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
 
       const handleEnded = () => onEnded?.();
       const handleCanPlay = () => onCanPlay?.();
+      let nearEndFired = false;
+      const handleTimeUpdate = () => {
+        if (!nearEndFired && nearEndOffset > 0 && video.duration && video.currentTime >= video.duration - nearEndOffset) {
+          nearEndFired = true;
+          onNearEnd?.();
+        }
+      };
 
       video.addEventListener("ended", handleEnded);
       video.addEventListener("canplaythrough", handleCanPlay);
+      if (nearEndOffset > 0) video.addEventListener("timeupdate", handleTimeUpdate);
 
       return () => {
         video.removeEventListener("ended", handleEnded);
         video.removeEventListener("canplaythrough", handleCanPlay);
+        video.removeEventListener("timeupdate", handleTimeUpdate);
       };
-    }, [onEnded, onCanPlay]);
+    }, [onEnded, onCanPlay, onNearEnd, nearEndOffset]);
 
     return (
       <video
