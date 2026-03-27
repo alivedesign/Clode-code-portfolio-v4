@@ -37,7 +37,7 @@ export function Home() {
     <MainLayout>
       <Logo visible={revealed} />
 
-      <div className="absolute left-1/2 top-1/2 -translate-x-[calc(50%+24px)] -translate-y-[calc(50%+48px)] w-[300px] h-[300px] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px]">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+48px)] w-[300px] h-[300px] md:-translate-x-[calc(50%+24px)] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px]">
         <Character
           state={state}
           onRevealComplete={handleRevealComplete}

@@ -84,7 +84,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
     const timer = setTimeout(() => {
       setMenuOpen(false);
       setMenuClosing(false);
-    }, 250);
+    }, 350);
     return () => clearTimeout(timer);
   }, []);
 
@@ -122,78 +122,46 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
   // ── Mobile ──
   return (
     <>
-      {/* Menu Overlay */}
-      {menuOpen && (
-        <div
-          ref={overlayRef}
-          className={`menu-overlay ${menuClosing ? "closing" : "open"}`}
-        >
-          <nav className="menu-overlay-items">
-            {MENU_NAV_ITEMS.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="menu-overlay-link"
-                onClick={closeMenu}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="menu-overlay-contact">
-            <span>Reach me at shkuratovdesigner@gmail.com or </span>
-            <a href="#book" className="text-accent">Book a Call</a>
-          </div>
-
-          {/* Bottom bar inside overlay */}
-          <div className="menu-overlay-bottom-bar">
-            <div className="navbar-shadow-halo">
-              <div className="navbar-glass mobile-nav-pill">
-                {MAIN_NAV_ITEMS.map((item) => (
-                  <a
-                    key={item.pose}
-                    href={item.href}
-                    className="mobile-nav-tab"
-                    onClick={closeMenu}
-                  >
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div className="navbar-shadow-halo">
-              <button
-                className="navbar-glass mobile-menu-btn"
-                onClick={closeMenu}
-              >
-                <div className="hamburger open">
-                  <span className="hamburger-line" />
-                  <span className="hamburger-line" />
-                  <span className="hamburger-line" />
-                </div>
-                <span className="hamburger-close-text visible">Close</span>
-              </button>
-            </div>
-          </div>
+      {/* Menu Overlay — always rendered, visibility controlled by CSS */}
+      <div
+        ref={overlayRef}
+        className={`menu-overlay ${menuOpen ? (menuClosing ? "closing" : "open") : ""}`}
+      >
+        {/* Logo in overlay */}
+        <div className="absolute top-[24px] left-[24px] font-['SF_Pro_Display','-apple-system',BlinkMacSystemFont,sans-serif] font-medium text-[14px] leading-none text-text-secondary tracking-[-0.28px]">
+          <p>Shkuratov</p>
+          <p>Designer</p>
         </div>
-      )}
 
-      {/* Mobile Bottom Nav Bar */}
-      {!menuOpen && (
-        <div
-          className={`mobile-nav transition-all duration-300 ${
-            visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
-          }`}
-        >
-          <div className="navbar-shadow-halo">
-            <div className="navbar-glass mobile-nav-pill">
+        <nav className="menu-overlay-items">
+          {MENU_NAV_ITEMS.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              className="menu-overlay-link"
+              onClick={closeMenu}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
+        <div className="menu-overlay-contact">
+          <span>Reach me at shkuratovdesigner@gmail.com or</span>
+          <br />
+          <a href="#book" className="text-accent">Book a Call</a>
+        </div>
+
+        {/* Bottom bar inside overlay */}
+        <div className="menu-overlay-bottom-bar">
+          <div className="navbar-shadow-halo flex-1">
+            <div className="navbar-glass mobile-nav-pill menu-open">
               {MAIN_NAV_ITEMS.map((item) => (
                 <a
                   key={item.pose}
                   href={item.href}
                   className="mobile-nav-tab"
-                  onClick={() => onHoverPose(item.pose)}
+                  onClick={closeMenu}
                 >
                   {item.label}
                 </a>
@@ -202,19 +170,54 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
           </div>
           <div className="navbar-shadow-halo">
             <button
-              ref={menuBtnRef}
               className="navbar-glass mobile-menu-btn"
-              onClick={openMenu}
+              onClick={closeMenu}
             >
-              <div className="hamburger">
+              <div className="hamburger open">
                 <span className="hamburger-line" />
                 <span className="hamburger-line" />
                 <span className="hamburger-line" />
               </div>
+              <span className="hamburger-close-text visible">Close</span>
             </button>
           </div>
         </div>
-      )}
+      </div>
+
+      {/* Mobile Bottom Nav Bar — always rendered, hidden behind overlay when open */}
+      <div
+        className={`mobile-nav transition-all duration-300 ${
+          visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0 pointer-events-none"
+        }`}
+      >
+        <div className="navbar-shadow-halo flex-1">
+          <div className="navbar-glass mobile-nav-pill">
+            {MAIN_NAV_ITEMS.map((item) => (
+              <a
+                key={item.pose}
+                href={item.href}
+                className="mobile-nav-tab"
+                onClick={() => onHoverPose(item.pose)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+        <div className="navbar-shadow-halo">
+          <button
+            ref={menuBtnRef}
+            className="navbar-glass mobile-menu-btn"
+            onClick={openMenu}
+          >
+            <div className="hamburger">
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+              <span className="hamburger-line" />
+            </div>
+          </button>
+        </div>
+      </div>
     </>
   );
 }
