@@ -26,6 +26,7 @@ export function MobileSwipeZone({ children, onNext, onPrev }: MobileSwipeZonePro
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      onTouchCancel={onTouchEnd}
     >
       {/* Left arrow */}
       <button
