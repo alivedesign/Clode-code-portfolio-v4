@@ -31,7 +31,12 @@ export function useCharacterState(): CharacterActions {
   }, []);
 
   const onRevealComplete = useCallback(() => {
-    setState({ phase: "idle" });
+    setState((prev) => {
+      if (prev.phase === "revealing") {
+        return { phase: "idle" };
+      }
+      return prev;
+    });
   }, []);
 
   const hoverPose = useCallback((pose: CharacterPose) => {
