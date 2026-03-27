@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Character, useCharacterState } from "@/components/Character";
 import { NavBar } from "@/components/NavBar";
-import { Logo, HeroText } from "@/components/Hero";
+import { Logo, HeroText, PoseText } from "@/components/Hero";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { MainLayout } from "@/components/Layout/MainLayout";
 import { useVideoPreloader } from "@/hooks/useVideoPreloader";
@@ -32,6 +32,8 @@ export function Home() {
 
   useVideoPreloader(POSE_VIDEOS, revealed);
 
+  const currentPose = state.phase === "posing" ? state.pose : null;
+
   return (
     <MainLayout>
       <Logo visible={revealed} />
@@ -42,7 +44,8 @@ export function Home() {
           onRevealComplete={handleRevealComplete}
           onPoseVideoEnded={onPoseVideoEnded}
         />
-        <HeroText visible={revealed} />
+        <HeroText visible={revealed && state.phase !== "posing"} />
+        <PoseText pose={revealed ? currentPose : null} />
       </div>
 
       <NavBar
