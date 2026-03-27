@@ -13,12 +13,11 @@ const POSE_VIDEOS = [
   "/videos/pose-content.mp4",
   "/videos/pose-about.mp4",
   "/videos/pose-resume.mp4",
-  "/videos/transition.mp4",
 ];
 
 export function Home() {
   const [revealed, setRevealed] = useState(false);
-  const { state, startReveal, onRevealComplete, onTransitionComplete, hoverPose, leavePose } =
+  const { state, startReveal, onRevealComplete, onPoseVideoEnded, hoverPose, leavePose } =
     useCharacterState();
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export function Home() {
         <Character
           state={state}
           onRevealComplete={handleRevealComplete}
-          onTransitionComplete={onTransitionComplete}
+          onPoseVideoEnded={onPoseVideoEnded}
         />
         <HeroText visible={revealed} />
       </div>

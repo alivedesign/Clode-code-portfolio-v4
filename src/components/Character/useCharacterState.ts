@@ -12,14 +12,12 @@ export type CharacterState =
   | { phase: "loading" }
   | { phase: "revealing" }
   | { phase: "idle" }
-  | { phase: "transitioning-to-pose"; pose: CharacterPose }
-  | { phase: "posing"; pose: CharacterPose }
-  | { phase: "transitioning-to-idle" };
+  | { phase: "posing"; pose: CharacterPose; videoEnded: boolean };
 
 export interface CharacterActions {
   state: CharacterState;
   onRevealComplete: () => void;
-  onTransitionComplete: () => void;
+  onPoseVideoEnded: () => void;
   hoverPose: (pose: CharacterPose) => void;
   leavePose: () => void;
   startReveal: () => void;
@@ -39,7 +37,7 @@ export function useCharacterState(): CharacterActions {
   const hoverPose = useCallback((pose: CharacterPose) => {
     setState((prev) => {
       if (prev.phase === "idle" || prev.phase === "posing") {
-        return { phase: "transitioning-to-pose", pose };
+        return { phase: "posing", pose, videoEnded: false };
       }
       return prev;
     });
@@ -47,20 +45,17 @@ export function useCharacterState(): CharacterActions {
 
   const leavePose = useCallback(() => {
     setState((prev) => {
-      if (prev.phase === "posing" || prev.phase === "transitioning-to-pose") {
-        return { phase: "transitioning-to-idle" };
+      if (prev.phase === "posing") {
+        return { phase: "idle" };
       }
       return prev;
     });
   }, []);
 
-  const onTransitionComplete = useCallback(() => {
+  const onPoseVideoEnded = useCallback(() => {
     setState((prev) => {
-      if (prev.phase === "transitioning-to-pose") {
-        return { phase: "posing", pose: prev.pose };
-      }
-      if (prev.phase === "transitioning-to-idle") {
-        return { phase: "idle" };
+      if (prev.phase === "posing") {
+        return { phase: "posing", pose: prev.pose, videoEnded: true };
       }
       return prev;
     });
@@ -69,7 +64,7 @@ export function useCharacterState(): CharacterActions {
   return {
     state,
     onRevealComplete,
-    onTransitionComplete,
+    onPoseVideoEnded,
     hoverPose,
     leavePose,
     startReveal,

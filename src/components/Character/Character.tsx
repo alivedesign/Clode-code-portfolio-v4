@@ -5,25 +5,21 @@ import type { CharacterState } from "./useCharacterState";
 interface CharacterProps {
   state: CharacterState;
   onRevealComplete: () => void;
-  onTransitionComplete: () => void;
+  onPoseVideoEnded: () => void;
   className?: string;
 }
 
-export function Character({ state, onRevealComplete, onTransitionComplete, className = "" }: CharacterProps) {
+export function Character({ state, onRevealComplete, onPoseVideoEnded, className = "" }: CharacterProps) {
   const revealRef = useRef<VideoPlayerHandle>(null);
   const poseRef = useRef<VideoPlayerHandle>(null);
-  const transitionRef = useRef<VideoPlayerHandle>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [videoPlaying, setVideoPlaying] = useState(false);
 
-  // Wait for the video to actually start rendering pixels before showing
-  // timeupdate fires after real frames are decoded and painted — no flash
   useEffect(() => {
     const video = containerRef.current?.querySelector("video");
     if (!video) return;
 
     const onFirstFrame = () => {
-      // Use requestAnimationFrame to ensure the browser has composited the frame
       requestAnimationFrame(() => {
         setVideoPlaying(true);
       });
@@ -34,12 +30,9 @@ export function Character({ state, onRevealComplete, onTransitionComplete, class
     return () => video.removeEventListener("timeupdate", onFirstFrame);
   }, []);
 
-  // Handle pose transitions
+  // Play pose video immediately when entering posing state
   useEffect(() => {
-    if (state.phase === "transitioning-to-pose" || state.phase === "transitioning-to-idle") {
-      transitionRef.current?.play();
-    }
-    if (state.phase === "posing") {
+    if (state.phase === "posing" && !state.videoEnded) {
       poseRef.current?.play();
     }
   }, [state]);
@@ -48,19 +41,14 @@ export function Character({ state, onRevealComplete, onTransitionComplete, class
     onRevealComplete();
   }, [onRevealComplete]);
 
-  const handleTransitionEnded = useCallback(() => {
-    onTransitionComplete();
-  }, [onTransitionComplete]);
-
-  const getPoseSrc = () => {
-    if (state.phase === "transitioning-to-pose" || state.phase === "posing") {
-      return `/videos/pose-${state.pose}.mp4`;
-    }
-    return "";
-  };
+  const handlePoseEnded = useCallback(() => {
+    onPoseVideoEnded();
+  }, [onPoseVideoEnded]);
 
   const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
-  const showPose = state.phase === "posing";
+  const isPosing = state.phase === "posing";
+  const showPoseVideo = isPosing && !state.videoEnded;
+  const showPoster = isPosing && state.videoEnded;
 
   return (
     <div
@@ -76,23 +64,26 @@ export function Character({ state, onRevealComplete, onTransitionComplete, class
         onEnded={handleRevealEnded}
       />
 
-      {/* Pose video layer */}
-      {getPoseSrc() && (
+      {/* Pose video layer — key forces remount on pose change */}
+      {isPosing && (
         <VideoPlayer
+          key={state.pose}
           ref={poseRef}
-          src={getPoseSrc()}
-          loop
-          className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${showPose ? "opacity-100" : "opacity-0"}`}
+          src={`/videos/pose-${state.pose}.mp4`}
+          onEnded={handlePoseEnded}
+          className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${showPoseVideo ? "opacity-100" : "opacity-0"}`}
         />
       )}
 
-      {/* Transition video layer */}
-      <VideoPlayer
-        ref={transitionRef}
-        src="/videos/transition.mp4"
-        className="absolute inset-0 w-full h-full object-cover bg-black opacity-0"
-        onEnded={handleTransitionEnded}
-      />
+      {/* Poster image — shown after pose video ends */}
+      {showPoster && (
+        <img
+          src={`/images/poster-${state.pose}.png`}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover bg-black"
+        />
+      )}
     </div>
   );
 }
