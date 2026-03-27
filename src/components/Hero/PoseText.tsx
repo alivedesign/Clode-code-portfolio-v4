@@ -72,7 +72,7 @@ export function PoseText({ pose }: PoseTextProps) {
       {activePose && (
         <a
           href={POSE_LABELS[activePose].href}
-          className="inline-block mt-4 text-accent"
+          className="inline-block mt-4 text-accent md:hidden"
         >
           {POSE_LABELS[activePose].label}
         </a>
