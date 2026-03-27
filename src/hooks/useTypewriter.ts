@@ -12,13 +12,9 @@ interface TypewriterState {
 }
 
 const FADE_DURATION = 200; // ms
-const BASE_MS_PER_CHAR = 35; // comfortable typing speed
-const FINISH_AFTER_VIDEO_MS = 300; // finish 0.3s after video ends
+const TARGET_TYPING_DURATION = 2500; // ms — constant speed, finishes ~0.3s after pose video
 
-export function useTypewriter(
-  pose: CharacterPose | null,
-  videoEnded: boolean
-): TypewriterState {
+export function useTypewriter(pose: CharacterPose | null): TypewriterState {
   const [state, setState] = useState<TypewriterState>({
     visibleChars: 0,
     totalChars: 0,
@@ -29,8 +25,6 @@ export function useTypewriter(
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const fadeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const prevPoseRef = useRef<CharacterPose | null>(null);
-  const visibleCharsRef = useRef(0);
-  const totalCharsRef = useRef(0);
 
   const clearTimers = useCallback(() => {
     if (intervalRef.current) {
@@ -43,11 +37,20 @@ export function useTypewriter(
     }
   }, []);
 
-  const runInterval = useCallback((startFrom: number, total: number, msPerChar: number) => {
-    let chars = startFrom;
+  const startTyping = useCallback((newPose: CharacterPose) => {
+    const total = getTotalChars(newPose);
+    const msPerChar = Math.max(TARGET_TYPING_DURATION / total, 15);
+
+    setState({
+      visibleChars: 0,
+      totalChars: total,
+      phase: "typing",
+      activePose: newPose,
+    });
+
+    let chars = 0;
     intervalRef.current = setInterval(() => {
       chars += 1;
-      visibleCharsRef.current = chars;
       if (chars >= total) {
         if (intervalRef.current) clearInterval(intervalRef.current);
         intervalRef.current = null;
@@ -57,33 +60,6 @@ export function useTypewriter(
       }
     }, msPerChar);
   }, []);
-
-  const startTyping = useCallback((newPose: CharacterPose) => {
-    const total = getTotalChars(newPose);
-    totalCharsRef.current = total;
-    visibleCharsRef.current = 0;
-
-    setState({
-      visibleChars: 0,
-      totalChars: total,
-      phase: "typing",
-      activePose: newPose,
-    });
-
-    runInterval(0, total, BASE_MS_PER_CHAR);
-  }, [runInterval]);
-
-  // Accelerate when video ends
-  useEffect(() => {
-    if (!videoEnded || !intervalRef.current) return;
-
-    const remaining = totalCharsRef.current - visibleCharsRef.current;
-    if (remaining <= 0) return;
-
-    clearInterval(intervalRef.current);
-    const msPerChar = Math.max(FINISH_AFTER_VIDEO_MS / remaining, 10);
-    runInterval(visibleCharsRef.current, totalCharsRef.current, msPerChar);
-  }, [videoEnded, runInterval]);
 
   useEffect(() => {
     const prevPose = prevPoseRef.current;

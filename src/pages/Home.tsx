@@ -42,8 +42,6 @@ export function Home() {
   useVideoPreloader(POSE_VIDEOS, revealed);
 
   const currentPose = state.phase === "posing" ? state.pose : null;
-  const poseVideoEnded = state.phase === "posing" && state.videoEnded;
-  const revealComplete = state.phase === "idle" || state.phase === "posing";
 
   return (
     <MainLayout>
@@ -58,12 +56,8 @@ export function Home() {
         <HeroText
           visible={heroReady && state.phase !== "posing"}
           startTyping={heroReady}
-          revealComplete={revealComplete}
         />
-        <PoseText
-          pose={revealed ? currentPose : null}
-          videoEnded={poseVideoEnded}
-        />
+        <PoseText pose={revealed ? currentPose : null} />
       </div>
 
       <NavBar

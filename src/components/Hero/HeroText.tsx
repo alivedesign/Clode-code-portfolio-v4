@@ -1,25 +1,22 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { HERO_TEXT, getLinesTotalChars } from "@/data/poseTextData";
 
-const BASE_MS_PER_CHAR = 35;
-const FINISH_AFTER_VIDEO_MS = 300;
 const TOTAL_CHARS = getLinesTotalChars(HERO_TEXT);
+const TARGET_TYPING_DURATION = 1700; // ms — constant speed, finishes ~0.3s after reveal video
+const MS_PER_CHAR = Math.max(TARGET_TYPING_DURATION / TOTAL_CHARS, 10);
 
 interface HeroTextProps {
   visible?: boolean;
   startTyping?: boolean;
-  revealComplete?: boolean;
 }
 
 export function HeroText({
   visible = true,
   startTyping = false,
-  revealComplete = false,
 }: HeroTextProps) {
   const [visibleChars, setVisibleChars] = useState(0);
   const [typingDone, setTypingDone] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const visibleCharsRef = useRef(0);
 
   const clearInterval_ = useCallback(() => {
     if (intervalRef.current) {
@@ -28,46 +25,25 @@ export function HeroText({
     }
   }, []);
 
-  const runInterval = useCallback(
-    (startFrom: number, total: number, msPerChar: number) => {
-      let chars = startFrom;
-      intervalRef.current = setInterval(() => {
-        chars += 1;
-        visibleCharsRef.current = chars;
-        if (chars >= total) {
-          clearInterval_();
-          setVisibleChars(total);
-          setTypingDone(true);
-        } else {
-          setVisibleChars(chars);
-        }
-      }, msPerChar);
-    },
-    [clearInterval_]
-  );
-
   // Start typing when startTyping becomes true
   useEffect(() => {
     if (!startTyping || typingDone) return;
-    if (intervalRef.current) return; // already running
+    if (intervalRef.current) return;
 
-    visibleCharsRef.current = 0;
-    runInterval(0, TOTAL_CHARS, BASE_MS_PER_CHAR);
+    let chars = 0;
+    intervalRef.current = setInterval(() => {
+      chars += 1;
+      if (chars >= TOTAL_CHARS) {
+        clearInterval_();
+        setVisibleChars(TOTAL_CHARS);
+        setTypingDone(true);
+      } else {
+        setVisibleChars(chars);
+      }
+    }, MS_PER_CHAR);
 
     return () => clearInterval_();
-  }, [startTyping, typingDone, runInterval, clearInterval_]);
-
-  // Accelerate when reveal video ends
-  useEffect(() => {
-    if (!revealComplete || !intervalRef.current) return;
-
-    const remaining = TOTAL_CHARS - visibleCharsRef.current;
-    if (remaining <= 0) return;
-
-    clearInterval_();
-    const msPerChar = Math.max(FINISH_AFTER_VIDEO_MS / remaining, 10);
-    runInterval(visibleCharsRef.current, TOTAL_CHARS, msPerChar);
-  }, [revealComplete, runInterval, clearInterval_]);
+  }, [startTyping, typingDone, clearInterval_]);
 
   // Cleanup on unmount
   useEffect(() => {
