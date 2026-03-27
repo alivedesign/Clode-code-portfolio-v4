@@ -55,9 +55,25 @@ export const POSE_TEXT: Record<CharacterPose, PoseLine[]> = {
   ],
 };
 
+export const HERO_TEXT: PoseLine[] = [
+  [
+    { text: "Hey! I\u2019m Evgeny. ", color: "secondary" },
+    { text: "Product Design Engineer who can\u2019t stop building.", color: "white" },
+  ],
+  [{ text: "Explore.", color: "secondary" }],
+  [{ text: "This site is me thinking out loud.", color: "secondary" }],
+];
+
 /** Flatten all segments for a pose into total character count */
 export function getTotalChars(pose: CharacterPose): number {
   return POSE_TEXT[pose].reduce(
+    (sum, line) => sum + line.reduce((s, seg) => s + seg.text.length, 0),
+    0
+  );
+}
+
+export function getLinesTotalChars(lines: PoseLine[]): number {
+  return lines.reduce(
     (sum, line) => sum + line.reduce((s, seg) => s + seg.text.length, 0),
     0
   );

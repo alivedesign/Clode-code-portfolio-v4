@@ -5,6 +5,7 @@ import type { TypewriterPhase } from "@/hooks/useTypewriter";
 
 interface PoseTextProps {
   pose: CharacterPose | null;
+  videoEnded?: boolean;
 }
 
 function getOpacityClass(phase: TypewriterPhase): string {
@@ -18,8 +19,8 @@ function getOpacityClass(phase: TypewriterPhase): string {
   }
 }
 
-export function PoseText({ pose }: PoseTextProps) {
-  const { visibleChars, phase, activePose } = useTypewriter(pose);
+export function PoseText({ pose, videoEnded = false }: PoseTextProps) {
+  const { visibleChars, phase, activePose } = useTypewriter(pose, videoEnded);
 
   // Use activePose (not prop pose) so text stays visible during fade-out
   const textData = activePose ? POSE_TEXT[activePose] : null;

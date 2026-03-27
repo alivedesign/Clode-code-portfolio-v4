@@ -17,6 +17,7 @@ const POSE_VIDEOS = [
 
 export function Home() {
   const [revealed, setRevealed] = useState(false);
+  const [heroReady, setHeroReady] = useState(false);
   const { state, startReveal, onRevealComplete, onPoseVideoEnded, hoverPose, leavePose } =
     useCharacterState();
 
@@ -26,6 +27,14 @@ export function Home() {
     return () => clearTimeout(uiTimer);
   }, [startReveal]);
 
+  // Start hero text typing shortly after reveal begins
+  useEffect(() => {
+    if (state.phase === "revealing" && !heroReady) {
+      const timer = setTimeout(() => setHeroReady(true), 400);
+      return () => clearTimeout(timer);
+    }
+  }, [state.phase, heroReady]);
+
   const handleRevealComplete = useCallback(() => {
     onRevealComplete();
   }, [onRevealComplete]);
@@ -33,6 +42,8 @@ export function Home() {
   useVideoPreloader(POSE_VIDEOS, revealed);
 
   const currentPose = state.phase === "posing" ? state.pose : null;
+  const poseVideoEnded = state.phase === "posing" && state.videoEnded;
+  const revealComplete = state.phase === "idle" || state.phase === "posing";
 
   return (
     <MainLayout>
@@ -44,8 +55,15 @@ export function Home() {
           onRevealComplete={handleRevealComplete}
           onPoseVideoEnded={onPoseVideoEnded}
         />
-        <HeroText visible={revealed && state.phase !== "posing"} />
-        <PoseText pose={revealed ? currentPose : null} />
+        <HeroText
+          visible={heroReady && state.phase !== "posing"}
+          startTyping={heroReady}
+          revealComplete={revealComplete}
+        />
+        <PoseText
+          pose={revealed ? currentPose : null}
+          videoEnded={poseVideoEnded}
+        />
       </div>
 
       <NavBar
