@@ -29,12 +29,23 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
     return () => video.removeEventListener("timeupdate", onFirstFrame);
   }, []);
 
+  const prevPhaseRef = useRef(state.phase);
+
+  useEffect(() => {
+    if (state.phase === "revealing" && prevPhaseRef.current === "posing") {
+      revealRef.current?.play();
+    }
+    prevPhaseRef.current = state.phase;
+  }, [state]);
+
   const showReveal = state.phase === "loading" || state.phase === "revealing" || state.phase === "idle";
   const isPosing = state.phase === "posing";
   const showPoseVideo = isPosing && !state.videoEnded;
   const showPoster = isPosing && state.videoEnded;
   const poseSrc = isPosing ? `/videos/pose-${state.pose}.mp4` : "";
   const posterSrc = isPosing ? `/images/poster-${state.pose}.png` : "";
+  const needsEdgeMask = isPosing && state.pose !== "products" && state.pose !== "content";
+  const edgeMaskClass = needsEdgeMask ? "pose-edge-mask" : "";
 
   return (
     <div
@@ -56,8 +67,9 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
           key={state.pose}
           src={poseSrc}
           autoPlay
+          playbackRate={1.25}
           onEnded={onPoseVideoEnded}
-          className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${showPoseVideo ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 w-full h-full object-cover bg-black transition-opacity duration-200 ${edgeMaskClass} ${showPoseVideo ? "opacity-100" : "opacity-0"}`}
         />
       )}
 
@@ -67,7 +79,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
           src={posterSrc}
           alt=""
           aria-hidden="true"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${showPoster ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-200 ${edgeMaskClass} ${showPoster ? "opacity-100" : "opacity-0"}`}
         />
       )}
     </div>

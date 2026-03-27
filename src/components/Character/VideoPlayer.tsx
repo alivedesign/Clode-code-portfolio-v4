@@ -9,6 +9,7 @@ interface VideoPlayerProps {
   onEnded?: () => void;
   onCanPlay?: () => void;
   autoPlay?: boolean;
+  playbackRate?: number;
 }
 
 export interface VideoPlayerHandle {
@@ -19,7 +20,7 @@ export interface VideoPlayerHandle {
 }
 
 export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
-  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, autoPlay = false }, ref) => {
+  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, autoPlay = false, playbackRate = 1 }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -42,6 +43,12 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
       },
       element: videoRef.current,
     }));
+
+    useEffect(() => {
+      if (videoRef.current) {
+        videoRef.current.playbackRate = playbackRate;
+      }
+    }, [playbackRate]);
 
     useEffect(() => {
       const video = videoRef.current;

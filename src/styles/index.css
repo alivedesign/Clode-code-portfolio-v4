@@ -302,6 +302,18 @@
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
 }
 
+/* ─── Pose edge mask (soft fade on all 4 edges) ──────────── */
+.pose-edge-mask {
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-composite: destination-in;
+  mask-image:
+    linear-gradient(to right, transparent, black 12%, black 88%, transparent),
+    linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+  mask-composite: intersect;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

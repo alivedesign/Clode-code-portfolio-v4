@@ -46,7 +46,7 @@ export function useCharacterState(): CharacterActions {
   const leavePose = useCallback(() => {
     setState((prev) => {
       if (prev.phase === "posing") {
-        return { phase: "idle" };
+        return { phase: "revealing" };
       }
       return prev;
     });
