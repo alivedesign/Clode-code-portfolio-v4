@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
@@ -35,6 +35,10 @@ function ExperienceItem({ entry, index }: { entry: ExperienceEntry; index: numbe
 export function Experience() {
   const [videoRef, videoVisible] = useInView(0.2);
   const [playing, setPlaying] = useState(false);
+
+  useEffect(() => {
+    document.title = "Experience — Shkuratov Designer";
+  }, []);
 
   return (
     <div className="relative min-h-screen min-h-dvh w-full bg-black">

@@ -27,6 +27,10 @@ export function Home() {
   const { nextPose, prevPose } = usePoseCycle(hoverPose);
 
   useEffect(() => {
+    document.title = "Shkuratov Designer — AI Product Design Engineer";
+  }, []);
+
+  useEffect(() => {
     startReveal();
     const uiTimer = setTimeout(() => setRevealed(true), REVEAL_UI_DELAY);
     return () => clearTimeout(uiTimer);
