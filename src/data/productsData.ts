@@ -30,7 +30,7 @@ export const PRODUCT_CARDS: ProductCard[] = [
     image: "/images/products/products-1.png",
     link: { type: "modal" },
     modalContent: {
-      heroImage: "/images/products/products-1.png",
+      heroImage: "/images/products/products-modal1.png",
       blocks: [
         {
           type: "paragraph",
@@ -84,7 +84,7 @@ export const PRODUCT_CARDS: ProductCard[] = [
     image: "/images/products/products-2.png",
     link: { type: "modal" },
     modalContent: {
-      heroImage: "/images/products/products-2.png",
+      heroImage: "/images/products/products-modal2.png",
       blocks: [
         {
           type: "paragraph",

@@ -11,7 +11,7 @@ function ModalBlockRenderer({ block }: { block: ModalBlock }) {
   switch (block.type) {
     case "paragraph":
       return (
-        <p className="font-sf text-[18px] leading-[1.4] text-white">
+        <p className="font-sf text-[18px] leading-[1.54] text-white/85">
           {block.text}
         </p>
       );
@@ -25,9 +25,9 @@ function ModalBlockRenderer({ block }: { block: ModalBlock }) {
       );
     case "bulletList":
       return (
-        <ul className="list-disc font-sf text-[18px] text-white w-full">
+        <ul className="list-disc font-sf text-[18px] text-white/85 w-full">
           {block.items.map((item) => (
-            <li key={item} className="mb-[6px] ms-[27px] leading-[1.4] last:mb-0">
+            <li key={item} className="mb-[6px] ms-[27px] leading-[1.54] last:mb-0">
               {item}
             </li>
           ))}
@@ -35,9 +35,9 @@ function ModalBlockRenderer({ block }: { block: ModalBlock }) {
       );
     case "numberedList":
       return (
-        <ol className="font-sf text-[18px] text-white w-full">
+        <ol className="list-decimal font-sf text-[18px] text-white/85 w-full">
           {block.items.map((item) => (
-            <li key={item} className="mb-[6px] ms-[27px] leading-[1.4] last:mb-0">
+            <li key={item} className="mb-[6px] ms-[27px] leading-[1.54] last:mb-0">
               {item}
             </li>
           ))}
@@ -58,11 +58,26 @@ export function ProductModal({ card, onClose }: ProductModalProps) {
 
   useEffect(() => {
     if (isOpen) {
+      // iOS requires position:fixed to truly prevent background scroll
+      const scrollY = window.scrollY;
+      document.body.style.position = "fixed";
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = "0";
+      document.body.style.right = "0";
       document.body.style.overflow = "hidden";
       document.addEventListener("keydown", handleKeyDown);
+
+      return () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.overflow = "";
+        document.removeEventListener("keydown", handleKeyDown);
+        window.scrollTo(0, scrollY);
+      };
     }
     return () => {
-      document.body.style.overflow = "";
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [isOpen, handleKeyDown]);
@@ -93,19 +108,21 @@ export function ProductModal({ card, onClose }: ProductModalProps) {
           </svg>
         </button>
 
-        {/* Hero image */}
-        <div className="w-full max-w-[636px] h-[200px] md:h-[270px] rounded-[16px] overflow-hidden shrink-0 mx-auto">
-          <img
-            src={card.modalContent.heroImage}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-        </div>
+        <div className="product-modal-content">
+          {/* Hero image */}
+          <div className="w-full max-w-[636px] h-[200px] md:h-[270px] rounded-[16px] overflow-hidden shrink-0 mx-auto">
+            <img
+              src={card.modalContent.heroImage}
+              alt=""
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-        {/* Content blocks */}
-        {card.modalContent.blocks.map((block, i) => (
-          <ModalBlockRenderer key={i} block={block} />
-        ))}
+          {/* Content blocks */}
+          {card.modalContent.blocks.map((block, i) => (
+            <ModalBlockRenderer key={i} block={block} />
+          ))}
+        </div>
       </div>
     </div>
   );

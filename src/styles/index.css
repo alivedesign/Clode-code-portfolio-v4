@@ -8,6 +8,20 @@
   --color-glass: rgba(255, 255, 255, 0.1);
 }
 
+html {
+  background-color: #000000;
+}
+body {
+  background-color: #000000;
+  overscroll-behavior: none;
+}
+#root {
+  background-color: #000000;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
 @font-face {
   font-family: "TN";
   src: url("/fonts/TimesNow-ExtraLight.woff2") format("woff2"),
@@ -443,36 +457,73 @@
 /* ─── Product modal ──────────────────────────────────────── */
 .product-modal-backdrop {
   position: fixed;
-  inset: 0;
+  /* Extend beyond viewport to cover iOS safe areas and overscroll */
+  top: -100px;
+  left: 0;
+  right: 0;
+  bottom: -100px;
   z-index: 60;
   background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 132px 16px;  /* 32px desired + 100px offset */
   animation: modalFadeIn 0.25s ease-out forwards;
 }
 
 .product-modal {
   position: relative;
-  background: #000000;
+  background: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
   max-width: 700px;
   width: 100%;
-  max-height: calc(100dvh - 32px);
-  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+  max-height: calc(100dvh - 64px);
+  overflow: hidden;
+  animation: modalSlideUp 0.3s ease-out forwards;
+}
+
+.product-modal-content {
   display: flex;
   flex-direction: column;
   gap: 24px;
   padding: 48px 32px;
-  animation: modalSlideUp 0.3s ease-out forwards;
+  overflow-y: auto;
+  max-height: calc(100vh - 64px);
+  max-height: calc(100dvh - 64px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
 }
 
 @media (max-width: 767px) {
-  .product-modal {
+  .product-modal-content {
     padding: 32px 20px;
-    max-height: calc(100dvh - 32px);
   }
+}
+
+/* ─── Product card hover ─────────────────────────────────── */
+.product-card {
+  -webkit-tap-highlight-color: transparent;
+}
+.product-card:focus-visible {
+  outline: 2px solid rgba(215, 119, 87, 0.6);
+  outline-offset: 4px;
+  border-radius: 16px;
+}
+
+.product-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.product-modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.product-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+.product-modal-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 @keyframes modalFadeIn {
