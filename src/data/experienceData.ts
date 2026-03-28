@@ -40,4 +40,5 @@ export const HEADLINE = "AI Product Design Engineer focused on designing product
 
 export const LINKEDIN_URL = "https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/";
 
-export const YOUTUBE_EMBED_URL = "https://www.youtube.com/embed/ijcQL4Dd0QY?controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3";
+export const YOUTUBE_VIDEO_ID = "ijcQL4Dd0QY";
+export const YOUTUBE_EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
