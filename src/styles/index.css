@@ -387,6 +387,23 @@
   pointer-events: none;
 }
 
+/* ─── Home frost glow (gives backdrop-filter something to blur) ── */
+.home-nav-glow {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 280px;
+  background: radial-gradient(
+    ellipse 80% 100% at 50% 100%,
+    rgba(120, 130, 180, 0.06) 0%,
+    rgba(80, 90, 140, 0.03) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* ─── Experience page animations ─────────────────────────── */
 @keyframes fadeUpIn {
   from {

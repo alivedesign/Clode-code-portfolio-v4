@@ -82,6 +82,13 @@ export function Home() {
         )}
       </div>
 
+      {/* Subtle glow for navbar frost effect */}
+      <div
+        className={`home-nav-glow transition-opacity duration-300 ${
+          revealed ? "opacity-100" : "opacity-0"
+        }`}
+      />
+
       <NavBar
         onHoverPose={hoverPose}
         onLeavePose={leavePose}
