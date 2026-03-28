@@ -13,6 +13,7 @@ interface VideoPlayerProps {
   autoPlay?: boolean;
   playbackRate?: number;
   startTime?: number;
+  fetchPriority?: "high" | "low" | "auto";
 }
 
 export interface VideoPlayerHandle {
@@ -23,7 +24,7 @@ export interface VideoPlayerHandle {
 }
 
 export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
-  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, onNearEnd, nearEndOffset = 0, autoPlay = false, playbackRate = 1, startTime = 0 }, ref) => {
+  ({ src, loop = false, muted = true, poster, className = "", onEnded, onCanPlay, onNearEnd, nearEndOffset = 0, autoPlay = false, playbackRate = 1, startTime = 0, fetchPriority }, ref) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     useImperativeHandle(ref, () => ({
@@ -102,6 +103,7 @@ export const VideoPlayer = forwardRef<VideoPlayerHandle, VideoPlayerProps>(
         className={className}
         aria-hidden="true"
         preload="auto"
+        {...(fetchPriority ? { fetchPriority } as React.VideoHTMLAttributes<HTMLVideoElement> : {})}
       />
     );
   }
