@@ -149,6 +149,7 @@
   top: 8px;
   bottom: 8px;
   left: 0;
+  will-change: transform, width;
 }
 
 /* ─── Mobile Navigation ───────────────────────────────────── */
@@ -269,6 +270,7 @@
   visibility: hidden;
   pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s ease;
+  will-change: opacity, visibility;
 }
 .menu-overlay.open {
   opacity: 1;
@@ -347,20 +349,25 @@
 @keyframes maskRevealC {
   0% {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
   }
   40% {
     -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 100%);
   }
   60% {
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 100%);
   }
   100% {
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 100%);
+    mask-image: linear-gradient(to bottom, black 0%, black 100%);
   }
 }
 .animate-mask-c {
   animation: maskRevealC 1.8s ease-out forwards;
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, transparent 30%, black 70%, black 100%);
 }
 
 /* ─── Pose edge mask (soft fade on all 4 edges) ──────────── */
