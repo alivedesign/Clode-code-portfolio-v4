@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import type { CharacterPose } from "@/components/Character/useCharacterState";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -6,7 +6,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
   { label: "Experience", pose: "experience", path: "/experience" },
   { label: "Products", pose: "products", path: "/products" },
-  { label: "Cases", pose: "cases", path: "/" },
+  { label: "Cases", pose: "cases", path: "/cases" },
   { label: "Content", pose: "content", path: "/" },
   { label: "About", pose: "about", path: "/" },
   { label: "Resume", pose: "resume", path: "/" },
@@ -15,7 +15,7 @@ const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
 const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
   { label: "Experience", pose: "experience", path: "/experience" },
   { label: "Products", pose: "products", path: "/products" },
-  { label: "Cases", pose: "cases", path: "/" },
+  { label: "Cases", pose: "cases", path: "/cases" },
 ];
 
 const MENU_NAV_ITEMS: { label: string; path: string }[] = [
@@ -40,6 +40,18 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
   const [menuClosing, setMenuClosing] = useState(false);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
 
   const handleMouseEnter = useCallback(
     (e: React.MouseEvent<HTMLLIElement>, pose: CharacterPose) => {

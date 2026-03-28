@@ -69,15 +69,19 @@ export function Experience() {
             </div>
 
             {/* More on LinkedIn */}
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="experience-fade-up block text-center mt-[48px] font-sf text-[18px] leading-[1.3] text-accent hover:underline"
+            <div
+              className="experience-fade-up text-center mt-[48px]"
               style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 2) * EXPERIENCE_STAGGER_MS}ms` }}
             >
-              More on LinkedIn
-            </a>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-sf text-[18px] leading-[1.3] text-accent hover:underline"
+              >
+                More on LinkedIn
+              </a>
+            </div>
           </div>
         </section>
 

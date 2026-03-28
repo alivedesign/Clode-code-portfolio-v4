@@ -141,7 +141,7 @@ body {
   color: white;
 }
 
-.mobile-nav-tab-active {
+.mobile-nav-tab.mobile-nav-tab-active {
   color: white;
 }
 

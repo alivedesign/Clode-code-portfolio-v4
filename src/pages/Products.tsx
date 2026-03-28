@@ -38,7 +38,7 @@ export function Products() {
         {/* Product grid */}
         <section aria-label="Products" className="w-full max-w-[1080px]">
           <h2 className="sr-only">Products</h2>
-          <div className="grid grid-cols-2 gap-[16px] md:gap-[80px]">
+          <div className="grid grid-cols-2 gap-x-[16px] gap-y-[32px] md:gap-[80px]">
             {PRODUCT_CARDS.map((card, i) => (
               <ProductCard
                 key={card.id}
