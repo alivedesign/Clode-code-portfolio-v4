@@ -5,7 +5,7 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
   { label: "Experience", pose: "experience", path: "/experience" },
-  { label: "Products", pose: "products", path: "/" },
+  { label: "Products", pose: "products", path: "/products" },
   { label: "Cases", pose: "cases", path: "/" },
   { label: "Content", pose: "content", path: "/" },
   { label: "About", pose: "about", path: "/" },
@@ -14,7 +14,7 @@ const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
 
 const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
   { label: "Experience", pose: "experience", path: "/experience" },
-  { label: "Products", pose: "products", path: "/" },
+  { label: "Products", pose: "products", path: "/products" },
   { label: "Cases", pose: "cases", path: "/" },
 ];
 
