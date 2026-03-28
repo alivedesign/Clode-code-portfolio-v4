@@ -10,7 +10,7 @@ interface CaseLottieScatterProps {
 export function CaseLottieScatter({ caseData, index }: CaseLottieScatterProps) {
   return (
     <section
-      className="experience-fade-up w-full max-w-[1235px] mx-auto relative z-10"
+      className="experience-fade-up w-full max-w-[1235px] mx-auto relative z-10 mb-[184px] mt-[-24px]"
       style={{ animationDelay: `${(index + 1) * 80}ms` }}
       aria-label={caseData.id}
     >

@@ -67,8 +67,8 @@ export const CASES: CaseData[] = [
     lottieAssets: [
       { src: "/lottie/Mocking.lottie", name: "Mocking", position: { top: "181px", left: "0" }, size: "261px" },
       { src: "/lottie/Alien Face.lottie", name: "Alien Face", position: { top: "0", left: "381px" }, size: "198px" },
-      { src: "/lottie/Evil Smoking.lottie", name: "Evil Smoking", position: { top: "49px", right: "0" }, size: "280px" },
-      { src: "/lottie/Selfie.lottie", name: "Selfie", position: { bottom: "0", left: "597px" }, size: "192px" },
+      { src: "/lottie/Evil Smoking.lottie", name: "Evil Smoking", position: { top: "49px", right: "0" }, size: "224px" },
+      { src: "/lottie/Selfie.lottie", name: "Selfie", position: { bottom: "0", left: "597px" }, size: "221px" },
     ],
   },
   {

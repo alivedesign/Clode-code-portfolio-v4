@@ -14,7 +14,7 @@ export function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
 
   return (
     <section
-      className="experience-fade-up w-full flex flex-col items-center"
+      className="experience-fade-up w-full flex flex-col items-center my-[24px]"
       style={{ animationDelay: `${(index + 1) * 80}ms` }}
       aria-label={caseData.id}
     >

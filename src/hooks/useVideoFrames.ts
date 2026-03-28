@@ -1,14 +1,44 @@
 import { useEffect, useState } from "react";
+import { getCachedFrames } from "./videoFrameCache";
 
 export function useVideoFrames(
   videoSrc: string,
   targetFrameCount = 40,
   startTime = 0,
 ): { frames: ImageBitmap[]; loading: boolean } {
-  const [frames, setFrames] = useState<ImageBitmap[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [frames, setFrames] = useState<ImageBitmap[]>(() => {
+    const cached = getCachedFrames(videoSrc, targetFrameCount, startTime);
+    return cached && !cached.loading ? cached.frames : [];
+  });
+  const [loading, setLoading] = useState(() => {
+    const cached = getCachedFrames(videoSrc, targetFrameCount, startTime);
+    return !cached || cached.loading;
+  });
 
   useEffect(() => {
+    // If already resolved from cache init, skip
+    const cached = getCachedFrames(videoSrc, targetFrameCount, startTime);
+    if (cached && !cached.loading && cached.frames.length > 0) {
+      setFrames(cached.frames);
+      setLoading(false);
+      return;
+    }
+
+    // If cache is in progress, wait for it
+    if (cached && cached.loading) {
+      let cancelled = false;
+      cached.promise.then((f) => {
+        if (!cancelled) {
+          setFrames(f);
+          setLoading(false);
+        }
+      }).catch(() => {
+        if (!cancelled) setLoading(false);
+      });
+      return () => { cancelled = true; };
+    }
+
+    // No cache — extract inline (fallback)
     let cancelled = false;
 
     async function extract() {

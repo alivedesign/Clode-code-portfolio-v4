@@ -29,7 +29,7 @@ export function Products() {
     <div className="relative min-h-screen min-h-dvh w-full bg-black">
       <Logo visible />
 
-      <main className="relative z-10 flex flex-col items-center px-5 md:px-10 pt-[104px] md:pt-[104px] pb-[140px] md:pb-[272px]">
+      <main className="relative z-10 flex flex-col items-center px-5 md:px-10 pt-[104px] md:pt-[104px] pb-[164px] md:pb-[320px]">
         {/* Headline */}
         <h1 className="experience-fade-up text-[28px] md:text-[48px] leading-[1.2] text-white text-center tracking-[-0.48px] max-w-[765px] mb-[48px] md:mb-[64px] font-['TN',serif] font-extralight">
           {PRODUCTS_HEADLINE}

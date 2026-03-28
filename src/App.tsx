@@ -1,5 +1,9 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router";
+import { preloadVideoFrames } from "@/hooks/videoFrameCache";
+
+// Start extracting case-2 character frames immediately on app load
+preloadVideoFrames("/videos/case-2-character-anim.mp4", 144, 0.4);
 
 const Home = lazy(() => import("@/pages/Home").then(m => ({ default: m.Home })));
 const Experience = lazy(() => import("@/pages/Experience").then(m => ({ default: m.Experience })));

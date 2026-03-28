@@ -19,7 +19,7 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
   const rafId = useRef(0);
   const canvasSized = useRef(false);
 
-  const { frames, loading } = useVideoFrames(caseData.frameSrc!, 120, 0.4);
+  const { frames, loading } = useVideoFrames(caseData.frameSrc!, 144, 0.4);
 
   // Set canvas dimensions once when frames load
   useEffect(() => {
