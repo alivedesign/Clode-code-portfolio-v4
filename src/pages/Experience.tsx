@@ -1,6 +1,7 @@
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
+import { EXPERIENCE_STAGGER_MS } from "@/constants";
 import {
   EXPERIENCE_ENTRIES,
   HEADLINE,
@@ -14,10 +15,10 @@ function ExperienceItem({ entry, index }: { entry: ExperienceEntry; index: numbe
   return (
     <div
       className="experience-fade-up"
-      style={{ animationDelay: `${(index + 1) * 80}ms` }}
+      style={{ animationDelay: `${(index + 1) * EXPERIENCE_STAGGER_MS}ms` }}
     >
       <div className="w-full h-px bg-white/10" />
-      <p className="py-[28px] font-['SF_Pro_Text','-apple-system',BlinkMacSystemFont,sans-serif] text-[16px] md:text-[18px] leading-[1.4] text-text-secondary">
+      <p className="py-[28px] font-sf text-[16px] md:text-[18px] leading-[1.4] text-text-secondary">
         <span>{entry.dateRange} | </span>
         <span>{entry.role} @ </span>
         <span className="text-white">{entry.company}</span>
@@ -40,8 +41,7 @@ export function Experience() {
       <main className="relative z-10 flex flex-col items-center px-5 md:px-10 pt-[104px] md:pt-[104px] pb-[140px] md:pb-[272px]">
         {/* Headline */}
         <h1
-          className="experience-fade-up text-[28px] md:text-[48px] leading-[1.2] text-white text-center tracking-[-0.48px] max-w-[765px] mb-[48px] md:mb-[64px]"
-          style={{ fontFamily: '"TN", serif', fontWeight: 200 }}
+          className="experience-fade-up text-[28px] md:text-[48px] leading-[1.2] text-white text-center tracking-[-0.48px] max-w-[765px] mb-[48px] md:mb-[64px] font-['TN',serif] font-extralight"
         >
           {HEADLINE}
         </h1>
@@ -54,7 +54,7 @@ export function Experience() {
           {/* Bottom divider */}
           <div
             className="experience-fade-up"
-            style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 1) * 80}ms` }}
+            style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 1) * EXPERIENCE_STAGGER_MS}ms` }}
           >
             <div className="w-full h-px bg-white/10" />
           </div>
@@ -64,8 +64,8 @@ export function Experience() {
             href={LINKEDIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="experience-fade-up block text-center mt-[48px] font-['SF_Pro_Text','-apple-system',BlinkMacSystemFont,sans-serif] text-[18px] leading-[1.3] text-accent hover:underline"
-            style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 2) * 80}ms` }}
+            className="experience-fade-up block text-center mt-[48px] font-sf text-[18px] leading-[1.3] text-accent hover:underline"
+            style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 2) * EXPERIENCE_STAGGER_MS}ms` }}
           >
             More on LinkedIn
           </a>

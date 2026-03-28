@@ -57,6 +57,14 @@
   font-display: swap;
 }
 
+/* ─── Font utility ────────────────────────────────────────── */
+.font-sf {
+  font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.font-sf-display {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 /* ─── Navbar ───────────────────────────────────────────────── */
 .navbar-shadow-halo {
   /* shadows moved to .navbar-glass to avoid filter/backdrop-filter conflict in Firefox */

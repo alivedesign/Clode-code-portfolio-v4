@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from "react";
 import { VideoPlayer, type VideoPlayerHandle } from "./VideoPlayer";
 import type { CharacterState } from "./useCharacterState";
+import { POSE_PLAYBACK_RATE, POSE_START_TIME, POSE_NEAR_END_OFFSET } from "@/constants";
 
 interface CharacterProps {
   state: CharacterState;
@@ -35,7 +36,9 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
   useEffect(() => {
     if (state.phase === "revealing" && prevPhaseRef.current === "posing") {
       revealRef.current?.play();
-      // Re-trigger mask animation: remove class, force reflow, re-add
+      // Force browser reflow to re-trigger CSS animation.
+      // Without this, removing and re-adding a class in the same
+      // synchronous block is batched and the animation won't restart.
       const el = containerRef.current;
       if (el) {
         el.classList.remove("animate-mask-c");
@@ -90,10 +93,10 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
           key={state.pose}
           src={poseSrc}
           autoPlay
-          playbackRate={1.25}
-          startTime={0.8}
+          playbackRate={POSE_PLAYBACK_RATE}
+          startTime={POSE_START_TIME}
           onNearEnd={onPoseVideoEnded}
-          nearEndOffset={0.3}
+          nearEndOffset={POSE_NEAR_END_OFFSET}
           onCanPlay={handlePoseCanPlay}
           className={`absolute inset-0 w-full h-full object-cover bg-black ${edgeMaskClass} ${isPosing ? "opacity-100" : "opacity-0"}`}
         />

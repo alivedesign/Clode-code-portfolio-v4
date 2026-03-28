@@ -135,7 +135,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
         className={`menu-overlay ${menuOpen ? (menuClosing ? "closing" : "open") : ""}`}
       >
         {/* Logo in overlay */}
-        <div className="absolute top-[24px] left-[24px] font-['SF_Pro_Display','-apple-system',BlinkMacSystemFont,sans-serif] font-medium text-[14px] leading-none text-text-secondary tracking-[-0.28px]">
+        <div className="absolute top-[24px] left-[24px] font-sf-display font-medium text-[14px] leading-none text-text-secondary tracking-[-0.28px]">
           <p>Shkuratov</p>
           <p>Designer</p>
         </div>

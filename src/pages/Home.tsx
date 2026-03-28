@@ -7,6 +7,7 @@ import { MainLayout } from "@/components/Layout/MainLayout";
 import { useVideoPreloader } from "@/hooks/useVideoPreloader";
 import { usePoseCycle } from "@/hooks/usePoseCycle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { REVEAL_UI_DELAY, HERO_TYPING_DELAY } from "@/constants";
 
 const POSE_VIDEOS = [
   "/videos/pose-experience.mp4",
@@ -27,14 +28,14 @@ export function Home() {
 
   useEffect(() => {
     startReveal();
-    const uiTimer = setTimeout(() => setRevealed(true), 2500);
+    const uiTimer = setTimeout(() => setRevealed(true), REVEAL_UI_DELAY);
     return () => clearTimeout(uiTimer);
   }, [startReveal]);
 
   // Start hero text typing shortly after reveal begins
   useEffect(() => {
     if (state.phase === "revealing" && !heroReady) {
-      const timer = setTimeout(() => setHeroReady(true), 400);
+      const timer = setTimeout(() => setHeroReady(true), HERO_TYPING_DELAY);
       return () => clearTimeout(timer);
     }
   }, [state.phase, heroReady]);
