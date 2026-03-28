@@ -65,7 +65,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
   const showReveal = !isPosing || !poseVideoReady;
   const showPoster = isPosing && state.videoEnded;
   const poseSrc = isPosing ? `/videos/pose-${state.pose}.mp4` : "";
-  const posterSrc = isPosing ? `/images/poster-${state.pose}.png` : "";
+  const posterSrc = isPosing ? `/images/poster-${state.pose}.webp` : "";
   const needsEdgeMask = isPosing && state.pose !== "products" && state.pose !== "content";
   const edgeMaskClass = needsEdgeMask ? "pose-edge-mask" : "";
 
@@ -79,6 +79,7 @@ export function Character({ state, onRevealComplete, onPoseVideoEnded, className
         ref={revealRef}
         src="/videos/reveal.mp4"
         autoPlay
+        fetchPriority="high"
         className={`absolute inset-0 w-full h-full object-cover bg-black ${showReveal ? "opacity-100" : "opacity-0"}`}
         onEnded={onRevealComplete}
       />
