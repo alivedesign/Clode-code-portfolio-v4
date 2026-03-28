@@ -26,3 +26,4 @@ vite.config.ts.timestamp-*
 
 # Large video files
 public/videos/*.mp4
+!public/videos/typing-machine.mp4
