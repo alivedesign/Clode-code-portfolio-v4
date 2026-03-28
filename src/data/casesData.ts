@@ -3,14 +3,27 @@ export interface CaseTitleSegment {
   highlighted: boolean;
 }
 
+export interface LottieAsset {
+  src: string;
+  name: string;
+  position: {
+    top?: string;
+    left?: string;
+    right?: string;
+    bottom?: string;
+  };
+  size: string;
+}
+
 export interface CaseData {
   id: string;
-  type: "video" | "cinematic";
+  type: "video" | "cinematic" | "lottie";
   title: CaseTitleSegment[];
   videoSrc?: string;
   frameSrc?: string;
   posterSrc?: string;
   sideImages?: [string, string];
+  lottieAssets?: LottieAsset[];
 }
 
 export const CASES_HEADLINE =
@@ -42,5 +55,29 @@ export const CASES: CaseData[] = [
       "/images/cases/case-2-left.png",
       "/images/cases/case-2-right.png",
     ],
+  },
+  {
+    id: "b2b-stickers",
+    type: "lottie",
+    title: [
+      { text: "Built ", highlighted: false },
+      { text: "animated stickers & GIFs", highlighted: true },
+      { text: " that made a B2B messenger more engaging", highlighted: false },
+    ],
+    lottieAssets: [
+      { src: "/lottie/Mocking.lottie", name: "Mocking", position: { top: "181px", left: "0" }, size: "261px" },
+      { src: "/lottie/Alien Face.lottie", name: "Alien Face", position: { top: "0", left: "381px" }, size: "198px" },
+      { src: "/lottie/Evil Smoking.lottie", name: "Evil Smoking", position: { top: "49px", right: "0" }, size: "280px" },
+      { src: "/lottie/Selfie.lottie", name: "Selfie", position: { bottom: "0", left: "597px" }, size: "192px" },
+    ],
+  },
+  {
+    id: "ai-seo-startup",
+    type: "video",
+    title: [
+      { text: "From 0% to 5% conversion. ", highlighted: false },
+      { text: "Redesigning an AI SEO startup", highlighted: true },
+    ],
+    videoSrc: "/videos/typing-machine.mp4",
   },
 ];
