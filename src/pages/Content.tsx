@@ -13,13 +13,14 @@ import {
   INSTAGRAM_REELS,
   INSTAGRAM_PROFILE_URL,
 } from "@/data/contentData";
+import type { LinkedInPost } from "@/data/contentData";
 
 /* ── YouTube thumbnail card ── */
 function YouTubeCard({ videoId }: { videoId: string }) {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <div className="relative w-full rounded-[24px] overflow-hidden" style={{ paddingBottom: "56.25%" }}>
+    <div className="relative w-full rounded-[24px] overflow-hidden opacity-65 hover:opacity-100 hover:scale-[1.02] transition-all duration-300" style={{ paddingBottom: "56.25%" }}>
       {playing ? (
         <iframe
           className="absolute inset-0 w-full h-full"
@@ -60,20 +61,44 @@ function YouTubeCard({ videoId }: { videoId: string }) {
   );
 }
 
-/* ── LinkedIn embed card ── */
-function LinkedInCard({ activityId }: { activityId: string }) {
+/* ── LinkedIn custom card ── */
+function LinkedInCard({ post }: { post: LinkedInPost }) {
   return (
-    <div className="break-inside-avoid mb-[22px]">
-      <iframe
-        src={`https://www.linkedin.com/embed/feed/update/urn:li:activity:${activityId}`}
-        className="w-full rounded-[9px]"
-        height="450"
-        frameBorder="0"
-        allowFullScreen
-        title="LinkedIn post"
-        loading="lazy"
-      />
-    </div>
+    <a
+      href={`https://www.linkedin.com/feed/update/urn:li:activity:${post.activityId}/`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block break-inside-avoid mb-[22px]"
+    >
+      {/* Image */}
+      <div className="rounded-[16px] overflow-hidden bg-white/5">
+        <img
+          src={post.image}
+          alt=""
+          className="w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
+      </div>
+      {/* Author + text */}
+      <div className="mt-[16px]">
+        <div className="flex items-center gap-[10px] mb-[12px]">
+          <img
+            src="/images/content/avatar.jpg"
+            alt=""
+            className="w-[28px] h-[28px] rounded-full object-cover shrink-0"
+          />
+          <p className="text-white text-[13px] font-medium leading-tight">Evgeny Shkuratov</p>
+          <svg className="ml-auto shrink-0 w-[14px] h-[14px]" viewBox="0 0 24 24" fill="#0A66C2" aria-hidden="true">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+        </div>
+        <p className="text-text-secondary text-[13px] leading-[1.5] whitespace-pre-line line-clamp-[6]">{post.text}</p>
+        <div className="mt-[10px] flex items-center gap-3">
+          <span className="text-text-secondary/60 text-[12px]">{post.likes} likes</span>
+          <span className="text-text-secondary/60 text-[12px]">{post.comments} comments</span>
+        </div>
+      </div>
+    </a>
   );
 }
 
@@ -107,6 +132,7 @@ export function Content() {
   const [youtubeRef, youtubeVisible] = useInView(0.1);
   const [linkedinRef, linkedinVisible] = useInView(0.1);
   const [instagramRef, instagramVisible] = useInView(0.1);
+  // linkedinRef/linkedinVisible kept for scroll-reveal animation
 
   useInstagramEmbed(instagramVisible);
 
@@ -130,7 +156,7 @@ export function Content() {
           className={`experience-scroll-reveal${youtubeVisible ? " visible" : ""} w-full max-w-[1280px]`}
           aria-label="YouTube videos"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[32px]">
+          <div className="grid grid-cols-2 gap-[16px] md:gap-[48px]">
             {YOUTUBE_VIDEOS.map((video) => (
               <YouTubeCard key={video.id} videoId={video.id} />
             ))}
@@ -153,13 +179,11 @@ export function Content() {
           className={`experience-scroll-reveal${linkedinVisible ? " visible" : ""} w-full max-w-[1280px] mt-[80px] md:mt-[112px]`}
           aria-label="LinkedIn posts"
         >
-          {linkedinVisible && (
-            <div className="columns-1 md:columns-4 gap-[22px]">
-              {LINKEDIN_POSTS.map((id) => (
-                <LinkedInCard key={id} activityId={id} />
-              ))}
-            </div>
-          )}
+          <div className="columns-2 md:columns-4 gap-[16px] md:gap-[22px]">
+            {LINKEDIN_POSTS.map((post) => (
+              <LinkedInCard key={post.activityId} post={post} />
+            ))}
+          </div>
           <div className="text-center mt-[40px] md:mt-[56px]">
             <a
               href={LINKEDIN_PROFILE_URL}
