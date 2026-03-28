@@ -50,29 +50,32 @@ export function Experience() {
         </h1>
 
         {/* Experience list */}
-        <div className="w-full max-w-[887px]">
-          {EXPERIENCE_ENTRIES.map((entry, i) => (
-            <ExperienceItem key={entry.dateRange} entry={entry} index={i} />
-          ))}
-          {/* Bottom divider */}
-          <div
-            className="experience-fade-up"
-            style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 1) * EXPERIENCE_STAGGER_MS}ms` }}
-          >
-            <div className="w-full h-px bg-white/10" />
-          </div>
+        <section aria-label="Work experience">
+          <h2 className="sr-only">Work Experience</h2>
+          <div className="w-full max-w-[887px]">
+            {EXPERIENCE_ENTRIES.map((entry, i) => (
+              <ExperienceItem key={entry.dateRange} entry={entry} index={i} />
+            ))}
+            {/* Bottom divider */}
+            <div
+              className="experience-fade-up"
+              style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 1) * EXPERIENCE_STAGGER_MS}ms` }}
+            >
+              <div className="w-full h-px bg-white/10" />
+            </div>
 
-          {/* More on LinkedIn */}
-          <a
-            href={LINKEDIN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="experience-fade-up block text-center mt-[48px] font-sf text-[18px] leading-[1.3] text-accent hover:underline"
-            style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 2) * EXPERIENCE_STAGGER_MS}ms` }}
-          >
-            More on LinkedIn
-          </a>
-        </div>
+            {/* More on LinkedIn */}
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="experience-fade-up block text-center mt-[48px] font-sf text-[18px] leading-[1.3] text-accent hover:underline"
+              style={{ animationDelay: `${(EXPERIENCE_ENTRIES.length + 2) * EXPERIENCE_STAGGER_MS}ms` }}
+            >
+              More on LinkedIn
+            </a>
+          </div>
+        </section>
 
         {/* YouTube Video Embed */}
         <div

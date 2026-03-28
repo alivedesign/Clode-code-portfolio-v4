@@ -50,37 +50,44 @@ export function Home() {
 
   return (
     <MainLayout>
-      <Logo visible={revealed} />
+      <header>
+        <Logo visible={revealed} />
+      </header>
 
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+80px)] w-[300px] h-[300px] md:-translate-y-[calc(50%+48px)] md:-translate-x-[calc(50%+24px)] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px]">
-        {isMobile ? (
-          <MobileSwipeZone onNext={nextPose} onPrev={prevPose}>
-            <Character
-              state={state}
-              onRevealComplete={handleRevealComplete}
-              onPoseVideoEnded={onPoseVideoEnded}
-            />
-            <HeroText
-              visible={heroReady && state.phase !== "posing"}
-              startTyping={heroReady}
-            />
-            <PoseText pose={revealed ? currentPose : null} />
-          </MobileSwipeZone>
-        ) : (
-          <>
-            <Character
-              state={state}
-              onRevealComplete={handleRevealComplete}
-              onPoseVideoEnded={onPoseVideoEnded}
-            />
-            <HeroText
-              visible={heroReady && state.phase !== "posing"}
-              startTyping={heroReady}
-            />
-            <PoseText pose={revealed ? currentPose : null} />
-          </>
-        )}
-      </div>
+      <main>
+        <h1 className="sr-only">
+          Evgeny Shkuratov — Product Design Engineer
+        </h1>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[calc(50%+80px)] w-[300px] h-[300px] md:-translate-y-[calc(50%+48px)] md:-translate-x-[calc(50%+24px)] md:w-[400px] md:h-[400px] lg:w-[550px] lg:h-[550px]">
+          {isMobile ? (
+            <MobileSwipeZone onNext={nextPose} onPrev={prevPose}>
+              <Character
+                state={state}
+                onRevealComplete={handleRevealComplete}
+                onPoseVideoEnded={onPoseVideoEnded}
+              />
+              <HeroText
+                visible={heroReady && state.phase !== "posing"}
+                startTyping={heroReady}
+              />
+              <PoseText pose={revealed ? currentPose : null} />
+            </MobileSwipeZone>
+          ) : (
+            <>
+              <Character
+                state={state}
+                onRevealComplete={handleRevealComplete}
+                onPoseVideoEnded={onPoseVideoEnded}
+              />
+              <HeroText
+                visible={heroReady && state.phase !== "posing"}
+                startTyping={heroReady}
+              />
+              <PoseText pose={revealed ? currentPose : null} />
+            </>
+          )}
+        </div>
+      </main>
 
       {/* Subtle glow for navbar frost effect */}
       <div
