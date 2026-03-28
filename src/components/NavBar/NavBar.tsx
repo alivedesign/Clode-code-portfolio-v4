@@ -7,7 +7,7 @@ const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
   { label: "Experience", pose: "experience", path: "/experience" },
   { label: "Products", pose: "products", path: "/products" },
   { label: "Cases", pose: "cases", path: "/cases" },
-  { label: "Content", pose: "content", path: "/" },
+  { label: "Content", pose: "content", path: "/content" },
   { label: "About", pose: "about", path: "/" },
   { label: "Resume", pose: "resume", path: "/" },
 ];
@@ -19,7 +19,7 @@ const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
 ];
 
 const MENU_NAV_ITEMS: { label: string; path: string }[] = [
-  { label: "Content", path: "/" },
+  { label: "Content", path: "/content" },
   { label: "About", path: "/" },
   { label: "Resume", path: "/" },
 ];
