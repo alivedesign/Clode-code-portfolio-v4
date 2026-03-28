@@ -3,6 +3,8 @@ import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { CaseVideoPreview } from "./CaseVideoPreview";
 import { CaseCinematicScroll } from "./CaseCinematicScroll";
 import { CaseCinematicMobile } from "./CaseCinematicMobile";
+import { CaseLottieScatter } from "./CaseLottieScatter";
+import { CaseLottieMobile } from "./CaseLottieMobile";
 
 interface CaseSectionProps {
   caseData: CaseData;
@@ -20,6 +22,12 @@ export function CaseSection({ caseData, index }: CaseSectionProps) {
         <CaseCinematicMobile caseData={caseData} index={index} />
       ) : (
         <CaseCinematicScroll caseData={caseData} />
+      );
+    case "lottie":
+      return isMobile ? (
+        <CaseLottieMobile caseData={caseData} index={index} />
+      ) : (
+        <CaseLottieScatter caseData={caseData} index={index} />
       );
   }
 }
