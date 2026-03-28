@@ -440,6 +440,57 @@
   transform: translateY(0);
 }
 
+/* ─── Product modal ──────────────────────────────────────── */
+.product-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: modalFadeIn 0.25s ease-out forwards;
+}
+
+.product-modal {
+  position: relative;
+  background: #000000;
+  border-radius: 24px;
+  max-width: 700px;
+  width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 48px 32px;
+  animation: modalSlideUp 0.3s ease-out forwards;
+}
+
+@media (max-width: 767px) {
+  .product-modal {
+    padding: 32px 20px;
+    max-height: calc(100dvh - 32px);
+  }
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -459,5 +510,10 @@
   .experience-scroll-reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .product-modal-backdrop,
+  .product-modal {
+    animation: none;
   }
 }
