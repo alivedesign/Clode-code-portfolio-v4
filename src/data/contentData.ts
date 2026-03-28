@@ -80,13 +80,18 @@ export const LINKEDIN_POSTS: LinkedInPost[] = [
 export const LINKEDIN_PROFILE_URL =
   "https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/";
 
-export const INSTAGRAM_REELS = [
-  "DWZBADwMeH1",
-  "DWWHHjwsWpR",
-  "DWMCQDlDHGM",
-  "DWbkKjuMXkC",
-  "DWJYRkzMOn7",
-  "DWRM9aVjD5d",
+export type InstagramReel = {
+  reelId: string;
+  cover: string;
+};
+
+export const INSTAGRAM_REELS: InstagramReel[] = [
+  { reelId: "DWZBADwMeH1", cover: "/images/content/ig-1.png" },
+  { reelId: "DWWHHjwsWpR", cover: "/images/content/ig-2.png" },
+  { reelId: "DWMCQDlDHGM", cover: "/images/content/ig-3.png" },
+  { reelId: "DWbkKjuMXkC", cover: "/images/content/ig-4.png" },
+  { reelId: "DWJYRkzMOn7", cover: "/images/content/ig-5.png" },
+  { reelId: "DWRM9aVjD5d", cover: "/images/content/ig-6.png" },
 ];
 
 export const INSTAGRAM_PROFILE_URL =

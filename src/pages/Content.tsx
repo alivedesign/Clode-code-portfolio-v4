@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { useInView } from "@/hooks/useInView";
-import { useInstagramEmbed } from "@/hooks/useInstagramEmbed";
 import {
   CONTENT_HEADLINE,
   YOUTUBE_VIDEOS,
@@ -13,7 +13,7 @@ import {
   INSTAGRAM_REELS,
   INSTAGRAM_PROFILE_URL,
 } from "@/data/contentData";
-import type { LinkedInPost } from "@/data/contentData";
+import type { LinkedInPost, InstagramReel } from "@/data/contentData";
 
 /* ── YouTube thumbnail card ── */
 function YouTubeCard({ videoId }: { videoId: string }) {
@@ -102,28 +102,84 @@ function LinkedInCard({ post }: { post: LinkedInPost }) {
   );
 }
 
-/* ── Instagram embed card ── */
-function InstagramCard({ reelId }: { reelId: string }) {
+/* ── Instagram cover card (links to Reel) ── */
+function InstagramCoverCard({ reel }: { reel: InstagramReel }) {
   return (
-    <blockquote
-      className="instagram-media"
-      data-instgrm-permalink={`https://www.instagram.com/reel/${reelId}/`}
-      data-instgrm-version="14"
-      style={{
-        background: "transparent",
-        border: 0,
-        borderRadius: 24,
-        margin: 0,
-        padding: 0,
-        minWidth: 0,
-        maxWidth: "none",
-        width: 300,
-      }}
+    <a
+      href={`https://www.instagram.com/reel/${reel.reelId}/`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block shrink-0 w-[200px] md:w-[300px] h-[356px] md:h-[533px] rounded-[24px] overflow-hidden group [-webkit-tap-highlight-color:transparent]"
     >
-      <a href={`https://www.instagram.com/reel/${reelId}/`} target="_blank" rel="noopener noreferrer">
-        View on Instagram
-      </a>
-    </blockquote>
+      <img
+        src={reel.cover}
+        alt=""
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        loading="lazy"
+      />
+    </a>
+  );
+}
+
+/* ── Instagram carousel with Embla ── */
+function InstagramSlider({ reels }: { reels: InstagramReel[] }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+    dragFree: true,
+  });
+
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(true);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => {
+      setCanScrollPrev(emblaApi.canScrollPrev());
+      setCanScrollNext(emblaApi.canScrollNext());
+    };
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    onSelect();
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi]);
+
+  return (
+    <div className="relative">
+      {/* Embla viewport */}
+      <div ref={emblaRef} className="overflow-hidden">
+        <div className="flex gap-[28px] md:gap-[56px]">
+          {reels.map((reel) => (
+            <InstagramCoverCard key={reel.reelId} reel={reel} />
+          ))}
+        </div>
+      </div>
+
+      {/* Prev arrow — desktop only */}
+      <button
+        type="button"
+        onClick={() => emblaApi?.scrollPrev()}
+        disabled={!canScrollPrev}
+        className={`hidden md:flex absolute left-[-48px] top-1/2 -translate-y-1/2 p-2 cursor-pointer transition-all duration-300 hover:brightness-200 hover:scale-110 ${canScrollPrev ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        aria-label="Scroll left"
+      >
+        <img src="/arrow-left.svg" alt="" width={28} height={21} />
+      </button>
+
+      {/* Next arrow — desktop only */}
+      <button
+        type="button"
+        onClick={() => emblaApi?.scrollNext()}
+        disabled={!canScrollNext}
+        className={`hidden md:flex absolute right-[-48px] top-1/2 -translate-y-1/2 p-2 cursor-pointer transition-all duration-300 hover:brightness-200 hover:scale-110 ${canScrollNext ? "opacity-100" : "opacity-0 pointer-events-none"}`}
+        aria-label="Scroll right"
+      >
+        <img src="/arrow-right.svg" alt="" width={28} height={21} />
+      </button>
+    </div>
   );
 }
 
@@ -132,9 +188,6 @@ export function Content() {
   const [youtubeRef, youtubeVisible] = useInView(0.1);
   const [linkedinRef, linkedinVisible] = useInView(0.1);
   const [instagramRef, instagramVisible] = useInView(0.1);
-  // linkedinRef/linkedinVisible kept for scroll-reveal animation
-
-  useInstagramEmbed(instagramVisible);
 
   useEffect(() => {
     document.title = "Content — Shkuratov Designer";
@@ -202,15 +255,7 @@ export function Content() {
           className={`experience-scroll-reveal${instagramVisible ? " visible" : ""} w-full max-w-[1280px] mt-[80px] md:mt-[112px]`}
           aria-label="Instagram reels"
         >
-          {instagramVisible && (
-            <div className="flex gap-[20px] md:gap-[40px] overflow-x-auto pb-4 scrollbar-hide">
-              {INSTAGRAM_REELS.map((id) => (
-                <div key={id} className="shrink-0">
-                  <InstagramCard reelId={id} />
-                </div>
-              ))}
-            </div>
-          )}
+          <InstagramSlider reels={INSTAGRAM_REELS} />
           <div className="text-center mt-[40px] md:mt-[56px]">
             <a
               href={INSTAGRAM_PROFILE_URL}
