@@ -1,6 +1,6 @@
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import type { CaseData } from "@/data/casesData";
 import { CaseTitle } from "./CaseTitle";
+import { DotLottieCanvas } from "./DotLottieCanvas";
 
 interface CaseLottieScatterProps {
   caseData: CaseData;
@@ -27,7 +27,7 @@ export function CaseLottieScatter({ caseData, index }: CaseLottieScatterProps) {
             }}
             aria-label={asset.name}
           >
-            <DotLottieReact
+            <DotLottieCanvas
               src={asset.src}
               autoplay
               loop

@@ -1,6 +1,6 @@
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import type { CaseData } from "@/data/casesData";
 import { CaseTitle } from "./CaseTitle";
+import { DotLottieCanvas } from "./DotLottieCanvas";
 
 interface CaseLottieMobileProps {
   caseData: CaseData;
@@ -22,7 +22,7 @@ export function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
       <div className="flex gap-[16px] mb-[32px] justify-center">
         {topRow.map((asset) => (
           <div key={asset.name} className="w-[120px] h-[120px]" aria-label={asset.name}>
-            <DotLottieReact src={asset.src} autoplay loop style={{ width: "100%", height: "100%" }} />
+            <DotLottieCanvas src={asset.src} autoplay loop style={{ width: "100%", height: "100%" }} />
           </div>
         ))}
       </div>
@@ -34,7 +34,7 @@ export function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
       <div className="flex gap-[16px] mt-[32px] justify-center">
         {bottomRow.map((asset) => (
           <div key={asset.name} className="w-[120px] h-[120px]" aria-label={asset.name}>
-            <DotLottieReact src={asset.src} autoplay loop style={{ width: "100%", height: "100%" }} />
+            <DotLottieCanvas src={asset.src} autoplay loop style={{ width: "100%", height: "100%" }} />
           </div>
         ))}
       </div>
