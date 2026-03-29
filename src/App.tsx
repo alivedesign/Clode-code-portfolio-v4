@@ -1,5 +1,5 @@
-import { Suspense, lazy } from "react";
-import { Routes, Route } from "react-router";
+import { Suspense, lazy, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router";
 import { preloadVideoFrames } from "@/hooks/videoFrameCache";
 
 // Start extracting case-2 character frames immediately on app load
@@ -16,9 +16,18 @@ const CaseStudy2 = lazy(() => import("@/pages/CaseStudy2").then(m => ({ default:
 const CaseStudy3 = lazy(() => import("@/pages/CaseStudy3").then(m => ({ default: m.CaseStudy3 })));
 const CaseStudy4 = lazy(() => import("@/pages/CaseStudy4").then(m => ({ default: m.CaseStudy4 })));
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <Suspense fallback={<div className="h-dvh w-full bg-black" />}>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/experience" element={<Experience />} />
