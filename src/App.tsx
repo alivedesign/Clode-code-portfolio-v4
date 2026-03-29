@@ -10,6 +10,7 @@ const Experience = lazy(() => import("@/pages/Experience").then(m => ({ default:
 const Products = lazy(() => import("@/pages/Products").then(m => ({ default: m.Products })));
 const Cases = lazy(() => import("@/pages/Cases").then(m => ({ default: m.Cases })));
 const Content = lazy(() => import("@/pages/Content").then(m => ({ default: m.Content })));
+const About = lazy(() => import("@/pages/About").then(m => ({ default: m.About })));
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/products" element={<Products />} />
         <Route path="/cases" element={<Cases />} />
         <Route path="/content" element={<Content />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Suspense>
   );

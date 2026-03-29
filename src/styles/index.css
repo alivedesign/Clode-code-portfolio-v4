@@ -6,6 +6,7 @@
   --color-text-secondary: #999899;
   --color-accent: #d77757;
   --color-glass: rgba(255, 255, 255, 0.1);
+  --color-link-inline: #b2b9f9;
 }
 
 html {
