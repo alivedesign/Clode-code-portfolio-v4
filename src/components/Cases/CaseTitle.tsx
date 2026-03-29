@@ -30,7 +30,7 @@ export function CaseTitle({ segments, link, className = "" }: CaseTitleProps) {
     return (
       <Link
         to={link}
-        className={`group flex flex-col gap-[16px] items-center text-center ${className}`}
+        className={`group flex flex-col gap-[16px] items-center text-center cursor-pointer ${className}`}
       >
         {inner}
       </Link>

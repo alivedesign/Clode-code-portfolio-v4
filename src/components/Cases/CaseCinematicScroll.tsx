@@ -95,7 +95,7 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
 
       // Show/hide title link based on animation progress
       if (titleRef.current) {
-        titleRef.current.style.pointerEvents = progress >= 1 ? "auto" : "none";
+        titleRef.current.style.pointerEvents = progress >= 0.8 ? "auto" : "none";
       }
     });
   }, [frames]);
