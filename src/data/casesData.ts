@@ -62,6 +62,7 @@ export const CASES: CaseData[] = [
   {
     id: "b2b-stickers",
     type: "lottie",
+    link: "/cases/stickers",
     title: [
       { text: "Built ", highlighted: false },
       { text: "animated stickers & GIFs", highlighted: true },
@@ -77,6 +78,7 @@ export const CASES: CaseData[] = [
   {
     id: "ai-seo-startup",
     type: "video",
+    link: "/cases/ai-seo-startup",
     title: [
       { text: "From 0% to 5% conversion. ", highlighted: false },
       { text: "Redesigning an AI SEO startup", highlighted: true },
