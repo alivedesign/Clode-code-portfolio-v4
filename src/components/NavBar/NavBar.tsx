@@ -3,13 +3,15 @@ import { Link, useLocation } from "react-router";
 import type { CharacterPose } from "@/components/Character/useCharacterState";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
+const RESUME_URL = "/Evgeny_Shkuratov_Product_Design_Engineer.pdf";
+
 const NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
   { label: "Experience", pose: "experience", path: "/experience" },
   { label: "Products", pose: "products", path: "/products" },
   { label: "Cases", pose: "cases", path: "/cases" },
   { label: "Content", pose: "content", path: "/content" },
   { label: "About", pose: "about", path: "/about" },
-  { label: "Resume", pose: "resume", path: "/" },
+  { label: "Resume", pose: "resume", path: "" },
 ];
 
 const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
@@ -21,7 +23,7 @@ const MAIN_NAV_ITEMS: { label: string; pose: CharacterPose; path: string }[] = [
 const MENU_NAV_ITEMS: { label: string; path: string }[] = [
   { label: "Content", path: "/content" },
   { label: "About", path: "/about" },
-  { label: "Resume", path: "/" },
+  { label: "Resume", path: "" },
 ];
 
 interface NavBarProps {
@@ -38,6 +40,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
   const isMobile = useMediaQuery("(max-width: 767px)");
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuClosing, setMenuClosing] = useState(false);
+  const [copiedToast, setCopiedToast] = useState(false);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -82,6 +85,41 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
     }
   }, [onLeavePose]);
 
+  const handleResumeClick = useCallback(() => {
+    // Open in new tab
+    window.open(RESUME_URL, "_blank", "noopener");
+    // Simultaneously trigger download
+    const a = document.createElement("a");
+    a.href = RESUME_URL;
+    a.download = "Evgeny_Shkuratov_Product_Design_Engineer.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }, []);
+
+  const handleCopyEmail = useCallback(() => {
+    // Copy to clipboard with fallback for iOS/HTTP
+    try {
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText("shkuratovdesigner@gmail.com");
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = "shkuratovdesigner@gmail.com";
+        ta.style.position = "fixed";
+        ta.style.opacity = "0";
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+      }
+    } catch {
+      // Clipboard failed silently — toast still shows
+    }
+    setCopiedToast(true);
+    setTimeout(() => setCopiedToast(false), 2500);
+  }, []);
+
   const openMenu = useCallback(() => {
     if (menuBtnRef.current && overlayRef.current) {
       const rect = menuBtnRef.current.getBoundingClientRect();
@@ -122,12 +160,22 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
                   key={item.pose}
                   onMouseEnter={(e) => handleMouseEnter(e, item.pose)}
                 >
-                  <Link
-                    to={item.path}
-                    className={`navbar-tab ${item.path !== "/" && location.pathname === item.path ? "navbar-tab-active" : ""}`}
-                  >
-                    {item.label}
-                  </Link>
+                  {item.pose === "resume" ? (
+                    <button
+                      type="button"
+                      onClick={handleResumeClick}
+                      className="navbar-tab"
+                    >
+                      {item.label}
+                    </button>
+                  ) : (
+                    <Link
+                      to={item.path}
+                      className={`navbar-tab ${location.pathname === item.path ? "navbar-tab-active" : ""}`}
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -152,23 +200,54 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
           <p>Designer</p>
         </div>
 
-        <nav className="menu-overlay-items">
-          {MENU_NAV_ITEMS.map((item) => (
-            <Link
-              key={item.label}
-              to={item.path}
-              className="menu-overlay-link"
-              onClick={closeMenu}
+        {/* Mail button */}
+        <div className="menu-mail-btn">
+          <div className="navbar-shadow-halo">
+            <button
+              type="button"
+              className="navbar-glass"
+              style={{ padding: 8, cursor: "pointer" }}
+              onClick={handleCopyEmail}
             >
-              {item.label}
-            </Link>
-          ))}
+              <img src="/Mail.svg" alt="Copy email" width={28} height={28} style={{ display: "block" }} />
+            </button>
+          </div>
+        </div>
+
+        <nav className="menu-overlay-items">
+          {MENU_NAV_ITEMS.map((item) =>
+            item.label === "Resume" ? (
+              <button
+                key={item.label}
+                type="button"
+                className="menu-overlay-link"
+                onClick={() => {
+                  handleResumeClick();
+                  closeMenu();
+                }}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <Link
+                key={item.label}
+                to={item.path}
+                className="menu-overlay-link"
+                onClick={closeMenu}
+              >
+                {item.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         <div className="menu-overlay-contact">
-          <span>Reach me at shkuratovdesigner@gmail.com or</span>
-          <br />
           <a href="#book" className="text-accent">Book a Call</a>
+        </div>
+
+        {/* Toast notification */}
+        <div className={`mail-toast ${copiedToast ? "visible" : ""}`}>
+          shkuratovdesigner@gmail.com copied
         </div>
 
         {/* Bottom bar inside overlay */}

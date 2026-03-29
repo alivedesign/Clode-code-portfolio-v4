@@ -1,15 +1,18 @@
+import { Link } from "react-router";
 import type { CharacterPose } from "@/components/Character";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { POSE_TEXT } from "@/data/poseTextData";
 import type { TypewriterPhase } from "@/hooks/useTypewriter";
 
-const POSE_LABELS: Record<CharacterPose, { label: string; href: string }> = {
-  experience: { label: "Experience", href: "#experience" },
-  products: { label: "Products", href: "#products" },
-  cases: { label: "Cases", href: "#cases" },
-  content: { label: "Content", href: "#content" },
-  about: { label: "About", href: "#about" },
-  resume: { label: "Resume", href: "#resume" },
+const RESUME_URL = "/Evgeny_Shkuratov_Product_Design_Engineer.pdf";
+
+const POSE_LABELS: Record<CharacterPose, { label: string; path: string }> = {
+  experience: { label: "Experience", path: "/experience" },
+  products: { label: "Products", path: "/products" },
+  cases: { label: "Cases", path: "/cases" },
+  content: { label: "Content", path: "/content" },
+  about: { label: "About", path: "/about" },
+  resume: { label: "Resume", path: "" },
 };
 
 interface PoseTextProps {
@@ -70,12 +73,30 @@ export function PoseText({ pose }: PoseTextProps) {
         );
       })}
       {activePose && (
-        <a
-          href={POSE_LABELS[activePose].href}
-          className="inline-block mt-4 text-accent md:hidden"
-        >
-          {POSE_LABELS[activePose].label}
-        </a>
+        activePose === "resume" ? (
+          <button
+            type="button"
+            onClick={() => {
+              window.open(RESUME_URL, "_blank", "noopener");
+              const a = document.createElement("a");
+              a.href = RESUME_URL;
+              a.download = "Evgeny_Shkuratov_Product_Design_Engineer.pdf";
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+            }}
+            className="inline-block mt-4 text-accent md:hidden"
+          >
+            {POSE_LABELS[activePose].label}
+          </button>
+        ) : (
+          <Link
+            to={POSE_LABELS[activePose].path}
+            className="inline-block mt-4 text-accent md:hidden"
+          >
+            {POSE_LABELS[activePose].label}
+          </Link>
+        )
       )}
     </div>
   );
