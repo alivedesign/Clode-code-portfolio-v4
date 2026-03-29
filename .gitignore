@@ -28,3 +28,5 @@ vite.config.ts.timestamp-*
 public/videos/*.mp4
 !public/videos/typing-machine.mp4
 !public/videos/case-2-gif.mp4
+!public/videos/case-1-approval.mp4
+!public/videos/case-1-implementation.mp4
