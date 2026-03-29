@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
@@ -43,6 +43,18 @@ export function CaseStudy3() {
   const [stickerGridRef, stickerGridVisible] = useInView(0.1);
   const [featuresRef, featuresVisible] = useInView(0.1);
   const [summaryRef, summaryVisible] = useInView(0.1);
+
+  // Scroll each mobile sticker row so the 2nd sticker is centered,
+  // hinting that the row is horizontally scrollable
+  const stickerRowRef = useCallback(
+    (el: HTMLDivElement | null) => {
+      if (!el || !isMobile) return;
+      // sticker 160px + gap 16px → 2nd sticker center at 160+16+80 = 256px
+      const secondCenter = 160 + 16 + 80;
+      el.scrollLeft = secondCenter - el.clientWidth / 2;
+    },
+    [isMobile],
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -92,17 +104,17 @@ export function CaseStudy3() {
         {/* Phone mockups */}
         <section
           ref={phonesRef}
-          className={`reveal-blur${phonesVisible ? " visible" : ""} flex gap-[0px] items-start mb-[128px] md:mb-[200px]`}
+          className={`reveal-blur${phonesVisible ? " visible" : ""} flex gap-[40px] md:gap-[156px] items-start mb-[128px] md:mb-[200px]`}
         >
           {[CASE3_PHONES.left, CASE3_PHONES.right].map((src, i) => (
             <div
               key={i}
-              className="w-[150px] md:w-[300px] rounded-[18px] md:rounded-[37px] overflow-hidden border-[4px] md:border-[8px] border-white/10 bg-white"
+              className="w-[150px] md:w-[300px]"
             >
               <img
                 src={src}
                 alt={`Phone mockup ${i + 1}`}
-                className="w-full h-auto object-cover"
+                className="w-full h-auto"
                 loading={i === 0 ? "eager" : "lazy"}
               />
             </div>
@@ -133,6 +145,7 @@ export function CaseStudy3() {
           {CASE3_STICKER_ROWS.map((row) => (
             <div
               key={row.name}
+              ref={isMobile ? stickerRowRef : undefined}
               className={
                 isMobile
                   ? "flex gap-[16px] overflow-x-auto scrollbar-hide px-5 -mx-5"
@@ -163,14 +176,14 @@ export function CaseStudy3() {
         {/* Feature cards */}
         <section
           ref={featuresRef}
-          className={`reveal-stagger-children${featuresVisible ? " visible" : ""} w-full max-w-[1256px] flex flex-wrap gap-[16px] md:gap-[32px_24px] mb-[128px] md:mb-[200px]`}
+          className={`reveal-stagger-children${featuresVisible ? " visible" : ""} w-full max-w-[1256px] grid grid-cols-2 gap-[12px] md:gap-[32px_24px] mb-[128px] md:mb-[200px]`}
         >
           {CASE3_FEATURES.map((feature) => (
             <div
               key={feature}
-              className="bg-white rounded-[14px] md:rounded-[20px] px-[20px] md:px-[32px] py-[16px] md:py-[24px] w-full md:w-[calc(50%-12px)]"
+              className="bg-white rounded-[14px] md:rounded-[20px] px-[16px] md:px-[32px] py-[16px] md:py-[24px]"
             >
-              <p className="font-['TN',serif] font-extralight text-[28px] md:text-[40px] leading-[1.2] text-[#222] tracking-[-0.4px]">
+              <p className="font-['TN',serif] font-extralight text-[20px] md:text-[40px] leading-[1.2] text-[#222] tracking-[-0.4px]">
                 {feature}
               </p>
             </div>
