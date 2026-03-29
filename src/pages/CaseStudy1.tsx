@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { useInView } from "@/hooks/useInView";
+import { useScrollProgress } from "@/hooks/useScrollProgress";
 import {
   CASE1_TITLE,
   CASE1_SUBTITLE_SEGMENTS,
@@ -24,7 +25,7 @@ function BackLink() {
   return (
     <Link
       to="/cases"
-      className="inline-flex items-center gap-2 font-['TN',serif] font-extralight text-[24px] leading-[1.2] text-text-secondary hover:text-white transition-colors"
+      className="inline-flex items-center gap-2 mt-[40px] md:mt-0 mb-[32px] font-['TN',serif] font-extralight text-[24px] leading-[1.2] text-text-secondary hover:text-white transition-colors"
     >
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <path d="M17.5 5.25L8.75 14L17.5 22.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -36,14 +37,15 @@ function BackLink() {
 
 /* ─── Hero ────────────────────────────────────────────────── */
 function HeroSection() {
-  const [ref, visible] = useInView(0.1);
+  const [textRef, textVisible] = useInView(0.1);
+  const [imgRef, imgVisible] = useInView(0.1);
 
   return (
-    <section
-      ref={ref}
-      className={`experience-scroll-reveal${visible ? " visible" : ""} flex flex-col items-center gap-[40px] md:gap-[56px] w-full max-w-[882px] mt-[48px] md:mt-[64px]`}
-    >
-      <div className="flex flex-col gap-[16px] items-center text-center max-w-[655px]">
+    <section className="flex flex-col items-center gap-[40px] md:gap-[56px] w-full max-w-[882px] mt-[48px] md:mt-[64px]">
+      <div
+        ref={textRef}
+        className={`reveal-fade-up${textVisible ? " visible" : ""} flex flex-col gap-[16px] items-center text-center max-w-[655px]`}
+      >
         <h1 className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] tracking-[-0.48px] text-white">
           {CASE1_TITLE}
         </h1>
@@ -55,27 +57,44 @@ function HeroSection() {
           ))}
         </p>
       </div>
-      <img
-        src={CASE1_HERO_IMAGE}
-        alt="Isometric design system city illustration"
-        className="w-full"
-        style={{ aspectRatio: "2752 / 1536" }}
-        loading="eager"
-      />
+      <div
+        ref={imgRef}
+        className={`reveal-blur${imgVisible ? " visible" : ""} w-full`}
+      >
+        <img
+          src={CASE1_HERO_IMAGE}
+          alt="Isometric design system city illustration"
+          className="w-full"
+          style={{ aspectRatio: "2752 / 1536" }}
+          loading="eager"
+        />
+      </div>
     </section>
   );
 }
 
 /* ─── The Problem ─────────────────────────────────────────── */
 function ProblemSection() {
-  const [ref, visible] = useInView(0.1);
+  const [headRef, headVisible] = useInView(0.1);
+  const [imgRef, imgVisible] = useInView(0.1);
+  const [pointsRef, pointsVisible] = useInView(0.1);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+
+  // Start slider on 2nd image (mobile only)
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    if (el.scrollWidth > el.clientWidth) {
+      el.scrollTo({ left: 316, behavior: "instant" as ScrollBehavior });
+    }
+  }, []);
 
   return (
-    <section
-      ref={ref}
-      className={`experience-scroll-reveal${visible ? " visible" : ""} flex flex-col items-center gap-[40px] md:gap-[56px] w-full mt-[100px] md:mt-[172px]`}
-    >
-      <div className="flex flex-col items-center gap-[16px] text-center max-w-[655px]">
+    <section className="flex flex-col items-center gap-[40px] md:gap-[56px] w-full mt-[100px] md:mt-[172px]">
+      <div
+        ref={headRef}
+        className={`reveal-fade-up${headVisible ? " visible" : ""} flex flex-col items-center gap-[16px] text-center max-w-[655px]`}
+      >
         <p className="font-sf text-[16px] md:text-[18px] leading-[1.4] text-accent">
           {CASE1_PROBLEM.label}
         </p>
@@ -85,7 +104,13 @@ function ProblemSection() {
       </div>
 
       {/* Full-width bleed images — Figma: 3 × 506.667×363, gap-40 */}
-      <div className="w-screen flex gap-[16px] md:gap-[40px] overflow-x-auto md:overflow-visible px-5 md:px-0 snap-x snap-mandatory scrollbar-hide">
+      <div
+        ref={(node) => {
+          sliderRef.current = node;
+          (imgRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+        }}
+        className={`reveal-stagger-children${imgVisible ? " visible" : ""} w-screen flex gap-[16px] md:gap-[40px] overflow-x-auto md:overflow-visible px-5 md:px-0 snap-x snap-mandatory scrollbar-hide`}
+      >
         {CASE1_PROBLEM.images.map((src, i) => (
           <div
             key={i}
@@ -103,7 +128,10 @@ function ProblemSection() {
       </div>
 
       {/* Text points */}
-      <div className="flex flex-col gap-[36px] md:gap-[48px] text-center max-w-[566px]">
+      <div
+        ref={pointsRef}
+        className={`reveal-stagger-children${pointsVisible ? " visible" : ""} flex flex-col gap-[36px] md:gap-[48px] text-center max-w-[566px]`}
+      >
         {CASE1_PROBLEM.points.map((point, i) => (
           <p key={i} className="font-sf text-[16px] md:text-[18px] leading-[1.4] text-text-secondary">
             <span className="text-white font-medium">{point.bold}</span>
@@ -148,7 +176,14 @@ function TimelineMedia({ step }: { step: TimelineStep }) {
     5→6: x=366, y=1078, 23×196
 */
 
-const TIMELINE_DOTS_Y = [79, 322, 565, 808, 1051, 1294];
+/* ─── Timeline scroll-linked constants ───────────────────── */
+const TIMELINE_HEIGHT = 1389;
+
+/** Y positions of the 6 dots (from Figma) */
+const DOT_POSITIONS = [79, 322, 565, 808, 1051, 1294];
+
+/** Progress threshold for each step (dot Y / container height) */
+const STEP_THRESHOLDS = DOT_POSITIONS.map((y) => y / TIMELINE_HEIGHT);
 
 const TIMELINE_TEXT: Array<{ right?: number; left?: number; top: number; width: number }> = [
   { right: 327, top: 62, width: 218 },
@@ -168,94 +203,222 @@ const TIMELINE_MEDIA: Array<{ left: number; top: number }> = [
   { left: 0, top: 1215 },
 ];
 
-const TIMELINE_CONNECTORS: Array<{ left: number; top: number; mirrored: boolean }> = [
-  { left: 366, top: 110, mirrored: false },
-  { left: 399, top: 352, mirrored: true },
-  { left: 366, top: 594, mirrored: false },
-  { left: 399, top: 836, mirrored: true },
-  { left: 366, top: 1078, mirrored: false },
-];
+/**
+ * Builds an SVG path string connecting all dots with S-curves.
+ * Center X of all dots = 390 (383 left + 15/2 width = 390.5 ≈ 390).
+ */
+function buildTimelinePath(): string {
+  const cx = 390;
+  const parts: string[] = [`M ${cx} ${DOT_POSITIONS[0]}`];
 
-/* The Figma S-curve path (197×24 viewBox, rotated 90° to become vertical 23×196) */
-const CURVE_PATH = "M0.5 0.5C0.5 0.5 57.7 23.2 96.7 23.5C137.1 23.8 196.5 0.5 196.5 0.5";
+  for (let i = 0; i < DOT_POSITIONS.length - 1; i++) {
+    const y1 = DOT_POSITIONS[i];
+    const y2 = DOT_POSITIONS[i + 1];
+    const midY = (y1 + y2) / 2;
+    // S-curve: alternate left/right bulge (±20px from center)
+    const bulge = i % 2 === 0 ? 20 : -20;
+    parts.push(`C ${cx + bulge} ${midY}, ${cx - bulge} ${midY}, ${cx} ${y2}`);
+  }
+
+  return parts.join(" ");
+}
+
+const TIMELINE_SVG_PATH = buildTimelinePath();
+
+/** Mobile timeline thresholds: earlier appearance, spread from 0.02 to 0.55 */
+const MOBILE_THRESHOLDS = Array.from({ length: 6 }, (_, i) => 0.02 + (i * 0.53) / 5);
 
 function TimelineSection() {
-  const [ref, visible] = useInView(0.1);
+  /* ── Desktop ── */
+  const desktopScrollRef = useScrollProgress();
+  const desktopContainerRef = useRef<HTMLDivElement | null>(null);
+  const desktopPathRef = useRef<SVGPathElement | null>(null);
+  const [desktopPathLen, setDesktopPathLen] = useState(0);
+  const [desktopSteps, setDesktopSteps] = useState<boolean[]>(new Array(6).fill(false));
+
+  const setDesktopRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      desktopContainerRef.current = node;
+      (desktopScrollRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+    },
+    [desktopScrollRef],
+  );
+
+  useEffect(() => {
+    if (desktopPathRef.current) setDesktopPathLen(desktopPathRef.current.getTotalLength());
+  }, []);
+
+  useEffect(() => {
+    const el = desktopContainerRef.current;
+    if (!el) return;
+    let rafId = 0;
+    const check = () => {
+      const p = parseFloat(el.style.getPropertyValue("--timeline-progress") || "0");
+      setDesktopSteps((prev) => {
+        const next = prev.map((_, i) => p >= STEP_THRESHOLDS[i]);
+        if (next.every((v, i) => v === prev[i])) return prev;
+        return next;
+      });
+      if (desktopPathRef.current && desktopPathLen > 0) {
+        desktopPathRef.current.style.strokeDashoffset = String(desktopPathLen - p * desktopPathLen);
+      }
+      rafId = requestAnimationFrame(check);
+    };
+    rafId = requestAnimationFrame(check);
+    return () => cancelAnimationFrame(rafId);
+  }, [desktopPathLen]);
+
+  /* ── Mobile ── */
+  const mobileScrollRef = useScrollProgress();
+  const mobileContainerRef = useRef<HTMLDivElement | null>(null);
+  const mobilePathRef = useRef<SVGPathElement | null>(null);
+  const [mobilePathLen, setMobilePathLen] = useState(0);
+  const [mobileSteps, setMobileSteps] = useState<boolean[]>(new Array(6).fill(false));
+
+  const setMobileRefs = useCallback(
+    (node: HTMLDivElement | null) => {
+      mobileContainerRef.current = node;
+      (mobileScrollRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+    },
+    [mobileScrollRef],
+  );
+
+  useEffect(() => {
+    if (mobilePathRef.current) setMobilePathLen(mobilePathRef.current.getTotalLength());
+  }, []);
+
+  useEffect(() => {
+    const el = mobileContainerRef.current;
+    if (!el) return;
+    let rafId = 0;
+    const check = () => {
+      const p = parseFloat(el.style.getPropertyValue("--timeline-progress") || "0");
+      setMobileSteps((prev) => {
+        const next = prev.map((_, i) => p >= MOBILE_THRESHOLDS[i]);
+        if (next.every((v, i) => v === prev[i])) return prev;
+        return next;
+      });
+      if (mobilePathRef.current && mobilePathLen > 0) {
+        mobilePathRef.current.style.strokeDashoffset = String(mobilePathLen - p * mobilePathLen);
+      }
+      rafId = requestAnimationFrame(check);
+    };
+    rafId = requestAnimationFrame(check);
+    return () => cancelAnimationFrame(rafId);
+  }, [mobilePathLen]);
 
   return (
-    <section
-      ref={ref}
-      className={`experience-scroll-reveal${visible ? " visible" : ""} w-full mt-[100px] md:mt-[172px]`}
-    >
-      {/* Mobile */}
-      <div className="md:hidden flex flex-col gap-[40px]">
-        {CASE1_TIMELINE.map((step, i) => (
-          <div key={i} className="flex flex-col gap-[12px]">
-            <div className="aspect-[327/174] rounded-[16px] overflow-hidden bg-[#3b3c48]">
-              <TimelineMedia step={step} />
-            </div>
-            <p className="font-['TN',serif] font-extralight text-[20px] leading-[1.2] text-white">
-              {step.label}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      {/* Desktop — exact Figma layout */}
-      <div className="hidden md:block relative mx-auto" style={{ width: 781, height: 1389 }}>
-        {/* Dots */}
-        {TIMELINE_DOTS_Y.map((y, i) => (
-          <div
-            key={`dot-${i}`}
-            className="absolute w-[15px] h-[15px] rounded-full bg-white z-10"
-            style={{ left: 383, top: y }}
-          />
-        ))}
-
-        {/* Curved connectors */}
-        {TIMELINE_CONNECTORS.map((c, i) => (
-          <div
-            key={`conn-${i}`}
-            className="absolute flex items-center justify-center"
-            style={{ left: c.left, top: c.top, width: c.mirrored ? 22 : 23, height: 196 }}
+    <section className="w-full mt-[100px] md:mt-[172px] overflow-hidden">
+      {/* ── Mobile — scroll-linked with line ── */}
+      <div ref={setMobileRefs} className="md:hidden flex gap-[16px]">
+        {/* Left column — SVG line + dots */}
+        <div className="relative flex-shrink-0" style={{ width: 24 }}>
+          <svg
+            className="absolute inset-0 w-full h-full"
+            viewBox="0 0 24 1000"
+            preserveAspectRatio="none"
+            fill="none"
             aria-hidden="true"
           >
+            <path
+              ref={mobilePathRef}
+              d="M 12 0 L 12 1000"
+              stroke="#999899"
+              strokeWidth="1"
+              fill="none"
+              strokeDasharray={mobilePathLen || 1}
+              strokeDashoffset={mobilePathLen || 1}
+            />
+          </svg>
+          {CASE1_TIMELINE.map((_, i) => {
+            const pct = (i / 5) * 100;
+            return (
+              <div
+                key={i}
+                className="absolute left-[7px] w-[10px] h-[10px] rounded-full bg-white transition-opacity duration-500"
+                style={{ top: `${pct}%`, opacity: mobileSteps[i] ? 1 : 0 }}
+              />
+            );
+          })}
+        </div>
+
+        {/* Right column — cards */}
+        <div className="flex-1 flex flex-col gap-[40px]">
+          {CASE1_TIMELINE.map((step, i) => (
             <div
-              className="flex-none"
+              key={i}
+              className="flex flex-col gap-[12px] transition-all duration-700"
               style={{
-                width: 196,
-                height: c.mirrored ? 22 : 23,
-                transform: c.mirrored ? "scaleX(-1) rotate(90deg)" : "rotate(90deg)",
+                opacity: mobileSteps[i] ? 1 : 0,
+                transform: mobileSteps[i] ? "translateX(0)" : "translateX(30px)",
               }}
             >
-              <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 197 24"
-                fill="none"
-                preserveAspectRatio="none"
-                overflow="visible"
-              >
-                <path d={CURVE_PATH} stroke="#999899" strokeWidth="1" strokeLinecap="round" fill="none" />
-              </svg>
+              <div className="aspect-[327/174] rounded-[16px] overflow-hidden bg-[#3b3c48]">
+                {mobileSteps[i] && <TimelineMedia step={step} />}
+              </div>
+              <p className="font-['TN',serif] font-extralight text-[20px] leading-[1.2] text-white">
+                {step.label}
+              </p>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+      </div>
 
-        {/* Text labels */}
+      {/* ── Desktop — scroll-linked ── */}
+      <div
+        ref={setDesktopRefs}
+        className="hidden md:block relative mx-auto"
+        style={{ width: 781, height: TIMELINE_HEIGHT }}
+      >
+        <svg
+          className="absolute inset-0 w-full h-full"
+          viewBox={`0 0 781 ${TIMELINE_HEIGHT}`}
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            ref={desktopPathRef}
+            d={TIMELINE_SVG_PATH}
+            stroke="#999899"
+            strokeWidth="1"
+            strokeLinecap="round"
+            fill="none"
+            strokeDasharray={desktopPathLen || 1}
+            strokeDashoffset={desktopPathLen || 1}
+          />
+          {DOT_POSITIONS.map((y, i) => (
+            <circle
+              key={i}
+              cx={390}
+              cy={y}
+              r={7.5}
+              fill="white"
+              className="transition-opacity duration-500"
+              style={{ opacity: desktopSteps[i] ? 1 : 0 }}
+            />
+          ))}
+        </svg>
+
         {CASE1_TIMELINE.map((step, i) => {
           const pos = TIMELINE_TEXT[i];
           const isRight = pos.right != null;
+          const isLeft = pos.left != null;
           return (
             <p
               key={`text-${i}`}
-              className="absolute font-['TN',serif] font-extralight text-[24px] leading-[1.2] text-white"
+              className="absolute font-['TN',serif] font-extralight text-[24px] leading-[1.2] text-white transition-all duration-700"
               style={{
                 top: pos.top,
                 width: pos.width,
                 ...(isRight
                   ? { left: pos.right! - pos.width, textAlign: "right" as const }
                   : { left: pos.left }),
+                opacity: desktopSteps[i] ? 1 : 0,
+                transform: desktopSteps[i]
+                  ? "translateX(0)"
+                  : isLeft
+                    ? "translateX(30px)"
+                    : "translateX(-30px)",
               }}
             >
               {step.label}
@@ -263,16 +426,27 @@ function TimelineSection() {
           );
         })}
 
-        {/* Media cards (327×174) */}
         {CASE1_TIMELINE.map((step, i) => {
           const pos = TIMELINE_MEDIA[i];
+          const isLeftCard = pos.left === 0;
           return (
             <div
               key={`media-${i}`}
-              className="absolute rounded-[16px] overflow-hidden bg-[#3b3c48]"
-              style={{ left: pos.left, top: pos.top, width: 327, height: 174 }}
+              className="absolute rounded-[16px] overflow-hidden bg-[#3b3c48] transition-all duration-700"
+              style={{
+                left: pos.left,
+                top: pos.top,
+                width: 327,
+                height: 174,
+                opacity: desktopSteps[i] ? 1 : 0,
+                transform: desktopSteps[i]
+                  ? "translateX(0)"
+                  : isLeftCard
+                    ? "translateX(-40px)"
+                    : "translateX(40px)",
+              }}
             >
-              <TimelineMedia step={step} />
+              {desktopSteps[i] && <TimelineMedia step={step} />}
             </div>
           );
         })}
@@ -305,30 +479,96 @@ function DecisionFlipCard({ card, index }: { card: DecisionCard; index: number }
 
   return (
     <div
-      className="relative w-[350px] h-[350px] rounded-[32px] cursor-pointer"
+      className="w-[350px] h-[350px] cursor-pointer"
+      style={{ perspective: 1000 }}
       onMouseEnter={() => setFlipped(true)}
       onMouseLeave={() => setFlipped(false)}
       onClick={() => setFlipped((f) => !f)}
     >
-      <img
-        src={card.image}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover rounded-[32px] transition-opacity duration-300 ease-in-out"
-        style={{ opacity: flipped ? 0 : 1 }}
-        loading="lazy"
-      />
       <div
-        className="absolute inset-0 bg-[#1e242a] rounded-[32px] transition-opacity duration-300 ease-in-out"
-        style={{ opacity: flipped ? 1 : 0 }}
+        className="relative w-full h-full transition-transform duration-500 ease-in-out"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
       >
+        {/* Front — image */}
+        <img
+          src={card.image}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover rounded-[32px]"
+          style={{ backfaceVisibility: "hidden" }}
+          loading="lazy"
+        />
+        {/* Back — text */}
         <div
-          className="absolute left-[30px] flex flex-col gap-[12px]"
-          style={{ top: CARD_TEXT_TOPS[index], width: 290 }}
+          className="absolute inset-0 bg-[#1e242a] rounded-[32px]"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <div
+            className="absolute left-[30px] flex flex-col gap-[12px]"
+            style={{ top: CARD_TEXT_TOPS[index], width: 290 }}
+          >
+            {card.paragraphs.map((para, pi) => (
+              <p
+                key={pi}
+                className={`font-sf text-[18px] leading-[1.4] whitespace-pre-line ${pi === 0 ? "text-white" : "text-text-secondary"}`}
+              >
+                {para}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function DecisionFlipCardMobile({
+  card,
+  flipOnVisible = false,
+}: {
+  card: DecisionCard;
+  flipOnVisible?: boolean;
+}) {
+  const [flipped, setFlipped] = useState(false);
+
+  // When flipOnVisible becomes true: wait for reveal to finish, then flip
+  useEffect(() => {
+    if (!flipOnVisible) return;
+    // 700ms = reveal-scale animation duration, then flip
+    const timer = setTimeout(() => setFlipped(true), 800);
+    return () => clearTimeout(timer);
+  }, [flipOnVisible]);
+
+  return (
+    <div
+      className="w-full aspect-square cursor-pointer"
+      style={{ perspective: 600 }}
+      onClick={() => setFlipped((f) => !f)}
+    >
+      <div
+        className="relative w-full h-full transition-transform duration-500 ease-in-out"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
+      >
+        <img
+          src={card.image}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover rounded-[16px]"
+          style={{ backfaceVisibility: "hidden" }}
+          loading="lazy"
+        />
+        <div
+          className="absolute inset-0 bg-[#1e242a] rounded-[16px] p-[16px] overflow-y-auto scrollbar-hide"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           {card.paragraphs.map((para, pi) => (
             <p
               key={pi}
-              className={`font-sf text-[18px] leading-[1.4] whitespace-pre-line ${pi === 0 ? "text-white" : "text-text-secondary"}`}
+              className={`font-sf leading-[1.4] whitespace-pre-line mb-[6px] last:mb-0 ${pi === 0 ? "text-white text-[14px] font-medium" : "text-text-secondary text-[12px]"}`}
             >
               {para}
             </p>
@@ -340,76 +580,88 @@ function DecisionFlipCard({ card, index }: { card: DecisionCard; index: number }
 }
 
 function DecisionsSection() {
-  const [ref, visible] = useInView(0.1);
-
+  const [titleRef, titleVisible] = useInView(0.1);
+  const [cardsRef, cardsVisible] = useInView(0.1);
+  const [mobileGridRef, mobileVisible] = useInView(0.2);
   return (
-    <section
-      ref={ref}
-      className={`experience-scroll-reveal${visible ? " visible" : ""} w-full mt-[100px] md:mt-[172px]`}
-    >
+    <section className="w-full mt-[100px] md:mt-[172px]">
       {/* Desktop — exact Figma absolute layout */}
       <div className="hidden md:block relative mx-auto" style={{ width: 1280, height: 704 }}>
-        {/* Title */}
-        <h2
-          className="absolute left-1/2 -translate-x-1/2 top-0 font-['TN',serif] font-extralight text-[48px] leading-[1.2] tracking-[-0.48px] text-white text-center"
-          style={{ width: 514 }}
-        >
-          3 decisions that changed everything
-        </h2>
+        <div ref={titleRef}>
+          <h2
+            className={`reveal-fade-up${titleVisible ? " visible" : ""} absolute left-1/2 -translate-x-1/2 top-0 font-['TN',serif] font-extralight text-[48px] leading-[1.2] tracking-[-0.48px] text-white text-center`}
+            style={{ width: 514 }}
+          >
+            3 decisions that changed everything
+          </h2>
 
-        {/* Left arrow */}
-        <svg
-          className="absolute"
-          style={{ left: 196, top: 41, width: 154.5, height: 115.5 }}
-          viewBox="0 0 158 116.5"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path d={ARROW_LEFT_PATH} fill="#999899" />
-        </svg>
+          <svg
+            className={`reveal-fade-up${titleVisible ? " visible" : ""} absolute`}
+            style={{ left: 196, top: 41, width: 154.5, height: 115.5, transitionDelay: "200ms" }}
+            viewBox="0 0 158 116.5"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d={ARROW_LEFT_PATH} fill="#999899" />
+          </svg>
 
-        {/* Right arrow (horizontally mirrored) */}
-        <svg
-          className="absolute"
-          style={{ left: 929, top: 41, width: 154.5, height: 115.5, transform: "scaleX(-1)" }}
-          viewBox="0 0 158 116.5"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path d={ARROW_LEFT_PATH} fill="#999899" />
-        </svg>
+          <svg
+            className={`reveal-fade-up${titleVisible ? " visible" : ""} absolute`}
+            style={{ left: 929, top: 41, width: 154.5, height: 115.5, transform: titleVisible ? "scaleX(-1)" : "scaleX(-1) translateY(30px)", transitionDelay: "200ms" }}
+            viewBox="0 0 158 116.5"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d={ARROW_LEFT_PATH} fill="#999899" />
+          </svg>
 
-        {/* Center arrow */}
-        <svg
-          className="absolute"
-          style={{ left: 638, top: 157, width: 7.4, height: 137.5 }}
-          viewBox="0 0 7.4 138.5"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path d={ARROW_CENTER_PATH} fill="#999899" />
-        </svg>
-
-        {/* Images/cards */}
-        <div className="absolute" style={{ left: 0, top: 187 }}>
-          <DecisionFlipCard card={CASE1_DECISIONS[0]} index={0} />
+          <svg
+            className={`reveal-fade-up${titleVisible ? " visible" : ""} absolute`}
+            style={{ left: 638, top: 157, width: 7.4, height: 137.5, transitionDelay: "200ms" }}
+            viewBox="0 0 7.4 138.5"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path d={ARROW_CENTER_PATH} fill="#999899" />
+          </svg>
         </div>
-        <div className="absolute left-1/2 -translate-x-1/2" style={{ top: 354 }}>
-          <DecisionFlipCard card={CASE1_DECISIONS[1]} index={1} />
-        </div>
-        <div className="absolute" style={{ left: 930, top: 187 }}>
-          <DecisionFlipCard card={CASE1_DECISIONS[2]} index={2} />
+
+        <div ref={cardsRef}>
+          <div
+            className={`reveal-scale${cardsVisible ? " visible" : ""} absolute`}
+            style={{ left: 0, top: 187 }}
+          >
+            <DecisionFlipCard card={CASE1_DECISIONS[0]} index={0} />
+          </div>
+          <div
+            className={`reveal-scale${cardsVisible ? " visible" : ""} absolute left-1/2 -translate-x-1/2`}
+            style={{ top: 354, transitionDelay: "150ms" }}
+          >
+            <DecisionFlipCard card={CASE1_DECISIONS[1]} index={1} />
+          </div>
+          <div
+            className={`reveal-scale${cardsVisible ? " visible" : ""} absolute`}
+            style={{ left: 930, top: 187, transitionDelay: "300ms" }}
+          >
+            <DecisionFlipCard card={CASE1_DECISIONS[2]} index={2} />
+          </div>
         </div>
       </div>
 
-      {/* Mobile — stacked */}
-      <div className="md:hidden flex flex-col items-center gap-[24px]">
+      {/* Mobile — 2-col grid, first card flips after reveal */}
+      <div ref={mobileGridRef} className="md:hidden">
         <h2 className="font-['TN',serif] font-extralight text-[28px] leading-[1.2] tracking-[-0.48px] text-white text-center mb-[16px]">
           3 decisions that changed everything
         </h2>
-        {CASE1_DECISIONS.map((card, i) => (
-          <DecisionFlipCard key={i} card={card} index={i} />
-        ))}
+        <div className={`reveal-stagger-children${mobileVisible ? " visible" : ""} grid grid-cols-2 gap-[12px] mb-[12px]`}>
+          <DecisionFlipCardMobile card={CASE1_DECISIONS[0]} flipOnVisible={mobileVisible} />
+          <DecisionFlipCardMobile card={CASE1_DECISIONS[1]} />
+        </div>
+        <div className="grid grid-cols-2 gap-[12px]">
+          <div className="col-start-1 col-end-3 mx-auto" style={{ width: "calc(50% - 6px)" }}>
+            <DecisionFlipCardMobile card={CASE1_DECISIONS[2]} />
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -417,16 +669,17 @@ function DecisionsSection() {
 
 /* ─── YouTube Video ───────────────────────────────────────── */
 function VideoSection() {
-  const [ref, visible] = useInView(0.1);
+  const [vidRef, vidVisible] = useInView(0.1);
+  const [tabsRef, tabsVisible] = useInView(0.1);
   const [playing, setPlaying] = useState(false);
 
   return (
-    <section
-      ref={ref}
-      className={`experience-scroll-reveal${visible ? " visible" : ""} flex flex-col items-center gap-[24px] w-full max-w-[966px] mt-[100px] md:mt-[172px]`}
-    >
+    <section className="flex flex-col items-center gap-[24px] w-full max-w-[966px] mt-[100px] md:mt-[172px]">
       {/* YouTube facade — no title per Figma */}
-      <div className="relative w-full rounded-[24px] md:rounded-[32px] overflow-hidden bg-white/10">
+      <div
+        ref={vidRef}
+        className={`reveal-blur${vidVisible ? " visible" : ""} relative w-full rounded-[24px] md:rounded-[32px] overflow-hidden bg-white/10 cursor-pointer`}
+      >
         <div className="relative w-full" style={{ paddingBottom: "57.76%" }}>
           {playing ? (
             <iframe
@@ -465,7 +718,10 @@ function VideoSection() {
       </div>
 
       {/* Tab labels — Figma: bg-[#1e1e1e], gap-24, rounded-12, py-16 px-8 */}
-      <div className="flex flex-col md:flex-row gap-[16px] md:gap-[24px] w-full">
+      <div
+        ref={tabsRef}
+        className={`reveal-stagger-children${tabsVisible ? " visible" : ""} flex flex-col md:flex-row gap-[16px] md:gap-[24px] w-full`}
+      >
         {CASE1_VIDEO_TABS.map((tab) => (
           <div
             key={tab}
@@ -483,24 +739,28 @@ function VideoSection() {
 
 /* ─── Metrics ─────────────────────────────────────────────── */
 function MetricsSection() {
-  const [ref, visible] = useInView(0.1);
+  const [quoteRef, quoteVisible] = useInView(0.1);
+  const [gridRef, gridVisible] = useInView(0.1);
 
   return (
-    <section
-      ref={ref}
-      className={`experience-scroll-reveal${visible ? " visible" : ""} w-full max-w-[1280px] mt-[100px] md:mt-[172px]`}
-    >
-      <p className="font-['TN',serif] font-extralight text-[24px] md:text-[48px] leading-[1.2] tracking-[-0.48px] text-white text-center max-w-[966px] mx-auto mb-[48px] md:mb-[80px]">
+    <section className="w-full max-w-[1280px] mt-[100px] md:mt-[172px]">
+      <p
+        ref={quoteRef}
+        className={`reveal-fade-up${quoteVisible ? " visible" : ""} font-['TN',serif] font-extralight text-[24px] md:text-[48px] leading-[1.2] tracking-[-0.48px] text-white text-center max-w-[966px] mx-auto mb-[48px] md:mb-[80px]`}
+      >
         {CASE1_QUOTE}
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[24px] md:gap-[48px]">
+      <div
+        ref={gridRef}
+        className={`reveal-stagger-children${gridVisible ? " visible" : ""} grid grid-cols-2 gap-[12px] md:gap-[48px] auto-rows-[1fr]`}
+      >
         {CASE1_METRICS.map((metric) => (
-          <div key={metric.label} className="bg-white rounded-[20px] pt-[24px] pb-[30px] px-[24px] md:px-[32px]">
-            <p className="font-['TN',serif] font-extralight text-[36px] md:text-[48px] text-[#222] tracking-[-0.48px] leading-[1.2]">
+          <div key={metric.label} className="bg-white rounded-[20px] pt-[24px] pb-[30px] px-[16px] md:px-[32px]">
+            <p className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] text-[#222] tracking-[-0.48px] leading-[1.2]">
               {metric.value}
             </p>
-            <p className="font-sf text-[16px] md:text-[18px] text-[#6a6a6a] mt-[12px] leading-[1.4]">
+            <p className="font-sf text-[14px] md:text-[18px] text-[#6a6a6a] mt-[12px] leading-[1.4]">
               {metric.label}
             </p>
           </div>

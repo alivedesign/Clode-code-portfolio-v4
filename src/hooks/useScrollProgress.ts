@@ -1,38 +1,45 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
-export function useScrollProgress(containerRef: React.RefObject<HTMLElement | null>): number {
-  const [progress, setProgress] = useState(0);
+/**
+ * Tracks how far a container has scrolled through the viewport (0 → 1).
+ * Sets --timeline-progress CSS custom property on the element.
+ */
+export function useScrollProgress(): React.RefObject<HTMLDivElement | null> {
+  const ref = useRef<HTMLDivElement | null>(null);
   const rafId = useRef(0);
 
+  const update = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const windowH = window.innerHeight;
+
+    // progress 0 = container top just entered viewport bottom
+    // progress 1 = container bottom just left viewport top
+    const totalTravel = windowH + rect.height;
+    const traveled = windowH - rect.top;
+    const progress = Math.min(1, Math.max(0, traveled / totalTravel));
+
+    el.style.setProperty("--timeline-progress", String(progress));
+  }, []);
+
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const update = () => {
-      const rect = container.getBoundingClientRect();
-      const scrollableHeight = container.offsetHeight - window.innerHeight;
-      if (scrollableHeight <= 0) {
-        setProgress(0);
-        return;
-      }
-      const scrolled = -rect.top;
-      const clamped = Math.max(0, Math.min(1, scrolled / scrollableHeight));
-      setProgress(clamped);
-    };
-
     const onScroll = () => {
       cancelAnimationFrame(rafId.current);
       rafId.current = requestAnimationFrame(update);
     };
 
+    update(); // initial
     window.addEventListener("scroll", onScroll, { passive: true });
-    update();
+    window.addEventListener("resize", onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
       cancelAnimationFrame(rafId.current);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
     };
-  }, [containerRef]);
+  }, [update]);
 
-  return progress;
+  return ref;
 }

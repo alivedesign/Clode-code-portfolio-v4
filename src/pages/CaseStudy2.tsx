@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
+import { useInView } from "@/hooks/useInView";
 
 const YOUTUBE_VIDEO_ID = "tozd-Dif7nI";
 const YOUTUBE_EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
@@ -47,30 +48,51 @@ function DecisionCard({
   decision: (typeof DECISIONS)[number];
   className?: string;
 }) {
+  const [flipped, setFlipped] = useState(false);
+
   return (
-    <div className={`group relative w-[350px] h-[350px] cursor-pointer ${className}`}>
-      {/* Image (default state) */}
-      <div className="absolute inset-0 rounded-[32px] overflow-hidden transition-opacity duration-300 group-hover:opacity-0">
-        <img
-          src={decision.image}
-          alt={decision.title}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      {/* Text card (hover state) */}
-      <div className="absolute inset-0 bg-[#1e242a] rounded-[32px] p-[30px] pt-[32px] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <p className="font-sf text-[18px] font-bold leading-[1.4] text-white mb-[12px]">
-          {decision.title}
-        </p>
-        {decision.description.map((para, i) => (
-          <p
-            key={i}
-            className="font-sf text-[18px] leading-[1.4] text-white mb-[12px] last:mb-0"
-          >
-            {para}
+    <div
+      className={`w-[350px] h-[350px] cursor-pointer ${className}`}
+      style={{ perspective: 1000 }}
+      onMouseEnter={() => setFlipped(true)}
+      onMouseLeave={() => setFlipped(false)}
+    >
+      <div
+        className="relative w-full h-full transition-transform duration-500 ease-in-out"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
+      >
+        {/* Front — image */}
+        <div
+          className="absolute inset-0 rounded-[32px] overflow-hidden bg-[#1e242a]"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <img
+            src={decision.image}
+            alt={decision.title}
+            className="w-full h-full object-contain"
+            loading="lazy"
+          />
+        </div>
+        {/* Back — text */}
+        <div
+          className="absolute inset-0 bg-[#1e242a] rounded-[32px] p-[30px] pt-[32px]"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <p className="font-sf text-[18px] font-bold leading-[1.4] text-white mb-[12px]">
+            {decision.title}
           </p>
-        ))}
+          {decision.description.map((para, i) => (
+            <p
+              key={i}
+              className="font-sf text-[18px] leading-[1.4] text-white mb-[12px] last:mb-0"
+            >
+              {para}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -85,36 +107,47 @@ function DecisionCardMobile({
   return (
     <button
       type="button"
-      className="relative w-full aspect-square cursor-pointer"
+      className="w-full aspect-square cursor-pointer"
+      style={{ perspective: 1000 }}
       onClick={() => setFlipped((f) => !f)}
       aria-label={`${flipped ? "Hide" : "Show"} details: ${decision.title}`}
     >
-      {/* Image */}
       <div
-        className={`absolute inset-0 rounded-[20px] overflow-hidden transition-opacity duration-300 ${flipped ? "opacity-0" : "opacity-100"}`}
+        className="relative w-full h-full transition-transform duration-500 ease-in-out"
+        style={{
+          transformStyle: "preserve-3d",
+          transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)",
+        }}
       >
-        <img
-          src={decision.image}
-          alt={decision.title}
-          className="w-full h-full object-cover"
-          loading="lazy"
-        />
-      </div>
-      {/* Text card */}
-      <div
-        className={`absolute inset-0 bg-[#1e242a] rounded-[20px] p-[20px] pt-[24px] text-left transition-opacity duration-300 ${flipped ? "opacity-100" : "opacity-0"}`}
-      >
-        <p className="font-sf text-[16px] font-bold leading-[1.4] text-white mb-[8px]">
-          {decision.title}
-        </p>
-        {decision.description.map((para, i) => (
-          <p
-            key={i}
-            className="font-sf text-[14px] leading-[1.4] text-white mb-[8px] last:mb-0"
-          >
-            {para}
+        {/* Front — image */}
+        <div
+          className="absolute inset-0 rounded-[20px] overflow-hidden bg-[#1e242a]"
+          style={{ backfaceVisibility: "hidden" }}
+        >
+          <img
+            src={decision.image}
+            alt={decision.title}
+            className="w-full h-full object-contain"
+            loading="lazy"
+          />
+        </div>
+        {/* Back — text */}
+        <div
+          className="absolute inset-0 bg-[#1e242a] rounded-[20px] p-[20px] pt-[24px] text-left"
+          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        >
+          <p className="font-sf text-[16px] font-bold leading-[1.4] text-white mb-[8px]">
+            {decision.title}
           </p>
-        ))}
+          {decision.description.map((para, i) => (
+            <p
+              key={i}
+              className="font-sf text-[14px] leading-[1.4] text-white mb-[8px] last:mb-0"
+            >
+              {para}
+            </p>
+          ))}
+        </div>
       </div>
     </button>
   );
@@ -122,6 +155,18 @@ function DecisionCardMobile({
 
 export function CaseStudy2() {
   const [playing, setPlaying] = useState(false);
+  const [heroRef, heroVisible] = useInView(0.1);
+  const [screenshotsRef, screenshotsVisible] = useInView(0.1);
+  const [problemTextRef, problemTextVisible] = useInView(0.1);
+  const [problemImgRef, problemImgVisible] = useInView(0.1);
+  const [builtTextRef, builtTextVisible] = useInView(0.1);
+  const [builtVideoRef, builtVideoVisible] = useInView(0.1);
+  const [builtCardsRef, builtCardsVisible] = useInView(0.1);
+  const [decisionsTitleRef, decisionsTitleVisible] = useInView(0.1);
+  const [decisionsCardsRef, decisionsCardsVisible] = useInView(0.1);
+  const [decisionsMobileRef, decisionsMobileVisible] = useInView(0.1);
+  const [youtubeRef, youtubeVisible] = useInView(0.1);
+  const [metricsRef, metricsVisible] = useInView(0.1);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -136,7 +181,7 @@ export function CaseStudy2() {
         {/* Back to cases */}
         <Link
           to="/cases"
-          className="flex items-center gap-[8px] self-center mb-[32px] md:mb-[24px] mt-[24px] md:mt-0"
+          className="flex items-center gap-[8px] self-center mb-[64px] md:mb-[56px] mt-[24px] md:mt-0"
         >
           <svg
             width="28"
@@ -156,7 +201,7 @@ export function CaseStudy2() {
         </Link>
 
         {/* Hero */}
-        <section className="flex flex-col items-center text-center max-w-[655px] mb-[40px] md:mb-[56px]">
+        <section ref={heroRef} className={`reveal-fade-up${heroVisible ? " visible" : ""} flex flex-col items-center text-center max-w-[655px] mb-[40px] md:mb-[56px]`}>
           <h1 className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] text-white tracking-[-0.48px] mb-[16px]">
             I built a Figma plugin with AI that manages 6 brands in one click
           </h1>
@@ -167,7 +212,7 @@ export function CaseStudy2() {
         </section>
 
         {/* Three screenshots — uniform containers with fixed aspect ratio */}
-        <section className="flex flex-col md:flex-row gap-[16px] md:gap-[32px] items-center mb-[160px] md:mb-[275px]">
+        <section ref={screenshotsRef} className={`reveal-stagger-children${screenshotsVisible ? " visible" : ""} flex flex-col md:flex-row gap-[16px] md:gap-[32px] items-center mb-[128px] md:mb-[243px]`}>
           {[1, 2, 3].map((n) => (
             <div
               key={n}
@@ -185,8 +230,8 @@ export function CaseStudy2() {
         </section>
 
         {/* The problem */}
-        <section className="flex flex-col items-center text-center max-w-[974px] mb-[160px] md:mb-[260px]">
-          <div className="max-w-[655px] mb-[48px] md:mb-[64px]">
+        <section className="flex flex-col items-center text-center max-w-[974px] mb-[128px] md:mb-[228px]">
+          <div ref={problemTextRef} className={`reveal-fade-up${problemTextVisible ? " visible" : ""} max-w-[655px] mb-[48px] md:mb-[64px]`}>
             <h2 className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] text-white tracking-[-0.48px] mb-[16px]">
               The problem nobody had a tool for
             </h2>
@@ -206,7 +251,7 @@ export function CaseStudy2() {
           </div>
 
           {/* 3D workflow illustration */}
-          <div className="w-full">
+          <div ref={problemImgRef} className={`reveal-blur${problemImgVisible ? " visible" : ""} w-full`}>
             <img
               src="/images/cases/case-2/workflow-3d.png"
               alt="Workflow visualization"
@@ -218,7 +263,7 @@ export function CaseStudy2() {
 
         {/* What I built */}
         <section className="flex flex-col items-center w-full max-w-[992px] mb-[160px] md:mb-[260px]">
-          <div className="flex flex-col items-center text-center max-w-[655px] mb-[48px] md:mb-[64px]">
+          <div ref={builtTextRef} className={`reveal-fade-up${builtTextVisible ? " visible" : ""} flex flex-col items-center text-center max-w-[655px] mb-[48px] md:mb-[64px]`}>
             <p className="font-sf text-[16px] md:text-[18px] leading-[1.4] text-accent mb-[16px]">
               What I built
             </p>
@@ -228,7 +273,7 @@ export function CaseStudy2() {
           </div>
 
           {/* Looped GIF video */}
-          <div className="w-full rounded-[14px] md:rounded-[20px] overflow-hidden mb-[48px] md:mb-[64px]">
+          <div ref={builtVideoRef} className={`reveal-blur${builtVideoVisible ? " visible" : ""} w-full rounded-[14px] md:rounded-[20px] overflow-hidden mb-[48px] md:mb-[64px]`}>
             <video
               autoPlay
               muted
@@ -240,7 +285,7 @@ export function CaseStudy2() {
           </div>
 
           {/* Feature cards */}
-          <div className="flex flex-col gap-[16px] md:gap-[24px] w-full">
+          <div ref={builtCardsRef} className={`reveal-stagger-children${builtCardsVisible ? " visible" : ""} flex flex-col gap-[16px] md:gap-[24px] w-full`}>
             <div className="bg-[#1e242a] rounded-[16px] md:rounded-[24px] p-[20px] md:p-[24px]">
               <p className="font-sf text-[16px] md:text-[18px] leading-[1.5] text-white">
                 Colors tab → One-click theme switching across 6 brands × 2
@@ -260,14 +305,14 @@ export function CaseStudy2() {
 
         {/* 3 decisions that shaped the plugin */}
         <section className="w-full max-w-[1280px] mb-[120px] md:mb-[192px]">
-          <h2 className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] text-white tracking-[-0.48px] text-center max-w-[460px] mx-auto mb-[40px] md:mb-[24px]">
+          <h2 ref={decisionsTitleRef} className={`reveal-fade-up${decisionsTitleVisible ? " visible" : ""} font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] text-white tracking-[-0.48px] text-center max-w-[460px] mx-auto mb-[40px] md:mb-[24px]`}>
             3 decisions that shaped the plugin
           </h2>
 
           {/* Desktop layout with arrows */}
-          <div className="hidden md:block relative h-[700px]">
+          <div ref={decisionsCardsRef} className="hidden md:block relative h-[700px]">
             {/* Decorative arrows */}
-            <div className="absolute left-[calc(50%-294px)] top-0 w-[155px] h-[116px]">
+            <div className={`reveal-fade-up${decisionsCardsVisible ? " visible" : ""} absolute left-[calc(50%-294px)] top-0 w-[155px] h-[116px]`}>
               <svg
                 width="100%"
                 height="100%"
@@ -281,7 +326,7 @@ export function CaseStudy2() {
                 />
               </svg>
             </div>
-            <div className="absolute right-[calc(50%-294px)] top-0 w-[155px] h-[116px] scale-x-[-1]">
+            <div className={`reveal-fade-up${decisionsCardsVisible ? " visible" : ""} absolute right-[calc(50%-294px)] top-0 w-[155px] h-[116px] scale-x-[-1]`}>
               <svg
                 width="100%"
                 height="100%"
@@ -295,7 +340,7 @@ export function CaseStudy2() {
                 />
               </svg>
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 top-[20px] w-[8px] h-[138px]">
+            <div className={`reveal-fade-up${decisionsCardsVisible ? " visible" : ""} absolute left-1/2 -translate-x-1/2 top-[20px] w-[8px] h-[138px]`}>
               <svg
                 width="100%"
                 height="100%"
@@ -311,19 +356,19 @@ export function CaseStudy2() {
             </div>
 
             {/* Decision cards with images */}
-            <div className="absolute left-0 top-[163px]">
+            <div className={`reveal-scale${decisionsCardsVisible ? " visible" : ""} absolute left-0 top-[163px]`}>
               <DecisionCard decision={DECISIONS[0]} />
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 top-[330px]">
+            <div className={`reveal-scale${decisionsCardsVisible ? " visible" : ""} absolute left-1/2 -translate-x-1/2 top-[330px]`}>
               <DecisionCard decision={DECISIONS[1]} />
             </div>
-            <div className="absolute right-0 top-[163px]">
+            <div className={`reveal-scale${decisionsCardsVisible ? " visible" : ""} absolute right-0 top-[163px]`}>
               <DecisionCard decision={DECISIONS[2]} />
             </div>
           </div>
 
           {/* Mobile layout */}
-          <div className="flex md:hidden flex-col gap-[16px]">
+          <div ref={decisionsMobileRef} className={`reveal-stagger-children${decisionsMobileVisible ? " visible" : ""} flex md:hidden flex-col gap-[16px]`}>
             {DECISIONS.map((d, i) => (
               <DecisionCardMobile key={i} decision={d} />
             ))}
@@ -331,9 +376,9 @@ export function CaseStudy2() {
         </section>
 
         {/* YouTube embed — no title, with content-page hover effect */}
-        <section className="w-full max-w-[966px] mb-[120px] md:mb-[192px]">
+        <section ref={youtubeRef} className={`reveal-blur${youtubeVisible ? " visible" : ""} w-full max-w-[966px] mb-[120px] md:mb-[192px]`}>
           <div
-            className={`relative w-full rounded-[20px] md:rounded-[32px] overflow-hidden bg-white/10 transition-all duration-300 ${playing ? "opacity-100 scale-100" : "opacity-65 hover:opacity-100 hover:scale-[1.02]"}`}
+            className={`relative w-full rounded-[20px] md:rounded-[32px] overflow-hidden bg-white/10 cursor-pointer transition-all duration-300 ${playing ? "opacity-100 scale-100" : "opacity-65 hover:opacity-100 hover:scale-[1.02]"}`}
             style={{ paddingBottom: "56.25%" }}
           >
             {playing ? (
@@ -377,7 +422,7 @@ export function CaseStudy2() {
 
         {/* Metrics */}
         <section className="w-full max-w-[1280px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[48px]">
+          <div ref={metricsRef} className={`reveal-stagger-children${metricsVisible ? " visible" : ""} grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[48px]`}>
             {METRICS.map((m, i) => (
               <div
                 key={i}
