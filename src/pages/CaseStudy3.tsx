@@ -176,7 +176,7 @@ export function CaseStudy3() {
         {/* Feature cards */}
         <section
           ref={featuresRef}
-          className={`reveal-stagger-children${featuresVisible ? " visible" : ""} w-full max-w-[1256px] grid grid-cols-2 gap-[12px] md:gap-[32px_24px] mb-[128px] md:mb-[200px]`}
+          className={`reveal-stagger-children${featuresVisible ? " visible" : ""} w-full max-w-[1256px] grid grid-cols-2 gap-[12px] md:gap-[32px_24px] auto-rows-[1fr] mb-[128px] md:mb-[200px]`}
         >
           {CASE3_FEATURES.map((feature) => (
             <div
