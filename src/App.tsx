@@ -11,6 +11,8 @@ const Products = lazy(() => import("@/pages/Products").then(m => ({ default: m.P
 const Cases = lazy(() => import("@/pages/Cases").then(m => ({ default: m.Cases })));
 const Content = lazy(() => import("@/pages/Content").then(m => ({ default: m.Content })));
 const About = lazy(() => import("@/pages/About").then(m => ({ default: m.About })));
+const CaseStudy1 = lazy(() => import("@/pages/CaseStudy1").then(m => ({ default: m.CaseStudy1 })));
+const CaseStudy2 = lazy(() => import("@/pages/CaseStudy2").then(m => ({ default: m.CaseStudy2 })));
 
 export default function App() {
   return (
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/cases" element={<Cases />} />
         <Route path="/content" element={<Content />} />
         <Route path="/about" element={<About />} />
+        <Route path="/cases/mcp-vibe-coding" element={<CaseStudy1 />} />
+        <Route path="/cases/figma-token-plugin" element={<CaseStudy2 />} />
       </Routes>
     </Suspense>
   );

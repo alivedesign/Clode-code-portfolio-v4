@@ -169,7 +169,7 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
           className="mt-[32px] flex justify-center"
           style={{ opacity: 0, transform: "translateY(20px)" }}
         >
-          <CaseTitle segments={caseData.title} />
+          <CaseTitle segments={caseData.title} link={caseData.link} />
         </div>
       </div>
     </div>

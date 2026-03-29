@@ -28,7 +28,7 @@ export function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
       </div>
 
       {/* Title */}
-      <CaseTitle segments={caseData.title} />
+      <CaseTitle segments={caseData.title} link={caseData.link} />
 
       {/* Bottom 2 characters */}
       <div className="flex gap-[16px] mt-[32px] justify-center">

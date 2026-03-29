@@ -23,7 +23,7 @@ export function CaseVideoPreview({ caseData, index }: CaseVideoPreviewProps) {
           src={caseData.videoSrc}
         />
       </div>
-      <CaseTitle segments={caseData.title} className="mt-[32px]" />
+      <CaseTitle segments={caseData.title} link={caseData.link} className="mt-[32px]" />
     </section>
   );
 }

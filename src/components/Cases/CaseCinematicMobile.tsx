@@ -26,7 +26,7 @@ export function CaseCinematicMobile({ caseData, index }: CaseCinematicMobileProp
       )}
 
       {/* Title */}
-      <CaseTitle segments={caseData.title} />
+      <CaseTitle segments={caseData.title} link={caseData.link} />
     </section>
   );
 }

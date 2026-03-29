@@ -19,6 +19,7 @@ export interface CaseData {
   id: string;
   type: "video" | "cinematic" | "lottie";
   title: CaseTitleSegment[];
+  link?: string;
   videoSrc?: string;
   frameSrc?: string;
   posterSrc?: string;
@@ -33,6 +34,7 @@ export const CASES: CaseData[] = [
   {
     id: "mcp-vibe-coding",
     type: "video",
+    link: "/cases/mcp-vibe-coding",
     title: [
       { text: "Designed & engineered a ", highlighted: false },
       { text: "system + MCP to power vibe-coding", highlighted: true },
@@ -43,6 +45,7 @@ export const CASES: CaseData[] = [
   {
     id: "figma-token-plugin",
     type: "cinematic",
+    link: "/cases/figma-token-plugin",
     title: [
       { text: "How I solved ", highlighted: false },
       { text: "figma's", highlighted: true },

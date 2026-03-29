@@ -38,7 +38,7 @@ export function CaseLottieScatter({ caseData, index }: CaseLottieScatterProps) {
 
         {/* Centered title */}
         <div className="absolute left-1/2 -translate-x-1/2 top-[280px]">
-          <CaseTitle segments={caseData.title} />
+          <CaseTitle segments={caseData.title} link={caseData.link} />
         </div>
       </div>
     </section>

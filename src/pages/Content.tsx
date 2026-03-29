@@ -20,11 +20,11 @@ function YouTubeCard({ videoId }: { videoId: string }) {
   const [playing, setPlaying] = useState(false);
 
   return (
-    <div className="relative w-full rounded-[24px] overflow-hidden opacity-65 hover:opacity-100 hover:scale-[1.02] transition-all duration-300" style={{ paddingBottom: "56.25%" }}>
+    <div className={`relative w-full rounded-[24px] overflow-hidden transition-all duration-300 ${playing ? "opacity-100 scale-100" : "opacity-65 hover:opacity-100 hover:scale-[1.02]"}`} style={{ paddingBottom: "56.25%" }}>
       {playing ? (
         <iframe
           className="absolute inset-0 w-full h-full"
-          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`}
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`}
           title="YouTube video"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
