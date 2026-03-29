@@ -5,6 +5,7 @@ interface DotLottieCanvasProps {
   src: string;
   autoplay?: boolean;
   loop?: boolean;
+  playWhenVisible?: boolean;
   className?: string;
   style?: React.CSSProperties;
 }
@@ -13,6 +14,7 @@ export function DotLottieCanvas({
   src,
   autoplay = true,
   loop = true,
+  playWhenVisible = false,
   className,
   style,
 }: DotLottieCanvasProps) {
@@ -23,18 +25,39 @@ export function DotLottieCanvas({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    const shouldAutoplay = playWhenVisible ? false : autoplay;
+
     instanceRef.current = new DotLottie({
       canvas,
       src,
-      autoplay,
+      autoplay: shouldAutoplay,
       loop,
     });
 
-    return () => {
+    if (!playWhenVisible) return () => {
       instanceRef.current?.destroy();
       instanceRef.current = null;
     };
-  }, [src, autoplay, loop]);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          instanceRef.current?.play();
+        } else {
+          instanceRef.current?.pause();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(canvas);
+
+    return () => {
+      observer.disconnect();
+      instanceRef.current?.destroy();
+      instanceRef.current = null;
+    };
+  }, [src, autoplay, loop, playWhenVisible]);
 
   return (
     <div className={className} style={{ lineHeight: 0, ...style }}>
