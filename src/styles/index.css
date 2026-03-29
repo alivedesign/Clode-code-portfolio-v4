@@ -505,6 +505,12 @@ body {
 .reveal-stagger-children.visible > *:nth-child(5) { transition-delay: 320ms; }
 .reveal-stagger-children.visible > *:nth-child(6) { transition-delay: 400ms; }
 
+/* ─── Clickable case card — forces pointer on all descendants ── */
+.case-card-link,
+.case-card-link * {
+  cursor: pointer !important;
+}
+
 /* ─── Product modal ──────────────────────────────────────── */
 .product-modal-backdrop {
   position: fixed;

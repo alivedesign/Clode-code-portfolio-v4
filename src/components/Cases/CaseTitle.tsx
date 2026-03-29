@@ -8,8 +8,8 @@ interface CaseTitleProps {
 }
 
 export function CaseTitle({ segments, link, className = "" }: CaseTitleProps) {
-  return (
-    <div className={`flex flex-col gap-[16px] items-center text-center ${className}`}>
+  const inner = (
+    <>
       <p className="font-['TN',serif] font-extralight text-[24px] md:text-[28px] leading-[1.2] max-w-[584px]">
         {segments.map((seg, i) => (
           <span
@@ -20,15 +20,26 @@ export function CaseTitle({ segments, link, className = "" }: CaseTitleProps) {
           </span>
         ))}
       </p>
-      {link ? (
-        <Link to={link} className="font-sf text-[18px] leading-[1.3] text-accent hover:underline">
-          View Case Study
-        </Link>
-      ) : (
-        <p className="font-sf text-[18px] leading-[1.3] text-accent">
-          View Case Study
-        </p>
-      )}
+      <p className={`font-sf text-[18px] leading-[1.3] text-accent ${link ? "group-hover:underline" : ""}`}>
+        View Case Study
+      </p>
+    </>
+  );
+
+  if (link) {
+    return (
+      <Link
+        to={link}
+        className={`group flex flex-col gap-[16px] items-center text-center ${className}`}
+      >
+        {inner}
+      </Link>
+    );
+  }
+
+  return (
+    <div className={`flex flex-col gap-[16px] items-center text-center ${className}`}>
+      {inner}
     </div>
   );
 }

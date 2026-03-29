@@ -92,6 +92,11 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
         titleRef.current.style.opacity = String(titleOpacity);
         titleRef.current.style.transform = `translateY(${titleTranslate}px)`;
       }
+
+      // Show/hide title link based on animation progress
+      if (titleRef.current) {
+        titleRef.current.style.pointerEvents = progress >= 1 ? "auto" : "none";
+      }
     });
   }, [frames]);
 
@@ -163,11 +168,11 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
           )}
         </div>
 
-        {/* Title below character — in flow, not absolute */}
+        {/* Title below character */}
         <div
           ref={titleRef}
           className="mt-[32px] flex justify-center"
-          style={{ opacity: 0, transform: "translateY(20px)" }}
+          style={{ opacity: 0, transform: "translateY(20px)", pointerEvents: "none" }}
         >
           <CaseTitle segments={caseData.title} link={caseData.link} />
         </div>

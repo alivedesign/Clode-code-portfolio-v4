@@ -44,9 +44,11 @@ const METRICS = [
 function DecisionCard({
   decision,
   className = "",
+  imageScale = 1,
 }: {
   decision: (typeof DECISIONS)[number];
   className?: string;
+  imageScale?: number;
 }) {
   const [flipped, setFlipped] = useState(false);
 
@@ -66,13 +68,14 @@ function DecisionCard({
       >
         {/* Front — image */}
         <div
-          className="absolute inset-0 rounded-[32px] overflow-hidden bg-[#1e242a]"
+          className="absolute inset-0 rounded-[32px] overflow-hidden bg-black flex items-center justify-center"
           style={{ backfaceVisibility: "hidden" }}
         >
           <img
             src={decision.image}
             alt={decision.title}
-            className="w-full h-full object-contain"
+            className="w-full"
+            style={imageScale !== 1 ? { transform: `scale(${imageScale})` } : undefined}
             loading="lazy"
           />
         </div>
@@ -100,17 +103,26 @@ function DecisionCard({
 
 function DecisionCardMobile({
   decision,
+  imageScale = 1,
+  flipOnVisible = false,
 }: {
   decision: (typeof DECISIONS)[number];
+  imageScale?: number;
+  flipOnVisible?: boolean;
 }) {
   const [flipped, setFlipped] = useState(false);
+
+  useEffect(() => {
+    if (!flipOnVisible) return;
+    const timer = setTimeout(() => setFlipped(true), 800);
+    return () => clearTimeout(timer);
+  }, [flipOnVisible]);
+
   return (
-    <button
-      type="button"
+    <div
       className="w-full aspect-square cursor-pointer"
-      style={{ perspective: 1000 }}
+      style={{ perspective: 600 }}
       onClick={() => setFlipped((f) => !f)}
-      aria-label={`${flipped ? "Hide" : "Show"} details: ${decision.title}`}
     >
       <div
         className="relative w-full h-full transition-transform duration-500 ease-in-out"
@@ -121,35 +133,36 @@ function DecisionCardMobile({
       >
         {/* Front — image */}
         <div
-          className="absolute inset-0 rounded-[20px] overflow-hidden bg-[#1e242a]"
+          className="absolute inset-0 rounded-[16px] overflow-hidden bg-black flex items-center justify-center"
           style={{ backfaceVisibility: "hidden" }}
         >
           <img
             src={decision.image}
             alt={decision.title}
-            className="w-full h-full object-contain"
+            className="w-full"
+            style={imageScale !== 1 ? { transform: `scale(${imageScale})` } : undefined}
             loading="lazy"
           />
         </div>
-        {/* Back — text */}
+        {/* Back — text with inner scroll */}
         <div
-          className="absolute inset-0 bg-[#1e242a] rounded-[20px] p-[20px] pt-[24px] text-left"
+          className="absolute inset-0 bg-[#1e242a] rounded-[16px] p-[16px] overflow-y-auto scrollbar-hide text-left"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
-          <p className="font-sf text-[16px] font-bold leading-[1.4] text-white mb-[8px]">
+          <p className="font-sf text-[14px] font-medium leading-[1.4] text-white mb-[6px]">
             {decision.title}
           </p>
           {decision.description.map((para, i) => (
             <p
               key={i}
-              className="font-sf text-[14px] leading-[1.4] text-white mb-[8px] last:mb-0"
+              className="font-sf text-[12px] leading-[1.4] text-text-secondary mb-[6px] last:mb-0"
             >
               {para}
             </p>
           ))}
         </div>
       </div>
-    </button>
+    </div>
   );
 }
 
@@ -181,7 +194,7 @@ export function CaseStudy2() {
         {/* Back to cases */}
         <Link
           to="/cases"
-          className="flex items-center gap-[8px] self-center mb-[64px] md:mb-[56px] mt-[24px] md:mt-0"
+          className="flex items-center gap-[8px] self-center mb-[64px] md:mb-[56px] mt-[16px] md:mt-0"
         >
           <svg
             width="28"
@@ -211,12 +224,15 @@ export function CaseStudy2() {
           </p>
         </section>
 
-        {/* Three screenshots — uniform containers with fixed aspect ratio */}
-        <section ref={screenshotsRef} className={`reveal-stagger-children${screenshotsVisible ? " visible" : ""} flex flex-col md:flex-row gap-[16px] md:gap-[32px] items-center mb-[128px] md:mb-[243px]`}>
+        {/* Three screenshots — horizontal slider on mobile, row on desktop */}
+        <section
+          ref={screenshotsRef}
+          className={`reveal-stagger-children${screenshotsVisible ? " visible" : ""} w-screen md:w-auto flex gap-[16px] md:gap-[32px] items-center overflow-x-auto md:overflow-visible px-5 md:px-0 snap-x snap-mandatory scrollbar-hide mb-[128px] md:mb-[243px]`}
+        >
           {[1, 2, 3].map((n) => (
             <div
               key={n}
-              className="w-full max-w-[347px] rounded-[11px] overflow-hidden shrink-0"
+              className="w-[260px] md:w-full md:max-w-[347px] rounded-[11px] overflow-hidden shrink-0 snap-center"
               style={{ aspectRatio: "347 / 536" }}
             >
               <img
@@ -357,7 +373,7 @@ export function CaseStudy2() {
 
             {/* Decision cards with images */}
             <div className={`reveal-scale${decisionsCardsVisible ? " visible" : ""} absolute left-0 top-[163px]`}>
-              <DecisionCard decision={DECISIONS[0]} />
+              <DecisionCard decision={DECISIONS[0]} imageScale={1.35} />
             </div>
             <div className={`reveal-scale${decisionsCardsVisible ? " visible" : ""} absolute left-1/2 -translate-x-1/2 top-[330px]`}>
               <DecisionCard decision={DECISIONS[1]} />
@@ -367,11 +383,17 @@ export function CaseStudy2() {
             </div>
           </div>
 
-          {/* Mobile layout */}
-          <div ref={decisionsMobileRef} className={`reveal-stagger-children${decisionsMobileVisible ? " visible" : ""} flex md:hidden flex-col gap-[16px]`}>
-            {DECISIONS.map((d, i) => (
-              <DecisionCardMobile key={i} decision={d} />
-            ))}
+          {/* Mobile layout — 2-col grid like case study 1 */}
+          <div ref={decisionsMobileRef} className="md:hidden">
+            <div className={`reveal-stagger-children${decisionsMobileVisible ? " visible" : ""} grid grid-cols-2 gap-[12px] mb-[12px]`}>
+              <DecisionCardMobile decision={DECISIONS[0]} imageScale={1.35} flipOnVisible={decisionsMobileVisible} />
+              <DecisionCardMobile decision={DECISIONS[1]} />
+            </div>
+            <div className="grid grid-cols-2 gap-[12px]">
+              <div className="col-start-1 col-end-3 mx-auto" style={{ width: "calc(50% - 6px)" }}>
+                <DecisionCardMobile decision={DECISIONS[2]} />
+              </div>
+            </div>
           </div>
         </section>
 
@@ -422,16 +444,16 @@ export function CaseStudy2() {
 
         {/* Metrics */}
         <section className="w-full max-w-[1280px]">
-          <div ref={metricsRef} className={`reveal-stagger-children${metricsVisible ? " visible" : ""} grid grid-cols-1 md:grid-cols-2 gap-[16px] md:gap-[48px]`}>
+          <div ref={metricsRef} className={`reveal-stagger-children${metricsVisible ? " visible" : ""} grid grid-cols-2 gap-[12px] md:gap-[48px] auto-rows-[1fr]`}>
             {METRICS.map((m, i) => (
               <div
                 key={i}
-                className="bg-white rounded-[14px] md:rounded-[20px] px-[24px] md:px-[32px] pt-[20px] md:pt-[24px] pb-[24px] md:pb-[30px]"
+                className="bg-white rounded-[14px] md:rounded-[20px] px-[16px] md:px-[32px] pt-[20px] md:pt-[24px] pb-[24px] md:pb-[30px]"
               >
-                <p className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] text-[#222] tracking-[-0.48px]">
+                <p className="font-['TN',serif] font-extralight text-[24px] md:text-[48px] leading-[1.2] text-[#222] tracking-[-0.48px]">
                   {m.value}
                 </p>
-                <p className="font-sf text-[16px] md:text-[18px] leading-[1.4] text-[#6a6a6a] mt-[8px] md:mt-[12px]">
+                <p className="font-sf text-[14px] md:text-[18px] leading-[1.4] text-[#6a6a6a] mt-[8px] md:mt-[12px]">
                   {m.label}
                 </p>
               </div>

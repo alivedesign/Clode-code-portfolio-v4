@@ -90,7 +90,7 @@ export function Experience() {
           ref={videoRef}
           className={`experience-scroll-reveal${videoVisible ? " visible" : ""} mt-[80px] md:mt-[112px] w-full max-w-[992px]`}
         >
-          <div className="relative w-full rounded-[24px] overflow-hidden" style={{ paddingBottom: "56.25%" }}>
+          <div className="relative w-full rounded-[24px] overflow-hidden cursor-pointer" style={{ paddingBottom: "56.25%" }}>
             {playing ? (
               <iframe
                 className="absolute inset-0 w-full h-full"
