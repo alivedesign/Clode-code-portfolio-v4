@@ -280,9 +280,14 @@ export function CaseStudy4() {
             ref={proposalRef}
             className={`reveal-fade-up${proposalVisible ? " visible" : ""} flex flex-col items-center text-center max-w-[773px] mb-[40px] md:mb-[56px]`}
           >
-            <p className="font-sf text-[16px] md:text-[18px] leading-[1.4] text-accent mb-[16px]">
+            <a
+              href="https://bloggingmachine.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-sf text-[16px] md:text-[18px] leading-[1.4] text-accent mb-[16px] hover:underline"
+            >
               bloggingmachine.io
-            </p>
+            </a>
             <h2 className="font-['TN',serif] font-extralight text-[28px] md:text-[48px] leading-[1.2] text-white tracking-[-0.48px]">
               Here's what I proposed and why...
             </h2>
