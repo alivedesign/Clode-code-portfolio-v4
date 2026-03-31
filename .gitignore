@@ -31,6 +31,15 @@ public/videos/*.mp4
 !public/videos/case-2-gif.mp4
 !public/videos/case-1-approval.mp4
 !public/videos/case-1-implementation.mp4
+!public/videos/case-1-preview.mp4
+!public/videos/case-2-character-anim.mp4
+!public/videos/reveal.mp4
+!public/videos/pose-about.mp4
+!public/videos/pose-cases.mp4
+!public/videos/pose-content.mp4
+!public/videos/pose-experience.mp4
+!public/videos/pose-products.mp4
+!public/videos/pose-resume.mp4
 .vercel
 
 # Block media files in project root (assets belong in public/)
