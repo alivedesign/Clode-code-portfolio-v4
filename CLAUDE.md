@@ -24,13 +24,32 @@ src/
   pages/
     Home.tsx           # Main page: character reveal, pose cycling, typewriter
     Experience.tsx     # Timeline page: work history, YouTube embed
+    Products.tsx       # Product cards with modal details
+    Cases.tsx          # Case study cards grid
+    CaseStudy1/        # MCP Vibe Coding (split into sub-components)
+      index.tsx        # Orchestrator
+      HeroSection.tsx
+      ProblemSection.tsx
+      TimelineSection.tsx
+      DecisionsSection.tsx
+      VideoSection.tsx
+      MetricsSection.tsx
+    CaseStudy2.tsx     # Figma Token Plugin
+    CaseStudy3.tsx     # B2B Stickers
+    CaseStudy4.tsx     # AI SEO Startup
+    Content.tsx        # YouTube + LinkedIn + Instagram carousels
+    About.tsx          # Photo grid + values
+    NotFound.tsx       # 404 page with character
   components/
     Character/         # Video-based character with reveal + pose animations
     Hero/              # Logo, HeroText (typewriter), PoseText (per-pose copy)
     NavBar/            # Desktop glass pill + mobile bottom bar with hamburger menu
     Layout/            # MainLayout wrapper, ContactLine
+    Cases/             # Shared case study components (BackLink, CaseSection, etc.)
+    Products/          # ProductCard, ProductModal
+    ErrorBoundary.tsx  # Catch-all error boundary
   hooks/               # useMediaQuery, useSwipe, useTypewriter, useInView, etc.
-  data/                # experienceData.ts, poseTextData.ts
+  data/                # experienceData, poseTextData, caseStudy1-4Data, etc.
   styles/
     index.css          # All custom CSS (glass morphism, animations, masks)
 ```
@@ -104,7 +123,7 @@ loading → revealing → idle ⇄ posing (with videoEnded flag)
 ### Video strategy:
 - Reveal video: always in DOM, `fetchPriority="high"`
 - Pose videos: mounted/unmounted per pose, key forces remount
-- Poster images (WebP): shown when pose video ends
+- Video last frame stays visible when pose ends (no separate poster images)
 - All pose videos preloaded after reveal via `useVideoPreloader`
 
 ## Cross-Browser Rules
@@ -119,6 +138,18 @@ loading → revealing → idle ⇄ posing (with videoEnded flag)
 - `playsInline` on all `<video>` elements (iOS Safari)
 - `-webkit-tap-highlight-color: transparent` on mobile interactive elements
 
+## Deployment
+
+- **Production:** https://shkuratovdesigner.com/ — deploys from `main` branch via Vercel
+- **Framework:** Vite (configured in `vercel.json`)
+- **Build:** `npm run build` → outputs to `dist/`
+- **Branches:** `main` = production, `v5` = development, `v4-production` = old portfolio archive
+- **Video files:** Most `.mp4` files in `public/videos/` are gitignored by default. Each video used by the app MUST be explicitly allowed in `.gitignore` with `!public/videos/filename.mp4`
+
+### Shared case study components:
+- `BackLink` in `src/components/Cases/BackLink.tsx` — shared "← Back to cases" link with `variant="stroke"` (CaseStudy1) and `variant="fill"` (CaseStudy2-4)
+- Case study data lives in `src/data/caseStudy1Data.ts` through `caseStudy4Data.ts`
+
 ## SEO & AI
 
 - JSON-LD `Person` schema in index.html with full work history
@@ -127,7 +158,7 @@ loading → revealing → idle ⇄ posing (with videoEnded flag)
 - `robots.txt` allows all crawlers
 - `sitemap.xml` lists all routes
 - Semantic HTML with proper heading hierarchy (h1 per page)
-- Per-page `document.title` updates
+- Per-page meta via `usePageMeta` hook (title + description)
 
 ## Don'ts
 
@@ -138,3 +169,5 @@ loading → revealing → idle ⇄ posing (with videoEnded flag)
 - Don't add `<link rel="preload">` for video — use `fetchPriority` on the `<video>` element
 - Don't import pages synchronously in App.tsx — use React.lazy
 - Don't skip `font-display: swap` on @font-face declarations
+- Don't add video files to `public/videos/` without updating `.gitignore` to allow them — they're blocked by default and won't deploy to production
+- Don't use poster images for character poses — the video last frame is sufficient
