@@ -4,6 +4,7 @@ import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { useInView } from "@/hooks/useInView";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const YOUTUBE_VIDEO_ID = "tozd-Dif7nI";
 const YOUTUBE_EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&controls=1&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3`;
@@ -181,9 +182,13 @@ export function CaseStudy2() {
   const [youtubeRef, youtubeVisible] = useInView(0.1);
   const [metricsRef, metricsVisible] = useInView(0.1);
 
+  usePageMeta(
+    "Figma Token Plugin — Shkuratov Designer",
+    "Case study: Figma Token Plugin — design system tooling for automated token management.",
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Figma Token Plugin — Shkuratov Designer";
   }, []);
 
   return (

@@ -14,6 +14,7 @@ import {
   INSTAGRAM_PROFILE_URL,
 } from "@/data/contentData";
 import type { LinkedInPost, InstagramReel } from "@/data/contentData";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 /* ── YouTube thumbnail card ── */
 function YouTubeCard({ videoId }: { videoId: string }) {
@@ -193,9 +194,10 @@ export function Content() {
   const [linkedinRef, linkedinVisible] = useInView(0.1);
   const [instagramRef, instagramVisible] = useInView(0.1);
 
-  useEffect(() => {
-    document.title = "Content — Shkuratov Designer";
-  }, []);
+  usePageMeta(
+    "Content — Shkuratov Designer",
+    "Design content and resources by Evgeny Shkuratov.",
+  );
 
   return (
     <div className="relative min-h-screen min-h-dvh w-full bg-black">

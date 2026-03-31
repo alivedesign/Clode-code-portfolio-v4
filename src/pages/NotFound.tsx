@@ -2,11 +2,13 @@ import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function NotFound() {
-  useEffect(() => {
-    document.title = "404 — Shkuratov Designer";
-  }, []);
+  usePageMeta(
+    "404 — Shkuratov Designer",
+    "Page not found — Shkuratov Designer.",
+  );
 
   return (
     <div className="relative h-screen h-dvh w-full bg-black overflow-hidden">

@@ -5,6 +5,7 @@ import { Logo, HeroText, PoseText } from "@/components/Hero";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { MainLayout } from "@/components/Layout/MainLayout";
 import { useVideoPreloader } from "@/hooks/useVideoPreloader";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { usePoseCycle } from "@/hooks/usePoseCycle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { REVEAL_UI_DELAY, HERO_TYPING_DELAY } from "@/constants";
@@ -26,9 +27,10 @@ export function Home() {
   const isMobile = useMediaQuery("(max-width: 767px)");
   const { nextPose, prevPose } = usePoseCycle(hoverPose);
 
-  useEffect(() => {
-    document.title = "Shkuratov Designer — AI Product Design Engineer";
-  }, []);
+  usePageMeta(
+    "Shkuratov Designer — Product Design Engineer",
+    "Evgeny Shkuratov — Product Design Engineer with 8+ years shipping products people love. Portfolio, case studies, and experience.",
+  );
 
   useEffect(() => {
     startReveal();

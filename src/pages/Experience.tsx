@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
@@ -12,6 +12,7 @@ import {
 } from "@/data/experienceData";
 import type { ExperienceEntry } from "@/data/experienceData";
 import { useInView } from "@/hooks/useInView";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 function ExperienceItem({ entry, index }: { entry: ExperienceEntry; index: number }) {
   return (
@@ -36,9 +37,10 @@ export function Experience() {
   const [videoRef, videoVisible] = useInView(0.2);
   const [playing, setPlaying] = useState(false);
 
-  useEffect(() => {
-    document.title = "Experience — Shkuratov Designer";
-  }, []);
+  usePageMeta(
+    "Experience — Shkuratov Designer",
+    "Work history and career timeline of Evgeny Shkuratov — Product Design Engineer with 8+ years across B2B, EdTech, and SaaS.",
+  );
 
   return (
     <div className="relative min-h-screen min-h-dvh w-full bg-black">

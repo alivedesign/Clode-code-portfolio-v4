@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
@@ -18,6 +17,7 @@ import {
   ABOUT_PHOTOS_GRID_3,
 } from "@/data/aboutData";
 import type { TextSegment, AboutPhoto } from "@/data/aboutData";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 /* ── TextBlock: renders mixed white/secondary/link text ── */
 function TextBlock({ segments, className }: { segments: TextSegment[]; className?: string }) {
@@ -78,9 +78,10 @@ export function About() {
   const [grid3Ref, grid3Visible] = useInView(0.2);
   const [text3Ref, text3Visible] = useInView(0.2);
 
-  useEffect(() => {
-    document.title = "About — Shkuratov Designer";
-  }, []);
+  usePageMeta(
+    "About — Shkuratov Designer",
+    "About Evgeny Shkuratov — Product Design Engineer with 8+ years of experience.",
+  );
 
   return (
     <div className="relative min-h-screen min-h-dvh w-full bg-black">

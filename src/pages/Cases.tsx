@@ -4,11 +4,16 @@ import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { CaseSection } from "@/components/Cases";
 import { CASES_HEADLINE, CASES } from "@/data/casesData";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function Cases() {
+  usePageMeta(
+    "Cases — Shkuratov Designer",
+    "Product design case studies by Evgeny Shkuratov — real projects with measurable outcomes.",
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Cases — Shkuratov Designer";
   }, []);
 
   return (

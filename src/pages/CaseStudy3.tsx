@@ -6,6 +6,7 @@ import { ContactLine } from "@/components/Layout/ContactLine";
 import { DotLottieCanvas } from "@/components/Cases/DotLottieCanvas";
 import { useInView } from "@/hooks/useInView";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import {
   CASE3_TITLE,
   CASE3_SUBTITLE,
@@ -56,9 +57,13 @@ export function CaseStudy3() {
     [isMobile],
   );
 
+  usePageMeta(
+    "B2B Stickers — Shkuratov Designer",
+    "Case study: B2B Stickers — animated sticker system for enterprise messaging.",
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "B2B Stickers — Shkuratov Designer";
   }, []);
 
   return (

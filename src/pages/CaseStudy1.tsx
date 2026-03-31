@@ -19,6 +19,7 @@ import {
   CASE1_METRICS,
 } from "@/data/caseStudy1Data";
 import type { TimelineStep, DecisionCard } from "@/data/caseStudy1Data";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 /* ─── Back Link ──────────────────────────────────────────── */
 function BackLink() {
@@ -784,9 +785,13 @@ function MetricsSection() {
 
 /* ─── Page ────────────────────────────────────────────────── */
 export function CaseStudy1() {
+  usePageMeta(
+    "MCP Vibe Coding — Shkuratov Designer",
+    "Case study: MCP vibe coding — design engineering process and outcomes.",
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Case Study — Shkuratov Designer";
   }, []);
 
   return (

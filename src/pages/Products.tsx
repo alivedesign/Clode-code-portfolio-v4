@@ -1,17 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { ProductCard, ProductModal } from "@/components/Products";
 import { EXPERIENCE_STAGGER_MS } from "@/constants";
 import { PRODUCTS_HEADLINE, PRODUCT_CARDS } from "@/data/productsData";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 export function Products() {
   const [activeModalId, setActiveModalId] = useState<string | null>(null);
 
-  useEffect(() => {
-    document.title = "Products — Shkuratov Designer";
-  }, []);
+  usePageMeta(
+    "Products — Shkuratov Designer",
+    "Product design work and projects by Evgeny Shkuratov.",
+  );
 
   const openModal = useCallback((cardId: string) => {
     setActiveModalId(cardId);

@@ -4,6 +4,7 @@ import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { useInView } from "@/hooks/useInView";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const PERSONAS_LEFT = [
   {
@@ -149,9 +150,13 @@ export function CaseStudy4() {
   const [resultChatRef, resultChatVisible] = useInView(0.1);
   const [closingRef, closingVisible] = useInView(0.1);
 
+  usePageMeta(
+    "AI SEO Startup Redesign — Shkuratov Designer",
+    "Case study: AI SEO Startup Redesign — conversion-focused product redesign.",
+  );
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "AI SEO Startup Redesign — Shkuratov Designer";
   }, []);
 
   return (
