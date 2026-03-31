@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://shkuratov.design/sitemap.xml
+Sitemap: https://www.shkuratovdesigner.com/sitemap.xml
