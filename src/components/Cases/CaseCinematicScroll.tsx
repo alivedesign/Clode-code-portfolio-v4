@@ -118,7 +118,7 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
           {caseData.sideImages && (
             <div
               ref={leftImgRef}
-              className="hidden md:block absolute left-10 top-1/2 w-[302px] rounded-[14px] overflow-hidden"
+              className="hidden md:block absolute left-10 top-1/2 w-[302px] z-10"
               style={{ opacity: 0, transform: "translateX(-40px) translateY(-50%)" }}
             >
               <img
@@ -155,7 +155,7 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
           {caseData.sideImages && (
             <div
               ref={rightImgRef}
-              className="hidden md:block absolute right-10 top-1/2 w-[302px] rounded-[14px] overflow-hidden"
+              className="hidden md:block absolute right-10 top-1/2 w-[302px] z-10"
               style={{ opacity: 0, transform: "translateX(40px) translateY(-50%)" }}
             >
               <img
