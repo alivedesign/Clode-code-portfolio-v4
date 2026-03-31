@@ -228,6 +228,12 @@ const TIMELINE_SVG_PATH = buildTimelinePath();
 /** Mobile timeline thresholds: earlier appearance, spread from 0.02 to 0.55 */
 const MOBILE_THRESHOLDS = Array.from({ length: 6 }, (_, i) => 0.02 + (i * 0.53) / 5);
 
+/** Scale factor applied to raw scroll progress so the animation completes earlier */
+const DESKTOP_PROGRESS_SCALE = 1.4;
+const DESKTOP_LINE_SCALE = 1.15;
+const MOBILE_PROGRESS_SCALE = 1.5;
+const MOBILE_LINE_SCALE = 1.2;
+
 function TimelineSection() {
   /* ── Desktop ── */
   const desktopScrollRef = useScrollProgress();
@@ -253,14 +259,16 @@ function TimelineSection() {
     if (!el) return;
     let rafId = 0;
     const check = () => {
-      const p = parseFloat(el.style.getPropertyValue("--timeline-progress") || "0");
+      const raw = parseFloat(el.style.getPropertyValue("--timeline-progress") || "0");
+      const p = Math.min(1, raw * DESKTOP_PROGRESS_SCALE);
       setDesktopSteps((prev) => {
         const next = prev.map((_, i) => p >= STEP_THRESHOLDS[i]);
         if (next.every((v, i) => v === prev[i])) return prev;
         return next;
       });
       if (desktopPathRef.current && desktopPathLen > 0) {
-        desktopPathRef.current.style.strokeDashoffset = String(desktopPathLen - p * desktopPathLen);
+        const lineProg = Math.min(1, raw * DESKTOP_LINE_SCALE);
+        desktopPathRef.current.style.strokeDashoffset = String(desktopPathLen - lineProg * desktopPathLen);
       }
       rafId = requestAnimationFrame(check);
     };
@@ -292,14 +300,16 @@ function TimelineSection() {
     if (!el) return;
     let rafId = 0;
     const check = () => {
-      const p = parseFloat(el.style.getPropertyValue("--timeline-progress") || "0");
+      const raw = parseFloat(el.style.getPropertyValue("--timeline-progress") || "0");
+      const p = Math.min(1, raw * MOBILE_PROGRESS_SCALE);
       setMobileSteps((prev) => {
         const next = prev.map((_, i) => p >= MOBILE_THRESHOLDS[i]);
         if (next.every((v, i) => v === prev[i])) return prev;
         return next;
       });
       if (mobilePathRef.current && mobilePathLen > 0) {
-        mobilePathRef.current.style.strokeDashoffset = String(mobilePathLen - p * mobilePathLen);
+        const lineProg = Math.min(1, raw * MOBILE_LINE_SCALE);
+        mobilePathRef.current.style.strokeDashoffset = String(mobilePathLen - lineProg * mobilePathLen);
       }
       rafId = requestAnimationFrame(check);
     };
