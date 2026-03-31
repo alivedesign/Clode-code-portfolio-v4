@@ -128,8 +128,7 @@ loading → revealing → idle ⇄ posing (with videoEnded flag)
 
 ## Cross-Browser Rules
 
-- Always pair `-webkit-mask-image` with standard `mask-image`
-- Always pair `-webkit-backdrop-filter` with standard `backdrop-filter`
+- Only write unprefixed `mask-image` / `backdrop-filter` — Lightning CSS (Tailwind v4) auto-adds `-webkit-` prefixes. Manual `-webkit-` duplicates cause the unprefixed version to be stripped in production builds.
 - Never use `filter: drop-shadow()` on a parent of `backdrop-filter` elements (Firefox breaks)
 - Use `h-screen h-dvh` pattern (vh fallback before dvh)
 - Use `will-change` on frequently animated elements (navbar-lens, menu-overlay)
