@@ -15,6 +15,7 @@ const CaseStudy1 = lazy(() => import("@/pages/CaseStudy1").then(m => ({ default:
 const CaseStudy2 = lazy(() => import("@/pages/CaseStudy2").then(m => ({ default: m.CaseStudy2 })));
 const CaseStudy3 = lazy(() => import("@/pages/CaseStudy3").then(m => ({ default: m.CaseStudy3 })));
 const CaseStudy4 = lazy(() => import("@/pages/CaseStudy4").then(m => ({ default: m.CaseStudy4 })));
+const NotFound = lazy(() => import("@/pages/NotFound").then(m => ({ default: m.NotFound })));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/cases/figma-token-plugin" element={<CaseStudy2 />} />
         <Route path="/cases/stickers" element={<CaseStudy3 />} />
         <Route path="/cases/ai-seo-startup" element={<CaseStudy4 />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
