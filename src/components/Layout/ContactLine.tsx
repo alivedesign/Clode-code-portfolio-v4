@@ -10,7 +10,7 @@ export function ContactLine({ visible = true }: ContactLineProps) {
       }`}
     >
       <span>Reach me at shkuratovdesigner@gmail.com or </span>
-      <a href="#book" className="text-accent hover:underline">
+      <a href="https://cal.com/shkuratov-design/website45min?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
         Book a Call
       </a>
     </div>

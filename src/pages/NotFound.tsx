@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
 import { NavBar } from "@/components/NavBar";
@@ -16,7 +15,7 @@ export function NotFound() {
       {/* Back to Main — centered top */}
       <Link
         to="/"
-        className="notfound-fade-up absolute top-[40px] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 text-text-secondary no-underline"
+        className="notfound-fade-up absolute top-[40px] left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 text-text-secondary hover:text-white transition-colors no-underline"
       >
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M17.5 5.25L10.5 14L17.5 22.75" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -35,7 +34,7 @@ export function NotFound() {
           style={{ animationDelay: "100ms" }}
         />
         <h1
-          className="notfound-fade-up font-['TN',serif] font-[350] text-[32px] md:text-[56px] leading-[1.2] text-white tracking-[-0.56px] mt-6 md:mt-8"
+          className="notfound-fade-up font-['TN',serif] font-extralight text-[32px] md:text-[56px] leading-[1.2] text-white tracking-[-0.56px] mt-6 md:mt-8"
           style={{ animationDelay: "200ms" }}
         >
           Page not found

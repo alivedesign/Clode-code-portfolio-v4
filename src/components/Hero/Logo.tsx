@@ -8,7 +8,7 @@ export function Logo({ visible = true }: LogoProps) {
   return (
     <Link
       to="/"
-      className={`absolute top-[24px] left-[24px] md:top-8 md:left-40 z-20 font-sf-display font-medium text-[14px] md:text-base leading-none text-text-secondary tracking-[-0.28px] md:tracking-[-0.32px] transition-opacity duration-200 no-underline ${
+      className={`absolute top-[24px] left-[24px] md:top-8 md:left-40 z-20 font-sf-display font-medium text-[14px] md:text-base leading-none text-text-secondary tracking-[-0.28px] md:tracking-[-0.32px] transition-all duration-200 cursor-pointer hover:text-white no-underline ${
         visible ? "opacity-100" : "opacity-0"
       }`}
     >

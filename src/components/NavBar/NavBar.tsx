@@ -242,7 +242,7 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
         </nav>
 
         <div className="menu-overlay-contact">
-          <a href="#book" className="text-accent">Book a Call</a>
+          <a href="https://cal.com/shkuratov-design/website45min?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-accent">Book a Call</a>
         </div>
 
         {/* Toast notification */}
