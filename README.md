@@ -1,14 +1,13 @@
 # Evgeny Shkuratov Portfolio v5.0.1
 
-A command-driven portfolio website with terminal-style navigation.
+A dark, minimal, animation-heavy portfolio with character video reveals and pose-based navigation.
 
 ## Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: React 19 + React Router 7
 - **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **Search**: Fuse.js (fuzzy search for command autocomplete)
+- **Build**: Vite 8
+- **Styling**: Tailwind CSS 4
 - **Deployment**: Vercel
 
 ## Getting Started
@@ -23,47 +22,48 @@ npm install
 npm run dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) in your browser.
+3. Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Project Structure
 
 ```
-├── app/                    # Next.js App Router
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Home page
-│   └── globals.css        # Global styles
-├── components/            # React components
-├── hooks/                 # Custom React hooks
-├── lib/                   # Utility functions
-└── public/               # Static assets
-    └── assets/           # Images, SVGs
+src/
+  App.tsx              # Router with React.lazy code splitting
+  main.tsx             # Entry: BrowserRouter + StrictMode
+  constants.ts         # Named timing/animation constants
+  pages/               # Route-level page components
+  components/          # Reusable UI components
+  hooks/               # Custom React hooks
+  data/                # Static data (experience, pose text)
+  styles/              # Global CSS (glass morphism, animations)
+public/
+  fonts/               # TimesNow WOFF2 + TTF font files
+  images/              # Posters, case study assets, content images
+  videos/              # Character reveal + pose videos
 ```
 
 ## Design System
 
 All design tokens are configured in:
-- `tailwind.config.ts` - Tailwind theme
-- `app/globals.css` - CSS variables
+- `src/styles/index.css` — CSS variables and custom classes
+- `tailwind.config.ts` — Tailwind theme extensions
 
 ### Colors
-- Background: `#1e1e1e`
+- Background: `#000000`
 - Text: `#ffffff`
 - Text Secondary: `#999899`
 - Accent: `#d77757`
-- Link: `#b2b9f9`
-- Dark Text: `#222222`
 
 ### Typography
-- Font: SF Pro Text (with system fallbacks)
-- Body: 16px / 1.4
-- Body Large: 18px / 1.2
+- Headings: TimesNow (custom font, WOFF2)
+- Body: SF Pro Text (system font)
+- Display: SF Pro Display (system font)
 
 ## Development
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
+- `npm run dev` — Start Vite dev server
+- `npm run build` — TypeScript check + production build
+- `npm run preview` — Preview production build
 
 ## Deployment
 

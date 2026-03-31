@@ -8,6 +8,7 @@
 .DS_Store
 *.pem
 .worktrees/
+.playwright-mcp/
 
 # debug
 npm-debug.log*
