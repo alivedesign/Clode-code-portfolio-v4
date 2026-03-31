@@ -40,7 +40,9 @@ function YouTubeCard({ videoId }: { videoId: string }) {
         >
           <img
             src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
-            alt=""
+            alt="Video thumbnail"
+            width={1280}
+            height={720}
             className="absolute inset-0 w-full h-full object-cover"
             loading="lazy"
           />
@@ -84,7 +86,9 @@ function LinkedInCard({ post }: { post: LinkedInPost }) {
         <div className="flex items-center gap-[10px] mb-[12px]">
           <img
             src="/images/content/avatar.jpg"
-            alt=""
+            alt="Evgeny Shkuratov"
+            width={28}
+            height={28}
             className="w-[28px] h-[28px] rounded-full object-cover shrink-0"
           />
           <p className="text-white text-[13px] font-medium leading-tight">Evgeny Shkuratov</p>

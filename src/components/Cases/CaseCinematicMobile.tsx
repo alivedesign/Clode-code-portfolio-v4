@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { CaseData } from "@/data/casesData";
 import { CaseTitle } from "./CaseTitle";
 
@@ -6,7 +7,7 @@ interface CaseCinematicMobileProps {
   index: number;
 }
 
-export function CaseCinematicMobile({ caseData, index }: CaseCinematicMobileProps) {
+export const CaseCinematicMobile = memo(function CaseCinematicMobile({ caseData, index }: CaseCinematicMobileProps) {
   return (
     <section
       className="experience-fade-up w-full flex flex-col items-center"
@@ -29,4 +30,4 @@ export function CaseCinematicMobile({ caseData, index }: CaseCinematicMobileProp
       <CaseTitle segments={caseData.title} link={caseData.link} />
     </section>
   );
-}
+});

@@ -8,7 +8,7 @@ export const YOUTUBE_VIDEOS = [
   { id: "_j-mglGJGk0" },
 ];
 
-export const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@evgeny.shkuratov";
+export const YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@EvgenyShkuratovDesigner";
 
 export type LinkedInPost = {
   activityId: string;
@@ -36,7 +36,7 @@ export const LINKEDIN_POSTS: LinkedInPost[] = [
   {
     activityId: "7429913849069441024",
     text: "\"AI is going to kill us!!!!!\"\nRelax. It won't.\n\nBut can we talk about something nobody wants to admit?\nWe're sleepwalking into full dependency.\n\nI use AI every single day. It helps me solve harder problems. Ship faster. Earn more.\nAnd I love it.\n\nBut I also catch myself in moments where I think:\n«If this disappeared tomorrow, could I still do my job at the same level?»\n\n→ Use AI to amplify, not replace your thinking\n→ Stay sharp enough that you don't NEED it for everything\n→ Keep your judgment yours, not the model's",
-    image: "/images/content/ai-going-to-kill-us.png",
+    image: "/images/content/ai-going-to-kill-us.webp",
     likes: 35,
     comments: 12,
   },
@@ -64,7 +64,7 @@ export const LINKEDIN_POSTS: LinkedInPost[] = [
   {
     activityId: "7420842828630573056",
     text: "China just turned the night sky into a masterpiece of precision and intelligence.\n\n11,787 drones. Zero human pilots. No crashes. No delays. No errors.\nAI coordinated every single movement.\n\nThe result looked closer to CGI than real life.\n\nWe're watching AI do things we couldn't imagine 3 years ago.\nAnd 3 years from now? I genuinely can't picture it.\n\nThe pace isn't slowing down. It's accelerating.\nEvery month brings something that makes last month look ancient.\n\nI've stopped asking «what can AI do?»\nNow I ask «what CAN'T it do yet?»\nThat list keeps shrinking.",
-    image: "/images/content/china-drones.png",
+    image: "/images/content/china-drones.webp",
     likes: 27,
     comments: 12,
   },
@@ -86,12 +86,12 @@ export type InstagramReel = {
 };
 
 export const INSTAGRAM_REELS: InstagramReel[] = [
-  { reelId: "DWZBADwMeH1", cover: "/images/content/ig-1.png" },
-  { reelId: "DWWHHjwsWpR", cover: "/images/content/ig-2.png" },
-  { reelId: "DWMCQDlDHGM", cover: "/images/content/ig-3.png" },
-  { reelId: "DWbkKjuMXkC", cover: "/images/content/ig-4.png" },
-  { reelId: "DWJYRkzMOn7", cover: "/images/content/ig-5.png" },
-  { reelId: "DWRM9aVjD5d", cover: "/images/content/ig-6.png" },
+  { reelId: "DWZBADwMeH1", cover: "/images/content/ig-1.webp" },
+  { reelId: "DWWHHjwsWpR", cover: "/images/content/ig-2.webp" },
+  { reelId: "DWMCQDlDHGM", cover: "/images/content/ig-3.webp" },
+  { reelId: "DWbkKjuMXkC", cover: "/images/content/ig-4.webp" },
+  { reelId: "DWJYRkzMOn7", cover: "/images/content/ig-5.webp" },
+  { reelId: "DWRM9aVjD5d", cover: "/images/content/ig-6.webp" },
 ];
 
 export const INSTAGRAM_PROFILE_URL =

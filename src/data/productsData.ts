@@ -12,6 +12,7 @@ export type ProductCard = {
   link:
     | { type: "modal" }
     | { type: "external"; url: string }
+    | { type: "internal"; url: string }
     | { type: "none" };
   modalContent?: {
     heroImage: string;
@@ -27,10 +28,10 @@ export const PRODUCT_CARDS: ProductCard[] = [
     id: "morning-briefing",
     name: "Morning briefing agent.",
     description: "Personalized news & AI updates",
-    image: "/images/products/products-1.png",
+    image: "/images/products/products-1.webp",
     link: { type: "modal" },
     modalContent: {
-      heroImage: "/images/products/products-modal1.png",
+      heroImage: "/images/products/products-modal1.webp",
       blocks: [
         {
           type: "paragraph",
@@ -81,10 +82,10 @@ export const PRODUCT_CARDS: ProductCard[] = [
     id: "youtube-research",
     name: "YouTube research AI agent",
     description: "",
-    image: "/images/products/products-2.png",
+    image: "/images/products/products-2.webp",
     link: { type: "modal" },
     modalContent: {
-      heroImage: "/images/products/products-modal2.png",
+      heroImage: "/images/products/products-modal2.webp",
       blocks: [
         {
           type: "paragraph",
@@ -140,21 +141,21 @@ export const PRODUCT_CARDS: ProductCard[] = [
     id: "figma-plugin",
     name: "Figma plugin",
     description: "for cleaning up legacy design tokens",
-    image: "/images/products/products-3.png",
-    link: { type: "none" },
+    image: "/images/products/products-3.webp",
+    link: { type: "internal", url: "/cases/figma-token-plugin" },
   },
   {
     id: "klondaike",
     name: "Klondaike.",
     description: "Curated collection of useful AI resources",
-    image: "/images/products/products-4.png",
+    image: "/images/products/products-4.webp",
     link: { type: "external", url: "https://www.klondaike.com/" },
   },
   {
     id: "lullami",
     name: "Lullami.",
     description: "Kids' stories app",
-    image: "/images/products/products-5.png",
+    image: "/images/products/products-5.webp",
     link: {
       type: "external",
       url: "https://apps.apple.com/us/app/lullami-bed-time-stories/id6745401906",
@@ -164,7 +165,7 @@ export const PRODUCT_CARDS: ProductCard[] = [
     id: "skr-design",
     name: "skr.design.",
     description: "Design agency",
-    image: "/images/products/products-6.png",
+    image: "/images/products/products-6.webp",
     link: { type: "external", url: "https://www.skr.design/" },
   },
 ];

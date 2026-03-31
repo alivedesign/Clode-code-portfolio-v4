@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { CaseData } from "@/data/casesData";
 import { CaseTitle } from "./CaseTitle";
 import { DotLottieCanvas } from "./DotLottieCanvas";
@@ -7,7 +8,7 @@ interface CaseLottieMobileProps {
   index: number;
 }
 
-export function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
+export const CaseLottieMobile = memo(function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
   const assets = caseData.lottieAssets ?? [];
   const topRow = assets.slice(0, 2);
   const bottomRow = assets.slice(2, 4);
@@ -40,4 +41,4 @@ export function CaseLottieMobile({ caseData, index }: CaseLottieMobileProps) {
       </div>
     </section>
   );
-}
+});

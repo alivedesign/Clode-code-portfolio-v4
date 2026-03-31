@@ -64,6 +64,8 @@ function HeroSection() {
         <img
           src={CASE1_HERO_IMAGE}
           alt="Isometric design system city illustration"
+          width={2752}
+          height={1536}
           className="w-full"
           style={{ aspectRatio: "2752 / 1536" }}
           loading="eager"

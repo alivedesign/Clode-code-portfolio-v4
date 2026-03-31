@@ -6,15 +6,15 @@ export const CASE1_SUBTITLE_SEGMENTS = [
   { text: " across iOS, Android, and Web", highlighted: false },
 ];
 
-export const CASE1_HERO_IMAGE = "/images/cases/case-1/hero.png";
+export const CASE1_HERO_IMAGE = "/images/cases/case-1/hero.webp";
 
 export const CASE1_PROBLEM = {
   label: "The Problem",
   heading: "7+ Designers, 3 Platforms, 0 Consistency",
   images: [
-    "/images/cases/case-1/problem-1.png",
-    "/images/cases/case-1/problem-2.png",
-    "/images/cases/case-1/problem-3.png",
+    "/images/cases/case-1/problem-1.webp",
+    "/images/cases/case-1/problem-2.webp",
+    "/images/cases/case-1/problem-3.webp",
   ],
   points: [
     {
@@ -42,7 +42,7 @@ export const CASE1_TIMELINE: TimelineStep[] = [
   {
     label: "Initial observation / problem identification",
     side: "left",
-    media: { type: "image", src: "/images/cases/case-1/timeline-1.png" },
+    media: { type: "image", src: "/images/cases/case-1/timeline-1.webp" },
   },
   {
     label: "Solution design / architecture planning",
@@ -57,7 +57,7 @@ export const CASE1_TIMELINE: TimelineStep[] = [
   {
     label: "Internal pitch to leadership",
     side: "left",
-    media: { type: "image", src: "/images/cases/case-1/timeline-3.png" },
+    media: { type: "image", src: "/images/cases/case-1/timeline-3.webp" },
   },
   {
     label: "Approval + budget secured",
@@ -72,7 +72,7 @@ export const CASE1_TIMELINE: TimelineStep[] = [
   {
     label: "Full team adoption",
     side: "right",
-    media: { type: "image", src: "/images/cases/case-1/timeline-6.png" },
+    media: { type: "image", src: "/images/cases/case-1/timeline-6.webp" },
   },
 ];
 
@@ -83,7 +83,7 @@ export interface DecisionCard {
 
 export const CASE1_DECISIONS: DecisionCard[] = [
   {
-    image: "/images/cases/case-1/decision-1.png",
+    image: "/images/cases/case-1/decision-1.webp",
     paragraphs: [
       "One repository. Three platforms. Automatic sync every 6 hours.",
       "Figma feeds the hub. The hub builds for:\n- IOS (Swift Package)\n- Android (GitHub Releases)\n- Web (npm)",
@@ -91,7 +91,7 @@ export const CASE1_DECISIONS: DecisionCard[] = [
     ],
   },
   {
-    image: "/images/cases/case-1/decision-2.png",
+    image: "/images/cases/case-1/decision-2.webp",
     paragraphs: [
       "Figma prototypes approximate. Code prototypes specify.",
       "We build interactive prototypes on the real tech stack now. Exact animations. Exact parameters. Exact behavior.",
@@ -99,7 +99,7 @@ export const CASE1_DECISIONS: DecisionCard[] = [
     ],
   },
   {
-    image: "/images/cases/case-1/decision-3.png",
+    image: "/images/cases/case-1/decision-3.webp",
     paragraphs: [
       "4 MCP servers. 15 tools. The entire design system queryable by AI in real-time.",
       "Claude Code searches existing components before building new ones. Uses only library icons. References only design tokens. Follows component specs automatically.",

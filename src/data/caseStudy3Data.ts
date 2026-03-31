@@ -5,8 +5,8 @@ export const CASE3_SUBTITLE =
   "Working under NDA, I've adapted this case study to showcase my process and thinking while respecting confidentiality";
 
 export const CASE3_PHONES = {
-  left: "/images/cases/case-3/phone-left.png",
-  right: "/images/cases/case-3/phone-right.png",
+  left: "/images/cases/case-3/phone-left.webp",
+  right: "/images/cases/case-3/phone-right.webp",
 };
 
 export const CASE3_STICKER_LABEL = "Animated stickers, emojis, and GIFs";

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { CaseData } from "@/data/casesData";
 import { CaseTitle } from "./CaseTitle";
 import { DotLottieCanvas } from "./DotLottieCanvas";
@@ -7,7 +8,7 @@ interface CaseLottieScatterProps {
   index: number;
 }
 
-export function CaseLottieScatter({ caseData, index }: CaseLottieScatterProps) {
+export const CaseLottieScatter = memo(function CaseLottieScatter({ caseData, index }: CaseLottieScatterProps) {
   return (
     <section
       className="experience-fade-up w-full max-w-[1235px] mx-auto relative z-10 mb-[184px] mt-[-24px]"
@@ -43,4 +44,4 @@ export function CaseLottieScatter({ caseData, index }: CaseLottieScatterProps) {
       </div>
     </section>
   );
-}
+});

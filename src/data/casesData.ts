@@ -53,10 +53,10 @@ export const CASES: CaseData[] = [
       { text: "token problem with a custom plugin", highlighted: true },
     ],
     frameSrc: "/videos/case-2-character-anim.mp4",
-    posterSrc: "/images/cases/case-2-character.png",
+    posterSrc: "/images/cases/case-2-character.webp",
     sideImages: [
-      "/images/cases/case-2-left.png",
-      "/images/cases/case-2-right.png",
+      "/images/cases/case-2-left.webp",
+      "/images/cases/case-2-right.webp",
     ],
   },
   {

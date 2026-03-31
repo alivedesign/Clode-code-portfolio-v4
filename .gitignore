@@ -30,3 +30,15 @@ public/videos/*.mp4
 !public/videos/case-2-gif.mp4
 !public/videos/case-1-approval.mp4
 !public/videos/case-1-implementation.mp4
+.vercel
+
+# Block media files in project root (assets belong in public/)
+/*.png
+/*.jpg
+/*.jpeg
+/*.mp4
+/*.lottie
+/*.docx
+
+# Next.js artifacts (this is a Vite project)
+.next/

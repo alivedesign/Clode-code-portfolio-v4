@@ -1,3 +1,5 @@
+import { memo } from "react";
+import { useNavigate } from "react-router";
 import type { ProductCard as ProductCardType } from "@/data/productsData";
 
 interface ProductCardProps {
@@ -7,12 +9,16 @@ interface ProductCardProps {
   staggerMs: number;
 }
 
-export function ProductCard({ card, index, onOpenModal, staggerMs }: ProductCardProps) {
+export const ProductCard = memo(function ProductCard({ card, index, onOpenModal, staggerMs }: ProductCardProps) {
+  const navigate = useNavigate();
+
   const handleClick = () => {
     if (card.link.type === "modal") {
       onOpenModal?.(card.id);
     } else if (card.link.type === "external") {
       window.open(card.link.url, "_blank", "noopener,noreferrer");
+    } else if (card.link.type === "internal") {
+      navigate(card.link.url);
     }
   };
 
@@ -36,6 +42,8 @@ export function ProductCard({ card, index, onOpenModal, staggerMs }: ProductCard
           <img
             src={card.image}
             alt={`${card.name} ${card.description}`}
+            width={500}
+            height={300}
             className={`w-full h-full object-cover transition-transform duration-300${isClickable ? " group-hover:scale-[1.03]" : ""}`}
             loading="lazy"
           />
@@ -56,4 +64,4 @@ export function ProductCard({ card, index, onOpenModal, staggerMs }: ProductCard
       </div>
     </div>
   );
-}
+});

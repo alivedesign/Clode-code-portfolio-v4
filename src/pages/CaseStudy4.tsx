@@ -95,8 +95,10 @@ function ChatBubble({
   return (
     <div className={`flex gap-[16px] items-end ${className}`}>
       <img
-        src="/images/cases/case-4/andrew-avatar.png"
+        src="/images/cases/case-4/andrew-avatar.webp"
         alt="Andrew"
+        width={48}
+        height={48}
         className="w-[48px] h-[48px] rounded-full object-cover shrink-0"
         loading="lazy"
       />
@@ -252,7 +254,7 @@ export function CaseStudy4() {
             Old version of the Site
           </p>
           <img
-            src="/images/cases/case-4/old-website.png"
+            src="/images/cases/case-4/old-website.webp"
             alt="Old version of bloggingmachine.io"
             className="w-full h-auto rounded-[10px]"
             loading="eager"
@@ -273,13 +275,13 @@ export function CaseStudy4() {
             className={`reveal-blur${dataImagesVisible ? " visible" : ""} flex flex-col gap-[6px] w-full`}
           >
             <img
-              src="/images/cases/case-4/research-data-1.png"
+              src="/images/cases/case-4/research-data-1.webp"
               alt="Customer research data"
               className="w-full h-auto rounded-[12px]"
               loading="lazy"
             />
             <img
-              src="/images/cases/case-4/research-data-2.png"
+              src="/images/cases/case-4/research-data-2.webp"
               alt="Analytics data"
               className="w-full h-auto rounded-[12px]"
               loading="lazy"
@@ -304,6 +306,7 @@ export function CaseStudy4() {
               muted
               loop
               playsInline
+              preload="metadata"
               className="w-full h-auto"
               poster="/videos/bloggingmachine-case/research-poster.webp"
             >
@@ -381,6 +384,7 @@ export function CaseStudy4() {
               muted
               loop
               playsInline
+              preload="metadata"
               className="w-full h-auto"
               poster="/videos/bloggingmachine-case/bloggingmachine-video-poster.webp"
             >

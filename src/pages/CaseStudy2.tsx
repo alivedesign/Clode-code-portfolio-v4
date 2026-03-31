@@ -10,7 +10,7 @@ const YOUTUBE_EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?aut
 
 const DECISIONS = [
   {
-    image: "/images/cases/case-2/decision-1.png",
+    image: "/images/cases/case-2/decision-1.webp",
     title: "Smart color matching",
     description: [
       'RGB distance failed — dark blue and dark red scored as "similar."',
@@ -18,14 +18,14 @@ const DECISIONS = [
     ],
   },
   {
-    image: "/images/cases/case-2/decision-2.png",
+    image: "/images/cases/case-2/decision-2.webp",
     title: "Catching what designers miss",
     description: [
       "→ Scans every layer for unbound colors and sizes → Groups by value, shows count, navigates to layers → Smart suggestions + one-click fix → Same approach for spacing, radius, stroke tokens",
     ],
   },
   {
-    image: "/images/cases/case-2/decision-3.png",
+    image: "/images/cases/case-2/decision-3.webp",
     title: "Progressive loading over spinners",
     description: [
       "Spinner at 800ms+ felt broken.",
@@ -236,7 +236,7 @@ export function CaseStudy2() {
               style={{ aspectRatio: "347 / 536" }}
             >
               <img
-                src={`/images/cases/case-2/screenshot-${n}.png`}
+                src={`/images/cases/case-2/screenshot-${n}.webp`}
                 alt={`Plugin screenshot ${n}`}
                 className="w-full h-full object-cover"
                 loading={n === 1 ? "eager" : "lazy"}
@@ -269,7 +269,7 @@ export function CaseStudy2() {
           {/* 3D workflow illustration */}
           <div ref={problemImgRef} className={`reveal-blur${problemImgVisible ? " visible" : ""} w-full`}>
             <img
-              src="/images/cases/case-2/workflow-3d.png"
+              src="/images/cases/case-2/workflow-3d.webp"
               alt="Workflow visualization"
               className="w-full h-auto"
               loading="lazy"
@@ -295,6 +295,8 @@ export function CaseStudy2() {
               muted
               loop
               playsInline
+              preload="metadata"
+              poster="/images/cases/case-2-character.webp"
               className="w-full h-auto"
               src="/videos/case-2-gif.mp4"
             />

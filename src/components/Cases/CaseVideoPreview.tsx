@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { CaseData } from "@/data/casesData";
 import { CaseTitle } from "./CaseTitle";
 
@@ -6,7 +7,7 @@ interface CaseVideoPreviewProps {
   index: number;
 }
 
-export function CaseVideoPreview({ caseData, index }: CaseVideoPreviewProps) {
+export const CaseVideoPreview = memo(function CaseVideoPreview({ caseData, index }: CaseVideoPreviewProps) {
   return (
     <section
       className="experience-fade-up w-full max-w-[1120px] mx-auto relative z-10 bg-black"
@@ -19,6 +20,8 @@ export function CaseVideoPreview({ caseData, index }: CaseVideoPreviewProps) {
           muted
           loop
           playsInline
+          preload="metadata"
+          poster={caseData.posterSrc}
           className="w-full h-auto"
           src={caseData.videoSrc}
         />
@@ -26,4 +29,4 @@ export function CaseVideoPreview({ caseData, index }: CaseVideoPreviewProps) {
       <CaseTitle segments={caseData.title} link={caseData.link} className="mt-[32px]" />
     </section>
   );
-}
+});

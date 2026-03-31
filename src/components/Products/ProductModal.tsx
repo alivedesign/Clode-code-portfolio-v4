@@ -113,7 +113,7 @@ export function ProductModal({ card, onClose }: ProductModalProps) {
           <div className="w-full max-w-[636px] h-[200px] md:h-[270px] rounded-[16px] overflow-hidden shrink-0 mx-auto">
             <img
               src={card.modalContent.heroImage}
-              alt=""
+              alt={card.name}
               className="w-full h-full object-cover"
             />
           </div>

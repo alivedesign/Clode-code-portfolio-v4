@@ -39,7 +39,7 @@ export const ABOUT_TEXT_3_P1: TextSegment[] = [
   { text: "As you've probably noticed, ", white: false },
   { text: "I love creating content too.", white: true },
   { text: " I share my experience and stories on ", white: false },
-  { text: "YouTube", link: "https://www.youtube.com/@shkuratovdesigner" },
+  { text: "YouTube", link: "https://www.youtube.com/@EvgenyShkuratovDesigner" },
   { text: " and ", white: false },
   { text: "LinkedIn", link: "https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/" },
 ];
@@ -52,19 +52,19 @@ export const ABOUT_TEXT_3_P2: TextSegment[] = [
 export const ABOUT_TEXT_3_P3 = "That's what drives most of what I do (\uFF3E\u25BD\uFF3E)";
 
 export const ABOUT_PHOTOS_GRID_1: AboutPhoto[] = [
-  { src: "/images/about/about-1.jpg", alt: "Evgeny at a conference" },
-  { src: "/images/about/about-2.jpg", alt: "Portrait of Evgeny" },
-  { src: "/images/about/about-3.jpg", alt: "Evgeny smiling" },
+  { src: "/images/about/about-1.webp", alt: "Evgeny at a conference" },
+  { src: "/images/about/about-2.webp", alt: "Portrait of Evgeny" },
+  { src: "/images/about/about-3.webp", alt: "Evgeny smiling" },
 ];
 
 export const ABOUT_PHOTOS_GRID_2: AboutPhoto[] = [
-  { src: "/images/about/about-4.jpg", alt: "Evgeny snowboarding" },
-  { src: "/images/about/about-5.jpg", alt: "Evgeny cycling" },
-  { src: "/images/about/about-6.jpg", alt: "Evgeny outdoors" },
+  { src: "/images/about/about-4.webp", alt: "Evgeny snowboarding" },
+  { src: "/images/about/about-5.webp", alt: "Evgeny cycling" },
+  { src: "/images/about/about-6.webp", alt: "Evgeny outdoors" },
 ];
 
 export const ABOUT_PHOTOS_GRID_3: AboutPhoto[] = [
-  { src: "/images/about/about-7.jpg", alt: "Evgeny in winter" },
-  { src: "/images/about/about-8.jpg", alt: "Evgeny cycling at night" },
-  { src: "/images/about/about-9.jpg", alt: "Evgeny in the mountains" },
+  { src: "/images/about/about-7.webp", alt: "Evgeny in winter" },
+  { src: "/images/about/about-8.webp", alt: "Evgeny cycling at night" },
+  { src: "/images/about/about-9.webp", alt: "Evgeny in the mountains" },
 ];

@@ -110,7 +110,9 @@ export function Experience() {
               >
                 <img
                   src={`https://img.youtube.com/vi/${YOUTUBE_VIDEO_ID}/maxresdefault.jpg`}
-                  alt=""
+                  alt="Video thumbnail"
+                  width={1280}
+                  height={720}
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                 />
