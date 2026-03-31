@@ -77,7 +77,7 @@ function LinkedInCard({ post }: { post: LinkedInPost }) {
       <div className="rounded-[16px] overflow-hidden bg-white/5">
         <img
           src={post.image}
-          alt=""
+          alt={`LinkedIn post by Evgeny Shkuratov: ${post.text.split("\n")[0]}`}
           className="w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
           loading="lazy"
         />
@@ -86,7 +86,7 @@ function LinkedInCard({ post }: { post: LinkedInPost }) {
       <div className="mt-[16px]">
         <div className="flex items-center gap-[10px] mb-[12px]">
           <img
-            src="/images/content/avatar.jpg"
+            src="/images/content/avatar.webp"
             alt="Evgeny Shkuratov"
             width={28}
             height={28}
@@ -118,7 +118,7 @@ function InstagramCoverCard({ reel }: { reel: InstagramReel }) {
     >
       <img
         src={reel.cover}
-        alt=""
+        alt="Instagram reel cover by Evgeny Shkuratov"
         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
         loading="lazy"
       />
@@ -197,6 +197,7 @@ export function Content() {
   usePageMeta(
     "Content — Shkuratov Designer",
     "Design content and resources by Evgeny Shkuratov.",
+    "/content",
   );
 
   return (
@@ -215,6 +216,7 @@ export function Content() {
           className={`experience-scroll-reveal${youtubeVisible ? " visible" : ""} w-full max-w-[1280px]`}
           aria-label="YouTube videos"
         >
+          <h2 className="sr-only">YouTube videos</h2>
           <div className="grid grid-cols-2 gap-[16px] md:gap-[48px]">
             {YOUTUBE_VIDEOS.map((video) => (
               <YouTubeCard key={video.id} videoId={video.id} />
@@ -238,6 +240,7 @@ export function Content() {
           className={`experience-scroll-reveal${linkedinVisible ? " visible" : ""} w-full max-w-[1280px] mt-[80px] md:mt-[112px]`}
           aria-label="LinkedIn posts"
         >
+          <h2 className="sr-only">LinkedIn posts</h2>
           <div className="columns-2 md:columns-4 gap-[16px] md:gap-[22px]">
             {LINKEDIN_POSTS.map((post) => (
               <LinkedInCard key={post.activityId} post={post} />
@@ -261,6 +264,7 @@ export function Content() {
           className={`experience-scroll-reveal${instagramVisible ? " visible" : ""} w-full max-w-[1280px] mt-[80px] md:mt-[112px]`}
           aria-label="Instagram reels"
         >
+          <h2 className="sr-only">Instagram reels</h2>
           <InstagramSlider reels={INSTAGRAM_REELS} />
           <div className="text-center mt-[40px] md:mt-[56px]">
             <a

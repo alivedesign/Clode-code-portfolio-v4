@@ -13,6 +13,7 @@ export function Products() {
   usePageMeta(
     "Products — Shkuratov Designer",
     "Product design work and projects by Evgeny Shkuratov.",
+    "/products",
   );
 
   const openModal = useCallback((cardId: string) => {

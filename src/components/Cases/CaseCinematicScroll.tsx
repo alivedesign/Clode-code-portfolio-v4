@@ -111,7 +111,7 @@ export function CaseCinematicScroll({ caseData }: CaseCinematicScrollProps) {
 
   return (
     <div ref={containerRef} className="relative z-0" style={{ height: "250vh", marginTop: "-60vh" }}>
-      <div className="sticky top-0 h-screen h-dvh flex flex-col items-center justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen h-dvh flex flex-col items-center justify-center">
         {/* Canvas / Poster */}
         <div className="relative flex items-center justify-center w-full max-w-[1280px] px-5 md:px-10">
           {/* Left image */}

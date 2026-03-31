@@ -1,0 +1,38 @@
+# Evgeny Shkuratov — Portfolio
+
+> Site: https://www.shkuratovdesigner.com
+> Contact: shkuratovdesigner@gmail.com
+> LinkedIn: https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/
+
+## About
+
+Evgeny Shkuratov is an AI Product Design Engineer with 8+ years of experience. He specializes in designing and building digital products that combine strong design thinking with modern engineering.
+
+## Key Expertise
+
+- Product Design Engineering
+- Design Systems
+- Figma Plugins & Tooling
+- AI-Powered Design Workflows
+- SaaS Product Design
+- React Component Systems
+
+## Site Contents
+
+This portfolio showcases Evgeny's work through case studies, product design projects, work experience, and design content.
+
+## Pages
+
+/ — Home page with character animation and pose-based navigation
+/experience — Work history timeline with detailed career progression
+/products — Product design projects and shipped work
+/cases — Case studies with real-world design challenges and measurable outcomes
+/content — Design content and resources including YouTube videos, LinkedIn posts, and Instagram reels
+/about — About Evgeny, personal interests, and design philosophy
+
+## Contact
+
+Email: shkuratovdesigner@gmail.com
+LinkedIn: https://www.linkedin.com/in/evgeny-shkuratov-b34a99174/
+YouTube: https://www.youtube.com/@EvgenyShkuratovDesigner
+Instagram: https://www.instagram.com/evgeny.shkuratov/

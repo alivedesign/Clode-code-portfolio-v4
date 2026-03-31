@@ -40,6 +40,7 @@ export function Experience() {
   usePageMeta(
     "Experience — Shkuratov Designer",
     "Work history and career timeline of Evgeny Shkuratov — Product Design Engineer with 8+ years across B2B, EdTech, and SaaS.",
+    "/experience",
   );
 
   return (

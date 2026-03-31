@@ -356,7 +356,7 @@ function TimelineSection() {
         </div>
 
         {/* Right column — cards */}
-        <div className="flex-1 flex flex-col gap-[40px]">
+        <div className="flex-1 min-w-0 flex flex-col gap-[40px]">
           {CASE1_TIMELINE.map((step, i) => (
             <div
               key={i}
@@ -788,6 +788,7 @@ export function CaseStudy1() {
   usePageMeta(
     "MCP Vibe Coding — Shkuratov Designer",
     "Case study: MCP vibe coding — design engineering process and outcomes.",
+    "/cases/mcp-vibe-coding",
   );
 
   useEffect(() => {
@@ -795,7 +796,7 @@ export function CaseStudy1() {
   }, []);
 
   return (
-    <div className="relative min-h-screen min-h-dvh w-full bg-black">
+    <div className="relative min-h-screen min-h-dvh w-full bg-black overflow-x-clip">
       <Logo visible />
 
       <main className="relative z-10 flex flex-col items-center px-5 md:px-10 pt-[40px] pb-[164px] md:pb-[320px]">

@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { preloadVideoFrames } from "@/hooks/videoFrameCache";
 
 // Start extracting case-2 character frames immediately on app load
@@ -27,21 +28,23 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <Suspense fallback={<div className="h-dvh w-full bg-black" />}>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/experience" element={<Experience />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/cases" element={<Cases />} />
-        <Route path="/content" element={<Content />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/cases/mcp-vibe-coding" element={<CaseStudy1 />} />
-        <Route path="/cases/figma-token-plugin" element={<CaseStudy2 />} />
-        <Route path="/cases/stickers" element={<CaseStudy3 />} />
-        <Route path="/cases/ai-seo-startup" element={<CaseStudy4 />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<div className="h-dvh w-full bg-black" />}>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/cases" element={<Cases />} />
+          <Route path="/content" element={<Content />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/cases/mcp-vibe-coding" element={<CaseStudy1 />} />
+          <Route path="/cases/figma-token-plugin" element={<CaseStudy2 />} />
+          <Route path="/cases/stickers" element={<CaseStudy3 />} />
+          <Route path="/cases/ai-seo-startup" element={<CaseStudy4 />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   );
 }

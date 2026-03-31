@@ -10,6 +10,7 @@ export function Cases() {
   usePageMeta(
     "Cases — Shkuratov Designer",
     "Product design case studies by Evgeny Shkuratov — real projects with measurable outcomes.",
+    "/cases",
   );
 
   useEffect(() => {
@@ -27,11 +28,14 @@ export function Cases() {
         </h1>
 
         {/* Case studies */}
-        <div className="w-full flex flex-col gap-[88px] md:gap-[40px]">
-          {CASES.map((caseData, i) => (
-            <CaseSection key={caseData.id} caseData={caseData} index={i} />
-          ))}
-        </div>
+        <section aria-label="Case studies">
+          <h2 className="sr-only">Case studies</h2>
+          <div className="w-full flex flex-col gap-[88px] md:gap-[40px]">
+            {CASES.map((caseData, i) => (
+              <CaseSection key={caseData.id} caseData={caseData} index={i} />
+            ))}
+          </div>
+        </section>
       </main>
 
       <NavBar visible />

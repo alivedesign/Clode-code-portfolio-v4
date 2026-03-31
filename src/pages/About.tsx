@@ -81,6 +81,7 @@ export function About() {
   usePageMeta(
     "About — Shkuratov Designer",
     "About Evgeny Shkuratov — Product Design Engineer with 8+ years of experience.",
+    "/about",
   );
 
   return (
@@ -112,6 +113,7 @@ export function About() {
           aria-label="Personal photos"
           className={`experience-scroll-reveal${grid1Visible ? " visible" : ""} mt-[48px] md:mt-[64px] w-full max-w-[895px]`}
         >
+          <h2 className="sr-only">Personal photos</h2>
           {isMobile ? (
             <PhotoCarousel photos={ABOUT_PHOTOS_GRID_1} />
           ) : (
@@ -141,6 +143,7 @@ export function About() {
           aria-label="Design philosophy"
           className={`experience-scroll-reveal${text1Visible ? " visible" : ""} mt-[48px] md:mt-[96px] max-w-[640px]`}
         >
+          <h2 className="sr-only">Design philosophy</h2>
           <TextBlock segments={ABOUT_TEXT_1} />
         </section>
 
@@ -150,6 +153,7 @@ export function About() {
           aria-label="Active lifestyle photos"
           className={`experience-scroll-reveal${grid2Visible ? " visible" : ""} mt-[48px] md:mt-[96px] w-full max-w-[895px]`}
         >
+          <h2 className="sr-only">Active lifestyle photos</h2>
           {isMobile ? (
             <PhotoCarousel photos={ABOUT_PHOTOS_GRID_2} />
           ) : (
@@ -179,6 +183,7 @@ export function About() {
           aria-label="Personal interests"
           className={`experience-scroll-reveal${text2Visible ? " visible" : ""} mt-[48px] md:mt-[96px] max-w-[670px]`}
         >
+          <h2 className="sr-only">Personal interests</h2>
           <TextBlock segments={ABOUT_TEXT_2} />
         </section>
 
@@ -188,6 +193,7 @@ export function About() {
           aria-label="Adventure photos"
           className={`experience-scroll-reveal${grid3Visible ? " visible" : ""} mt-[48px] md:mt-[96px] w-full max-w-[895px]`}
         >
+          <h2 className="sr-only">Adventure photos</h2>
           {isMobile ? (
             <PhotoCarousel photos={ABOUT_PHOTOS_GRID_3} />
           ) : (
@@ -217,6 +223,7 @@ export function About() {
           aria-label="Content creation"
           className={`experience-scroll-reveal${text3Visible ? " visible" : ""} mt-[48px] md:mt-[96px] max-w-[640px]`}
         >
+          <h2 className="sr-only">Content creation</h2>
           <TextBlock segments={ABOUT_TEXT_3_P1} />
           <div className="mt-[32px]">
             <TextBlock segments={ABOUT_TEXT_3_P2} />

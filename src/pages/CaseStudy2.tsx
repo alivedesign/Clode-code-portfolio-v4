@@ -185,6 +185,7 @@ export function CaseStudy2() {
   usePageMeta(
     "Figma Token Plugin — Shkuratov Designer",
     "Case study: Figma Token Plugin — design system tooling for automated token management.",
+    "/cases/figma-token-plugin",
   );
 
   useEffect(() => {

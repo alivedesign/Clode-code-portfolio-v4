@@ -30,6 +30,7 @@ export function Home() {
   usePageMeta(
     "Shkuratov Designer — Product Design Engineer",
     "Evgeny Shkuratov — Product Design Engineer with 8+ years shipping products people love. Portfolio, case studies, and experience.",
+    "/",
   );
 
   useEffect(() => {

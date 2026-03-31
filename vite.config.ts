@@ -13,4 +13,28 @@ export default defineConfig({
   resolve: {
     alias: { "@": "/src" },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules/react/") || id.includes("node_modules/react-dom/") || id.includes("node_modules/react-router")) {
+            return "vendor-react";
+          }
+          if (id.includes("node_modules/@lottiefiles/")) {
+            return "vendor-lottie";
+          }
+          if (id.includes("node_modules/embla-carousel")) {
+            return "vendor-carousel";
+          }
+        },
+      },
+    },
+  },
+  server: {
+    headers: {
+      "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "Referrer-Policy": "strict-origin-when-cross-origin",
+    },
+  },
 });

@@ -60,6 +60,7 @@ export function CaseStudy3() {
   usePageMeta(
     "B2B Stickers — Shkuratov Designer",
     "Case study: B2B Stickers — animated sticker system for enterprise messaging.",
+    "/cases/stickers",
   );
 
   useEffect(() => {

@@ -153,6 +153,7 @@ export function CaseStudy4() {
   usePageMeta(
     "AI SEO Startup Redesign — Shkuratov Designer",
     "Case study: AI SEO Startup Redesign — conversion-focused product redesign.",
+    "/cases/ai-seo-startup",
   );
 
   useEffect(() => {

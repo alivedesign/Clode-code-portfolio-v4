@@ -65,15 +65,17 @@ export function NavBar({ onHoverPose, onLeavePose, visible = true }: NavBarProps
       const glass = glassRef.current;
       if (!lens || !glass) return;
 
-      const liRect = li.getBoundingClientRect();
-      const glassRect = glass.getBoundingClientRect();
-      const border = parseFloat(getComputedStyle(glass).borderLeftWidth) || 0;
-      const left = liRect.left - glassRect.left - border + 8;
-      const width = liRect.width - 16;
+      requestAnimationFrame(() => {
+        const liRect = li.getBoundingClientRect();
+        const glassRect = glass.getBoundingClientRect();
+        const border = parseFloat(getComputedStyle(glass).borderLeftWidth) || 0;
+        const left = liRect.left - glassRect.left - border + 8;
+        const width = liRect.width - 16;
 
-      lens.style.display = "flex";
-      lens.style.width = `${width}px`;
-      lens.style.transform = `translate(${left}px, 0)`;
+        lens.style.display = "flex";
+        lens.style.width = `${width}px`;
+        lens.style.transform = `translate(${left}px, 0)`;
+      });
     },
     [onHoverPose],
   );

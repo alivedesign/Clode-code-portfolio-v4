@@ -8,6 +8,7 @@ export function NotFound() {
   usePageMeta(
     "404 — Shkuratov Designer",
     "Page not found — Shkuratov Designer.",
+    "/404",
   );
 
   return (
