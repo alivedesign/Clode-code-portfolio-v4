@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from "react";
-import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
+import { BackLink } from "@/components/Cases";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { DotLottieCanvas } from "@/components/Cases/DotLottieCanvas";
@@ -73,26 +73,7 @@ export function CaseStudy3() {
 
       <main className="relative z-10 flex flex-col items-center px-5 md:px-10 pt-[80px] md:pt-[40px] pb-[164px] md:pb-[320px]">
         {/* Back to cases */}
-        <Link
-          to="/cases"
-          className="flex items-center gap-[8px] self-center mb-[64px] md:mb-[56px] mt-[16px] md:mt-0"
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 28 28"
-            fill="none"
-            className="shrink-0"
-          >
-            <path
-              d="M5.25 14L13.75 5.25L14.975 6.475L7.45 14L14.975 21.525L13.75 22.75L5.25 14Z"
-              fill="#999899"
-            />
-          </svg>
-          <span className="font-['TN',serif] font-extralight text-[24px] leading-[1.2] text-text-secondary">
-            Back to cases
-          </span>
-        </Link>
+        <BackLink />
 
         {/* Hero */}
         <section

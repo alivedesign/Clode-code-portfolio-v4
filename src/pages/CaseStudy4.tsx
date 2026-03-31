@@ -1,90 +1,15 @@
 import { useEffect } from "react";
-import { Link } from "react-router";
 import { Logo } from "@/components/Hero";
+import { BackLink } from "@/components/Cases";
 import { NavBar } from "@/components/NavBar";
 import { ContactLine } from "@/components/Layout/ContactLine";
 import { useInView } from "@/hooks/useInView";
 import { usePageMeta } from "@/hooks/usePageMeta";
-
-const PERSONAS_LEFT = [
-  {
-    text: [
-      { content: "Startup founders", white: true },
-      {
-        content:
-          " who understand the value of SEO but don't have resources to do research and writing of blog articles",
-        white: false,
-      },
-    ],
-  },
-  {
-    text: [
-      {
-        content:
-          "AI SEO blog writer cranks out human-like, SEO-optimized articles at scale",
-        white: false,
-      },
-    ],
-  },
-  {
-    text: [
-      {
-        content: "Sit back, relax, and watch your organic traffic grow",
-        white: true,
-      },
-      { content: " 10x. Start now", white: false },
-    ],
-  },
-];
-
-const PERSONAS_CENTER = [
-  {
-    text: [
-      {
-        content:
-          "Most early-stage founders know they need SEO but don't have the time to do it right.",
-        white: true,
-      },
-      {
-        content:
-          " Blogging Machine handles everything from keyword research to writing and publishing, so you get high-intent traffic with zero effort.",
-        white: false,
-      },
-    ],
-  },
-  {
-    text: [
-      { content: "More Traffic. Zero Effort. ", white: true },
-      { content: "Powered by Your AI Agent", white: false },
-    ],
-  },
-];
-
-const PERSONAS_RIGHT = [
-  {
-    text: [
-      {
-        content:
-          "Seed-to-Series B founders and scrappy solo marketers who know SEO's worth",
-        white: true,
-      },
-      {
-        content:
-          " but don't want to waste headcount, weekends, or runway on it",
-        white: false,
-      },
-    ],
-  },
-  {
-    text: [
-      {
-        content: "Your AI Agent is like a 5-people content team.",
-        white: true,
-      },
-      { content: " Minus the coffee breaks.", white: false },
-    ],
-  },
-];
+import {
+  PERSONAS_LEFT,
+  PERSONAS_CENTER,
+  PERSONAS_RIGHT,
+} from "@/data/caseStudy4Data";
 
 function ChatBubble({
   message,
@@ -166,26 +91,7 @@ export function CaseStudy4() {
 
       <main className="relative z-10 flex flex-col items-center px-5 md:px-10 pt-[80px] md:pt-[40px] pb-[164px] md:pb-[320px]">
         {/* Back to cases */}
-        <Link
-          to="/cases"
-          className="flex items-center gap-[8px] self-center mb-[64px] md:mb-[56px] mt-[16px] md:mt-0"
-        >
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 28 28"
-            fill="none"
-            className="shrink-0"
-          >
-            <path
-              d="M5.25 14L13.75 5.25L14.975 6.475L7.45 14L14.975 21.525L13.75 22.75L5.25 14Z"
-              fill="#999899"
-            />
-          </svg>
-          <span className="font-['TN',serif] font-extralight text-[24px] leading-[1.2] text-text-secondary">
-            Back to cases
-          </span>
-        </Link>
+        <BackLink />
 
         {/* Hero */}
         <section

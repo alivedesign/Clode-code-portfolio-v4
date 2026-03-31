@@ -5,3 +5,4 @@ export { CaseCinematicScroll } from "./CaseCinematicScroll";
 export { CaseCinematicMobile } from "./CaseCinematicMobile";
 export { CaseLottieScatter } from "./CaseLottieScatter";
 export { CaseLottieMobile } from "./CaseLottieMobile";
+export { BackLink } from "./BackLink";
