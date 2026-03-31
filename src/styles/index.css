@@ -507,6 +507,11 @@ body {
   animation: fadeUpIn 500ms ease-out forwards;
 }
 
+.notfound-fade-up {
+  opacity: 0;
+  animation: fadeUpIn 500ms ease-out forwards;
+}
+
 /* ─── Scroll-triggered reveal ────────────────────────────── */
 .experience-scroll-reveal {
   opacity: 0;
@@ -676,6 +681,10 @@ body {
   }
 
   .experience-fade-up {
+    opacity: 1;
+    animation: none;
+  }
+  .notfound-fade-up {
     opacity: 1;
     animation: none;
   }
